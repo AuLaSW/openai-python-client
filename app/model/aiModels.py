@@ -9,7 +9,6 @@ def getModels():
     TEXT_KEY = "text"
     ID_KEY = "id"
     DATA_KEY = "data"
-    DELIM = "-"
 
     # list of text models
     models = []
@@ -17,9 +16,7 @@ def getModels():
     # print the names of the models that you can use
     for model in openai.Model.list()[DATA_KEY]:
         if model[ID_KEY].startswith(TEXT_KEY) > 0:
-            if len(model[ID_KEY].split(DELIM)) == 3:
-                models.append(model["id"])
-                pass
+            models.append(model["id"])
             pass
         pass
     return models
@@ -27,3 +24,7 @@ def getModels():
 
 # generate list of text models
 textModels = getModels()
+
+if __name__ == "__main__":
+    print(textModels)
+    pass
