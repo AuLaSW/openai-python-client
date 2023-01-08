@@ -1,4 +1,3 @@
-import openai
 """
 Class Request:
 
