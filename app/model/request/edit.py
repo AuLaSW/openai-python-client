@@ -31,7 +31,7 @@ class EditRequest(Request):
         }
 
     def getResponse(self, dict):
-        required, optional = self.separateDict(dict)
+        required, optional = self.separateDict()
 
         response = openai.Edit.create(
                 # required inputs

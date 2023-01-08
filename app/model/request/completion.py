@@ -44,7 +44,7 @@ class CompletionRequest(Request):
         }
 
     def getResponse(self, dict):
-        required, optional = self.separateDict(dict)
+        required, optional = self.separateDict()
 
         response = openai.Completion.create(
                 # required inputs
@@ -74,3 +74,4 @@ if __name__ == "__main__":
     req = CompletionRequest()
 
     print(req)
+    print(req.getResponse(req.requestDict))
