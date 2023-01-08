@@ -7,4 +7,5 @@ usr/*
 app/__pycache__/*
 app/controller/__pycache__/*
 app/model/__pycache__/*
+app/model/request/__pycache__/*
 app/view/__pycache__/*
