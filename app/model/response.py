@@ -25,14 +25,4 @@ class Response:
 
 
 if __name__ == "__main__":
-    from request.completion import CompletionRequest
-
-    req = CompletionRequest()
-    req.requestDict[req.OPTIONAL]["prompt"] = "tell me a joke"
-
-    response = Response()
-
-    response.parseResponse(req.getResponse(req.requestDict))
-
-    print(response.text, response.index)
     pass
