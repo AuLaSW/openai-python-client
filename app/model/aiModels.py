@@ -1,6 +1,9 @@
 import openai
 
 
+# retreives the different GPT models
+# from OpenAI and creates a list with
+# all of the valid IDs
 def getModels():
     # constant values
     TEXT_KEY = "text"
