@@ -1,4 +1,12 @@
-from request import Request, openai
+from request import Request
+import openai
+
+"""
+Class CompletionRequest
+
+This is a derived class, with the Request class being the base class.
+Handles sending requests to OpenAI for completion.
+"""
 
 
 class CompletionRequest(Request):
