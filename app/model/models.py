@@ -7,6 +7,7 @@ This class retrieves the models from the OpenAI API
 and creates a dictionary of the usable classes.
 """
 
+
 class Models:
     def __init__(self):
         self.COMPLETION = "Completion"
