@@ -1,6 +1,12 @@
 import openai
 
 
+# sort the textModels into a more
+# friendly list.
+def sortModels(modelList):
+    return modelList
+
+
 # retreives the different GPT models
 # from OpenAI and creates a list with
 # all of the valid IDs
@@ -19,7 +25,7 @@ def getModels():
             models.append(model["id"])
             pass
         pass
-    return models
+    return sortModels(models)
 
 
 # generate list of text models
