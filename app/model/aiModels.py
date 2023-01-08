@@ -23,3 +23,7 @@ def getModels():
             pass
         pass
     return models
+
+
+# generate list of text models
+textModels = getModels()
