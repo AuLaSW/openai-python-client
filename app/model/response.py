@@ -7,12 +7,11 @@ into an object that can be used within Python
 
 
 class Response:
-    def __init__(self):
+    def __init__(self, response):
         self.obj = ""
         self.model = ""
         self.text = ""
         self.finish_reason = ""
-    pass
 
     def parseResponse(self, response):
         self.obj = response["object"]
