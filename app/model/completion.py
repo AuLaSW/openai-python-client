@@ -82,12 +82,12 @@ if __name__ == "__main__":
     response = req.getResponse()
 
     print("\nPrompt One:\n")
-    print(response.text)
+    print(response.getText())
 
-    req.requestDict[req.OPTIONAL]["prompt"] = response.text
+    req.requestDict[req.OPTIONAL]["prompt"] = response.getText()
     req.requestDict[req.OPTIONAL]["prompt"] += "\nI don't know. What?"
 
     response = req.getResponse()
 
     print("\nPrompt Two:\n")
-    print(response.text)
+    print(response.getText())
