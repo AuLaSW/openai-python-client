@@ -16,7 +16,7 @@ This project is still a work in progress, though I am working on it frequently r
 
 ### Requirements
 
-![requirements for running file](requirements.txt)
+[Requirements for running the application can be found here.](requirements.txt)
 
 ## Basic Setup
 
@@ -24,6 +24,9 @@ This project is still a work in progress, though I am working on it frequently r
 
 Features to be implemented in this project include but are not limited to:
 
-
-
 ## Contributing
+
+If you would like to contribute, please fork the repository and make a [pull request]! Contributions are welcome; however, I can be slow to looking at them and getting back with you, so I may not immediately look at/comment on/merge them.
+
+## Licsence
+
