@@ -38,7 +38,7 @@ class Request:
 
         return strRequest
 
-    def getResponse(self, dict):
+    def getResponse(self):
         return NotImplementedError()
 
     # returns required keys and optional keys, in that order
