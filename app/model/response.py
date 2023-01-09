@@ -8,11 +8,15 @@ into an object that can be used within Python
 
 class Response:
     def __init__(self, response):
-        self.obj = ""
-        self.model = ""
-        self.text = ""
-        self.finish_reason = ""
+        self.obj = response["object"]
+        self.text = response["choices"][0]["text"]
+        self.index = response["choices"][0]["index"]
 
+        if "text_completion" in self.obj:
+            self.model = response["model"]
+            self.finish_reason = response["choices"][0]["finish_reason"]
+
+    """
     def parseResponse(self, response):
         self.obj = response["object"]
         self.text = response["choices"][0]["text"]
@@ -21,6 +25,7 @@ class Response:
         if "text_completion" in self.obj:
             self.model = response["model"]
             self.finish_reason = response["choices"][0]["finish_reason"]
+    """
 
 
 if __name__ == "__main__":
