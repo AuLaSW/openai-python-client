@@ -32,19 +32,17 @@ class EditRequest(Request):
         }
 
     def getResponse(self):
-        required, optional = self.separateDict()
-
         return Response(
                 openai.Edit.create(
                     # required inputs
-                    model=required["model"],
-                    instruction=required["instruction"],
+                    model=self.getModel(),
+                    instruction=self.getInstruction(),
 
                     # optional inputs
-                    input=optional["input"],
-                    temperature=optional["temperature"],
-                    top_p=optional["top_p"],
-                    n=optional["n"],
+                    input=self.getInput(),
+                    temperature=self.getTemperature(),
+                    top_p=self.getTopP(),
+                    n=self.getN(),
                 )
 
     def getModel(self):
