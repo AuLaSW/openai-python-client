@@ -45,25 +45,23 @@ class CompletionRequest(Request):
         }
 
     def getResponse(self):
-        required, optional = self.separateDict()
-
         return Response(
                 openai.Completion.create(
                     # required inputs
-                    model=required["model"],
+                    model=self.getModel(),
 
                     # optional inputs
-                    prompt=optional["prompt"],
-                    max_tokens=optional["max_tokens"],
-                    temperature=optional["temperature"],
-                    top_p=optional["top_p"],
-                    n=optional["n"],
-                    stream=optional["stream"],
-                    echo=optional["echo"],
-                    presence_penalty=optional["presence_penalty"],
-                    frequency_penalty=optional["frequency_penalty"],
-                    best_of=optional["best_of"],
-                    user=optional["user"]
+                    prompt=self.getPrompt(),
+                    max_tokens=self.getMaxTokens(),
+                    temperature=self.getTemperature(),
+                    top_p=self.getTopP(),
+                    n=self.getN(),
+                    stream=self.getStream(),
+                    echo=self.getEcho(),
+                    presence_penalty=self.getPresencePenalty(),
+                    frequency_penalty=self.getFrequencyPenalty(),
+                    best_of=self.getBestOf(),
+                    user=self.getUser()
                     # suffix=optional["suffix"],
                     # logprobs=optional["logprobs"],
                     # stop=optional["stop"],
