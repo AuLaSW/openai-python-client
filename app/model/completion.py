@@ -47,9 +47,7 @@ class CompletionRequest(Request):
     def getResponse(self):
         required, optional = self.separateDict()
 
-        # response = Response()
-
-        response = Response(
+        return Response(
                 openai.Completion.create(
                     # required inputs
                     model=required["model"],
@@ -72,9 +70,6 @@ class CompletionRequest(Request):
                     # logit_bias=optional["logit_bias"],
                 )
             )
-        # response.parseResponse(resp)
-
-        return response
 
 
 if __name__ == "__main__":
