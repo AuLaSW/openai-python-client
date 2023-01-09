@@ -55,8 +55,3 @@ class Request:
             keys[self.OPTIONAL] = d.keys()
 
         return keys[self.REQUIRED], keys[self.OPTIONAL]
-
-    # separate the dictionary into a required dictionary and
-    # an optional dictionary
-    def separateDict(self):
-        return self.requestDict[self.REQUIRED], self.requestDict[self.OPTIONAL]
