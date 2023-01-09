@@ -16,6 +16,12 @@ class Response:
             self.model = response["model"]
             self.finish_reason = response["choices"][0]["finish_reason"]
 
+    def getText(self):
+        return self.text
+
+    def getFinishReason(self):
+        return self.finish_reason
+
 
 if __name__ == "__main__":
     pass
