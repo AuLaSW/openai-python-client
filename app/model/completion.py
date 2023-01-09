@@ -47,30 +47,32 @@ class CompletionRequest(Request):
     def getResponse(self):
         required, optional = self.separateDict()
 
-        response = Response()
+        # response = Response()
 
-        resp = openai.Completion.create(
-                # required inputs
-                model=required["model"],
+        response = Response(
+                openai.Completion.create(
+                    # required inputs
+                    model=required["model"],
 
-                # optional inputs
-                prompt=optional["prompt"],
-                max_tokens=optional["max_tokens"],
-                temperature=optional["temperature"],
-                top_p=optional["top_p"],
-                n=optional["n"],
-                stream=optional["stream"],
-                echo=optional["echo"],
-                presence_penalty=optional["presence_penalty"],
-                frequency_penalty=optional["frequency_penalty"],
-                best_of=optional["best_of"],
-                user=optional["user"]
-                # suffix=optional["suffix"],
-                # logprobs=optional["logprobs"],
-                # stop=optional["stop"],
-                # logit_bias=optional["logit_bias"],
+                    # optional inputs
+                    prompt=optional["prompt"],
+                    max_tokens=optional["max_tokens"],
+                    temperature=optional["temperature"],
+                    top_p=optional["top_p"],
+                    n=optional["n"],
+                    stream=optional["stream"],
+                    echo=optional["echo"],
+                    presence_penalty=optional["presence_penalty"],
+                    frequency_penalty=optional["frequency_penalty"],
+                    best_of=optional["best_of"],
+                    user=optional["user"]
+                    # suffix=optional["suffix"],
+                    # logprobs=optional["logprobs"],
+                    # stop=optional["stop"],
+                    # logit_bias=optional["logit_bias"],
                 )
-        response.parseResponse(resp)
+            )
+        # response.parseResponse(resp)
 
         return response
 
