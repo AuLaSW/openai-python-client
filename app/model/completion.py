@@ -44,7 +44,7 @@ class CompletionRequest(Request):
             # "logit_bias": {},
         }
 
-    def getResponse(self, dict):
+    def getResponse(self):
         required, optional = self.separateDict()
 
         response = Response()
@@ -82,7 +82,7 @@ if __name__ == "__main__":
 
     # print(req)
 
-    response = req.getResponse(req.requestDict)
+    response = req.getResponse()
 
     print("\nPrompt One:\n")
     print(response.text)
@@ -90,7 +90,7 @@ if __name__ == "__main__":
     req.requestDict[req.OPTIONAL]["prompt"] = response.text
     req.requestDict[req.OPTIONAL]["prompt"] += "\nI don't know. What?"
 
-    response = req.getResponse(req.requestDict)
+    response = req.getResponse()
 
     print("\nPrompt Two:\n")
     print(response.text)
