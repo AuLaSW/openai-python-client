@@ -1,4 +1,5 @@
 from request import Request
+from response import Response
 import openai
 
 """
@@ -33,19 +34,18 @@ class EditRequest(Request):
     def getResponse(self, dict):
         required, optional = self.separateDict()
 
-        response = openai.Edit.create(
-                # required inputs
-                model=required["model"],
-                instruction=required["instruction"],
+        return Response(
+                openai.Edit.create(
+                    # required inputs
+                    model=required["model"],
+                    instruction=required["instruction"],
 
-                # optional inputs
-                input=optional["input"],
-                temperature=optional["temperature"],
-                top_p=optional["top_p"],
-                n=optional["n"],
+                    # optional inputs
+                    input=optional["input"],
+                    temperature=optional["temperature"],
+                    top_p=optional["top_p"],
+                    n=optional["n"],
                 )
-
-        return response
 
 
 if __name__ == "__main__":
