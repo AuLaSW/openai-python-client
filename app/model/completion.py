@@ -70,16 +70,16 @@ class CompletionRequest(Request):
             )
 
     def getModel(self):
-        return self.requestDict[self.REQUIRED]["model"]
+        return self.get(self.REQUIRED, "model")
 
     def setModel(self, input):
-        self.requestDict[self.REQUIRED]["model"] = input
+        self.set(self.REQUIRED, "model", input)
 
     def getPrompt(self):
-        return self.requestDict[self.OPTIONAL]["prompt"]
+        return self.get(self.OPTIONAL, "prompt")
 
     def setPrompt(self, input):
-        self.requestDict[self.OPTIONAL]["prompt"] = input
+        self.set(self.OPTIONAL, "prompt", input) 
 
     def addToPrompt(self, input, newLine=False):
         if newLine:
@@ -87,64 +87,64 @@ class CompletionRequest(Request):
         self.requestDict[self.OPTIONAL]["prompt"] += input
 
     def getMaxTokens(self):
-        return self.requestDict[self.OPTIONAL]["max_tokens"]
+        return self.get(self.OPTIONAL, "max_tokens")
 
     def setMaxTokens(self, input):
-        self.requestDict[self.OPTIONAL]["max_tokens"] = input
+        self.set(self.OPTIONAL, "max_tokens", input) 
 
     def getTemperature(self):
-        return self.requestDict[self.OPTIONAL]["temperature"]
+        return self.get(self.OPTIONAL, "temperature")
 
     def setTemperature(self, input):
-        self.requestDict[self.OPTIONAL]["temperature"] = input
+        self.set(self.OPTIONAL, "temperature", input) 
 
     def getTopP(self):
-        return self.requestDict[self.OPTIONAL]["top_p"]
+        return self.get(self.OPTIONAL, "top_p")
 
     def setTopP(self, input):
-        self.requestDict[self.OPTIONAL]["top_p"] = input
+        self.set(self.OPTIONAL, "top_p", input) 
 
     def getN(self):
-        return self.requestDict[self.OPTIONAL]["n"]
+        return self.get(self.OPTIONAL, "n")
 
     def setN(self, input):
-        self.requestDict[self.OPTIONAL]["n"] = input
+        self.set(self.OPTIONAL, "n", input) 
 
     def getStream(self):
-        return self.requestDict[self.OPTIONAL]["stream"]
+        return self.get(self.OPTIONAL, "stream")
 
     def setStream(self, input):
-        self.requestDict[self.OPTIONAL]["stream"] = input
+        self.set(self.OPTIONAL, "stream", input) 
 
     def getEcho(self):
-        return self.requestDict[self.OPTIONAL]["echo"]
+        return self.get(self.OPTIONAL, "echo")
 
     def setEcho(self, input):
-        self.requestDict[self.OPTIONAL]["echo"] = input
+        self.set(self.OPTIONAL, "echo", input) 
 
     def getPresencePenalty(self):
-        return self.requestDict[self.OPTIONAL]["presence_penalty"]
+        return self.get(self.OPTIONAL, "presence_penalty")
 
     def setPresencePenalty(self, input):
-        self.requestDict[self.OPTIONAL]["presence_penalty"] = input
+        self.set(self.OPTIONAL, "presence_penalty", input) 
 
     def getFrequencyPenalty(self):
-        return self.requestDict[self.OPTIONAL]["frequency_penalty"]
+        return self.get(self.OPTIONAL, "frequency_penalty")
 
     def setFrequencyPenalty(self, input):
-        self.requestDict[self.OPTIONAL]["frequency_penalty"] = input
+        self.set(self.OPTIONAL, "frequency_penalty", input) 
 
     def getBestOf(self):
-        return self.requestDict[self.OPTIONAL]["best_of"]
+        return self.get(self.OPTIONAL, "best_of")
 
     def setBestOf(self, input):
-        self.requestDict[self.OPTIONAL]["best_of"] = input
+        self.set(self.OPTIONAL, "best_of", input) 
 
     def getUser(self):
-        return self.requestDict[self.OPTIONAL]["user"]
+        return self.get(self.OPTIONAL, "user")
 
     def setUser(self, input):
-        self.requestDict[self.OPTIONAL]["user"] = input
+        self.set(self.OPTIONAL, "user", input) 
 
 
 if __name__ == "__main__":

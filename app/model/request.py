@@ -55,3 +55,9 @@ class Request:
             keys[self.OPTIONAL] = d.keys()
 
         return keys[self.REQUIRED], keys[self.OPTIONAL]
+
+    def get(self, option, var):
+        return self.requestDict[option][var]
+    
+    def set(self, option, var, val):
+        self.requestDict[option][var] = val
