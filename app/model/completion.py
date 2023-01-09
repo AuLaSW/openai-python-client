@@ -1,4 +1,5 @@
 from request import Request
+from response import Response
 import openai
 
 """
@@ -46,7 +47,9 @@ class CompletionRequest(Request):
     def getResponse(self, dict):
         required, optional = self.separateDict()
 
-        response = openai.Completion.create(
+        response = Response()
+
+        resp = openai.Completion.create(
                 # required inputs
                 model=required["model"],
 
@@ -67,11 +70,27 @@ class CompletionRequest(Request):
                 # stop=optional["stop"],
                 # logit_bias=optional["logit_bias"],
                 )
+        response.parseResponse(resp)
+
         return response
 
 
 if __name__ == "__main__":
     req = CompletionRequest()
+    req.requestDict[req.OPTIONAL]["prompt"] = "Tell me a joke"
+    req.requestDict[req.OPTIONAL]["echo"] = True
 
-    print(req)
-    print(req.getResponse(req.requestDict))
+    # print(req)
+
+    response = req.getResponse(req.requestDict)
+
+    print("\nPrompt One:\n")
+    print(response.text)
+
+    req.requestDict[req.OPTIONAL]["prompt"] = response.text
+    req.requestDict[req.OPTIONAL]["prompt"] += "\nI don't know. What?"
+
+    response = req.getResponse(req.requestDict)
+
+    print("\nPrompt Two:\n")
+    print(response.text)
