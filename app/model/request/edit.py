@@ -1,5 +1,5 @@
-from request import Request
-from response import Response
+from model.request.request import Request
+from model.response import Response
 import openai
 
 """
