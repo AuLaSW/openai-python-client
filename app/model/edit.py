@@ -31,7 +31,7 @@ class EditRequest(Request):
             "n": 1,
         }
 
-    def getResponse(self, dict):
+    def getResponse(self):
         required, optional = self.separateDict()
 
         return Response(
