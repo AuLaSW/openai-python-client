@@ -17,6 +17,13 @@ class View:
         # functions
         self.controller = controller
 
+        # the Window class will be directly
+        # interacting with the tkinter package
+        # this will give us specific frames and
+        # windows to call and use without having
+        # to go through tkinter directly
+        self.window = Window()
+
 
 if __name__ == "__main__":
     pass
