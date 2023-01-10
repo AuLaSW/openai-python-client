@@ -58,8 +58,9 @@ class Controller:
         return self.view.init()
     
     # get the next view
-    def getView(self, nextView):
-        return self.view.get(nextView)
+    def getView(self, nextView):        
+        return nextView
+        # return self.view.get(nextView)
 
 
 if __name__ == "__main__":
