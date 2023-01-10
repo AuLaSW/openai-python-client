@@ -68,6 +68,18 @@ class CompletionRequest(Request):
                     # logit_bias=optional["logit_bias"],
                 )
             )
+        """
+        Another option could look like this:
+
+        required = self.requestDict[self.REQUIRED]
+        optional = self.requestDict[self.OPTIONAL]
+
+        return Response(
+                Comp.create(
+                    required | optional
+                )
+            )
+        """
 
     def getModel(self):
         return self.get(self.REQUIRED, "model")
