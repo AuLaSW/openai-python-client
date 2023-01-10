@@ -14,6 +14,8 @@ This project is still a work in progress, though I am working on it frequently r
 
 ## Installing
 
+To install, 
+
 ### Requirements
 
 [Requirements for running the application can be found here.](requirements.txt)
@@ -24,9 +26,41 @@ This project is still a work in progress, though I am working on it frequently r
 
 Features to be implemented in this project include but are not limited to:
 
+### Documentation
+
+- [ ] Complete README
+	- [ ] Complete Installation information
+	- [ ] Complete Setup information
+	- [ ] Contribution
+		- [ ] How to best contribute to the project
+		- [ ] Resources for discussion
+		- [ ] Links to dependencies
+- [ ] Code documentation
+	- [ ] Determine method of Documentation
+	- [ ] Document modules
+		- [ ] app.py
+		- [ ] model package
+			- [ ] request package
+				- [ ] completion.py
+				- [ ] edit.py
+				- [ ] request.py
+			- [ ] models.py
+			- [ ] response.py
+		- [ ] view package
+		- [ ] controller package
+			- [ ] controller.py
+
+### Project
+
+
+
 ## Contributing
 
-If you would like to contribute, please fork the repository and make a [pull request]! Contributions are welcome; however, I can be slow to looking at them and getting back with you, so I may not immediately look at/comment on/merge them.
+If you would like to contribute, please fork the repository and make a [pull request](https://github.com/AuLaSW/openai-python-client/compare)! Contributions are welcome; however, I can be slow to looking at them and getting back with you, so I may not immediately look at/comment on/merge them.
+
+## Contributors
+
+AuLaSW
 
 ## Licsence
 
