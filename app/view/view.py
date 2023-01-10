@@ -14,12 +14,6 @@ class View:
         # functions and have a better time working
         # with everything
         self.controller = controller
-    
-    def get(self, nextView):
-        pass
-    
-    def initView(self):
-        pass
         
     def getRequest(self, req):
         pass
