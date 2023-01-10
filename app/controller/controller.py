@@ -26,6 +26,16 @@ class Controller:
         self.request = None
         # the response
         self.response = None
+        
+    # get completion form
+    def getCompletionForm(self):
+        self.view.window = CompletionFormWindow()
+        self.view.window.init()
+    
+    # get edit form
+    def getEditForm(self):
+        self.view.window = EditFormWindow()
+        self.view.window.init()
     
     # creates a request
     def buildRequest(self, req):

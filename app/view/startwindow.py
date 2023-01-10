@@ -23,15 +23,15 @@ class StartWindow(Window):
         self.buttonCompletionForm.grid(
             column=0,
             row=0,
-            padx = 10,
-            pady = 10
+            padx=10,
+            pady=10
         )
         
         self.buttonCompletionForm.grid(
             column=0,
             row=0,
-            padx = 10,
-            pady = 10
+            padx=10,
+            pady=10
         )
         
         self.frameMain.pack()
