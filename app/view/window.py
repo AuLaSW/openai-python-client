@@ -4,12 +4,11 @@ import tkinter as tk
 """
 Class Window:
 
-Creates the different windows used by the application and acts
-as a buffer between the View class and the tkinter package.
+An abstract class that builds windows from composite frames.
+Frame classes are stacked to creating a single frame that
+is added to the window then packed. This creates a dyanmic
+window that can change as the user navigates through the UI.
 
-This is an abstract class. All of the windows produced by
-the application should have their own class for extensibility
-reasons.
 """
 
 
@@ -17,25 +16,14 @@ class Window:
     def __init__(self, controller):
         self.window = tk.Tk()
         self.controller = controller
-
-        self.window.title("openai-python-client")
-
-    def init(self):
-        self.window.mainloop()
-
-    # draw the window
-    def draw(self):
-        return NotImplementedError()
-
-    # get return value from window
-    # if it has a return
-    # this should yield a dictionary?
-    # haven't decided yet
-    def get(self):
-        return NotImplementedError()
-
-    def set(self, input):
-        return NotImplementedError()
+        self.frame
+    
+    # function for drawing the window given the frame
+    # the window will hold. Allows for a window to be 
+    # reset without starting a new window instance.
+    def startWindow(self):
+        self.frame = StartFrame(self.window, self.controller)
+        self.frame.pack()
 
 
 if __name__ == "__main__":
