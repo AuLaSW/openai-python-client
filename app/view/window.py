@@ -1,4 +1,5 @@
 # window.py
+import tkinter as tk
 
 """
 Class Window:
@@ -16,12 +17,12 @@ class Window:
     def __init__(self, controller):
         self.window = tk.Tk()
         self.controller = controller
-        
-        self.window.title("openai-python-client)
-    
+
+        self.window.title("openai-python-client")
+
     def init(self):
         self.window.mainloop()
-    
+
     # draw the window
     def draw(self):
         return NotImplementedError()
@@ -30,10 +31,10 @@ class Window:
     # if it has a return
     # this should yield a dictionary?
     # haven't decided yet
-    def get(self)
+    def get(self):
         return NotImplementedError()
-        
-    def set(self, input)
+
+    def set(self, input):
         return NotImplementedError()
 
 
