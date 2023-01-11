@@ -38,6 +38,24 @@ class SettingsFrame(BaseFrame):
                     break
                 default:
                     break
+            
+            # potentially better way to implement this?
+            # Allows a class to add entries to a 
+            # settingsDict dictionary, with the keys being
+            # the name of the class and the values being
+            # the function that that setting type calls
+            # to create the correct entry.
+            #
+            # When a class inherits this class, it can
+            # add setting types to the setting dictionary
+            # making the settings generation more extensible
+            """
+            valueTypeName = type(value).__name__
+            if valueTypeName is in self.settingsDict.keys():
+                self.settingsDict[valueTypeName](key, value)
+            else:
+                return NotImplementedError()
+            """
 
     # default setting generator. Cleans
     # up the code and makes it easier to
