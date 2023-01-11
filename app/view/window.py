@@ -14,8 +14,13 @@ window that can change as the user navigates through the UI.
 
 class Window:
     def __init__(self, controller):
+        # the main window
         self.window = tk.Tk()
+        # the controller managing the window
+        # and the models
         self.controller = controller
+        # the frame that will be packed onto the
+        # window
         self.frame
     
     # function for drawing the window given the frame
