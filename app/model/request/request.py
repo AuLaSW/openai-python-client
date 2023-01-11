@@ -38,7 +38,7 @@ class Request:
 
         return strRequest
 
-    def getResponse(self, dict):
+    def getResponse(self):
         return NotImplementedError()
 
     # returns required keys and optional keys, in that order
@@ -56,7 +56,8 @@ class Request:
 
         return keys[self.REQUIRED], keys[self.OPTIONAL]
 
-    # separate the dictionary into a required dictionary and
-    # an optional dictionary
-    def separateDict(self):
-        return self.requestDict[self.REQUIRED], self.requestDict[self.OPTIONAL]
+    def get(self, option, var):
+        return self.requestDict[option][var]
+    
+    def set(self, option, var, val):
+        self.requestDict[option][var] = val
