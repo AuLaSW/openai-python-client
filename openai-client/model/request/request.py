@@ -8,13 +8,17 @@ OpenAI API.
 
 class Request:
     def __init__(self):
-        self.REQUIRED = "required"
-        self.OPTIONAL = "optional"
+        # dictionary of request arguments
+        self.requestDict = dict()
 
-        self.requestDict = {
-            self.REQUIRED: {},
-            self.OPTIONAL: {}
-        }
+        # set of required request arguments
+        self.requiredArgs = {}
+        
+        # set of optional request arguments
+        self.optionalArgs = {}
+
+        # set of request settings
+        self.settings = {}
 
     def __str__(self):
         # this produces a header for the output that contains the
