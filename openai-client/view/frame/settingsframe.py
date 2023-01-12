@@ -113,17 +113,37 @@ class SettingsFrame(BaseFrame):
 
     # string setting input
     def strSetting(self, label, default):
-        kwargs = {}
+        output = tk.StringVar()
+        output.set(default)
+
+        self.outputs[label] = output
+
+        kwargs["variable"] = output
+
         self.baseSetting(tk.Entry, label, default, **kwargs)
 
     # integer setting input
     def intSetting(self, label, default):
-        kwargs = {}
+        output = tk.IntVar()
+        output.set(default)
+
+        self.outputs[label] = output
+
+        kwargs["variable"] = output
+
         self.baseSetting(tk.Entry, label, default, **kwargs)
 
     # boolean setting input
     def boolSetting(self, label, default):
-        kwargs = {}
+        output = tk.IntVar()
+        output.set(default)
+
+        self.outputs[label] = output
+
+        kwargs["variable"] = output
+        kwargs["onvalue"] = 1
+        kwargs["offvalue"] = 0
+
         self.baseSetting(tk.Checkbutton, label, default, **kwargs)
 
 
