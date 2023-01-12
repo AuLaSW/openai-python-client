@@ -25,6 +25,10 @@ class View:
         # to go through tkinter directly
         self.window = Window(self.controller)
 
+    def run(self):
+        self.window.completionSettingsWindow()
+        self.window.window.mainloop()
+
 
 if __name__ == "__main__":
     view = View(None)
