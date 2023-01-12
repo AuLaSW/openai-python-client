@@ -56,16 +56,21 @@ class Request:
 
         return keys[self.REQUIRED], keys[self.OPTIONAL]
 
+    # returns dict of settings
     def getSettings(self):
         allKeys, optionalKeys = self.getKeys()
         
         allKeys.extend(optionalKeys)
         
+        settings = dict()
+        
         for key in allKeys:
             if key is in self.notSettings:
                 allKeys.remove(key)
+            else:
+                settings[key] = self.value(key)
 
-        return allKeys
+        return settings
 
     def get(self, option, var):
         return self.requestDict[option][var]
