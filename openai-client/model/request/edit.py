@@ -48,42 +48,6 @@ class EditRequest(Request):
                     **self.requestDict,
                 )
 
-    def getModel(self):
-        return self.requestDict[self.REQUIRED]["model"]
-
-    def setModel(self, input):
-        self.requestDict[self.REQUIRED]["model"] = input
-        
-    def getInstruction(self):
-        return self.requestDict[self.REQUIRED]["instruction"]
-
-    def setInstruction(self, input):
-        self.requestDict[self.REQUIRED]["instruction"] = input
-
-    def getInput(self):
-        return self.requestDict[self.OPTIONAL]["input"]
-
-    def setInput(self, input):
-        self.requestDict[self.OPTIONAL]["input"] = input
- 
-    def getTemperature(self):
-        return self.requestDict[self.OPTIONAL]["temperature"]
-
-    def setTemperature(self, input):
-        self.requestDict[self.OPTIONAL]["temperature"] = input       
-
-    def getTopP(self):
-        return self.requestDict[self.OPTIONAL]["top_p"]
-
-    def setTopP(self, input):
-        self.requestDict[self.OPTIONAL]["top_p"] = input
-
-    def getN(self):
-        return self.requestDict[self.OPTIONAL]["n"]
-
-    def setN(self, input):
-        self.requestDict[self.OPTIONAL]["n"] = input
-
 
 if __name__ == "__main__":
     req = EditRequest()
