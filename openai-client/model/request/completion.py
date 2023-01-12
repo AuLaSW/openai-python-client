@@ -66,6 +66,7 @@ class CompletionRequest(Request):
 
 
 if __name__ == "__main__":
+"""
     req = CompletionRequest()
     req.setPrompt("Tell me a joke")
     req.setEcho(True)
@@ -84,3 +85,5 @@ if __name__ == "__main__":
 
     print("\nPrompt Two:\n")
     print(response.getText())
+"""
+    pass
