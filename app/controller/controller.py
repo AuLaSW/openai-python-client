@@ -27,16 +27,6 @@ class Controller:
         # the response
         self.response = None
 
-    # get completion form
-    def getCompletionForm(self):
-        self.view.window = CompletionFormWindow()
-        self.view.window.init()
-
-    # get edit form
-    def getEditForm(self):
-        self.view.window = EditFormWindow()
-        self.view.window.init()
-
     # creates a request
     def buildRequest(self, req):
         self.request = self.view.getRequest(req)
@@ -62,15 +52,6 @@ class Controller:
             self.request = CompletionRequest()
         else:
             self.request = EditRequest()
-
-    # initialize view
-    def initView(self):
-        return self.view.init()
-
-    # get the next view
-    def getView(self, nextView):
-        return nextView
-        # return self.view.get(nextView)
 
 
 if __name__ == "__main__":
