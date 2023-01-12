@@ -56,6 +56,30 @@ class SettingsFrame(BaseFrame):
                 return NotImplementedError()
             """
 
+        # save settings button at bottom of window
+        saveButton = tk.Button(
+            master=self,
+            label="Save",
+            # command=self.saveSettings
+        ).grid(
+            column=0,
+            row=self.row,
+            padx=10,
+            pady=10
+        )
+
+        # don't save settings button at bottom of window
+        exitButton = tk.Button(
+            master=self,
+            label="Exit",
+            # command=self.exitSettings
+        ).grid(
+            column=1,
+            row=self.row,
+            padx=10,
+            pady=10
+        )
+
     # default setting generator. Cleans
     # up the code and makes it easier to
     # define a new setting type
