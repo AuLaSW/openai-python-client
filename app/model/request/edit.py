@@ -47,6 +47,17 @@ class EditRequest(Request):
                     n=self.getN(),
                 )
 
+    def getSettings(self):
+        allKeys, optionalKeys = self.getKeys()
+        
+        allKeys.extend(optionalKeys)
+        
+        for key in allKeys:
+            if key is in self.notSettings:
+                allKeys.remove(key)
+
+        return allKeys
+
     def getModel(self):
         return self.requestDict[self.REQUIRED]["model"]
 

@@ -82,16 +82,8 @@ class Controller:
         if not isinstance(self.request, EditRequest):
             # return an error
             pass
-        
-        required, optional = self.request.getKeys()
 
-        allKeys = required | optional
-        
-        for key in allKeys:
-            if key is in self.request.notSettings:
-                allKeys.remove(key)
-        
-        return allKeys
+        return self.request.getSettings()
 
 
 if __name__ == "__main__":
