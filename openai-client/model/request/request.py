@@ -77,7 +77,7 @@ class Request:
         return settings
 
     def get(self, option, var):
-        return self.requestDict[option][var]
+        return self.requestDict[var]
     
     def set(self, option, var, val):
-        self.requestDict[option][var] = val
+        self.requestDict[var] = val
