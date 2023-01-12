@@ -16,14 +16,9 @@ class CompletionRequest(Request):
         super().__init__()
 
         # setup self.requestDict
-
-        # required values
-        self.requestDict[self.REQUIRED] = {
-            "model": "text-davinci-003"
-        }
-
-        # optional values
-        self.requestDict[self.OPTIONAL] = {
+        
+        self.requestDict = {
+            "model": "text-davinci-003",
             "prompt": "",
             "max_tokens": 16,
             "temperature": 0,
@@ -44,7 +39,35 @@ class CompletionRequest(Request):
             # "logit_bias": {},
         }
 
-        self.notSettings = [ "prompt" ]
+        # required values
+        self.requiredArgs = {
+            "model",
+        }
+
+        # optional values
+        self.optionalArgs = {
+            "prompt",
+            "max_tokens",
+            "temperature",
+            "top_p",
+            "n",
+            "stream",
+            "echo",
+            "presence_penalty",
+            "frequency_penalty",
+            "best_of",
+            "user",
+            # these keys I cannot get to work and are optional,
+            # so they are commented out until they work
+            #
+            # "suffix",
+            # "logprobs",
+            # "stop",
+            # "logit_bias",
+        }
+
+        self.settings = Set(self.requestDict.keys())
+        self.settings.remove("prompt")
 
     def getResponse(self):
         return Response(
