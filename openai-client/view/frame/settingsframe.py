@@ -113,38 +113,39 @@ class SettingsFrame(BaseFrame):
 
     # string setting input
     def strSetting(self, label, default):
-        output = tk.StringVar()
-        output.set(default)
+        kwargs = dict()
 
-        self.outputs[label] = output
+        self.addOutput(tk.StringVar, lable, default, kwargs)
 
-        kwargs["variable"] = output
 
         self.baseSetting(tk.Entry, label, default, **kwargs)
 
     # integer setting input
     def intSetting(self, label, default):
-        output = tk.IntVar()
-        output.set(default)
+        kwargs = dict()
 
-        self.outputs[label] = output
-
-        kwargs["variable"] = output
+        self.addOutput(tk.IntVar, lable, default, kwargs)
 
         self.baseSetting(tk.Entry, label, default, **kwargs)
 
     # boolean setting input
     def boolSetting(self, label, default):
-        output = tk.IntVar()
-        output.set(default)
-
-        self.outputs[label] = output
-
-        kwargs["variable"] = output
+        kwargs = dict()
+        
+        self.addOutput(tk.IntVar, lable, default, kwargs)
+        
         kwargs["onvalue"] = 1
         kwargs["offvalue"] = 0
 
         self.baseSetting(tk.Checkbutton, label, default, **kwargs)
+
+    def addOutput(self, tkVar, label, default, kwaDict):
+        output = tkVar
+        output.set(default)
+        
+        self.outputs[label] = output
+        
+        kwaDict["variable"] = output
 
 
 if __name__ == "__main__":
