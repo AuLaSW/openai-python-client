@@ -22,12 +22,12 @@ class Window:
         # the frame that will be packed onto the
         # window
         self.frame
-    
+
     # function for drawing the window given the frame
-    # the window will hold. Allows for a window to be 
+    # the window will hold. Allows for a window to be
     # reset without starting a new window instance.
     def startWindow(self):
-        self.frame = StartFrame(self.window, self.controller)
+        # self.frame = StartFrame(self.window, self.controller)
         self.frame.pack()
 
 
