@@ -16,6 +16,7 @@ class SettingsFrame(BaseFrame):
         super().__init__(main, controller)
 
         self.settings = None
+        self.options = dict()
 
         self.row = 0
 
