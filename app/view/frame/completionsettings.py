@@ -13,12 +13,6 @@ class CompletionSettings(SettingsFrame):
     def __init__(self, main, controller):
         super().__init__(main, controller)
 
-        # self.settings = self.controller.getCompletionSettings()
-        self.settings = {
-                "test": "",
-                "enter and int": 0,
-                "bool?": True,
-                "float": 1.0,
-                }
+        self.settings = self.controller.getCompletionSettings()
 
         self.create()
