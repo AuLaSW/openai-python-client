@@ -1,5 +1,5 @@
 # settingsframe.py
-from baseframe import BaseFrame
+from .baseframe import BaseFrame
 import tkinter as tk
 
 """
@@ -15,7 +15,7 @@ class SettingsFrame(BaseFrame):
     def __init__(self, main, controller):
         super().__init__(main, controller)
 
-        self.settings
+        self.settings = None
 
         self.row = 0
 
@@ -25,20 +25,18 @@ class SettingsFrame(BaseFrame):
     # types of input in other settings
     # classes.
     def create(self):
-        for key, value in self.settings:
+        for key in self.settings:
+            value = self.settings[key]
             typeOfValue = type(value).__name__
             match typeOfValue:
                 case "str":
                     self.strSetting(key, value)
-                    break
                 case "int":
                     self.intSetting(key, value)
-                    break
                 case "bool":
                     self.boolSetting(key, value)
-                    break
                 case _:
-                    break
+                    pass
 
             # potentially better way to implement this?
             # Allows a class to add entries to a
@@ -64,7 +62,7 @@ class SettingsFrame(BaseFrame):
     def baseSetting(self, tkFunc, label, default, **kwargs):
         # generate label on the left
         tk.Label(
-            main=self,
+            master=self,
             text=label
         ).grid(
             column=0,
@@ -76,8 +74,8 @@ class SettingsFrame(BaseFrame):
         # setup the widget that we want
         # must pass the widget function
         # through the function
-        tk.tkFunc(
-            main=self,
+        tkFunc(
+            master=self,
             **kwargs
         ).grid(
             column=1,
