@@ -81,6 +81,9 @@ class SettingsFrame(BaseFrame):
             pady=10
         )
 
+    def saveSettings(self):
+        pass
+
     # default setting generator. Cleans
     # up the code and makes it easier to
     # define a new setting type
