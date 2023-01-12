@@ -83,7 +83,7 @@ class SettingsFrame(BaseFrame):
     # default setting generator. Cleans
     # up the code and makes it easier to
     # define a new setting type
-    def baseSetting(self, tkFunc, label, default, **kwargs):
+    def baseSetting(self, tkFunc, label, **kwargs):
         # generate label on the left
         tk.Label(
             master=self,
@@ -118,7 +118,7 @@ class SettingsFrame(BaseFrame):
         self.addOutput(tk.StringVar, lable, default, kwargs)
 
 
-        self.baseSetting(tk.Entry, label, default, **kwargs)
+        self.baseSetting(tk.Entry, label, **kwargs)
 
     # integer setting input
     def intSetting(self, label, default):
@@ -126,7 +126,7 @@ class SettingsFrame(BaseFrame):
 
         self.addOutput(tk.IntVar, lable, default, kwargs)
 
-        self.baseSetting(tk.Entry, label, default, **kwargs)
+        self.baseSetting(tk.Entry, label, **kwargs)
 
     # boolean setting input
     def boolSetting(self, label, default):
@@ -137,7 +137,7 @@ class SettingsFrame(BaseFrame):
         kwargs["onvalue"] = 1
         kwargs["offvalue"] = 0
 
-        self.baseSetting(tk.Checkbutton, label, default, **kwargs)
+        self.baseSetting(tk.Checkbutton, label, **kwargs)
 
     def addOutput(self, tkVar, label, default, kwaDict):
         output = tkVar
