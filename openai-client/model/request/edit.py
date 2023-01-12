@@ -45,15 +45,7 @@ class EditRequest(Request):
     def getResponse(self):
         return Response(
                 openai.Edit.create(
-                    # required inputs
-                    model=self.getModel(),
-                    instruction=self.getInstruction(),
-
-                    # optional inputs
-                    input=self.getInput(),
-                    temperature=self.getTemperature(),
-                    top_p=self.getTopP(),
-                    n=self.getN(),
+                    **self.requestDict,
                 )
 
     def getModel(self):
