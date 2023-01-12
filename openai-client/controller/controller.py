@@ -57,7 +57,6 @@ class Controller:
 
     """Request Settings Data"""
     
-    # returns keys for settings
     def getSettings(self, className):
         if not isinstance(self.request, className):
             # return an error
