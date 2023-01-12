@@ -27,15 +27,7 @@ class Controller:
         # the response
         self.response = None
 
-    # get completion form
-    def getCompletionForm(self):
-        self.view.window = CompletionFormWindow()
-        self.view.window.init()
-
-    # get edit form
-    def getEditForm(self):
-        self.view.window = EditFormWindow()
-        self.view.window.init()
+    """Manage requests"""
 
     # creates a request
     def buildRequest(self, req):
@@ -63,14 +55,24 @@ class Controller:
         else:
             self.request = EditRequest()
 
-    # initialize view
-    def initView(self):
-        return self.view.init()
+    """Request Settings Data"""
+    
+    def getSettings(self, className):
+        if not isinstance(self.request, className):
+            # return an error
+            pass
+        
+        return self.request.getSettings()
 
-    # get the next view
-    def getView(self, nextView):
-        return nextView
-        # return self.view.get(nextView)
+    # returns the keys that are settings for
+    # the completion request
+    def getCompletionSettings(self):
+        return self.getSettings(CompletionRequest)
+
+    # returns the keys that are settings for
+    # the completion request
+    def getEditSettings(self):
+        return self.getSettings(EditRequest)
 
 
 if __name__ == "__main__":

@@ -30,6 +30,8 @@ class EditRequest(Request):
             "top_p": 1,
             "n": 1,
         }
+        
+        self.notSettings = [ "instruction", "input" ]
 
     def getResponse(self):
         return Response(

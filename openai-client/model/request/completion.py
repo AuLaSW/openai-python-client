@@ -44,6 +44,8 @@ class CompletionRequest(Request):
             # "logit_bias": {},
         }
 
+        self.notSettings = [ "prompt" ]
+
     def getResponse(self):
         return Response(
                 openai.Completion.create(
