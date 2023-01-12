@@ -31,7 +31,10 @@ class View:
 
 
 if __name__ == "__main__":
-    view = View(None)
-    view.window.completionSettingsWindow()
-    view.window.window.mainloop()
-    pass
+    from openai-client.controller import Controller
+
+    tempController = Controller()
+
+    view = View(tempController)
+
+    view.run()
