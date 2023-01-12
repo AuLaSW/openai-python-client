@@ -64,17 +64,7 @@ class Controller:
             # return an error
             pass
         
-        required, optional = self.request.getKeys()
-
-        allKeys = required | optional
-
-        notSettings = { "prompt" }
-        
-        for key in allKeys:
-            if key is in notSettings:
-                allKeys.remove(key)
-        
-        return allKeys
+        return self.request.getSettings()
 
     # returns the keys that are settings for
     # the completion request
