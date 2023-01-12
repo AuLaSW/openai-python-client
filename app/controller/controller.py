@@ -27,6 +27,8 @@ class Controller:
         # the response
         self.response = None
 
+    """Manage requests"""
+
     # creates a request
     def buildRequest(self, req):
         self.request = self.view.getRequest(req)
@@ -52,6 +54,46 @@ class Controller:
             self.request = CompletionRequest()
         else:
             self.request = EditRequest()
+
+    """Request Settings Data"""
+
+    # returns the keys that are settings for
+    # the completion request
+    def getCompletionSettings(self):
+        if not isinstance(self.request, CompletionRequest):
+            # return an error
+            pass
+        
+        required, optional = self.request.getKeys()
+
+        allKeys = required | optional
+
+        notSettings = { "prompt" }
+        
+        for key in allKeys:
+            if key is in notSettings:
+                allKeys.remove(key)
+        
+        return allKeys
+
+    # returns the keys that are settings for
+    # the completion request
+    def getEditSettings(self):
+        if not isinstance(self.request, EditRequest):
+            # return an error
+            pass
+        
+        required, optional = self.request.getKeys()
+
+        allKeys = required | optional
+
+        notSettings = { "instruction", "input" }
+        
+        for key in allKeys:
+            if key is in notSettings:
+                allKeys.remove(key)
+        
+        return allKeys
 
 
 if __name__ == "__main__":
