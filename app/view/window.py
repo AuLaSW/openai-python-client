@@ -1,5 +1,6 @@
 # window.py
 import tkinter as tk
+from frame.completionsettings import CompletionSettings
 
 """
 Class Window:
@@ -21,13 +22,13 @@ class Window:
         self.controller = controller
         # the frame that will be packed onto the
         # window
-        self.frame
+        self.frame = None
 
     # function for drawing the window given the frame
     # the window will hold. Allows for a window to be
     # reset without starting a new window instance.
-    def startWindow(self):
-        # self.frame = StartFrame(self.window, self.controller)
+    def completionSettingsWindow(self):
+        self.frame = CompletionSettings(self.window, self.controller)
         self.frame.pack()
 
 
