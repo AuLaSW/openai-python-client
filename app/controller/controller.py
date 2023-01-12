@@ -56,11 +56,9 @@ class Controller:
             self.request = EditRequest()
 
     """Request Settings Data"""
-
-    # returns the keys that are settings for
-    # the completion request
-    def getCompletionSettings(self):
-        if not isinstance(self.request, CompletionRequest):
+    
+    def getSettings(self, className):
+        if not isinstance(self.request, className):
             # return an error
             pass
         
@@ -68,12 +66,13 @@ class Controller:
 
     # returns the keys that are settings for
     # the completion request
-    def getEditSettings(self):
-        if not isinstance(self.request, EditRequest):
-            # return an error
-            pass
+    def getCompletionSettings(self):
+        return self.getSettings(CompletionRequest)
 
-        return self.request.getSettings()
+    # returns the keys that are settings for
+    # the completion request
+    def getEditSettings(self):
+        return self.getSettings(EditRequest)
 
 
 if __name__ == "__main__":
