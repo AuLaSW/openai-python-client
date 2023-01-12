@@ -83,17 +83,6 @@ class CompletionRequest(Request):
             )
         """
 
-    def getSettings(self):
-        allKeys, optionalKeys = self.getKeys()
-        
-        allKeys.extend(optionalKeys)
-        
-        for key in allKeys:
-            if key is in self.notSettings:
-                allKeys.remove(key)
-
-        return allKeys
-
     def getModel(self):
         return self.get(self.REQUIRED, "model")
 
