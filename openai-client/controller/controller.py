@@ -1,8 +1,8 @@
-from model.request.completion import CompletionRequest
-from model.request.edit import EditRequest
-from model.models import Models
-from model.response import Response
-from view.view import View
+from openai-client.model.request.completion import CompletionRequest
+from openai-client.model.request.edit import EditRequest
+from openai-client.model.models import Models
+from openai-client.model.response import Response
+from openai-client.view.view import View
 
 """
 Class Controller:

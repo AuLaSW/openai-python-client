@@ -1,6 +1,6 @@
 # window.py
+from openai-client.view.frame.completionsettings import CompletionSettings
 import tkinter as tk
-from frame.completionsettings import CompletionSettings
 
 """
 Class Window:
