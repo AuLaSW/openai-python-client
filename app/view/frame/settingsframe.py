@@ -16,7 +16,7 @@ class SettingsFrame(BaseFrame):
         super().__init__(main, controller)
 
         self.settings
-        
+
         self.row = 0
 
     # creates all of the widgets for
@@ -26,21 +26,22 @@ class SettingsFrame(BaseFrame):
     # classes.
     def create(self):
         for key, value in self.settings:
-            switch type(value):
-                case str:
+            typeOfValue = type(value).__name__
+            match typeOfValue:
+                case "str":
                     self.strSetting(key, value)
                     break
-                case int:
-                    self.intSetting(key,value)
+                case "int":
+                    self.intSetting(key, value)
                     break
-                case bool:
+                case "bool":
                     self.boolSetting(key, value)
                     break
-                default:
+                case _:
                     break
-            
+
             # potentially better way to implement this?
-            # Allows a class to add entries to a 
+            # Allows a class to add entries to a
             # settingsDict dictionary, with the keys being
             # the name of the class and the values being
             # the function that that setting type calls
@@ -73,7 +74,7 @@ class SettingsFrame(BaseFrame):
         )
 
         # setup the widget that we want
-        # must pass the widget function 
+        # must pass the widget function
         # through the function
         tk.tkFunc(
             main=self,
@@ -84,18 +85,21 @@ class SettingsFrame(BaseFrame):
             padx=5,
             pady=10
         )
-        
+
         # move down one row
         self.row += 1
 
     # string setting input
     def strSetting(self, label, default):
+        kwargs = {}
         self.baseSetting(tk.Entry, label, default, **kwargs)
 
     # integer setting input
-    def intSetting(self, label, default)
+    def intSetting(self, label, default):
+        kwargs = {}
         self.baseSetting(tk.Entry, label, default, **kwargs)
 
     # boolean setting input
-    def boolSetting(self, label, default)
+    def boolSetting(self, label, default):
+        kwargs = {}
         self.baseSetting(tk.Checkbutton, label, default, **kwargs)
