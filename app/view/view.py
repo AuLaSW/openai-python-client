@@ -1,5 +1,6 @@
 # view.py
-import tkinter as tk
+from window import Window
+
 """
 Class View:
 
@@ -22,8 +23,11 @@ class View:
         # this will give us specific frames and
         # windows to call and use without having
         # to go through tkinter directly
-        self.window = Window()
+        self.window = Window(self.controller)
 
 
 if __name__ == "__main__":
+    view = View(None)
+    view.window.completionSettingsWindow()
+    view.window.window.mainloop()
     pass
