@@ -15,7 +15,7 @@ class SettingsFrame(BaseFrame):
     def __init__(self, main, controller):
         super().__init__(main, controller)
 
-        self.settings = None
+        self.settings = {}
         self.options = dict()
 
         self.row = 0
@@ -31,7 +31,29 @@ class SettingsFrame(BaseFrame):
             typeOfValue = type(value).__name__
             match typeOfValue:
                 case "str":
-                    self.strSetting(key, value)
+                    # this won't work because the function
+                    # returns two values, so how to make 
+                    # this work?
+                    labelWidget, widget = SettingsInputFrame(
+                        self, 
+                        self.controller, 
+                        key, 
+                        value
+                    )
+                    
+                    labelWidget.grid(
+                        column=0,
+                        row=self.row,
+                        padx=10,
+                        pady=10,
+                    )
+                    
+                    widget.grid(
+                        column=0,
+                        row=self.row,
+                        padx=10,
+                        pady=10,
+                    )
                 case "int":
                     self.intSetting(key, value)
                 case "bool":
