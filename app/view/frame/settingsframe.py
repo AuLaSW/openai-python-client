@@ -103,3 +103,7 @@ class SettingsFrame(BaseFrame):
     def boolSetting(self, label, default):
         kwargs = {}
         self.baseSetting(tk.Checkbutton, label, default, **kwargs)
+
+
+if __name__ == "__main__":
+    pass
