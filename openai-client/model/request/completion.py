@@ -48,7 +48,6 @@ class CompletionRequest(Request):
         self.optionalArgs = Set(self.requestDict.keys())
         self.optionalArgs -= self.requiredArgs
 
-        # arguments that are settings
         self.settings = Set(self.requestDict.keys())
         self.settings.remove("prompt")
 
