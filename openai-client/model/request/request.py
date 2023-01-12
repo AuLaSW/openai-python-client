@@ -47,18 +47,7 @@ class Request:
 
     # returns required keys and optional keys, in that order
     def getKeys(self):
-        keys = {
-            self.REQUIRED: [],
-            self.OPTIONAL: []
-        }
-
-        for d in self.requestDict[self.REQUIRED]:
-            keys[self.REQUIRED] = d.keys()
-
-        for d in self.requestDict[self.OPTIONAL]:
-            keys[self.OPTIONAL] = d.keys()
-
-        return keys[self.REQUIRED], keys[self.OPTIONAL]
+        return self.requestDict.keys()
 
     # returns dict of settings
     def getSettings(self):
