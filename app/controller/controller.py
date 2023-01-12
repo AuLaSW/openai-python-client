@@ -86,11 +86,9 @@ class Controller:
         required, optional = self.request.getKeys()
 
         allKeys = required | optional
-
-        notSettings = { "instruction", "input" }
         
         for key in allKeys:
-            if key is in notSettings:
+            if key is in self.request.notSettings:
                 allKeys.remove(key)
         
         return allKeys
