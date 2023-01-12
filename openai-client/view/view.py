@@ -1,5 +1,5 @@
 # view.py
-from openai-client.view.window import Window
+from openai-client.view.window.window import Window
 
 """
 Class View:
