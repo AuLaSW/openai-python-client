@@ -45,26 +45,8 @@ class CompletionRequest(Request):
         }
 
         # optional values
-        self.optionalArgs = {
-            "prompt",
-            "max_tokens",
-            "temperature",
-            "top_p",
-            "n",
-            "stream",
-            "echo",
-            "presence_penalty",
-            "frequency_penalty",
-            "best_of",
-            "user",
-            # these keys I cannot get to work and are optional,
-            # so they are commented out until they work
-            #
-            # "suffix",
-            # "logprobs",
-            # "stop",
-            # "logit_bias",
-        }
+        self.optionalArgs = Set(self.requestDict.keys())
+        self.optionalArgs -= self.requiredArgs
 
         self.settings = Set(self.requestDict.keys())
         self.settings.remove("prompt")
