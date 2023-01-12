@@ -18,20 +18,29 @@ class EditRequest(Request):
         # setup self.requestDict
 
         # required values
-        self.requestDict[self.REQUIRED] = {
+        self.requestDict = {
             "model": "text-davinci-edit-001",
             "instruction": ""
-        }
-
-        # optional values
-        self.requestDict[self.OPTIONAL] = {
             "input": "",
             "temperature": 1,
             "top_p": 1,
             "n": 1,
         }
         
-        self.notSettings = [ "instruction", "input" ]
+        # required arguments
+        self.requiredArgs= {
+            "model",
+            "instruction",
+        }
+        
+        # optional arguments
+        self.optionalArgs = Set(self.requestDict.keys())
+        self.optionalArgs -= self.requiredArgs
+        
+        # arguments that are settings
+        self.settings = Set(self.requestDict.keys())
+        self.settings.remove("instruction")
+        self.settings.remove("input")
 
     def getResponse(self):
         return Response(
