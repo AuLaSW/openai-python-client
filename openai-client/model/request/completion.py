@@ -48,45 +48,16 @@ class CompletionRequest(Request):
         self.optionalArgs = Set(self.requestDict.keys())
         self.optionalArgs -= self.requiredArgs
 
+        # set of setting arguments
         self.settings = Set(self.requestDict.keys())
         self.settings.remove("prompt")
 
     def getResponse(self):
         return Response(
                 openai.Completion.create(
-                    # required inputs
-                    model=self.getModel(),
-
-                    # optional inputs
-                    prompt=self.getPrompt(),
-                    max_tokens=self.getMaxTokens(),
-                    temperature=self.getTemperature(),
-                    top_p=self.getTopP(),
-                    n=self.getN(),
-                    stream=self.getStream(),
-                    echo=self.getEcho(),
-                    presence_penalty=self.getPresencePenalty(),
-                    frequency_penalty=self.getFrequencyPenalty(),
-                    best_of=self.getBestOf(),
-                    user=self.getUser()
-                    # suffix=optional["suffix"],
-                    # logprobs=optional["logprobs"],
-                    # stop=optional["stop"],
-                    # logit_bias=optional["logit_bias"],
+                    **self.requestDict,
                 )
             )
-        """
-        Another option could look like this:
-
-        required = self.requestDict[self.REQUIRED]
-        optional = self.requestDict[self.OPTIONAL]
-
-        return Response(
-                Comp.create(
-                    required | optional
-                )
-            )
-        """
 
     def getModel(self):
         return self.get(self.REQUIRED, "model")
