@@ -10,9 +10,9 @@ with settings for an OpenAI API text-completion request.
 
 
 class CompletionSettings(SettingsFrame):
-    def __init__(super, main, controller):
+    def __init__(self, main, controller):
         super().__init__(main, controller)
-        
+
         self.settings = self.controller.getCompletionSettings()
-        
+
         self.create()
