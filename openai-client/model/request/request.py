@@ -42,10 +42,11 @@ class Request:
 
         return strRequest
 
+    # returns response object from request
     def getResponse(self):
         return NotImplementedError()
 
-    # returns required keys and optional keys, in that order
+    # returns list of all keys in the request
     def getKeys(self):
         return self.requestDict.keys()
 
@@ -53,8 +54,10 @@ class Request:
     def getSettings(self):
         return self.settings
 
-    def get(self, option, var):
+    # gets value of var in requestDict
+    def get(self, var):
         return self.requestDict[var]
     
-    def set(self, option, var, val):
+    # sets value of var in requestDict
+    def set(self, var, val):
         self.requestDict[var] = val
