@@ -31,14 +31,15 @@ class testModels(unittest.Test):
         # the word "text", since that means
         # it is a text model
         for list in self.models.items():
-            for model in list
-                self.assertIn("text", model)
-                self.assertNotIn("code", model)
-                self.assertNotIn("search", model)
-                self.assertNotIn("similarity", model)
-                self.assertNotIn("insert", model)
-                self.assertNotIn("embedding", model)
-                self.assertNotIn(":", model)
+            for model in list:
+                with self.subTest(model = model):
+                    self.assertIn("text", model)
+                    self.assertNotIn("code", model)
+                    self.assertNotIn("search", model)
+                    self.assertNotIn("similarity", model)
+                    self.assertNotIn("insert", model)
+                    self.assertNotIn("embedding", model)
+                    self.assertNotIn(":", model)
     
     # tests that the model dictionary does
     # contain the model
