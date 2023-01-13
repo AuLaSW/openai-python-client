@@ -4,19 +4,14 @@ import unittest
 
 
 class TestResponse(unittest.TestCase):
-    # test that the response object put
-    # the data in the correct objects
-    def test_correctPlacement(self):
+    def test_correctObject(self):
         self.assertEqual(self.obj, response["object"])
-        self.assertEqual(self.text, response["choices"][0]["text"])
-        self.assertEqual(self.index, response["choices"][0]["index"])
         
-        if "text_completion" in self.obj:
-            self.assertEqual(self.model, response["model"])
-            self.assertEqual(
-                self.finish_reason, 
-                response["choices"][0]["finish_reason"]
-            )
+    def test_correctText(self):
+        self.assertEqual(self.text, response["choices"][0]["text"])
+    
+    def test_correctIndex(self):
+        self.assertEqual(self.index, response["choices"][0]["index"])
 
     # test that getText() returns the 
     # text object
@@ -35,7 +30,6 @@ class TestResponse(unittest.TestCase):
         self.assertEqual(result, reference)
 
 
-
 class TestResponseTextCompletion(TestResponse):
     def setUp(self):
         self.dictionary = {
@@ -50,6 +44,16 @@ class TestResponseTextCompletion(TestResponse):
         }
 
         self.response = Response(self.dictionary)
+    
+    def test_correctModel(self):
+        self.assertEqual(self.model, response["model"])
+            
+    
+    def test_correctFinishReason(self):
+        self.assertEqual(
+                self.finish_reason, 
+                response["choices"][0]["finish_reason"]
+            )
 
 
 class TestResponseEdit(TestResponse):
