@@ -1,5 +1,5 @@
 # view.py
-from openai-client.view.window.window import Window
+from openaiclient.view.window.window import Window
 
 """
 Class View:
@@ -31,7 +31,7 @@ class View:
 
 
 if __name__ == "__main__":
-    from openai-client.controller import Controller
+    from openaiclient.controller import Controller
 
     tempController = Controller()
 

@@ -1,5 +1,5 @@
 # settingsframe.py
-from openai-client.view.frame.baseframe import BaseFrame
+from openaiclient.view.frame.baseframe import BaseFrame
 import tkinter as tk
 
 """

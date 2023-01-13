@@ -1,5 +1,5 @@
 # settingsinputframe.py
-from openai-client.view.frame.baseframe import BaseFrame
+from openaiclient.view.frame.baseframe import BaseFrame
 
 
 class SettingsInputFrame(BaseFrame):

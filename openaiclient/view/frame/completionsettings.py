@@ -1,5 +1,5 @@
 # completionsettings.py
-from openai-client.view.frame.settingsframe import SettingsFrame
+from openaiclient.view.frame.settingsframe import SettingsFrame
 
 """
 Class CompletionSettings:

@@ -1,5 +1,5 @@
-from openai-client.model.request.request import Request
-from openai-client.model.response import Response
+from openaiclient.model.request.request import Request
+from openaiclient.model.response import Response
 import openai
 
 """
