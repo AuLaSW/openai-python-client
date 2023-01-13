@@ -7,14 +7,14 @@ from app.model.response import Response
 class TestResponse(unittest.TestCase):
     def setUp(self):
         self.dictionary = {
-            "object": "",
+            "object": "object value",
             "choices": [ {
-                "text": ""
+                "text": "input text"
                 "index": 0
-                "finish_reason": ""
+                "finish_reason": "finished"
                 }
             ],
-            "model": ""
+            "model": "model value"
         }
 
         self.response = Response(self.dictionary)
