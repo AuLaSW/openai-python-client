@@ -4,18 +4,18 @@ import unittest
 
 
 class TestResponse(unittest.TestCase):
-    def test_correctObject(self):
+    def test_CorrectObject(self):
         self.assertEqual(self.obj, response["object"])
         
-    def test_correctText(self):
+    def test_CorrectText(self):
         self.assertEqual(self.text, response["choices"][0]["text"])
     
-    def test_correctIndex(self):
+    def test_CorrectIndex(self):
         self.assertEqual(self.index, response["choices"][0]["index"])
 
     # test that getText() returns the 
     # text object
-    def test_getText(self):
+    def test_GetText(self):
         result = self.response.getText()
         reference = self.dictionary["choices"][0]["text"]
 
@@ -23,7 +23,7 @@ class TestResponse(unittest.TestCase):
 
     # test that getFinishReason() returns
     # the finish reason
-    def test_getFinishReason(self):
+    def test_GetFinishReason(self):
         result = self.response.getFinishReason()
         reference = self.dictionary["choices"][0]["finish_reason"]
 
@@ -45,11 +45,11 @@ class TestResponseTextCompletion(TestResponse):
 
         self.response = Response(self.dictionary)
     
-    def test_correctModel(self):
+    def test_CorrectModel(self):
         self.assertEqual(self.model, response["model"])
             
     
-    def test_correctFinishReason(self):
+    def test_CorrectFinishReason(self):
         self.assertEqual(
                 self.finish_reason, 
                 response["choices"][0]["finish_reason"]

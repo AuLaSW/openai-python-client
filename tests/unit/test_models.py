@@ -42,17 +42,17 @@ class testModels(unittest.Test):
     
     # tests that the model dictionary does
     # contain the model
-    def test_containsModel(self):
+    def test_ContainsModel(self):
         exModel = "text-davinci-003"
         
         self.assertIn(sels.modelObj, exModel)
     
     # tests that the model dictionary doesn't
     # contain the model
-    def test_notContainsModel(self):
+    def test_NotContainsModel(self):
         exModel = "text-code-davinci-003"
         
         self.assertIn(self.modelObj, exModel)
 
-    def test_getModels(self):
+    def test_GetModels(self):
         self.assertEqual(self.modelObj.getModels(), self.models)
