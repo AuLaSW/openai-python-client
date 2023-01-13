@@ -47,7 +47,7 @@ class testModels(unittest.Test):
         
         self.assertIn(sels.modelObj, exModel)
     
-    # tests taht the model dictionar doesn't
+    # tests that the model dictionary doesn't
     # contain the model
     def test_notContainsModel(self):
         exModel = "text-code-davinci-003"
