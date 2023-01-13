@@ -3,7 +3,7 @@ from openai.model.models import Models
 import unittest
 
 
-class testModels(unittest.Test):
+class TestModels(unittest.Test):
     def setup(self):
         self.modelObj = Models()
         self.models = self.modelObj.models
@@ -57,3 +57,7 @@ class testModels(unittest.Test):
 
     def test_GetModels(self):
         self.assertEqual(self.modelObj.getModels(), self.models)
+
+
+if __name__ == "__main__":
+    unittest.mainloop()
