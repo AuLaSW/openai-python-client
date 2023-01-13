@@ -141,7 +141,7 @@ class SettingsFrame(BaseFrame):
     def strSetting(self, label, default):
         kwargs = dict()
 
-        self.addOutput(tk.StringVar, lable, default, kwargs)
+        self.addOutput(tk.StringVar, label, default, kwargs)
 
         self.baseSetting(tk.Entry, label, **kwargs)
 
@@ -149,7 +149,7 @@ class SettingsFrame(BaseFrame):
     def intSetting(self, label, default):
         kwargs = dict()
 
-        self.addOutput(tk.IntVar, lable, default, kwargs)
+        self.addOutput(tk.IntVar, label, default, kwargs)
 
         self.baseSetting(tk.Entry, label, **kwargs)
 
@@ -157,7 +157,7 @@ class SettingsFrame(BaseFrame):
     def boolSetting(self, label, default):
         kwargs = dict()
 
-        self.addOutput(tk.IntVar, lable, default, kwargs)
+        self.addOutput(tk.IntVar, label, default, kwargs)
 
         kwargs["onvalue"] = 1
         kwargs["offvalue"] = 0
