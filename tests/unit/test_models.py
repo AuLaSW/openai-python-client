@@ -9,21 +9,24 @@ class testModels(unittest.Test):
         self.models = self.modelObj.models
         self.comp = self.modelObj.COMPLETION
         self.comp = self.modelObj.EDIT
-    
-    # test that when the model object is
-    # initialized, the models follow the
-    # designated filters
-    def test_modelDictInit(self):
+
+    def test_CompletionKeyInDict(self):
         # assert that comp is a key in dictionary
         self.assertIn(self.comp, self.models.keys())
+        
+    def test_EditKeyInDict(self):
         # assert that edit is a key in dictionary
         self.assertIn(self.edit, self.models.keys())
-        
+    
+    def test_CompletionListNotEmpty(self):
         # assert the completion models are not empty
-        self.assertIsNotEqual(self.models[self.comp], [])
-        # assert the edit models are not empty
-        self.assertIsNotEqual(self.models[self.edit], [])
-        
+        self.assertTrue(self.models[self.comp])
+    
+    def test_EditListNotEmpty(self):
+        # assert the completion models are not empty
+        self.assertTrue(self.models[self.edit])
+    
+    def test_ModelsFilterCorrectly(self):
         # make sure that all models contain
         # the word "text", since that means
         # it is a text model
