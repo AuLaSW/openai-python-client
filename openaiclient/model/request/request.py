@@ -8,13 +8,17 @@ OpenAI API.
 
 class Request:
     def __init__(self):
-        self.REQUIRED = "required"
-        self.OPTIONAL = "optional"
+        # dictionary of request arguments
+        self.requestDict = dict()
 
-        self.requestDict = {
-            self.REQUIRED: {},
-            self.OPTIONAL: {}
-        }
+        # set of required request arguments
+        self.requiredArgs = {}
+
+        # set of optional request arguments
+        self.optionalArgs = {}
+
+        # set of request settings
+        self.settings = {}
 
     def __str__(self):
         # this produces a header for the output that contains the
@@ -38,26 +42,22 @@ class Request:
 
         return strRequest
 
+    # returns response object from request
     def getResponse(self):
         return NotImplementedError()
 
-    # returns required keys and optional keys, in that order
+    # returns list of all keys in the request
     def getKeys(self):
-        keys = {
-            self.REQUIRED: [],
-            self.OPTIONAL: []
-        }
+        return self.requestDict.keys()
 
-        for d in self.requestDict[self.REQUIRED]:
-            keys[self.REQUIRED] = d.keys()
+    # returns dict of settings
+    def getSettings(self):
+        return self.settings
 
-        for d in self.requestDict[self.OPTIONAL]:
-            keys[self.OPTIONAL] = d.keys()
+    # gets value of var in requestDict
+    def get(self, var):
+        return self.requestDict[var]
 
-        return keys[self.REQUIRED], keys[self.OPTIONAL]
-
-    def get(self, option, var):
-        return self.requestDict[option][var]
-    
-    def set(self, option, var, val):
-        self.requestDict[option][var] = val
+    # sets value of var in requestDict
+    def set(self, var, val):
+        self.requestDict[var] = val
