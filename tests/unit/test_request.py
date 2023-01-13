@@ -4,7 +4,7 @@ import unittest
 
 
 class TestRequest(unittest.Test):
-    def setup():
+    def setup(self):
         self.request = Request()
 
     # tests that the requestDict is empty on
