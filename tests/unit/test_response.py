@@ -4,20 +4,6 @@ import unittest
 
 
 class TestResponse(unittest.TestCase):
-    def setUp(self):
-        self.dictionary = {
-            "object": "object value",
-            "choices": [ {
-                "text": "input text"
-                "index": 0
-                "finish_reason": "finished"
-                }
-            ],
-            "model": "model value"
-        }
-
-        self.response = Response(self.dictionary)
-
     def test_getText(self):
         result = self.response.getText()
         reference = self.dictionary["choices"][0]["text"]
@@ -30,5 +16,36 @@ class TestResponse(unittest.TestCase):
 
         self.assertEqual(result, reference)
 
+
+class TestResponseTextCompletion(TestResponse):
+    def setUp(self):
+        self.dictionary = {
+            "object": "text_completion",
+            "choices": [ {
+                "text": "input text"
+                "index": 0
+                "finish_reason": "finished"
+                }
+            ],
+            "model": "text-davinci-003"
+        }
+
+        self.response = Response(self.dictionary)
+
+
+class TestResponseEdit(TestResponse):
+    def setUp(self):
+        self.dictionary = {
+            "object": "edit",
+            "choices": [ {
+                "text": "input text"
+                "index": 0
+                }
+            ],
+        }
+
+        self.response = Response(self.dictionary)
+
+
 if __name__ == "__main__":
-    pass
+    unittest.main()
