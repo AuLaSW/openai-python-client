@@ -13,7 +13,7 @@ class Request:
 
         # set of required request arguments
         self.requiredArgs = {}
-        
+
         # set of optional request arguments
         self.optionalArgs = {}
 
@@ -57,7 +57,7 @@ class Request:
     # gets value of var in requestDict
     def get(self, var):
         return self.requestDict[var]
-    
+
     # sets value of var in requestDict
     def set(self, var, val):
         self.requestDict[var] = val

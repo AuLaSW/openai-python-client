@@ -26,17 +26,17 @@ class EditRequest(Request):
             "top_p": 1,
             "n": 1,
         }
-        
+
         # required arguments
-        self.requiredArgs= {
+        self.requiredArgs = {
             "model",
             "instruction",
         }
-        
+
         # optional arguments
         self.optionalArgs = Set(self.requestDict.keys())
         self.optionalArgs -= self.requiredArgs
-        
+
         # arguments that are settings
         self.settings = Set(self.requestDict.keys())
         self.settings.remove("instruction")
@@ -50,6 +50,6 @@ class EditRequest(Request):
 
 
 if __name__ == "__main__":
-    req = EditRequest()
+    req=EditRequest()
 
     print(req)

@@ -27,7 +27,7 @@ class SettingsInputFrame(BaseFrame):
             master=self,
             **kwargs
         )
-        
+
         return labelWidget, widget
 
     # create the output variable for the widget
@@ -37,7 +37,7 @@ class SettingsInputFrame(BaseFrame):
 
         output = tkVar
         output.set(default)
-        
+
         self.main.options[label] = output
 
         kwargs["variable"] = output

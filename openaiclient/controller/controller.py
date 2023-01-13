@@ -56,12 +56,12 @@ class Controller:
             self.request = EditRequest()
 
     """Request Settings Data"""
-    
+
     def getSettings(self, className):
         if not isinstance(self.request, className):
             # return an error
             pass
-        
+
         return self.request.getSettings()
 
     # returns the keys that are settings for

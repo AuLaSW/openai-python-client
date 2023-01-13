@@ -16,7 +16,7 @@ class CompletionRequest(Request):
         super().__init__()
 
         # setup self.requestDict
-        
+
         self.requestDict = {
             "model": "text-davinci-003",
             "prompt": "",
@@ -54,10 +54,10 @@ class CompletionRequest(Request):
 
     def getResponse(self):
         return Response(
-                openai.Completion.create(
-                    **self.requestDict,
-                )
+            openai.Completion.create(
+                **self.requestDict,
             )
+        )
 
     def addToPrompt(self, input, newLine=False):
         if newLine:
@@ -86,4 +86,4 @@ if __name__ == "__main__":
     print("\nPrompt Two:\n")
     print(response.getText())
 """
-    pass
+pass

@@ -32,22 +32,22 @@ class SettingsFrame(BaseFrame):
             match typeOfValue:
                 case "str":
                     # this won't work because the function
-                    # returns two values, so how to make 
+                    # returns two values, so how to make
                     # this work?
                     labelWidget, widget = SettingsInputFrame(
-                        self, 
-                        self.controller, 
-                        key, 
+                        self,
+                        self.controller,
+                        key,
                         value
                     )
-                    
+
                     labelWidget.grid(
                         column=0,
                         row=self.row,
                         padx=10,
                         pady=10,
                     )
-                    
+
                     widget.grid(
                         column=0,
                         row=self.row,
@@ -143,7 +143,6 @@ class SettingsFrame(BaseFrame):
 
         self.addOutput(tk.StringVar, lable, default, kwargs)
 
-
         self.baseSetting(tk.Entry, label, **kwargs)
 
     # integer setting input
@@ -157,9 +156,9 @@ class SettingsFrame(BaseFrame):
     # boolean setting input
     def boolSetting(self, label, default):
         kwargs = dict()
-        
+
         self.addOutput(tk.IntVar, lable, default, kwargs)
-        
+
         kwargs["onvalue"] = 1
         kwargs["offvalue"] = 0
 
@@ -168,9 +167,9 @@ class SettingsFrame(BaseFrame):
     def addOutput(self, tkVar, label, default, kwaDict):
         output = tkVar
         output.set(default)
-        
+
         self.outputs[label] = output
-        
+
         kwaDict["variable"] = output
 
 
