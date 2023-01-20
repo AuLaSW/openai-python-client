@@ -1,5 +1,6 @@
 # test_completionrequest.py
 from openaiclient.model.request.completion import CompletionRequest
+from openaiclient.model.response import Response
 import unittest
 """
 Class TestCompletionRequest:
@@ -80,6 +81,8 @@ class TestCompletionRequest(unittest.Test):
             **kwargs
         )
         
+    def test_GetResponse(self):
+        self.assertIsInstance(self.request.getResponse(), Response)
 
 
 if __name__ == "__main__":
