@@ -1,6 +1,11 @@
 # test_completionrequest.py
 from openaiclient.model.request.completion import CompletionRequest
 import unittest
+"""
+Class TestCompletionRequest:
+
+Tests different units of the CompletionRequest class.
+"""
 
 
 class TestCompletionRequest(unittest.Test):
@@ -27,7 +32,10 @@ class TestCompletionRequest(unittest.Test):
     # (should be setup)
     def test_SettingsNotEmpty(self):
         self.assertTrue(self.request.settings)
-    
+        
+    # if the following three tests pass then
+    # the optionalArgs variable is also correct.
+
     # test that the requiredArgs variable and the
     # optionalArgs variable are disjoint
     def test_RequiredOptionalDisjoint(self):
@@ -36,10 +44,7 @@ class TestCompletionRequest(unittest.Test):
                 self.request.optionalArgs
             )
         )
-    
-    # if the following three tests pass then
-    # the optionalArgs variable is also correct.
-    
+
     # test that requiredArgs has the correct
     # number of elements
     def test_RequiredArgsCorrectLength(self):
