@@ -1,5 +1,6 @@
 # settingsframe.py
 from openaiclient.view.frame.baseframe import BaseFrame
+from openaiclient.view.frame.settingsinputframe import SettingsInputFrame
 import tkinter as tk
 
 """
@@ -29,38 +30,29 @@ class SettingsFrame(BaseFrame):
         for key in self.settings:
             value = self.settings[key]
             typeOfValue = type(value).__name__
+            
             match typeOfValue:
                 case "str":
-                    # this won't work because the function
-                    # returns two values, so how to make
-                    # this work?
-                    labelWidget, widget = SettingsInputFrame(
-                        self,
-                        self.controller,
+                    self.strSetting(
                         key,
                         value
                     )
-
-                    labelWidget.grid(
-                        column=0,
-                        row=self.row,
-                        padx=10,
-                        pady=10,
-                    )
-
-                    widget.grid(
-                        column=0,
-                        row=self.row,
-                        padx=10,
-                        pady=10,
-                    )
                 case "int":
-                    self.intSetting(key, value)
+                    self.intSetting(
+                        key,
+                        value
+                    )
                 case "bool":
-                    self.boolSetting(key, value)
+                    self.boolSetting(
+                        key,
+                        value
+                    )
                 case _:
                     pass
+            
+            self.row += 1
 
+            
             # potentially better way to implement this?
             # Allows a class to add entries to a
             # settingsDict dictionary, with the keys being
@@ -78,7 +70,7 @@ class SettingsFrame(BaseFrame):
             else:
                 return NotImplementedError()
             """
-
+            
         # save settings button at bottom of window
         saveButton = tk.Button(
             master=self,
@@ -109,68 +101,59 @@ class SettingsFrame(BaseFrame):
     # default setting generator. Cleans
     # up the code and makes it easier to
     # define a new setting type
-    def baseSetting(self, tkFunc, label, **kwargs):
-        # generate label on the left
-        tk.Label(
-            master=self,
-            text=label
-        ).grid(
-            column=0,
-            row=self.row,
-            padx=5,
-            pady=10
+    def baseSetting(self, tkVar, tkFunc, label, default, **kwargs=dict()):
+        # creating the SettingsInputFrame
+        input = SettingsInputFrame(
+            self,
+            self.controller,
+            label,
+            default,
+            tkVar,
+            tkFunc,
+            kwargs
         )
-
-        # setup the widget that we want
-        # must pass the widget function
-        # through the function
-        tkFunc(
-            master=self,
-            **kwargs
-        ).grid(
-            column=1,
+        
+        # attach the input frame to the
+        # current frame at column 0
+        input.grid(
+            column=0, 
             row=self.row,
-            padx=5,
-            pady=10
+            padx=10,
+            pady=10,
         )
-
-        # move down one row
-        self.row += 1
 
     # string setting input
     def strSetting(self, label, default):
-        kwargs = dict()
-
-        self.addOutput(tk.StringVar, label, default, kwargs)
-
-        self.baseSetting(tk.Entry, label, **kwargs)
+        self.baseSetting(
+            tkVar=tk.StringVar,
+            tkFunc=tk.Entry,
+            label,
+            default,
+        )
 
     # integer setting input
     def intSetting(self, label, default):
-        kwargs = dict()
-
-        self.addOutput(tk.IntVar, label, default, kwargs)
-
-        self.baseSetting(tk.Entry, label, **kwargs)
+        self.baseSetting(
+            tkVar=tk.IntVar,
+            tkFunc=tk.Entry,
+            label,
+            default,
+        )
 
     # boolean setting input
     def boolSetting(self, label, default):
         kwargs = dict()
-
-        self.addOutput(tk.IntVar, label, default, kwargs)
-
+        
         kwargs["onvalue"] = 1
         kwargs["offvalue"] = 0
 
-        self.baseSetting(tk.Checkbutton, label, **kwargs)
-
-    def addOutput(self, tkVar, label, default, kwaDict):
-        output = tkVar
-        output.set(default)
-
-        self.outputs[label] = output
-
-        kwaDict["variable"] = output
+        self.baseSetting(
+            tkVar=tk.StringVar,
+            tkFunc=tk.Checkbutton,
+            label,
+            default,
+            kwargs
+        )
 
 
 if __name__ == "__main__":
