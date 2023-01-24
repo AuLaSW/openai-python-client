@@ -80,7 +80,9 @@ class TestCompletionRequest(unittest.Test):
             self.request.set,
             **kwargs
         )
-        
+
+    # test that the obect returned from getResponse() is
+    # a Response object.
     def test_GetResponse(self):
         self.assertIsInstance(self.request.getResponse(), Response)
 
