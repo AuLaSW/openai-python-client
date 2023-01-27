@@ -75,7 +75,7 @@ class SettingsFrame(BaseFrame):
         saveButton = tk.Button(
             master=self,
             label="Save",
-            # command=self.saveSettings
+            command=self.saveSettings
         ).grid(
             column=0,
             row=self.row,
@@ -87,7 +87,7 @@ class SettingsFrame(BaseFrame):
         exitButton = tk.Button(
             master=self,
             label="Exit",
-            # command=self.exitSettings
+            commande=self.destroy,
         ).grid(
             column=1,
             row=self.row,
@@ -95,8 +95,12 @@ class SettingsFrame(BaseFrame):
             pady=10
         )
 
+    # Save the settings when the save button is pressed
     def saveSettings(self):
-        pass
+        for var in self.settings:
+            val = self.settings[var]
+            
+            self.controller.request.set(var, val)
 
     # default setting generator. Cleans
     # up the code and makes it easier to
