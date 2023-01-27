@@ -1,6 +1,7 @@
 # settingsframe.py
 from openaiclient.view.frame.baseframe import BaseFrame
-from openaiclient.view.frame.settingsinputframe import SettingsInputFrame
+from openaiclient.view.frame.settings \
+    .settingsinputframe import SettingsInputFrame
 import tkinter as tk
 
 """

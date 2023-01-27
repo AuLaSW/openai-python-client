@@ -1,5 +1,6 @@
 # window.py
-from openaiclient.view.frame.completionsettings import CompletionSettings
+from openaiclient.view.frame.settings \
+    .completionsettings import CompletionSettings
 import tkinter as tk
 
 """
