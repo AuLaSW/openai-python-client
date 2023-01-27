@@ -16,7 +16,7 @@ class SettingsFrame(BaseFrame):
     def __init__(self, main, controller):
         super().__init__(main, controller)
 
-        self.settings = {}
+        self.settings = dict()
         self.options = dict()
 
         self.row = 0
