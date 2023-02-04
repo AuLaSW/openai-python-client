@@ -1,0 +1,52 @@
+[MAIN]
+
+# configuration file for pylint
+
+# ignore the following paths:
+ignore=
+    venv,
+    config,
+    lint
+
+# number of processors to use
+jobs=1
+
+[REPORTS]
+
+# the output format for the reports.
+output-format=json
+
+# output=lint\pylint.txt
+
+[FORMAT]
+
+max-line-length=79
+
+# allow an if-statement to be one line (no)
+single-line-if-stms=no
+
+# allow a class statement to be one line (no)
+single-line-class-stmt=no
+
+indent-string='    '
+
+[BASIC]
+
+# define the naming styles
+fuction-naming-style=camelCase
+
+variable-naming-style=camelCase
+
+const-naming-style=UPPER_CASE
+
+attr-naming-style=camelCase
+
+argument-naming-style=camelCase
+
+class-naming-style=PascalCase
+
+class-const-naming-style=UPPER_CASE
+
+module-naming-style=snake_case
+
+method-naming-style=camelCase
