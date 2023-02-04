@@ -6,14 +6,14 @@ import unittest
 class TestResponse(unittest.TestCase):
     def test_CorrectObject(self):
         self.assertEqual(self.obj, response["object"])
-        
+
     def test_CorrectText(self):
         self.assertEqual(self.text, response["choices"][0]["text"])
-    
+
     def test_CorrectIndex(self):
         self.assertEqual(self.index, response["choices"][0]["index"])
 
-    # test that getText() returns the 
+    # test that getText() returns the
     # text object
     def test_GetText(self):
         result = self.response.getText()
@@ -34,36 +34,35 @@ class TestResponseTextCompletion(TestResponse):
     def setUp(self):
         self.dictionary = {
             "object": "text_completion",
-            "choices": [ {
+            "choices": [{
                 "text": "input text"
                 "index": 0
                 "finish_reason": "finished"
-                }
+            }
             ],
             "model": "text-davinci-003"
         }
 
         self.response = Response(self.dictionary)
-    
+
     def test_CorrectModel(self):
         self.assertEqual(self.model, response["model"])
-            
-    
+
     def test_CorrectFinishReason(self):
         self.assertEqual(
-                self.finish_reason, 
-                response["choices"][0]["finish_reason"]
-            )
+            self.finish_reason,
+            response["choices"][0]["finish_reason"]
+        )
 
 
 class TestResponseEdit(TestResponse):
     def setUp(self):
         self.dictionary = {
             "object": "edit",
-            "choices": [ {
+            "choices": [{
                 "text": "input text"
                 "index": 0
-                }
+            }
             ],
         }
 
