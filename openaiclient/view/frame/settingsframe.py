@@ -77,6 +77,13 @@ class SettingsFrame(BaseFrame):
                 return NotImplementedError()
             """
 
+            self.saveAndExitButtons()
+
+
+    def saveSettings(self):
+        pass
+
+    def saveAndExitButtons(self):
         # button for savings settings
         tk.Button(
             master=self,
@@ -100,9 +107,6 @@ class SettingsFrame(BaseFrame):
             padx=10,
             pady=10
         )
-
-    def saveSettings(self):
-        pass
 
     # default setting generator. Cleans
     # up the code and makes it easier to
