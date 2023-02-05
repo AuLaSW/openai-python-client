@@ -6,13 +6,9 @@ This file should be imported as a module and contains the followings functions:
 """
 
 from openaiclient.model.request.completion import CompletionRequest
-
 from openaiclient.model.request.edit import EditRequest
-
 from openaiclient.model.models import Models
-
 from openaiclient.model.response import Response
-
 from openaiclient.view.view import View
 
 
@@ -45,9 +41,11 @@ class Controller:
         # the response
         self.response = None
 
+    # TODO: implement functions for this class.
+    """
     # creates a request
     def buildRequest(self, req):
-        """Creates a request"""
+       Creates a request
         self.request = self.view.getRequest(req)
         self.response = self.request.getResponse()
 
@@ -72,7 +70,7 @@ class Controller:
         else:
             self.request = EditRequest()
 
-    """Request Settings Data"""
+    ""Request Settings Data""
 
     def getSettings(self, className):
         if not isinstance(self.request, className):
@@ -90,6 +88,7 @@ class Controller:
     # the completion request
     def getEditSettings(self):
         return self.getSettings(EditRequest)
+    """
 
 
 if __name__ == "__main__":
