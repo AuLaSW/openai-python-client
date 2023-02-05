@@ -1,5 +1,5 @@
-from openaiclient.view.frame.baseframe import BaseFrame
 import unittest
+from openaiclient.view.frame.baseframe import BaseFrame
 
 
 class TestBaseFrame(unittest.Test):
