@@ -1,6 +1,7 @@
 # settingsframe.py
-from openaiclient.view.frame.baseframe import BaseFrame
 import tkinter as tk
+from openaiclient.view.frame.baseframe import BaseFrame
+from openaiclient.view.frame.settingsinputframe import SettingsInputFrame
 
 """
 Class SettingsFrame:
@@ -16,7 +17,8 @@ class SettingsFrame(BaseFrame):
         super().__init__(main, controller)
 
         self.settings = {}
-        self.options = dict()
+        self.options = {}
+        self.outputs = {}
 
         self.row = 0
 
@@ -80,7 +82,7 @@ class SettingsFrame(BaseFrame):
             """
 
         # save settings button at bottom of window
-        saveButton = tk.Button(
+        tk.Button(
             master=self,
             label="Save",
             # command=self.saveSettings
@@ -92,7 +94,7 @@ class SettingsFrame(BaseFrame):
         )
 
         # don't save settings button at bottom of window
-        exitButton = tk.Button(
+        tk.Button(
             master=self,
             label="Exit",
             # command=self.exitSettings
