@@ -14,16 +14,16 @@ jobs=1
 [REPORTS]
 
 # the output format for the reports.
-output-format=json
+# output-format=json
 
-# output=lint\pylint.txt
+# output=lint\pylint.json
 
 [FORMAT]
 
 max-line-length=79
 
 # allow an if-statement to be one line (no)
-single-line-if-stms=no
+single-line-if-stmt=no
 
 # allow a class statement to be one line (no)
 single-line-class-stmt=no
@@ -33,7 +33,7 @@ indent-string='    '
 [BASIC]
 
 # define the naming styles
-fuction-naming-style=camelCase
+function-naming-style=camelCase
 
 variable-naming-style=camelCase
 
