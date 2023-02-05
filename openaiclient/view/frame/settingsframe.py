@@ -28,8 +28,7 @@ class SettingsFrame(BaseFrame):
     # types of input in other settings
     # classes.
     def create(self):
-        for key in self.settings:
-            value = self.settings[key]
+        for key, value in self.settings, self.settings.items():
             typeOfValue = type(value).__name__
             match typeOfValue:
                 case "str":
