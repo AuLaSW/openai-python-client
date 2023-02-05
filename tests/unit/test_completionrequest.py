@@ -9,8 +9,8 @@ Tests different units of the CompletionRequest class.
 """
 
 
-class TestCompletionRequest(unittest.Test):
-    def setup(self):
+class TestCompletionRequest(unittest.TestCase):
+    def setUp(self):
         self.request = CompletionRequest()
         self.REQUIRED_ARGS = 1
 
@@ -49,7 +49,7 @@ class TestCompletionRequest(unittest.Test):
     # test that requiredArgs has the correct
     # number of elements
     def test_RequiredArgsCorrectLength(self):
-        self.assertIs(set.len(self.request.requiredArgs), self.REQUIRED_ARGS)
+        self.assertIs(self.request.requiredArgs.len(), self.REQUIRED_ARGS)
 
     # test that requiredArgs has the correct
     # values
