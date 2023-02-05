@@ -1,26 +1,29 @@
 # settingsinputframe.py
+import tkinter as tk
 from openaiclient.view.frame.baseframe import BaseFrame
 
 
 class SettingsInputFrame(BaseFrame):
     def __init__(self, main, controller, label, default):
-        super().__init__(self, main, controller)
+        super().__init__(main, controller)
 
-        self.main = main
+        # this should be handled by master in the
+        # tk.Frame class
+        # self.main = main
         self.label = label
         self.default = default
 
     # default setting generator. Cleans
     # up the code and makes it easier to
     # define a new setting type
-    def addSettingWidget(self, tkFunc, label, **kwargs):
+    def addSettingWidget(self, tkFunc, **kwargs):
         # generate label on the left
         labelWidget = tk.Label(
             master=self,
-            text=label
+            text=self.label
         )
 
-        # setup the widget that we want
+        # setup the widget that we want.
         # must pass the widget function
         # through the function
         widget = tkFunc(
@@ -32,13 +35,13 @@ class SettingsInputFrame(BaseFrame):
 
     # create the output variable for the widget
     # and point kwargs and self.main.options to it
-    def createOutput(self, tkVar, label, default):
+    def createOutput(self, tkVar):
         kwargs = dict()
 
         output = tkVar
-        output.set(default)
+        output.set(self.default)
 
-        self.main.options[label] = output
+        self.master.outputs[self.label] = output
 
         kwargs["variable"] = output
 
