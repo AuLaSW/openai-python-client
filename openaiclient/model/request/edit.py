@@ -1,6 +1,6 @@
+import openai
 from openaiclient.model.request.request import Request
 from openaiclient.model.response import Response
-import openai
 
 """
 Class EditRequest
@@ -20,7 +20,7 @@ class EditRequest(Request):
         # required values
         self.requestDict = {
             "model": "text-davinci-edit-001",
-            "instruction": ""
+            "instruction": "",
             "input": "",
             "temperature": 1,
             "top_p": 1,
@@ -34,11 +34,11 @@ class EditRequest(Request):
         }
 
         # optional arguments
-        self.optionalArgs = Set(self.requestDict.keys())
+        self.optionalArgs = set(self.requestDict.keys())
         self.optionalArgs -= self.requiredArgs
 
         # arguments that are settings
-        self.settings = Set(self.requestDict.keys())
+        self.settings = set(self.requestDict.keys())
         self.settings.remove("instruction")
         self.settings.remove("input")
 
@@ -47,6 +47,7 @@ class EditRequest(Request):
                 openai.Edit.create(
                     **self.requestDict,
                 )
+            )
 
 
 if __name__ == "__main__":
