@@ -1,6 +1,6 @@
+import openai
 from openaiclient.model.request.request import Request
 from openaiclient.model.response import Response
-import openai
 
 """
 Class CompletionRequest
