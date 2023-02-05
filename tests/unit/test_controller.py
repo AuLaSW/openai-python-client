@@ -1,8 +1,8 @@
-from openaiclient.controller.controller import Controller
 import unittest
+from openaiclient.controller.controller import Controller
 
 
-class TestController(unittest.Test):
+class TestController(unittest.TestCase):
     pass
 
 

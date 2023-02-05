@@ -1,6 +1,6 @@
 # test_response.py
-from openai.model.response import Response
 import unittest
+from openai.model.response import Response
 
 
 class TestResponse(unittest.TestCase):
@@ -35,8 +35,8 @@ class TestResponseTextCompletion(TestResponse):
         self.dictionary = {
             "object": "text_completion",
             "choices": [{
-                "text": "input text"
-                "index": 0
+                "text": "input text",
+                "index": 0,
                 "finish_reason": "finished"
             }
             ],
@@ -60,8 +60,8 @@ class TestResponseEdit(TestResponse):
         self.dictionary = {
             "object": "edit",
             "choices": [{
-                "text": "input text"
-                "index": 0
+                "text": "input text",
+                "index": 0,
             }
             ],
         }

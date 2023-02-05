@@ -1,8 +1,8 @@
-from openaiclient.view.view import View
 import unittest
+from openaiclient.view.view import View
 
 
-class TestView(unittest.Test):
+class TestView(unittest.TestCase):
     pass
 
 

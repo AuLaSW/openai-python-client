@@ -1,7 +1,7 @@
 # test_completionrequest.py
+import unittest
 from openaiclient.model.request.edit import EditRequest
 from openaiclient.model.response import Response
-import unittest
 """
 Class TestCompletionRequest:
 
@@ -9,7 +9,7 @@ Tests different units of the CompletionRequest class.
 """
 
 
-class TestEditRequest(unittest.Test):
+class TestEditRequest(unittest.TestCase):
     def setup(self):
         self.request = EditRequest()
         self.REQUIRED_ARGS = 2

@@ -1,9 +1,9 @@
 # test_request.py
-from openaiclient.model.request.request import Request
 import unittest
+from openaiclient.model.request.request import Request
 
 
-class TestRequest(unittest.Test):
+class TestRequest(unittest.TestCase):
     def setup(self):
         self.request = Request()
 

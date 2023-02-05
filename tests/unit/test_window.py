@@ -1,8 +1,8 @@
-from openaiclient.view.window.window import Window
 import unittest
+from openaiclient.view.window.window import Window
 
 
-class TestWindow(unittest.Test):
+class TestWindow(unittest.TestCase):
     pass
 
 

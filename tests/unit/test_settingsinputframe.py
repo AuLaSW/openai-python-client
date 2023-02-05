@@ -1,8 +1,8 @@
-from openaiclient.view.frame.settingsinputframe import SettingsInputFrame
 import unittest
+from openaiclient.view.frame.settingsinputframe import SettingsInputFrame
 
 
-class TestSettingsInputFrame(unittest.Test):
+class TestSettingsInputFrame(unittest.TestCase):
     pass
 
 

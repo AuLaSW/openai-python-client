@@ -1,9 +1,9 @@
 # test_models.py
-from openai.model.models import Models
 import unittest
+from openai.model.models import Models
 
 
-class TestModels(unittest.Test):
+class TestModels(unittest.TestCase):
     def setup(self):
         self.modelObj = Models()
         self.models = self.modelObj.models
