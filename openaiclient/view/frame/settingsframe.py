@@ -1,4 +1,6 @@
-# settingsframe.py
+"""
+SettingsFrame Module
+"""
 import tkinter as tk
 from openaiclient.view.frame.baseframe import BaseFrame
 from openaiclient.view.frame.settingsinputframe import SettingsInputFrame
@@ -81,9 +83,13 @@ class SettingsFrame(BaseFrame):
 
 
     def saveSettings(self):
-        pass
+        """saves the settings inputted in the window"""
+
+    def exitSettings(self):
+        """exits the window without savings the changes"""
 
     def saveAndExitButtons(self):
+        """Creates the save and exit button for the frame"""
         # button for savings settings
         tk.Button(
             master=self,
