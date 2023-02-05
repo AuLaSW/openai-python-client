@@ -1,8 +1,8 @@
-from openaiclient.view.frame.completionsettings import CompletionSettings
 import unittest
+from openaiclient.view.frame.completionsettings import CompletionSettings
 
 
-class TestCompletionSettings(unittest.Test):
+class TestCompletionSettings(unittest.TestCase):
     pass
 
 
