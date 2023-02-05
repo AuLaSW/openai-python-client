@@ -45,11 +45,11 @@ class CompletionRequest(Request):
         }
 
         # optional values
-        self.optionalArgs = Set(self.requestDict.keys())
+        self.optionalArgs = set(self.requestDict.keys())
         self.optionalArgs -= self.requiredArgs
 
         # set of setting arguments
-        self.settings = Set(self.requestDict.keys())
+        self.settings = set(self.requestDict.keys())
         self.settings.remove("prompt")
 
     def getResponse(self):
@@ -66,6 +66,7 @@ class CompletionRequest(Request):
 
 
 if __name__ == "__main__":
+    pass
 """
     req = CompletionRequest()
     req.setPrompt("Tell me a joke")
