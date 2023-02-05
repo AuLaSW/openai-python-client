@@ -49,7 +49,7 @@ class TestCompletionRequest(unittest.TestCase):
     # test that requiredArgs has the correct
     # number of elements
     def test_RequiredArgsCorrectLength(self):
-        self.assertIs(self.request.requiredArgs.len(), self.REQUIRED_ARGS)
+        self.assertIs(len(self.request.requiredArgs), self.REQUIRED_ARGS)
 
     # test that requiredArgs has the correct
     # values
