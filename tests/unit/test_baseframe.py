@@ -2,7 +2,7 @@ import unittest
 from openaiclient.view.frame.baseframe import BaseFrame
 
 
-class TestBaseFrame(unittest.Test):
+class TestBaseFrame(unittest.TestCase):
     pass
 
 
