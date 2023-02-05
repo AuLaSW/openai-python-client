@@ -1,72 +1,123 @@
-# test_completionrequest.py
+"""
+This module tests the CompletionRequest class.
+"""
+import unittest
 from openaiclient.model.request.completion import CompletionRequest
 from openaiclient.model.response import Response
-import unittest
-"""
-Class TestCompletionRequest:
-
-Tests different units of the CompletionRequest class.
-"""
 
 
 class TestCompletionRequest(unittest.TestCase):
+    """
+    This class holds the test functions for the CompletionRequest class.
+
+    setUp():
+        Setup request and REQUIRED_ARGS before all of the tests.
+
+    test_RequestNotEmpty():
+        Tests that the requestDict is not empty. There should be a default
+        requestDict() created.
+
+    test_RequiredArgsNotEmpty():
+        Tests that requiredArgs is not empty. There are required arguments.
+
+    test_OptionalArgsNotEmpty():
+        Tests that optionalArgs is not emtpy. There are optional arguments.
+
+    test_SettingsNotEmpty():
+        Tests that the settings are not emtpy.
+
+    test_RequiredOptionalDisjoint():
+        Tests that requiredArgs and OptionalArgs are disjoint. There are no
+        arguments that are both required and optional.
+
+    test_RequiredArgsCorrectLength():
+        Tests that the requiredArgs variable has the correct number of required
+        arguments.
+
+    test_RequiredArgsCorrectValue():
+        Tests that the requiredArgs variable has the correct values.
+
+    test_SettingsCorrectValue():
+        Tests that the settings variable has the correct values.
+
+    test_SetRejectUnknownKey():
+        Tests that the Set() function rejects a key that is not already in the
+        dictionary.
+
+    test_GetResponse():
+        Tests that the getResponse() method returns a Response object.
+
+    Implicit Tests:
+    ---------------
+        
+        If test_RequiredOptionalDisjoint(), test_RequiredArgsCorrectLength(),
+        and test_RequiredArgsCorrectValue() all pass, then the optionalArgs
+        variable would also pass the same tests. This is because the two sets
+        are disjoint and contain different values, so if requiredArgs contains
+        the correct values and is disjoint from optionalArgs, then optionalArgs
+        must contain the correct values too.
+    """
     def setUp(self):
         self.request = CompletionRequest()
         self.REQUIRED_ARGS = 1
 
-    # test that the requestDict var is not empty
-    # (should be setup)
     def test_RequestNotEmpty(self):
+        """
+        Asserts that requestDict is not empty.
+        """
         self.assertTrue(self.request.requestDict)
 
-    # test that the requiredArgs var is not empty
-    # (should be setup)
     def test_RequiredArgsNotEmpty(self):
+        """
+        Asserts that requiredArgs is not empty.
+        """
         self.assertTrue(self.request.requiredArgs)
 
-    # test that the optionalArgs var is not empty
-    # (should be setup)
     def test_OptionalArgsNotEmpty(self):
+        """
+        Asserts that optionalArgs is not empty.
+        """
         self.assertTrue(self.request.optionalArgs)
 
-    # test that the settings var is not empty
-    # (should be setup)
     def test_SettingsNotEmpty(self):
+        """
+        Asserts that optionalArgs is not empty.
+        """
         self.assertTrue(self.request.settings)
 
-    # if the following three tests pass then
-    # the optionalArgs variable is also correct.
-
-    # test that the requiredArgs variable and the
-    # optionalArgs variable are disjoint
     def test_RequiredOptionalDisjoint(self):
+        """
+        Asserts that requiredArgs and optionalArgs are disjoint.
+        """
         self.assertTrue(
             self.request.requiredArgs.isdisjoint(
                 self.request.optionalArgs
             )
         )
 
-    # test that requiredArgs has the correct
-    # number of elements
     def test_RequiredArgsCorrectLength(self):
+        """
+        Asserts that requiredArgs has the correct number of arguments.
+        """
         self.assertIs(len(self.request.requiredArgs), self.REQUIRED_ARGS)
 
-    # test that requiredArgs has the correct
-    # values
     def test_RequiredArgsCorrectValue(self):
+        """
+        Asserts that requiredArgs has the correct arguments.
+        """
         self.assertIn("model", self.request.requiredArgs)
 
-    # # #
-
-    # tests that the correct values are in
-    # the settings
     def test_SettingsCorrectValue(self):
+        """
+        Asserts that "prompt" is not in settings.
+        """
         self.assertNotIn("prompt", self.request.settings)
 
-    # test that the set method rejects a
-    # key that is not in the dictionary
-    # already
     def test_SetRejectUnknownKey(self):
+        """
+        Asserts that a key not in the requestDict will throw a RuntimeError
+        when passed as an argument to set().
+        """
         key = "testKey"
         value = "testValue"
 
@@ -81,9 +132,10 @@ class TestCompletionRequest(unittest.TestCase):
             **kwargs
         )
 
-    # test that the obect returned from getResponse() is
-    # a Response object.
     def test_GetResponse(self):
+        """
+        Asserts that the object returned by getResponse() is a Response object.
+        """
         self.assertIsInstance(self.request.getResponse(), Response)
 
 
