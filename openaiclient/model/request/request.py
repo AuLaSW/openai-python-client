@@ -20,6 +20,7 @@ class Request:
         # set of request settings
         self.settings = {}
 
+    """
     def __str__(self):
         # this produces a header for the output that contains the
         # class name (works with sublcasses, too)
@@ -41,6 +42,7 @@ class Request:
             strRequest += "    " + key + ": " + str(optionalDict[key]) + "\n"
 
         return strRequest
+    """
 
     # returns response object from request
     def getResponse(self):
