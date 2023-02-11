@@ -1,6 +1,6 @@
 # test_models.py
 import unittest
-from openai.model.models import Models
+from openaiclient.model.models import Models
 
 
 class TestModels(unittest.TestCase):

@@ -1,6 +1,6 @@
 # test_response.py
 import unittest
-from openai.model.response import Response
+from openaiclient.model.response import Response
 
 
 class TestResponse(unittest.TestCase):
