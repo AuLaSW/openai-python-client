@@ -1,5 +1,6 @@
 # test_completionrequest.py
 import unittest
+from tests.unit.fixture import api
 from openaiclient.model.request.edit import EditRequest
 from openaiclient.model.response import Response
 """
@@ -10,8 +11,8 @@ Tests different units of the CompletionRequest class.
 
 
 class TestEditRequest(unittest.TestCase):
-    def setup(self):
-        self.request = EditRequest()
+    def setUp(self):
+        self.request = EditRequest(api)
         self.REQUIRED_ARGS = 2
 
     # test that the requestDict var is not empty
