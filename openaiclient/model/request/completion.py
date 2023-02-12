@@ -1,4 +1,4 @@
-import openai
+# import openai
 from openaiclient.model.request.request import Request
 from openaiclient.model.response import Response
 
@@ -11,9 +11,12 @@ Handles sending requests to OpenAI for completion.
 
 
 class CompletionRequest(Request):
-    def __init__(self):
+    def __init__(self, module):
         # initialize from parent class Request
         super().__init__()
+
+        # set up API class
+        self.module = module
 
         # setup self.requestDict
 
@@ -54,7 +57,7 @@ class CompletionRequest(Request):
 
     def getResponse(self):
         return Response(
-            openai.Completion.create(
+            self.module.Completion.create(
                 **self.requestDict,
             )
         )
