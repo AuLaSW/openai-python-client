@@ -2,6 +2,7 @@
 This module tests the CompletionRequest class.
 """
 import unittest
+from tests.unit.fixture import api
 from openaiclient.model.request.completion import CompletionRequest
 from openaiclient.model.response import Response
 
@@ -58,7 +59,7 @@ class TestCompletionRequest(unittest.TestCase):
         must contain the correct values too.
     """
     def setUp(self):
-        self.request = CompletionRequest()
+        self.request = CompletionRequest(api)
         self.REQUIRED_ARGS = 1
 
     def test_RequestNotEmpty(self):
