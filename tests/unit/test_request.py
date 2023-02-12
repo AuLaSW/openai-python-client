@@ -4,7 +4,7 @@ from openaiclient.model.request.request import Request
 
 
 class TestRequest(unittest.TestCase):
-    def setup(self):
+    def setUp(self):
         self.request = Request()
 
     # tests that the requestDict is empty on
@@ -31,12 +31,12 @@ class TestRequest(unittest.TestCase):
     # test that getKeys() called with an empty dictionary
     # will return a runtime error.
     def test_GetKeys(self):
-        self.assertRaise(RuntimeError, self.request.getKeys)
+        self.assertRaises(RuntimeError, self.request.getKeys)
 
     # test that getSettings() called with an empty set
     # will return a runtime error
     def test_getSettings(self):
-        self.assertRaise(RuntimeError, self.request.getSettings)
+        self.assertRaises(RuntimeError, self.request.getSettings)
 
     # test that set() sets the correct value
     # also tests that get() works
@@ -45,7 +45,7 @@ class TestRequest(unittest.TestCase):
         value = "testValue"
         self.request.set(key, value)
 
-        self.assertEquals(self.request.get(key), value)
+        self.assertEqual(self.request.get(key), value)
 
     # test that set() adds key to dictionary
     def test_SetCorrectKey(self):
