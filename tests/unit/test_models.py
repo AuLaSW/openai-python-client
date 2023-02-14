@@ -46,7 +46,7 @@ class TestModels(unittest.TestCase):
     def test_ContainsModel(self):
         exModel = "text-davinci-003"
 
-        self.assertIn(sels.modelObj, exModel)
+        self.assertIn(exModel, self.modelObj)
 
     # tests that the model dictionary doesn't
     # contain the model
