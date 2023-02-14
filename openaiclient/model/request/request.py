@@ -46,7 +46,7 @@ class Request:
 
     # returns response object from request
     def getResponse(self):
-        return NotImplementedError()
+        raise NotImplementedError
 
     # returns list of all keys in the request
     def getKeys(self):
