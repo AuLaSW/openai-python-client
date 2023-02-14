@@ -6,7 +6,6 @@ from openaiclient.view.frame.baseframe import BaseFrame
 from openaiclient.view.frame.settingsinputframe import SettingsInputFrame
 
 
-
 class SettingsFrame(BaseFrame):
     """
     Class SettingsFrame:
@@ -19,9 +18,9 @@ class SettingsFrame(BaseFrame):
         super().__init__(main, controller)
 
         # hold the settings we will be using
-        self.settings = {}
+        self.settings = dict()
         # hold the tk variables for returning inputs from the frame
-        self.outputs = {}
+        self.options = dict()
 
         # row count
         self.row = 0
@@ -60,7 +59,10 @@ class SettingsFrame(BaseFrame):
                     self.boolSetting(inputFrame)
                 case _:
                     pass
+            
+            self.row += 1
 
+            
             # potentially better way to implement this?
             # Allows a class to add entries to a
             # settingsDict dictionary, with the keys being
@@ -94,7 +96,7 @@ class SettingsFrame(BaseFrame):
         tk.Button(
             master=self,
             label="Save",
-            # command=self.saveSettings
+            command=self.saveSettings
         ).grid(
             column=0,
             row=self.row,
@@ -106,7 +108,7 @@ class SettingsFrame(BaseFrame):
         tk.Button(
             master=self,
             label="Exit",
-            # command=self.exitSettings
+            commande=self.destroy,
         ).grid(
             column=1,
             row=self.row,
@@ -151,12 +153,9 @@ class SettingsFrame(BaseFrame):
         widget.grid(
             column=1,
             row=self.row,
-            padx=5,
-            pady=10
+            padx=10,
+            pady=10,
         )
-
-        # move down one row
-        self.row += 1
 
     # string setting input
     def strSetting(self, frame):
@@ -178,7 +177,7 @@ class SettingsFrame(BaseFrame):
         Creates a boolean setting input with on and off values as 1 and 0 and
         the input as a checkbutton.
         """
-        kwargs = {}
+        kwargs = dict()
         kwargs["onvalue"] = 1
         kwargs["offvalue"] = 0
 
