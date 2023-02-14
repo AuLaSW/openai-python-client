@@ -75,6 +75,18 @@ class TestCompletionRequest(unittest.TestCase):
         
         self.assertEqual(self.request.requestDict["prompt"], additionalPrompt)
 
+    def test_AddToOriginalPrompt(self):
+        originalPrompt = "This is the first prompt."
+        additionalPrompt = "Add this to the prompt."
+        
+        self.request.set("prompt", originalPrompt)
+        
+        self.request.addToPrompt(additionalPrompt)
+        
+        self.assertEqual(
+            self.request.requestDict["prompt"], 
+            originalPrompt + " " + additionalPrompt
+        )
 
 class TestSettings(TestCompletionRequest):
     def test_RequestNotEmpty(self):
