@@ -7,7 +7,7 @@ API:
         the current window.
 """
 import tkinter as tk
-from openaiclient.view.frame.completionsettings import CompletionSettings
+from openaiclient.view.frame.settings.completionsettings import CompletionSettings
 
 
 

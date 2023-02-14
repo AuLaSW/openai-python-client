@@ -3,7 +3,7 @@ SettingsFrame Module
 """
 import tkinter as tk
 from openaiclient.view.frame.baseframe import BaseFrame
-from openaiclient.view.frame.settingsinputframe import SettingsInputFrame
+from openaiclient.view.frame.settings.settingsinputframe import SettingsInputFrame
 
 
 class SettingsFrame(BaseFrame):
