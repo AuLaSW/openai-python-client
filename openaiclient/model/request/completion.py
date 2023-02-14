@@ -63,9 +63,12 @@ class CompletionRequest(Request):
         )
 
     def addToPrompt(self, newInput, newLine=False):
-        if newLine:
+        if len(self.requestDict["prompt"]) == 0:
+            self.set("prompt", newInput)
+        elif newLine:
             self.requestDict["prompt"] += "\n"
-        self.requestDict["prompt"] += newInput
+        else:
+            self.requestDict["prompt"] += " " + newInput
 
 
 if __name__ == "__main__":
