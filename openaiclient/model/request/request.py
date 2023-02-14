@@ -50,7 +50,12 @@ class Request:
 
     # returns list of all keys in the request
     def getKeys(self):
-        return self.requestDict.keys()
+        keys = self.requestDict.keys()
+        
+        if len(keys) == 0:
+            raise RuntimeError
+        else:
+            return keys
 
     # returns dict of settings
     def getSettings(self):
