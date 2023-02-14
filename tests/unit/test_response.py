@@ -12,7 +12,7 @@ class TestResponseWrapper:
             self.assertEqual(self.response.text, self.dictionary["choices"][0]["text"])
 
         def test_CorrectIndex(self):
-            self.assertEqual(self.index, response["choices"][0]["index"])
+            self.assertEqual(self.response.index, self.dictionary["choices"][0]["index"])
 
         # test that getText() returns the
         # text object
@@ -47,7 +47,7 @@ class TestResponseTextCompletion(TestResponseWrapper.TestResponse):
         self.response = Response(self.dictionary)
 
     def test_CorrectModel(self):
-        self.assertEqual(self.model, response["model"])
+        self.assertEqual(self.response.model, self.dictionary["model"])
 
     def test_CorrectFinishReason(self):
         self.assertEqual(
