@@ -3,7 +3,7 @@ import unittest
 from openaiclient.model.response import Response
 
 
-class TestResponse:
+class TestResponseWrapper:
     class TestResponse(unittest.TestCase):
         def test_CorrectObject(self):
             self.assertEqual(self.obj, response["object"])
@@ -31,7 +31,7 @@ class TestResponse:
             self.assertEqual(result, reference)
 
 
-class TestResponseTextCompletion(TestResponse):
+class TestResponseTextCompletion(TestResponseWrapper.TestResponse):
     def setUp(self):
         self.dictionary = {
             "object": "text_completion",
@@ -56,7 +56,7 @@ class TestResponseTextCompletion(TestResponse):
         )
 
 
-class TestResponseEdit(TestResponse):
+class TestResponseEdit(TestResponseWrapper.TestResponse):
     def setUp(self):
         self.dictionary = {
             "object": "edit",
