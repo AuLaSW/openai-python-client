@@ -48,12 +48,12 @@ class TestRequest(unittest.TestCase):
         self.assertEqual(self.request.get(key), value)
 
     # test that set() adds key to dictionary
-    def test_SetCorrectKey(self):
-        key = "testKey"
-        value = "testValue"
-        self.request.set(key, value)
-
-        self.assertIn(key, self.request.getKeys())
+    def test_SetNewKeyError(self):
+        kwargs = {
+        "var": "testKey",
+        "val": "testValue"
+        }
+        self.assertRaises(RuntimeError, self.request.set, **kwargs)
 
 
 if __name__ == "__main__":
