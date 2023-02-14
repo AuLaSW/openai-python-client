@@ -45,8 +45,8 @@ class TestResponseTextCompletion(TestResponseWrapper.TestResponse):
 
     def test_CorrectFinishReason(self):
         self.assertEqual(
-            self.finish_reason,
-            response["choices"][0]["finish_reason"]
+            self.response.finish_reason,
+            self.dictionary["choices"][0]["finish_reason"]
         )
     
     # test that getFinishReason() returns
