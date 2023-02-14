@@ -22,13 +22,7 @@ class TestResponseWrapper:
 
             self.assertEqual(result, reference)
 
-        # test that getFinishReason() returns
-        # the finish reason
-        def test_GetFinishReason(self):
-            result = self.response.getFinishReason()
-            reference = self.dictionary["choices"][0]["finish_reason"]
-
-            self.assertEqual(result, reference)
+        
 
 
 class TestResponseTextCompletion(TestResponseWrapper.TestResponse):
@@ -54,6 +48,14 @@ class TestResponseTextCompletion(TestResponseWrapper.TestResponse):
             self.finish_reason,
             response["choices"][0]["finish_reason"]
         )
+    
+    # test that getFinishReason() returns
+    # the finish reason
+    def test_GetFinishReason(self):
+        result = self.response.getFinishReason()
+        reference = self.dictionary["choices"][0]["finish_reason"]
+
+        self.assertEqual(result, reference)
 
 
 class TestResponseEdit(TestResponseWrapper.TestResponse):
