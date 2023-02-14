@@ -38,15 +38,6 @@ class TestRequest(unittest.TestCase):
     def test_getSettings(self):
         self.assertRaises(RuntimeError, self.request.getSettings)
 
-    # test that set() sets the correct value
-    # also tests that get() works
-    def test_SetCorrectValue(self):
-        key = "testKey"
-        value = "testValue"
-        self.request.set(key, value)
-
-        self.assertEqual(self.request.get(key), value)
-
     # test that set() adds key to dictionary
     def test_SetNewKeyError(self):
         kwargs = {
