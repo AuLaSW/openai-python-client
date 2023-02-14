@@ -45,8 +45,7 @@ class TestCompletionRequest(unittest.TestCase):
         Tests that the Set() function rejects a key that is not already in the
         dictionary.
 
-    test_GetResponse():
-        Tests that the getResponse() method returns a Response object.
+
 
     Implicit Tests:
     ---------------
@@ -62,6 +61,26 @@ class TestCompletionRequest(unittest.TestCase):
         self.request = CompletionRequest(api)
         self.REQUIRED_ARGS = 1
 
+
+class TestFunctions(TestCompletionRequest):
+    """
+    This class holds the functional tests for the Completion class.
+    
+    test_GetResponse():
+        Tests that the getResponse() method returns a Response object.
+    
+    test_AddToPrompt():
+        Adds a prompt to an empty prompt and tests that the function
+        completes successfully.
+    
+    test_AddToOriginalPrompt():
+        Adds a prompt to an original prompt without making a new line.
+        Tests that the function completes successfully.
+    
+    test_AddNewLineToOriginalPrompt():
+        Adds a prompt to an original prompt while also generating a new
+        line. Tests that the function completes successfully.
+    """
     def test_GetResponse(self):
         """
         Asserts that the object returned by getResponse() is a Response object.
@@ -100,6 +119,7 @@ class TestCompletionRequest(unittest.TestCase):
             self.request.requestDict["prompt"], 
             originalPrompt + "\n" + additionalPrompt
         )
+
 
 class TestSettings(TestCompletionRequest):
     def test_RequestNotEmpty(self):
