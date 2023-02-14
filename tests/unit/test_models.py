@@ -8,7 +8,7 @@ class TestModels(unittest.TestCase):
         self.modelObj = Models()
         self.models = self.modelObj.models
         self.comp = self.modelObj.COMPLETION
-        self.comp = self.modelObj.EDIT
+        self.edit = self.modelObj.EDIT
 
     def test_CompletionKeyInDict(self):
         # assert that comp is a key in dictionary
