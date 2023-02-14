@@ -48,6 +48,9 @@ class Models:
 
             # is the model a text model
             textModel = "text" in modelID
+            
+            # is the model an edit model?
+            editModel = "edit" in modelID
 
             # is the model not a search or code model?
             # I'm not sure what the : is used for in the model
@@ -61,9 +64,6 @@ class Models:
             validModel = (not codeModel and not searchModel
                           and not simModel and not colModel
                           and not insModel and not embModel)
-
-            # is the model an edit model?
-            editModel = "edit" in modelID
 
             if textModel and validModel:
                 if editModel:
