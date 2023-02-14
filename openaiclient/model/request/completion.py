@@ -66,7 +66,7 @@ class CompletionRequest(Request):
         if len(self.requestDict["prompt"]) == 0:
             self.set("prompt", newInput)
         elif newLine:
-            self.requestDict["prompt"] += "\n"
+            self.requestDict["prompt"] += "\n" + newInput
         else:
             self.requestDict["prompt"] += " " + newInput
 
