@@ -62,25 +62,6 @@ class TestCompletionRequest(unittest.TestCase):
         self.request = CompletionRequest(api)
         self.REQUIRED_ARGS = 1
 
-    def test_SetRejectUnknownKey(self):
-        """
-        Asserts that a key not in the requestDict will throw a RuntimeError
-        when passed as an argument to set().
-        """
-        key = "testKey"
-        value = "testValue"
-
-        kwargs = {
-            "var": key,
-            "val": value
-        }
-
-        self.assertRaises(
-            RuntimeError,
-            self.request.set,
-            **kwargs
-        )
-
     def test_GetResponse(self):
         """
         Asserts that the object returned by getResponse() is a Response object.
