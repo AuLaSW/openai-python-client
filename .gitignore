@@ -7,4 +7,8 @@ lint/*
 # ignore the usr folder
 usr/*
 
+# ignore the pycache folders
 **/__pycache__/*
+
+# ignore the test output
+tests.txt
