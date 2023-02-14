@@ -4,7 +4,7 @@ from openaiclient.model.models import Models
 
 
 class TestModels(unittest.TestCase):
-    def setup(self):
+    def setUp(self):
         self.modelObj = Models()
         self.models = self.modelObj.models
         self.comp = self.modelObj.COMPLETION
