@@ -53,7 +53,7 @@ class TestModels(unittest.TestCase):
     def test_NotContainsModel(self):
         exModel = "text-code-davinci-003"
 
-        self.assertIn(self.modelObj, exModel)
+        self.assertIn(exModel, self.modelObj)
 
     def test_GetModels(self):
         self.assertEqual(self.modelObj.getModels(), self.models)
