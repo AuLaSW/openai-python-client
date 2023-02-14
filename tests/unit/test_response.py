@@ -22,8 +22,6 @@ class TestResponseWrapper:
 
             self.assertEqual(result, reference)
 
-        
-
 
 class TestResponseTextCompletion(TestResponseWrapper.TestResponse):
     def setUp(self):
