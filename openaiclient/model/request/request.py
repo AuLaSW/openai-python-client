@@ -59,7 +59,10 @@ class Request:
 
     # returns dict of settings
     def getSettings(self):
-        return self.settings
+        if len(self.settings) == 0:
+            raise RuntimeError
+        else:
+            return self.settings
 
     # gets value of var in requestDict
     def get(self, var):
