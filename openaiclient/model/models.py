@@ -42,7 +42,7 @@ class Models:
         return strModels
 
     def __contains__(self, item):
-        return item in self.models
+        return item in self.models[self.COMPLETION] + self.models[self.EDIT]
 
     def getModels(self):
         return self.models
