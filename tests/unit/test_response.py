@@ -9,7 +9,7 @@ class TestResponseWrapper:
             self.assertEqual(self.response.obj, self.dictionary["object"])
 
         def test_CorrectText(self):
-            self.assertEqual(self.text, response["choices"][0]["text"])
+            self.assertEqual(self.response.text, self.dictionary["choices"][0]["text"])
 
         def test_CorrectIndex(self):
             self.assertEqual(self.index, response["choices"][0]["index"])
