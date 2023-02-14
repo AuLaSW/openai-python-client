@@ -30,7 +30,8 @@ class TestModels(unittest.TestCase):
         # make sure that all models contain
         # the word "text", since that means
         # it is a text model
-        for list in self.models.items():
+        
+        for _, list in self.models.items():
             for model in list:
                 with self.subTest(model=model):
                     self.assertIn("text", model)
