@@ -1,5 +1,5 @@
 import unittest
-from openaiclient.view.frame.settingsframe import SettingsFrame
+from openaiclient.view.frame.settings.settingsframe import SettingsFrame
 
 
 class TestSettingsFrame(unittest.TestCase):
