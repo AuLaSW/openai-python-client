@@ -67,6 +67,13 @@ class TestCompletionRequest(unittest.TestCase):
         Asserts that the object returned by getResponse() is a Response object.
         """
         self.assertIsInstance(self.request.getResponse(), Response)
+    
+    def test_addToPrompt(self):
+        additionalPrompt = "Add this to the prompt."
+        
+        self.request.addToPrompt(additionalPrompt)
+        
+        self.assertEqual(self.request.requestDict["prompt"], additionalPrompt)
 
 
 class TestSettings(TestCompletionRequest):
