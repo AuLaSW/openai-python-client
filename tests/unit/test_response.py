@@ -6,7 +6,7 @@ from openaiclient.model.response import Response
 class TestResponseWrapper:
     class TestResponse(unittest.TestCase):
         def test_CorrectObject(self):
-            self.assertEqual(self.obj, response["object"])
+            self.assertEqual(self.response.obj, self.dictionary["object"])
 
         def test_CorrectText(self):
             self.assertEqual(self.text, response["choices"][0]["text"])
