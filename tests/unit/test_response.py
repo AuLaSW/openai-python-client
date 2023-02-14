@@ -69,6 +69,8 @@ class TestResponseEdit(TestResponseWrapper.TestResponse):
 
         self.response = Response(self.dictionary)
 
+    def test_GetFinishReasonException(self):
+        self.assertRaises(RuntimeError, self.response.getFinishReason)
 
 if __name__ == "__main__":
     unittest.main()
