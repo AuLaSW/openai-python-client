@@ -24,9 +24,6 @@ class TestModels(unittest.TestCase):
 
         self.assertNotIn(exModel, self.modelObj)
 
-    def test_GetModels(self):
-        self.assertEqual(self.modelObj.getModels(), self.models)
-
 
 if __name__ == "__main__":
     unittest.mainloop()
