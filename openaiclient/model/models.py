@@ -106,7 +106,7 @@ class Models:
 
 
 class Model:
-    def __init__(self, name, max_tokens, type):
+    def __init__(self, name, type, max_tokens=0):
         self._name = name
         self._type = type
         
