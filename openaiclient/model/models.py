@@ -100,8 +100,8 @@ class Models:
         return self.models["text-ada-001"]
     
     @property
-    def text_davinci_edit_003(self):
-        return self.models["text-davinci-edit-003"]
+    def text_davinci_edit_001(self):
+        return self.models["text-davinci-edit-001"]
 
 
 class Model:
