@@ -89,9 +89,6 @@ class CompletionRequest(Request):
     def model(self):
         return self.requestDict["model"]
     
-    """
-    TODO: link openaiclient.model.models to validate against known models.
-    """
     @model.setter
     def model(self, val):
         if val in self.models:
