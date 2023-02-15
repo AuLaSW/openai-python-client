@@ -3,6 +3,7 @@ This module tests the CompletionRequest class.
 """
 import unittest
 from tests.unit.fixture import api
+from tests.unit.fixture.models import Models
 from openaiclient.model.request.completion import CompletionRequest
 from openaiclient.model.response import Response
 
