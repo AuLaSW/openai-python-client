@@ -180,7 +180,10 @@ class TestProperties(TestCompletionRequest):
         Asserts that adding a valid model results in the model
         value being correctly updated
         """
-        self.request.model = "text-davinci-003"
+        model = "text-davinci-003"
+        self.request.model = model
+        
+        self.assertEqual(self.request.model, model)
 
 
 if __name__ == "__main__":
