@@ -37,40 +37,61 @@ class TestModels(unittest.TestCase):
             )
 
     def test_CompletionModels(self):
+        """
+        Asserts that completionModles returns only models of type completion.
+        """
         for model in self.modelObj.completionModels:
             with self.subTest(model=model):
                 self.assertEqual(model.type, self.modelObj.COMPLETION)
 
     def test_EditModels(self):
+        """
+        Asserts that editModels returns only models of type edit.
+        """
         for model in self.modelObj.editModels:
             with self.subTest(model=model):
                 self.assertEqual(model.type, self.modelObj.EDIT)
     
     def test_Text_Davinci_003(self):
+        """
+        Asserts that text_davinci_003 returns the correct model.
+        """
         self.assertEqual(
             self.modelObj.text_davinci_003.name,
             "text-davinci-003"
         )
     
     def test_Text_Curie_001(self):
+        """
+        Asserts that text_curie_001 returns the correct model.
+        """
         self.assertEqual(
             self.modelObj.text_curie_001.name,
             "text-curie-001"
         )
     
     def test_Text_Babbage_001(self):
+        """
+        Asserts that text_babbage_001 returns the correct model.
+        """
         self.assertEqual(
             self.modelObj.text_babbage_001.name,
             "text-babbage-001"
         )
     
     def test_Text_Ada_001(self):
+        """
+        Asserts that text_ada_001 returns the correct model.
+        """
         self.assertEqual(
             self.modelObj.text_ada_001.name,
             "text-ada-001"
         )
     
     def test_Text_Davinci_Edit_001(self):
+        """
+        Asserts that text_davinci_edit_001 returns the correct model.
+        """
         self.assertEqual(
             self.modelObj.text_davinci_edit_001.name,
             "text-davinci-edit-001"
