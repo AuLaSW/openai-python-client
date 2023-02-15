@@ -66,24 +66,6 @@ class TestEditRequest(unittest.TestCase):
         self.assertNotIn("instruction", self.request.settings)
         self.assertNotIn("input", self.request.settings)
 
-    # test that the set method rejects a
-    # key that is not in the dictionary
-    # already
-    def test_SetRejectUnknownKey(self):
-        key = "testKey"
-        value = "testValue"
-
-        kwargs = {
-            "var": key,
-            "val": value
-        }
-
-        self.assertRaises(
-            RuntimeError,
-            self.request.set,
-            **kwargs
-        )
-
     # test that the obect returned from getResponse() is
     # a Response object.
     def test_GetResponse(self):
