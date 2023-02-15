@@ -14,7 +14,7 @@ class Models:
         self.EDIT = "Edit"
         
         # dictionary of models
-        self.models = {
+        self._models = {
             "text-davinci-003": Model(
                 "text-davinci-003",
                 4_000,
@@ -58,11 +58,11 @@ class Models:
         return strModels
 
     def __contains__(self, item):
-        return item in self.models
+        return item in self._models
 
     @property
     def models(self):
-        return self.models
+        return self._models
 
 
 class Model:
