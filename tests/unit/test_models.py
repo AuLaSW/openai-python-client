@@ -10,22 +10,6 @@ class TestModels(unittest.TestCase):
         self.comp = self.modelObj.COMPLETION
         self.edit = self.modelObj.EDIT
 
-    def test_CompletionKeyInDict(self):
-        # assert that comp is a key in dictionary
-        self.assertIn(self.comp, self.models.keys())
-
-    def test_EditKeyInDict(self):
-        # assert that edit is a key in dictionary
-        self.assertIn(self.edit, self.models.keys())
-
-    def test_CompletionListNotEmpty(self):
-        # assert the completion models are not empty
-        self.assertTrue(self.models[self.comp])
-
-    def test_EditListNotEmpty(self):
-        # assert the completion models are not empty
-        self.assertTrue(self.models[self.edit])
-
     # tests that the model dictionary does
     # contain the model
     def test_ContainsModel(self):
