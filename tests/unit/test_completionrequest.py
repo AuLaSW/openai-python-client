@@ -116,7 +116,7 @@ class TestFunctions(TestCompletionRequest):
         self.request.addToPrompt(additionalPrompt, True)
         
         self.assertEqual(
-            self.request.requestDict["prompt"], 
+            self.request.prompt, 
             originalPrompt + "\n" + additionalPrompt
         )
 
