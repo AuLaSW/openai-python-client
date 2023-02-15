@@ -267,6 +267,18 @@ class TestProperties(TestCompletionRequest):
                 
                 self.assertEqual(self.request.max_tokens, max_tokens)
     
+    def test_Max_TokensFloatError(self):
+        """
+        Asserts that when a float is passed to max_tokens an error is thrown.
+        """
+        for max_tokens in range(1, 100):
+            max_tokens = 0.5 * float(max_tokens)
+            with self.subTest(max_tokens=max_tokens):
+                with self.assertRaises(RuntimeError) as error:
+                    self.request.max_tokens = max_tokens
+                
+                self.assertIsInstance(error.exception, RuntimeError)
+    
     def test_Max_TokensLessThanZero(self):
         """
         Asserts that when an integer less than or equal to zero is passed an error is thrown.
