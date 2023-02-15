@@ -45,6 +45,12 @@ class TestModels(unittest.TestCase):
         for model in self.modelObj.editModels:
             with self.subTest(model=model):
                 self.assertEqual(model.type, self.modelObj.EDIT)
+    
+    def test_Text_Davinci_003(self):
+        self.assertEqual(
+            self.modelObj.text_davinci_003.model,
+            "text-davinci-003"
+        )
 
 if __name__ == "__main__":
     unittest.mainloop()
