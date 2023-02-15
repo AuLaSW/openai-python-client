@@ -244,6 +244,18 @@ class TestProperties(TestCompletionRequest):
                     self.request.prompt = prompt
                 
                 self.assertIsInstance(error.exception, RuntimeError)
+    
+    def test_PromptBooleanFail(self):
+        """
+        Asserts that when a boolean is passed into the prompt,
+        it throws an error.
+        """
+        for prompt in [True, False]:
+            with self.subTest(prompt=prompt):
+                with self.assertRaises(RuntimeError) as error:
+                    self.request.prompt = prompt
+                
+                self.assertIsInstance(error.exception, RuntimeError)
 
 
 if __name__ == "__main__":
