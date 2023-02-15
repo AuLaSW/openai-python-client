@@ -210,6 +210,16 @@ class TestProperties(TestCompletionRequest):
                     self.request.model = model
                 
                 self.assertIsInstance(error.exception, RuntimeError)
+    
+    def test_Prompt(self):
+        """
+        Asserts that when a string is passed into the prompt setter,
+        the prompt is correctly changed.
+        """
+        prompt = "this is a test"
+        self.request.prompt = prompt
+        
+        self.assertEqual(self.request.prompt, prompt)
 
 
 if __name__ == "__main__":
