@@ -232,6 +232,18 @@ class TestProperties(TestCompletionRequest):
                     self.request.prompt = prompt
                 
                 self.assertIsInstance(error.exception, RuntimeError)
+    
+    def test_PromptFloatFail(self):
+        """
+        Asserts that when a number is passed into the prompt, it
+        throws an error.
+        """
+        for prompt in [-1.0, -0.5, 0.0, 0.5, 1.0]:
+            with self.subTest(prompt=prompt):
+                with self.assertRaises(RuntimeError) as error:
+                    self.request.prompt = prompt
+                
+                self.assertIsInstance(error.exception, RuntimeError)
 
 
 if __name__ == "__main__":
