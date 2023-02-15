@@ -36,6 +36,11 @@ class TestModels(unittest.TestCase):
                 " Make sure you've updated the string function."
             )
 
+    def test_CompletionModels(self):
+        for model in self.modelObj.completionModels:
+            with self.subTest(model=model):
+                self.assertEqual(model.type, "Completion")
+
 
 if __name__ == "__main__":
     unittest.mainloop()
