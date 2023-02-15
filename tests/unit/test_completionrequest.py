@@ -316,7 +316,17 @@ class TestProperties(TestCompletionRequest):
                             self.request.max_tokens = model.max_tokens + i
                             
                         self.assertIsInstance(error.exception, RuntimeError)
-            
+    
+    def test_Temperature(self):
+        """
+        Assert that a correct input to temperature parameter will change correct data field.
+        """
+        for temperature in range(0, 20, 1):
+            temperature *= 0.1
+            with self.subTest(temperature=temperature):
+                self.request.temperature = temperature
+                self.assertEqual(self.request.temperature, temperature)
+        
 
 if __name__ == "__main__":
     unittest.mainloop()
