@@ -15,15 +15,31 @@ class Models:
         
         # dictionary of models
         self.models = {
-            self.COMPLETION: [
+            "text-davinci-003": Model(
                 "text-davinci-003",
+                4_000,
+                self.COMPLETION
+            ),
+            "text-curie-001": Model(
                 "text-curie-001",
+                2_048,
+                self.COMPLETION
+            ),
+            "text-babbage-001": Model(
                 "text-babbage-001",
-                "text-ada-001"
-            ],
-            self.EDIT: [
-                "text-davinci-edit-001"
-            ]
+                2_048,
+                self.COMPLETION
+            ),
+            "text-ada-001": Model(
+                "text-ada-001",
+                2_048,
+                self.COMPLETION
+            ),
+            "text-davinci-edit-001": Model(
+                "text-davinci-edit-001",
+                2_048,
+                self.EDIT
+            ),
         }
 
     def __str__(self):
