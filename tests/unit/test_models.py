@@ -51,6 +51,14 @@ class TestModels(unittest.TestCase):
             self.modelObj.text_davinci_003.name,
             "text-davinci-003"
         )
+    
+    def test_Text_Curie_001(self):
+        self.assertEqual(
+            self.modelObj.text_curie_001.name,
+            "text-curie-001"
+        )
+        
+    
 
 if __name__ == "__main__":
     unittest.mainloop()
