@@ -506,6 +506,39 @@ class TestProperties(TestCompletionRequest):
                 
                 self.assertIsInstance(error.exception, RuntimeError)
     
+    def test_Echo(self):
+        """
+        Asserts that valid input results in correct data field change.
+        """
+        for echo in [True, False]:
+            with self.subTest(echo=echo):
+                self.request.echo = echo
+                
+                self.assertEqual(self.request.echo, echo)
+    
+    def test_EchoIntegerFail(self):
+        """
+        Asserts that an integer input will fail.
+        """
+        for echo in range(-10, 10):
+            with self.subTest(echo=echo):
+                with self.assertRaises(RuntimeError) as error:
+                    self.request.echo = echo
+                
+                self.assertIsInstance(error.exception, RuntimeError)
+    
+    def test_EchoFloatFail(self):
+        """
+        Asserts that a float input will fail.
+        """
+        for echo in range(-30, 30):
+            echo *= 0.1
+            with self.subTest(echo=echo):
+                with self.assertRaises(RuntimeError) as error:
+                    self.request.echo = echo
+                
+                self.assertIsInstance(error.exception, RuntimeError)
+    
 
 if __name__ == "__main__":
     unittest.mainloop()
