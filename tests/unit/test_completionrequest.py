@@ -174,6 +174,9 @@ class TestSettings(TestCompletionRequest):
         """
         self.assertNotIn("prompt", self.request.settings)
 
+class TestProperties(TestCompletionRequest):
+    pass
+
 
 if __name__ == "__main__":
     unittest.mainloop()
