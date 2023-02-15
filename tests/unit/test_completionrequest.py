@@ -277,7 +277,21 @@ class TestProperties(TestCompletionRequest):
                     self.request.max_tokens = max_tokens
                     
                 self.assertIsInstance(error.exception, RuntimeError)
-
+    
+    def test_Max_TokensGreaterThanMaximum(self):
+        """
+        Asserts that when an integer greater than the maximum number of tokens is passed an error is thrown.
+        """
+        for _, model in self.request.models.models.items():
+            with self.subTest(model=model):
+                for i in range(1, 20):
+                    with self.subTest(i=i):
+                        self.request.model = model.name
+                        with self.assertRaises(RuntimeError) as error:
+                            self.request.max_tokens = model.max_tokens + i
+                            
+                        self.assertIsInstance(error.exception, RuntimeError)
+            
 
 if __name__ == "__main__":
     unittest.mainloop()
