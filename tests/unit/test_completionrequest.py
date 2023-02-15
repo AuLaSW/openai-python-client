@@ -221,6 +221,18 @@ class TestProperties(TestCompletionRequest):
         
         self.assertEqual(self.request.prompt, prompt)
 
+    def test_PromptIntegerFail(self):
+        """
+        Asserts that when a number is passed into the prompt, it
+        throws an error.
+        """
+        for prompt in range(-10, 10, 1):
+            with self.subTest(prompt=prompt):
+                with self.assertRaises(RuntimeError) as error:
+                    self.request.prompt = prompt
+                
+                self.assertIsInstance(error.exception, RuntimeError)
+
 
 if __name__ == "__main__":
     unittest.mainloop()
