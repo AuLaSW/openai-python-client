@@ -117,10 +117,12 @@ class CompletionRequest(Request):
     """
     @max_tokens.setter
     def max_tokens(self, val):
-        if isinstance(val, int) and val > 0 and val < 2_048:
+        max_tokens = self.models.models[self.model].max_tokens
+        
+        if isinstance(val, int) and val > 0 and val <= max_tokens:
             self.requestDict["max_tokens"] = val
         else:
-            raise RuntimeError("max_tokens must be an integer greater than 0.")
+            raise RuntimeError(f"max_tokens must be an integer greater than 0 and less than {max_tokens}")
     
     @property
     def temperature(self):
