@@ -128,9 +128,6 @@ class CompletionRequest(Request):
     def temperature(self):
         return self.requestDict["temperature"]
         
-    """
-    TODO: validate maximum length
-    """
     @temperature.setter
     def temperature(self, val):
         if isinstance(val, float) and val >= 0 and val <=2:
@@ -153,15 +150,12 @@ class CompletionRequest(Request):
     def n(self):
         return self.requestDict["n"]
     
-    """
-    TODO: validate maximum length
-    """
     @n.setter
     def n(self, val):
         if isinstance(val, int) and val > 0:
-            self.requestDict["top_p"] = val
+            self.requestDict["n"] = val
         else:
-            raise RuntimeError("top_p must be an integer greater than 0.")
+            raise RuntimeError("n must be an integer greater than 0.")
         
     @property
     def stream(self):
