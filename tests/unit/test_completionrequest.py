@@ -59,7 +59,8 @@ class TestCompletionRequest(unittest.TestCase):
         must contain the correct values too.
     """
     def setUp(self):
-        self.request = CompletionRequest(api)
+        models = Models()
+        self.request = CompletionRequest(api, models)
         self.REQUIRED_ARGS = 1
 
 
