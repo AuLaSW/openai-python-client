@@ -11,12 +11,13 @@ Handles sending requests to OpenAI for completion.
 
 
 class CompletionRequest(Request):
-    def __init__(self, module):
+    def __init__(self, module, models):
         # initialize from parent class Request
         super().__init__()
 
         # set up API class
         self.module = module
+        self.models = models
 
         # setup self.requestDict
 
