@@ -261,11 +261,13 @@ class TestProperties(TestCompletionRequest):
         """
         Asserts that when a valid integer is passed that the correct value is modified
         """
-        for max_tokens in range(1, 100):
-            with self.subTest(max_tokens=max_tokens):
-                self.request.max_tokens = max_tokens
-                
-                self.assertEqual(self.request.max_tokens, max_tokens)
+        for model in self.request.models.completionModels:
+            with self.subTest(model=model):
+                for max_tokens in range(1, model.max_tokens + 1, 32):
+                    with self.subTest(max_tokens=max_tokens):
+                        self.request.max_tokens = max_tokens
+                        
+                        self.assertEqual(self.request.max_tokens, max_tokens)
     
     def test_Max_TokensFloatError(self):
         """
