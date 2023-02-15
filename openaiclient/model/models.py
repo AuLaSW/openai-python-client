@@ -47,13 +47,15 @@ class Models:
 
         strModels += "  " + self.COMPLETION + " Models:\n"
 
-        for key in self.models[self.COMPLETION]:
-            strModels += "    " + key + "\n"
+        for _, model in self.models.items():
+            if model.type == self.COMPLETION:
+                strModels += "    " + model.model + "\n"
 
         strModels += "  " + self.EDIT + " Models:\n"
 
-        for key in self.models[self.EDIT]:
-            strModels += "    " + key + "\n"
+        for _, model in self.models.items():
+            if model.type == self.EDIT:
+                strModels += "    " + model.model + "\n"
 
         return strModels
 
