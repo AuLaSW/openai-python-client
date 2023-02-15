@@ -70,10 +70,10 @@ class TestModels(unittest.TestCase):
             "text-ada-001"
         )
     
-    def test_Text_Davinci_Edit_003(self):
+    def test_Text_Davinci_Edit_001(self):
         self.assertEqual(
-            self.modelObj.text_davinci_edit_003.name,
-            "text-davinci-edit-003"
+            self.modelObj.text_davinci_edit_001.name,
+            "text-davinci-edit-001"
         )
     
 
