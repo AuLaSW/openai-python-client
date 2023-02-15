@@ -108,8 +108,14 @@ class Models:
 class Model:
     def __init__(self, name, max_tokens, type):
         self._name = name
-        self._max_tokens = max_tokens
         self._type = type
+        
+        # Edit types don't have a max_tokens attribute,
+        # so set to -1 to make sure it can't be used.
+        if self._type == "Edit":
+            self._max_tokens = -1
+        else:
+            self._max_tokens = max_tokens
     
     @property
     def model(self):
