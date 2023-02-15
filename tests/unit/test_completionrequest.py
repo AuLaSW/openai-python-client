@@ -87,12 +87,12 @@ class TestFunctions(TestCompletionRequest):
         """
         self.assertIsInstance(self.request.getResponse(), Response)
     
-    def test_addToPrompt(self):
+    def test_AddToPrompt(self):
         additionalPrompt = "Add this to the prompt."
         
         self.request.addToPrompt(additionalPrompt)
         
-        self.assertEqual(self.request.requestDict["prompt"], additionalPrompt)
+        self.assertEqual(self.request.prompt, additionalPrompt)
 
     def test_AddToOriginalPrompt(self):
         originalPrompt = "This is the first prompt."
