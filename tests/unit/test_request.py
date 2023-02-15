@@ -21,7 +21,7 @@ class TestRequest(unittest.TestCase):
         self.assertFalse(self.request.optionalArgs)
 
     # test that settings is empty
-    def test_SettingsEmpty(self):
+    def test_EmptySettingsRaiseError(self):
         with self.assertRaises(RuntimeError) as error:
             self.request.settings
         
