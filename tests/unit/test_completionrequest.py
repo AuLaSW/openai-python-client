@@ -326,6 +326,52 @@ class TestProperties(TestCompletionRequest):
             with self.subTest(temperature=temperature):
                 self.request.temperature = temperature
                 self.assertEqual(self.request.temperature, temperature)
+                
+    def test_TemperatureIntegerError(self):
+        """
+        Asserts that when an integer is passed to temperature an error is thrown.
+        """
+        for temperature in range(-10, 10):
+            with self.subTest(temperature=temperature):
+                with self.assertRaises(RuntimeError) as error:
+                    self.request.temperature = temperature
+                
+                self.assertIsInstance(error.exception, RuntimeError)
+    
+    def test_TemperatureBooleanError(self):
+        """
+        Asserts that when a boolean is passed to temperature an error is thrown.
+        """
+        for temperature in [True, False]:
+            with self.subTest(temperature=temperature):
+                with self.assertRaises(RuntimeError) as error:
+                    self.request.temperature = temperature
+                
+                self.assertIsInstance(error.exception, RuntimeError)
+    
+    def test_TemperatureLessThanZero(self):
+        """
+        Asserts that when an float less than or equal to zero is passed an error is thrown.
+        """
+        for temperature in range(-10, 0):
+            temperature *= 0.1
+            with self.subTest(temperature=temperature):
+                with self.assertRaises(RuntimeError) as error:
+                    self.request.temperature = temperature
+                    
+                self.assertIsInstance(error.exception, RuntimeError)
+    
+    def test_TemperatureGreaterThanMaximum(self):
+        """
+        Asserts that when a float greater than the maximum temperature is passed an error is thrown.
+        """
+        for temperature in range(30, 50):
+            temperature *= 0.1
+            with self.subTest(temperature=temperature):
+                with self.assertRaises(RuntimeError) as error:
+                    self.request.temperature = temperature
+                    
+                self.assertIsInstance(error.exception, RuntimeError)
         
 
 if __name__ == "__main__":
