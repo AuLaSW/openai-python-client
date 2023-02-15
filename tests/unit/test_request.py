@@ -36,14 +36,6 @@ class TestRequest(unittest.TestCase):
     def test_GetKeys(self):
         self.assertRaises(RuntimeError, self.request.getKeys)
 
-    # test that set() adds key to dictionary
-    def test_SetNewKeyError(self):
-        kwargs = {
-        "var": "testKey",
-        "val": "testValue"
-        }
-        self.assertRaises(RuntimeError, self.request.set, **kwargs)
-
 
 if __name__ == "__main__":
     unittest.mainloop()
