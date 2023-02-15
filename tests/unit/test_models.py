@@ -57,6 +57,12 @@ class TestModels(unittest.TestCase):
             self.modelObj.text_curie_001.name,
             "text-curie-001"
         )
+    
+    def test_Text_Babbage_001(self):
+        self.assertEqual(
+            self.modelObj.text_babbage_001.name,
+            "text-babbage-001"
+        )
         
     
 
