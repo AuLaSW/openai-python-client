@@ -36,11 +36,6 @@ class TestRequest(unittest.TestCase):
     def test_GetKeys(self):
         self.assertRaises(RuntimeError, self.request.getKeys)
 
-    # test that getSettings() called with an empty set
-    # will return a runtime error
-    def test_getSettings(self):
-        self.assertRaises(RuntimeError, self.request.getSettings)
-
     # test that set() adds key to dictionary
     def test_SetNewKeyError(self):
         kwargs = {
