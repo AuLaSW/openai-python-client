@@ -372,7 +372,16 @@ class TestProperties(TestCompletionRequest):
                     self.request.temperature = temperature
                     
                 self.assertIsInstance(error.exception, RuntimeError)
-        
+
+    def test_Top_P(self):
+        """
+        Asserts that when a valid input in made it changes the correct value.
+        """
+        for top_p in range(0,10):
+            top_p *= 0.1
+            with self.subTest(top_p=top_p):
+                self.request.top_p = top_p
+                self.assertEqual(self.request.top_p, top_p)
 
 if __name__ == "__main__":
     unittest.mainloop()
