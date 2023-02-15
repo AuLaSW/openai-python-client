@@ -78,9 +78,9 @@ class Models:
     @property
     def editModels(self):
         modelList = []
-            for _, model in self.models.items():
-                if model.type == self.EDIT:
-                    modelList.append(model)
+        for _, model in self.models.items():
+            if model.type == self.EDIT:
+                modelList.append(model)
         
         return modelList
     
