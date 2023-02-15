@@ -120,7 +120,7 @@ class CompletionRequest(Request):
     """
     @max_tokens.setter
     def max_tokens(self, val):
-        if isinstance(val, int) and val > 0:
+        if isinstance(val, int) and val > 0 and val < 2_048:
             self.requestDict["max_tokens"] = val
         else:
             raise RuntimeError("max_tokens must be an integer greater than 0.")
