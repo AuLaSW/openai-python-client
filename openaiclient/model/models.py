@@ -16,29 +16,28 @@ class Models:
         # dictionary of models
         self._models = {
             "text-davinci-003": Model(
-                "text-davinci-003",
-                4_000,
-                self.COMPLETION
+                name="text-davinci-003",
+                max_tokens=4_000,
+                type=self.COMPLETION
             ),
             "text-curie-001": Model(
-                "text-curie-001",
-                2_048,
-                self.COMPLETION
+                name="text-curie-001",
+                max_tokens=2_048,
+                type=self.COMPLETION
             ),
             "text-babbage-001": Model(
-                "text-babbage-001",
-                2_048,
-                self.COMPLETION
+                name="text-babbage-001",
+                max_tokens=2_048,
+                type=self.COMPLETION
             ),
             "text-ada-001": Model(
-                "text-ada-001",
-                2_048,
-                self.COMPLETION
+                name="text-ada-001",
+                max_tokens=2_048,
+                type=self.COMPLETION
             ),
             "text-davinci-edit-001": Model(
-                "text-davinci-edit-001",
-                2_048,
-                self.EDIT
+                name="text-davinci-edit-001",
+                type=self.EDIT
             ),
         }
 
