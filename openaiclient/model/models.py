@@ -65,6 +65,44 @@ class Models:
     @property
     def models(self):
         return self._models
+        
+    @property
+    def completionModels(self):
+        modelList = []
+        for _, model in self.models.items():
+            if model.type == self.COMPLETION:
+                modelList.append(model)
+        
+        return modelList
+    
+    @property
+    def editModels(self):
+        modelList = []
+            for _, model in self.models.items():
+                if model.type == self.EDIT:
+                    modelList.append(model)
+        
+        return modelList
+    
+    @property
+    def text_davinci_003(self):
+        return self.models["text-davinci-003"]
+    
+    @property
+    def text_curie_001(self):
+        return self.models["text-curie-001"]
+        
+    @property
+    def text_babbage_001(self):
+        return self.models["text-babbage-001"]
+        
+    @property
+    def text_ada_001(self):
+        return self.models["text-ada-001"]
+    
+    @property
+    def text_davinci_edit_003(self):
+        return self.models["text-davinci-edit-003"]
 
 
 class Model:
