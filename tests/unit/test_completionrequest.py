@@ -428,6 +428,51 @@ class TestProperties(TestCompletionRequest):
                     self.request.top_p = top_p
                     
                 self.assertIsInstance(error.exception, RuntimeError)
+    
+    def test_N(self):
+        """
+        Asserts that when a valid integer is passed that the correct value is modified
+        """
+        for n in range(1, 10):
+            with self.subTest(n=n):
+                self.request.n = n
+                
+                self.assertEqual(self.request.n, n)
+    
+    def test_NFloatError(self):
+        """
+        Asserts that when a float is passed to n an error is thrown.
+        """
+        for n in range(1, 100):
+            n = 0.5 * float(n)
+            with self.subTest(n=n):
+                with self.assertRaises(RuntimeError) as error:
+                    self.request.n = n
+                
+                self.assertIsInstance(error.exception, RuntimeError)
+    
+    def test_NBooleanError(self):
+        """
+        Asserts that when a boolean is passed to n an error is thrown.
+        """
+        for n in [True, False]:
+            with self.subTest(n=n):
+                with self.assertRaises(RuntimeError) as error:
+                    self.request.n = n
+                
+                self.assertIsInstance(error.exception, RuntimeError)
+    
+    def test_NLessThanZero(self):
+        """
+        Asserts that when an integer less than or equal to zero is passed an error is thrown.
+        """
+        for n in range(-10, 0):
+            with self.subTest(n=n):
+                with self.assertRaises(RuntimeError) as error:
+                    self.request.n = n
+                    
+                self.assertIsInstance(error.exception, RuntimeError)
+    
 
 if __name__ == "__main__":
     unittest.mainloop()
