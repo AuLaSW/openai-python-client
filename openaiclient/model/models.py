@@ -48,6 +48,25 @@ class Models:
         return self.models
 
 
+class Model:
+    def __init__(self, name, max_tokens, type):
+        self._name = name
+        self._max_tokens = max_tokens
+        self._type = type
+    
+    @property
+    def model(self):
+        return self._name
+    
+    @property
+    def max_tokens(self):
+        return self._max_tokens
+        
+    @property
+    def type(self):
+        return self._type
+
+
 if __name__ == "__main__":
     model = Models()
 
