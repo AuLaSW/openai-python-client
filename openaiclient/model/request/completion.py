@@ -147,7 +147,7 @@ class CompletionRequest(Request):
     """
     @top_p.setter
     def top_p(self, val):
-        if isinstance(val, int) and val > 0:
+        if isinstance(val, float) and val >= 0 and val <=1:
             self.requestDict["top_p"] = val
         else:
             raise RuntimeError("top_p must be an integer greater than 0.")
