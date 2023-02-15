@@ -133,10 +133,10 @@ class CompletionRequest(Request):
     """
     @temperature.setter
     def temperature(self, val):
-        if isinstance(val, int) and val > 0:
+        if isinstance(val, float) and val >= 0 and val <=2:
             self.requestDict["temperature"] = val
         else:
-            raise RuntimeError("temperature must be an integer greater than 0.")
+            raise RuntimeError("temperature must be number between 0 and 2.")
         
     @property
     def top_p(self):
