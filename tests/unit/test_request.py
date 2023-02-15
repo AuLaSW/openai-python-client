@@ -22,7 +22,10 @@ class TestRequest(unittest.TestCase):
 
     # test that settings is empty
     def test_SettingsEmpty(self):
-        self.assertFalse(self.request.settings)
+        with self.assertRaises(RuntimeError) as error:
+            self.request.settings
+        
+        self.assertIsInstance(error.exception, RuntimeError) 
 
     # test that getResponse() returns a NotImplementedError
     def test_GetResponse(self):
