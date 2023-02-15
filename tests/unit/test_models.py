@@ -48,7 +48,7 @@ class TestModels(unittest.TestCase):
     
     def test_Text_Davinci_003(self):
         self.assertEqual(
-            self.modelObj.text_davinci_003.model,
+            self.modelObj.text_davinci_003.name,
             "text-davinci-003"
         )
 
