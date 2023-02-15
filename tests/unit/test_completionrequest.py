@@ -266,6 +266,17 @@ class TestProperties(TestCompletionRequest):
                 self.request.max_tokens = max_tokens
                 
                 self.assertEqual(self.request.max_tokens, max_tokens)
+    
+    def test_Max_TokensLessThanZero(self):
+        """
+        Asserts that when an integer less than or equal to zero is passed an error is thrown.
+        """
+        for max_tokens in range(-10, 0):
+            with self.subTest(max_tokens=max_tokens):
+                with self.assertRaises(RuntimeError) as error:
+                    self.request.max_tokens = max_tokens
+                    
+                self.assertIsInstance(error.exception, RuntimeError)
 
 
 if __name__ == "__main__":
