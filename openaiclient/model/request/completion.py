@@ -105,7 +105,7 @@ class CompletionRequest(Request):
         
     @prompt.setter
     def prompt(self, val):
-        if isinstance(val, string):
+        if isinstance(val, str):
             self.requestDict["prompt"] = val
         else:
             raise RuntimeError("The prompt must be a string.")
@@ -233,7 +233,7 @@ class CompletionRequest(Request):
         
     @user.setter
     def user(self, val):
-        if isinstance(val, string):
+        if isinstance(val, str):
             self.requestDict["user"] = val
         else:
             raise RuntimeError("The user must be a string.")
