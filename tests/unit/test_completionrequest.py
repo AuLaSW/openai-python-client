@@ -256,6 +256,16 @@ class TestProperties(TestCompletionRequest):
                     self.request.prompt = prompt
                 
                 self.assertIsInstance(error.exception, RuntimeError)
+    
+    def test_Max_Tokens(self):
+        """
+        Asserts that when a valid integer is passed that the correct value is modified
+        """
+        for max_tokens in range(1, 100):
+            with self.subTest(max_tokens=max_tokens):
+                self.request.max_tokens = max_tokens
+                
+                self.assertEqual(self.request.max_tokens, max_tokens)
 
 
 if __name__ == "__main__":
