@@ -57,13 +57,6 @@ class Request:
         else:
             return keys
 
-    # returns dict of settings
-    def getSettings(self):
-        if len(self._settings) == 0:
-            raise RuntimeError
-        else:
-            return self._settings
-
     # gets value of var in requestDict
     def get(self, var):
         return self.requestDict[var]
@@ -76,4 +69,7 @@ class Request:
         
     @property
     def settings(self):
-        return self._settings
+        if len(self._settings) == 0:
+            raise RuntimeError("No settings to return")
+        else:
+            return self._settings
