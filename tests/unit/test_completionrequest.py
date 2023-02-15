@@ -473,6 +473,39 @@ class TestProperties(TestCompletionRequest):
                     
                 self.assertIsInstance(error.exception, RuntimeError)
     
+    def test_Stream(self):
+        """
+        Asserts that valid input results in correct data field change.
+        """
+        for stream in [True, False]:
+            with self.subTest(stream=stream):
+                self.request.stream = stream
+                
+                self.assertEqual(self.request.stream, stream)
+    
+    def test_StreamIntegerFail(self):
+        """
+        Asserts that an integer input will fail.
+        """
+        for stream in range(-10, 10):
+            with self.subTest(stream=stream):
+                with self.assertRaises(RuntimeError) as error:
+                    self.request.stream = stream
+                
+                self.assertIsInstance(error.exception, RuntimeError)
+    
+    def test_StreamFloatFail(self):
+        """
+        Asserts that a float input will fail.
+        """
+        for stream in range(-30, 30):
+            stream *= 0.1
+            with self.subTest(stream=stream):
+                with self.assertRaises(RuntimeError) as error:
+                    self.request.stream = stream
+                
+                self.assertIsInstance(error.exception, RuntimeError)
+    
 
 if __name__ == "__main__":
     unittest.mainloop()
