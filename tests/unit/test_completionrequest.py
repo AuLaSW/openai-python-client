@@ -175,7 +175,12 @@ class TestSettings(TestCompletionRequest):
         self.assertNotIn("prompt", self.request.settings)
 
 class TestProperties(TestCompletionRequest):
-    pass
+    def test_ModelSetter(self):
+        """
+        Asserts that adding a valid model results in the model
+        value being correctly updated
+        """
+        self.request.model = "text-davinci-003"
 
 
 if __name__ == "__main__":
