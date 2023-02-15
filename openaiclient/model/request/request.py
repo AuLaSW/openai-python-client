@@ -56,10 +56,6 @@ class Request:
             raise RuntimeError
         else:
             return keys
-
-    # gets value of var in requestDict
-    def get(self, var):
-        return self.requestDict[var]
         
     @property
     def settings(self):
