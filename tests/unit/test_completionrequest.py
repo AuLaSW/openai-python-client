@@ -198,6 +198,18 @@ class TestProperties(TestCompletionRequest):
             self.request.model = model
         
         self.assertIsInstance(error.exception, RuntimeError)
+        
+    def test_ModelSetterIntegerInput(self):
+        """
+        Asserts that an error is thrown when an integer is inputted
+        into the model setter
+        """
+        for model in range(-10, 10, 1):
+            with self.subTest(model=model):
+                with self.assertRaises(RuntimeError) as error:
+                    self.request.model = model
+                
+                self.assertIsInstance(error.exception, RuntimeError)
 
 
 if __name__ == "__main__":
