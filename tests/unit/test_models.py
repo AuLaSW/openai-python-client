@@ -41,6 +41,10 @@ class TestModels(unittest.TestCase):
             with self.subTest(model=model):
                 self.assertEqual(model.type, "Completion")
 
+    def test_EditModels(self):
+        for model in self.modelObj.editModels:
+            with self.subTest(model=model):
+                self.assertEqual(model.type, "Edit")
 
 if __name__ == "__main__":
     unittest.mainloop()
