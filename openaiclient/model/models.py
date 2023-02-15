@@ -117,7 +117,7 @@ class Model:
             self._max_tokens = max_tokens
     
     @property
-    def model(self):
+    def name(self):
         return self._name
     
     @property
