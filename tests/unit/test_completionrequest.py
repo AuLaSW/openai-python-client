@@ -539,6 +539,50 @@ class TestProperties(TestCompletionRequest):
                 
                 self.assertIsInstance(error.exception, RuntimeError)
     
+    def test_Best_Of(self):
+        """
+        Asserts that when a valid integer is passed that the correct value is modified
+        """
+        for best_of in range(1, 10):
+            with self.subTest(best_of=best_of):
+                self.request.best_of = best_of
+                
+                self.assertEqual(self.request.best_of, best_of)
+    
+    def test_Best_OfFloatError(self):
+        """
+        Asserts that when a float is passed to best_of an error is thrown.
+        """
+        for best_of in range(1, 100):
+            best_of = 0.5 * float(best_of)
+            with self.subTest(best_of=best_of):
+                with self.assertRaises(RuntimeError) as error:
+                    self.request.best_of = best_of
+                
+                self.assertIsInstance(error.exception, RuntimeError)
+    
+    def test_Best_OfBooleanError(self):
+        """
+        Asserts that when a boolean is passed to n an error is thrown.
+        """
+        for best_of in [True, False]:
+            with self.subTest(best_of=best_of):
+                with self.assertRaises(RuntimeError) as error:
+                    self.request.best_of = best_of
+                
+                self.assertIsInstance(error.exception, RuntimeError)
+    
+    def test_Best_OfLessThanZero(self):
+        """
+        Asserts that when an integer less than or equal to zero is passed an error is thrown.
+        """
+        for best_of in range(-10, 0):
+            with self.subTest(best_of=best_of):
+                with self.assertRaises(RuntimeError) as error:
+                    self.request.best_of = best_of
+                    
+                self.assertIsInstance(error.exception, RuntimeError)
+    
     def test_User(self):
         """
         Asserts that valid input results in correct data field change.  
