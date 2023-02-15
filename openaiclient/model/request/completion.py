@@ -119,7 +119,7 @@ class CompletionRequest(Request):
     def max_tokens(self, val):
         max_tokens = self.models.models[self.model].max_tokens
         
-        if isinstance(val, int) and val > 0 and val <= max_tokens:
+        if isinstance(val, int) and not isinstance(val, bool) and val > 0 and val <= max_tokens:
             self.requestDict["max_tokens"] = val
         else:
             raise RuntimeError(f"max_tokens must be an integer greater than 0 and less than {max_tokens}")
