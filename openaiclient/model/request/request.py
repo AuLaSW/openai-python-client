@@ -60,12 +60,6 @@ class Request:
     # gets value of var in requestDict
     def get(self, var):
         return self.requestDict[var]
-
-    # sets value of var in requestDict
-    def set(self, var, val):
-        if var not in self.requestDict:
-            raise RuntimeError
-        self.requestDict[var] = val
         
     @property
     def settings(self):
