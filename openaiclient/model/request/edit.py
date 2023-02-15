@@ -41,9 +41,9 @@ class EditRequest(Request):
         self.optionalArgs -= self.requiredArgs
 
         # arguments that are settings
-        self.settings = set(self.requestDict.keys())
-        self.settings.remove("instruction")
-        self.settings.remove("input")
+        self._settings = set(self.requestDict.keys())
+        self._settings.remove("instruction")
+        self._settings.remove("input")
 
     def getResponse(self):
         return Response(

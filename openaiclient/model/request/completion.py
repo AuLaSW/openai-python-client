@@ -52,8 +52,8 @@ class CompletionRequest(Request):
         self.optionalArgs -= self.requiredArgs
 
         # set of setting arguments
-        self.settings = set(self.requestDict.keys())
-        self.settings.remove("prompt")
+        self._settings = set(self.requestDict.keys())
+        self._settings.remove("prompt")
 
     def getResponse(self):
         return Response(
@@ -81,22 +81,6 @@ class CompletionRequest(Request):
     @property
     def optionalArguments(self):
         return self.optionalArgs
-    
-    @property
-    def settings(self):
-        return self.settings
-        
-    @settings.setter
-    def settings(self, vals):
-        try:
-            var, val = vals
-        except ValueError:
-            raise ValueError("Please pass an iterable with two values.")
-        
-        if var in self.settings:
-            self.requestDict[var] = val
-        else:
-            raise RuntimeError
     
     # request dictionary arguments
     
@@ -137,7 +121,7 @@ class CompletionRequest(Request):
     def max_tokens(self, val):
         if isinstance(val, int) and val > 0:
             self.requestDict["max_tokens"] = val
-        elif:
+        else:
             raise RuntimeError("max_tokens must be an integer greater than 0.")
     
     @property
@@ -151,7 +135,7 @@ class CompletionRequest(Request):
     def temperature(self, val):
         if isinstance(val, int) and val > 0:
             self.requestDict["temperature"] = val
-        elif:
+        else:
             raise RuntimeError("temperature must be an integer greater than 0.")
         
     @property
@@ -165,7 +149,7 @@ class CompletionRequest(Request):
     def top_p(self, val):
         if isinstance(val, int) and val > 0:
             self.requestDict["top_p"] = val
-        elif:
+        else:
             raise RuntimeError("top_p must be an integer greater than 0.")
         
     @property
@@ -179,14 +163,14 @@ class CompletionRequest(Request):
     def n(self, val):
         if isinstance(val, int) and val > 0:
             self.requestDict["top_p"] = val
-        elif:
+        else:
             raise RuntimeError("top_p must be an integer greater than 0.")
         
     @property
     def stream(self):
         return self.requestDict["stream"]
         
-    @mstream.setter
+    @stream.setter
     def stream(self, val):
         if isinstance(val, bool):
             self.requestDict["stream"] = val
@@ -215,7 +199,7 @@ class CompletionRequest(Request):
     def presence_penalty(self, val):
         if isinstance(val, int) and val > 0:
             self.requestDict["presence_penalty"] = val
-        elif:
+        else:
             raise RuntimeError("presence_penalty must be an integer greater than 0.")
         
     @property
@@ -229,7 +213,7 @@ class CompletionRequest(Request):
     def frequency_penalty(self, val):
         if isinstance(val, int) and val > 0:
             self.requestDict["frequency_penalty"] = val
-        elif:
+        else:
             raise RuntimeError("frequency_penalty must be an integer greater than 0.")
         
     @property
@@ -240,7 +224,7 @@ class CompletionRequest(Request):
     def best_of(self, val):
         if isinstance(val, int) and val > 0:
             self.requestDict["best_of"] = val
-        elif:
+        else:
             raise RuntimeError("best_of must be an integer greater than 0.")
         
     @property

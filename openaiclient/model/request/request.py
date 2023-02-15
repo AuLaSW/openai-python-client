@@ -18,7 +18,7 @@ class Request:
         self.optionalArgs = {}
 
         # set of request settings
-        self.settings = {}
+        self._settings = {}
 
     """
     def __str__(self):
@@ -59,10 +59,10 @@ class Request:
 
     # returns dict of settings
     def getSettings(self):
-        if len(self.settings) == 0:
+        if len(self._settings) == 0:
             raise RuntimeError
         else:
-            return self.settings
+            return self._settings
 
     # gets value of var in requestDict
     def get(self, var):
@@ -73,3 +73,7 @@ class Request:
         if var not in self.requestDict:
             raise RuntimeError
         self.requestDict[var] = val
+        
+    @property
+    def settings(self):
+        return self._settings
