@@ -152,7 +152,7 @@ class CompletionRequest(Request):
     
     @n.setter
     def n(self, val):
-        if isinstance(val, int) and val > 0:
+        if isinstance(val, int) and not isinstance(val, bool) and val > 0:
             self.requestDict["n"] = val
         else:
             raise RuntimeError("n must be an integer greater than 0.")
