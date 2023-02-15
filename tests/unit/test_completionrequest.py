@@ -187,6 +187,18 @@ class TestProperties(TestCompletionRequest):
         
         self.assertEqual(self.request.model, model)
 
+    def test_ModelSetterInvalidModel(self):
+        """
+        Asserts that an error is thrown when an invalid model is
+        inputted into the setter.
+        """
+        model = "test-model"
+        
+        with self.assertRaises(RuntimeError) as error:
+            self.request.model = model
+        
+        self.assertIsInstance(error.exception, RuntimeError)
+
 
 if __name__ == "__main__":
     unittest.mainloop()
