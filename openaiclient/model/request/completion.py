@@ -142,9 +142,6 @@ class CompletionRequest(Request):
     def top_p(self):
         return self.requestDict["top_p"]
         
-    """
-    TODO: validate maximum length
-    """
     @top_p.setter
     def top_p(self, val):
         if isinstance(val, float) and val >= 0 and val <=1:
