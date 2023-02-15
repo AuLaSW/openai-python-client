@@ -281,6 +281,17 @@ class TestProperties(TestCompletionRequest):
                 
                 self.assertIsInstance(error.exception, RuntimeError)
     
+    def test_Max_TokensBooleanError(self):
+        """
+        Asserts that when a boolean is passed to max_tokens an error is thrown.
+        """
+        for max_tokens in [True, False]:
+            with self.subTest(max_tokens=max_tokens):
+                with self.assertRaises(RuntimeError) as error:
+                    self.request.max_tokens = max_tokens
+                
+                self.assertIsInstance(error.exception, RuntimeError)
+    
     def test_Max_TokensLessThanZero(self):
         """
         Asserts that when an integer less than or equal to zero is passed an error is thrown.
