@@ -539,6 +539,49 @@ class TestProperties(TestCompletionRequest):
                 
                 self.assertIsInstance(error.exception, RuntimeError)
     
+    def test_User(self):
+        """
+        Asserts that valid input results in correct data field change.  
+        """
+        user = "test-user"
+        self.request.user = user
+        
+        self.assertEqual(self.request.user, user)
+
+    def test_UserIntegerFail(self):
+        """
+        Asserts that an integer input will fail.
+        """
+        for user in range(-10, 10):
+            with self.subTest(user=user):
+                with self.assertRaises(RuntimeError) as error:
+                    self.request.user = user
+                
+                self.assertIsInstance(error.exception, RuntimeError)
+    
+    def test_UserFloatFail(self):
+        """
+        Asserts that a float input will fail.
+        """
+        for user in range(-30, 30):
+            user *= 0.1
+            with self.subTest(user=user):
+                with self.assertRaises(RuntimeError) as error:
+                    self.request.user = user
+                
+                self.assertIsInstance(error.exception, RuntimeError)
+    
+    def test_UserBooleanFail(self):
+        """
+        Asserts that when a boolean is passed to n an error is thrown.
+        """
+        for user in [True, False]:
+            with self.subTest(user=user):
+                with self.assertRaises(RuntimeError) as error:
+                    self.request.user = user
+                
+                self.assertIsInstance(error.exception, RuntimeError)
+    
 
 if __name__ == "__main__":
     unittest.mainloop()
