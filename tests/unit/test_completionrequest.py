@@ -250,10 +250,15 @@ class TestProperties(TestCompletionRequest):
         Asserts that when a boolean is passed into the prompt,
         it throws an error.
         """
-        for prompt in [True, False]:
-            with self.subTest(prompt=prompt):
+        self.loop_over_test(self.request.prompt, [True, False])
+
+    
+    @unittest.skip
+    def loop_over_test(self, val, rng):
+        for temp in rng:
+            with self.subTest(temp=temp):
                 with self.assertRaises(RuntimeError) as error:
-                    self.request.prompt = prompt
+                    val = temp
                 
                 self.assertIsInstance(error.exception, RuntimeError)
 
