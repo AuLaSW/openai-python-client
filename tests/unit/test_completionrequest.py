@@ -252,15 +252,17 @@ class TestProperties(TestCompletionRequest):
         """
         self.loop_over_test(self.request.prompt, [True, False])
 
-    
-    @unittest.skip
+
     def loop_over_test(self, val, rng):
         for temp in rng:
             with self.subTest(temp=temp):
-                with self.assertRaises(RuntimeError) as error:
-                    val = temp
-                
-                self.assertIsInstance(error.exception, RuntimeError)
+                self.property_exception(val, temp, RuntimeError)
+
+    def property_exception(self, val, temp, exc):
+        with self.assertRaises(exc) as error:
+            val = temp
+        
+        self.assertIsInstance(error.exception, exc)
 
 
 if __name__ == "__main__":
