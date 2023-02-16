@@ -427,7 +427,7 @@ class TestProperties(TestCompletionRequest):
         """
         for n in range(1, 10):
             with self.subTest(n=n):
-                self.request.n = n
+                self.request.n(n)
                 
                 self.assertEqual(self.request.n, n)
     
@@ -438,10 +438,11 @@ class TestProperties(TestCompletionRequest):
         for n in range(1, 100):
             n = 0.5 * float(n)
             with self.subTest(n=n):
-                with self.assertRaises(RuntimeError) as error:
-                    self.request.n = n
-                
-                self.assertIsInstance(error.exception, RuntimeError)
+                assertionRuntimeError(
+                            self.assertRaises, 
+                            self.request.set_n, 
+                            n
+                        )
     
     def test_NBooleanError(self):
         """
@@ -449,10 +450,11 @@ class TestProperties(TestCompletionRequest):
         """
         for n in [True, False]:
             with self.subTest(n=n):
-                with self.assertRaises(RuntimeError) as error:
-                    self.request.n = n
-                
-                self.assertIsInstance(error.exception, RuntimeError)
+                assertionRuntimeError(
+                            self.assertRaises, 
+                            self.request.set_n, 
+                            n
+                        )
     
     def test_NLessThanZero(self):
         """
@@ -460,10 +462,11 @@ class TestProperties(TestCompletionRequest):
         """
         for n in range(-10, 0):
             with self.subTest(n=n):
-                with self.assertRaises(RuntimeError) as error:
-                    self.request.n = n
-                    
-                self.assertIsInstance(error.exception, RuntimeError)
+                assertionRuntimeError(
+                            self.assertRaises, 
+                            self.request.set_n, 
+                            n
+                        )
     
     def test_Stream(self):
         """
