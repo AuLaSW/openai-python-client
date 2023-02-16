@@ -12,13 +12,6 @@ class SettingsInputFrame(BaseFrame):
         # self.main = main
         self.label = label
         self.default = default
-        
-        # create the setting widgets
-        # and attach to the frame
-        self.addSettingWidget(
-            tkFunc,
-            kwargs | self.createOutput(tkVar)
-        )
 
     # default setting generator. Cleans
     # up the code and makes it easier to
