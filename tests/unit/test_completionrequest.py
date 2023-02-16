@@ -545,7 +545,7 @@ class TestProperties(TestCompletionRequest):
         for pp in range(-20, 21):
             pp *= 0.1
             with self.subTest(pp=pp):
-                self.request.presence_penalty = pp
+                self.request.set_presence_penalty(pp)
                 self.assertEqual(self.request.presence_penalty, pp)
     
     def test_Presence_PenaltyIntegerError(self):
@@ -554,10 +554,11 @@ class TestProperties(TestCompletionRequest):
         """
         for pp in range(-10, 10):
             with self.subTest(pp=pp):
-                with self.assertRaises(RuntimeError) as error:
-                    self.request.presence_penalty = pp
-                
-                self.assertIsInstance(error.exception, RuntimeError)
+                assertionRuntimeError(
+                        self.assertRaises, 
+                        self.request.set_presence_penalty, 
+                        pp
+                    )
     
     def test_Presence_PenaltyBooleanError(self):
         """
@@ -565,10 +566,11 @@ class TestProperties(TestCompletionRequest):
         """
         for pp in [True, False]:
             with self.subTest(pp=pp):
-                with self.assertRaises(RuntimeError) as error:
-                    self.request.presence_penalty = pp
-                
-                self.assertIsInstance(error.exception, RuntimeError)
+                assertionRuntimeError(
+                        self.assertRaises, 
+                        self.request.set_presence_penalty, 
+                        pp
+                    )
     
     def test_Presence_PenaltyLessThanMinimum(self):
         """
@@ -577,10 +579,11 @@ class TestProperties(TestCompletionRequest):
         for pp in range(-30, -22):
             pp *= 0.1
             with self.subTest(pp=pp):
-                with self.assertRaises(RuntimeError) as error:
-                    self.request.presence_penalty = pp
-                    
-                self.assertIsInstance(error.exception, RuntimeError)
+                assertionRuntimeError(
+                        self.assertRaises, 
+                        self.request.set_presence_penalty, 
+                        pp
+                    )
     
     def test_Presence_PenaltyGreaterThanMaximum(self):
         """
@@ -589,10 +592,11 @@ class TestProperties(TestCompletionRequest):
         for pp in range(30, 50):
             pp *= 0.1
             with self.subTest(pp=pp):
-                with self.assertRaises(RuntimeError) as error:
-                    self.request.presence_penalty = pp
-                    
-                self.assertIsInstance(error.exception, RuntimeError)
+                assertionRuntimeError(
+                        self.assertRaises, 
+                        self.request.set_presence_penalty, 
+                        pp
+                    )
 
     def test_Frequency_Penalty(self):
         """
