@@ -543,7 +543,7 @@ class TestProperties(TestCompletionRequest):
         """
         Asserts that when a valid input is made it changes the correct value.
         """
-        for pp in range(-22, 22):
+        for pp in range(-20, 21):
             pp *= 0.1
             with self.subTest(pp=pp):
                 self.request.presence_penalty = pp
