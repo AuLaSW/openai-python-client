@@ -308,7 +308,7 @@ class TestProperties(TestCompletionRequest):
         for temperature in range(0, 20, 1):
             temperature *= 0.1
             with self.subTest(temperature=temperature):
-                self.request.temperature = temperature
+                self.request.set_temperature(temperature)
                 self.assertEqual(self.request.temperature, temperature)
                 
     def test_TemperatureIntegerError(self):
@@ -317,10 +317,11 @@ class TestProperties(TestCompletionRequest):
         """
         for temperature in range(-10, 10):
             with self.subTest(temperature=temperature):
-                with self.assertRaises(RuntimeError) as error:
-                    self.request.temperature = temperature
-                
-                self.assertIsInstance(error.exception, RuntimeError)
+                assertionRuntimeError(
+                            self.assertRaises, 
+                            self.request.set_temperature, 
+                            temperature
+                        )
     
     def test_TemperatureBooleanError(self):
         """
@@ -328,10 +329,11 @@ class TestProperties(TestCompletionRequest):
         """
         for temperature in [True, False]:
             with self.subTest(temperature=temperature):
-                with self.assertRaises(RuntimeError) as error:
-                    self.request.temperature = temperature
-                
-                self.assertIsInstance(error.exception, RuntimeError)
+                assertionRuntimeError(
+                            self.assertRaises, 
+                            self.request.set_temperature, 
+                            temperature
+                        )
     
     def test_TemperatureLessThanZero(self):
         """
@@ -340,10 +342,11 @@ class TestProperties(TestCompletionRequest):
         for temperature in range(-10, 0):
             temperature *= 0.1
             with self.subTest(temperature=temperature):
-                with self.assertRaises(RuntimeError) as error:
-                    self.request.temperature = temperature
-                    
-                self.assertIsInstance(error.exception, RuntimeError)
+                assertionRuntimeError(
+                            self.assertRaises, 
+                            self.request.set_temperature, 
+                            temperature
+                        )
     
     def test_TemperatureGreaterThanMaximum(self):
         """
@@ -352,10 +355,11 @@ class TestProperties(TestCompletionRequest):
         for temperature in range(30, 50):
             temperature *= 0.1
             with self.subTest(temperature=temperature):
-                with self.assertRaises(RuntimeError) as error:
-                    self.request.temperature = temperature
-                    
-                self.assertIsInstance(error.exception, RuntimeError)
+                assertionRuntimeError(
+                            self.assertRaises, 
+                            self.request.set_temperature, 
+                            temperature
+                        )
 
     def test_Top_P(self):
         """
