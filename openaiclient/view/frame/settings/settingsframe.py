@@ -20,7 +20,7 @@ class SettingsFrame(BaseFrame):
         # hold the settings we will be using
         self.settings = dict()
         # hold the tk variables for returning inputs from the frame
-        self.options = dict()
+        self.outputs = dict()
 
         # row count
         self.row = 0
