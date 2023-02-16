@@ -100,7 +100,7 @@ class TestFunctions(TestCompletionRequest):
         originalPrompt = "This is the first prompt."
         additionalPrompt = "Add this to the prompt."
         
-        self.request.prompt = originalPrompt
+        self.request.set_prompt(originalPrompt)
         
         self.request.addToPrompt(additionalPrompt)
         
