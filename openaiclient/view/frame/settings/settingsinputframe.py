@@ -49,7 +49,6 @@ class SettingsInputFrame(BaseFrame):
         output = tkVar
         output.set(self.default)
 
-        self.master.outputs[self.label] = output
 
         kwargs["variable"] = output
 

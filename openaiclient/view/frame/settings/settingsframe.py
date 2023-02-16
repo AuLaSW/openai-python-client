@@ -153,6 +153,9 @@ class SettingsFrame(BaseFrame):
            function on the current row.
         """
         kwargs = kwargs | frame.createOutput(tkVar)
+        
+        # add the output variable to the outputs dictionary
+        self.outputs[frame.label] = kwargs["variable"]
 
         frame.addSettingWidget(
             tkFunc,
