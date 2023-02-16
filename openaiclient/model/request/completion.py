@@ -100,8 +100,7 @@ class CompletionRequest(Request):
     def prompt(self):
         return self.requestDict["prompt"]
         
-    @prompt.setter
-    def prompt(self, val):
+    def set_prompt(self, val):
         if isinstance(val, str):
             self.requestDict["prompt"] = val
         else:
@@ -111,11 +110,7 @@ class CompletionRequest(Request):
     def max_tokens(self):
         return self.requestDict["max_tokens"]
         
-    """
-    TODO: validate maximum length
-    """
-    @max_tokens.setter
-    def max_tokens(self, val):
+    def set_max_tokens(self, val):
         max_tokens = self.models.models[self.model].max_tokens
         
         if isinstance(val, int) and not isinstance(val, bool) and val > 0 and val <= max_tokens:
@@ -126,9 +121,8 @@ class CompletionRequest(Request):
     @property
     def temperature(self):
         return self.requestDict["temperature"]
-        
-    @temperature.setter
-    def temperature(self, val):
+
+    def set_temperature(self, val):
         if isinstance(val, float) and val >= 0 and val <=2:
             self.requestDict["temperature"] = val
         else:
@@ -138,8 +132,7 @@ class CompletionRequest(Request):
     def top_p(self):
         return self.requestDict["top_p"]
         
-    @top_p.setter
-    def top_p(self, val):
+    def set_top_p(self, val):
         if isinstance(val, float) and val >= 0 and val <=1:
             self.requestDict["top_p"] = val
         else:
@@ -149,8 +142,7 @@ class CompletionRequest(Request):
     def n(self):
         return self.requestDict["n"]
     
-    @n.setter
-    def n(self, val):
+    def set_n(self, val):
         if isinstance(val, int) and not isinstance(val, bool) and val > 0:
             self.requestDict["n"] = val
         else:
@@ -159,9 +151,8 @@ class CompletionRequest(Request):
     @property
     def stream(self):
         return self.requestDict["stream"]
-        
-    @stream.setter
-    def stream(self, val):
+
+    def set_stream(self, val):
         if isinstance(val, bool):
             self.requestDict["stream"] = val
         else:
@@ -170,9 +161,8 @@ class CompletionRequest(Request):
     @property
     def echo(self):
         return self.requestDict["echo"]
-        
-    @echo.setter
-    def echo(self, val):
+
+    def set_echo(self, val):
         if isinstance(val, bool):
             self.requestDict["echo"] = val
         else:
@@ -182,8 +172,7 @@ class CompletionRequest(Request):
     def presence_penalty(self):
         return self.requestDict["presence_penalty"]
 
-    @presence_penalty.setter
-    def presence_penalty(self, val):
+    def set_presence_penalty(self, val):
         if isinstance(val, float) and val >= -2.0 and val <= 2.0:
             self.requestDict["presence_penalty"] = val
         else:
@@ -193,8 +182,7 @@ class CompletionRequest(Request):
     def frequency_penalty(self):
         return self.requestDict["frequency_penalty"]
         
-    @frequency_penalty.setter
-    def frequency_penalty(self, val):
+    def set_frequency_penalty(self, val):
         if isinstance(val, float) and val >= -2.0 and val <= 2.0:
             self.requestDict["frequency_penalty"] = val
         else:
@@ -204,8 +192,7 @@ class CompletionRequest(Request):
     def best_of(self):
         return self.requestDict["best_of"]
         
-    @best_of.setter
-    def best_of(self, val):
+    def set_best_of(self, val):
         if isinstance(val, int) and not isinstance(val, bool) and val > 0:
             self.requestDict["best_of"] = val
         else:
@@ -215,8 +202,7 @@ class CompletionRequest(Request):
     def user(self):
         return self.requestDict["user"]
         
-    @user.setter
-    def user(self, val):
+    def set_user(self, val):
         if isinstance(val, str):
             self.requestDict["user"] = val
         else:
