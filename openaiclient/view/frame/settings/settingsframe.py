@@ -172,14 +172,14 @@ class SettingsFrame(BaseFrame):
         """
         Creates a string setting input with the Entry object.
         """
-        self.baseSetting(tk.StringVar, tk.Entry, frame)
+        self.baseSetting(tk.StringVar, tk.Entry, frame, "textvariable")
 
     # integer setting input
     def intSetting(self, frame):
         """
         Creates an integer setting input with the Entry object.
         """
-        self.baseSetting(tk.IntVar, tk.Entry, frame)
+        self.baseSetting(tk.IntVar, tk.Entry, frame, "textvariable")
     
     # float setting input
     def floatSetting(self, frame):
@@ -198,7 +198,7 @@ class SettingsFrame(BaseFrame):
         kwargs["onvalue"] = 1
         kwargs["offvalue"] = 0
 
-        self.baseSetting(tk.IntVar, tk.Checkbutton, frame, **kwargs)
+        self.baseSetting(tk.IntVar, tk.Checkbutton, frame, "variable", **kwargs)
 
 
 if __name__ == "__main__":
