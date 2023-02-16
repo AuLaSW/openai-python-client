@@ -474,7 +474,7 @@ class TestProperties(TestCompletionRequest):
         """
         for stream in [True, False]:
             with self.subTest(stream=stream):
-                self.request.stream = stream
+                self.request.set_stream(stream)
                 
                 self.assertEqual(self.request.stream, stream)
     
@@ -484,10 +484,11 @@ class TestProperties(TestCompletionRequest):
         """
         for stream in range(-10, 10):
             with self.subTest(stream=stream):
-                with self.assertRaises(RuntimeError) as error:
-                    self.request.stream = stream
-                
-                self.assertIsInstance(error.exception, RuntimeError)
+                assertionRuntimeError(
+                            self.assertRaises, 
+                            self.request.set_stream, 
+                            stream
+                        )
     
     def test_StreamFloatFail(self):
         """
@@ -496,11 +497,12 @@ class TestProperties(TestCompletionRequest):
         for stream in range(-30, 30):
             stream *= 0.1
             with self.subTest(stream=stream):
-                with self.assertRaises(RuntimeError) as error:
-                    self.request.stream = stream
-                
-                self.assertIsInstance(error.exception, RuntimeError)
-    
+                assertionRuntimeError(
+                        self.assertRaises, 
+                        self.request.set_stream, 
+                        stream
+                    )
+
     def test_Echo(self):
         """
         Asserts that valid input results in correct data field change.
