@@ -229,11 +229,7 @@ class TestProperties(TestCompletionRequest):
         """
         for prompt in range(-10, 10, 1):
             with self.subTest(prompt=prompt):
-                kwargs = {
-                    "val": prompt
-                }
-                
-                self.assertRaises(RuntimeError, self.request.set_prompt, **kwargs)
+                assertionRuntimeError(self.assertRaises, self.request.set_prompt, prompt)
     
     def test_PromptFloatFail(self):
         """
@@ -242,11 +238,7 @@ class TestProperties(TestCompletionRequest):
         """
         for prompt in [-1.0, -0.5, 0.0, 0.5, 1.0]:
             with self.subTest(prompt=prompt):
-                kwargs = {
-                    "val": prompt
-                }
-                
-                self.assertRaises(RuntimeError, self.request.set_prompt, **kwargs)
+                assertionRuntimeError(self.assertRaises, self.request.set_prompt, prompt)
     
     def test_PromptBooleanFail(self):
         """
@@ -255,11 +247,7 @@ class TestProperties(TestCompletionRequest):
         """
         for prompt in [True, False]:
             with self.subTest(prompt=prompt):
-                kwargs = {
-                    "val": prompt
-                }
-                
-                self.assertRaises(RuntimeError, self.request.set_prompt, **kwargs)
+                assertionRuntimeError(self.assertRaises, self.request.set_prompt, prompt)
     
     def test_Max_Tokens(self):
         """
