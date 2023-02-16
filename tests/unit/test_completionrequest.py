@@ -571,11 +571,11 @@ class TestProperties(TestCompletionRequest):
                 
                 self.assertIsInstance(error.exception, RuntimeError)
     
-    def test_Presence_PenaltyLessThanZero(self):
+    def test_Presence_PenaltyLessThanMinimum(self):
         """
         Asserts that when an float less than or equal to zero is passed an error is thrown.
         """
-        for pp in range(-10, 0):
+        for pp in range(-30, -22):
             pp *= 0.1
             with self.subTest(pp=pp):
                 with self.assertRaises(RuntimeError) as error:
