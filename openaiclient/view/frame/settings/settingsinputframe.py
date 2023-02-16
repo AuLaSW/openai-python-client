@@ -21,6 +21,11 @@ class SettingsInputFrame(BaseFrame):
         labelWidget = tk.Label(
             master=self,
             text=self.label
+        ).grid(
+            column=0,
+            row=0,
+            padx=10,
+            pady=10
         )
 
         # setup the widget that we want.
@@ -34,7 +39,7 @@ class SettingsInputFrame(BaseFrame):
             master=self,
             **kwargs
         ).grid(
-            column=0,
+            column=1,
             row=0,
             padx=10,
             pady=10
