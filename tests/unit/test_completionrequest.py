@@ -311,7 +311,7 @@ class TestProperties(TestCompletionRequest):
             with self.subTest(model=model):
                 for i in range(1, 20):
                     with self.subTest(i=i):
-                        self.request.model = model.name
+                        self.request.setModel(model.name)
                         with self.assertRaises(RuntimeError) as error:
                             self.request.max_tokens = model.max_tokens + i
                             
