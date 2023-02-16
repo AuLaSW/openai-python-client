@@ -65,6 +65,8 @@ class SettingsFrame(BaseFrame):
                     self.strSetting(inputFrame)
                 case "int":
                     self.intSetting(inputFrame)
+                case "float":
+                    self.floatSetting(inputFrame)
                 case "bool":
                     self.boolSetting(inputFrame)
                 case _:
@@ -101,7 +103,7 @@ class SettingsFrame(BaseFrame):
                 return NotImplementedError()
             """
 
-            self.saveAndExitButtons()
+        self.saveAndExitButtons()
 
 
     def saveSettings(self):
