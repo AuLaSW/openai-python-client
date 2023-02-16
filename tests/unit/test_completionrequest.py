@@ -539,6 +539,62 @@ class TestProperties(TestCompletionRequest):
                 
                 self.assertIsInstance(error.exception, RuntimeError)
     
+    def test_Presence_Penalty(self):
+        """
+        Asserts that when a valid input is made it changes the correct value.
+        """
+        for pp in range(-22, 22):
+            pp *= 0.1
+            with self.subTest(pp=pp):
+                self.request.presence_penalty = pp
+                self.assertEqual(self.request.presence_penalty, pp)
+    
+    def test_Presence_PenaltyIntegerError(self):
+        """
+        Asserts that when an integer is passed to presence_penalty an error is thrown.
+        """
+        for pp in range(-10, 10):
+            with self.subTest(pp=pp):
+                with self.assertRaises(RuntimeError) as error:
+                    self.request.presence_penalty = pp
+                
+                self.assertIsInstance(error.exception, RuntimeError)
+    
+    def test_Presence_PenaltyBooleanError(self):
+        """
+        Asserts that when a boolean is passed to presence_penalty an error is thrown.
+        """
+        for pp in [True, False]:
+            with self.subTest(pp=pp):
+                with self.assertRaises(RuntimeError) as error:
+                    self.request.presence_penalty = pp
+                
+                self.assertIsInstance(error.exception, RuntimeError)
+    
+    def test_Presence_PenaltyLessThanZero(self):
+        """
+        Asserts that when an float less than or equal to zero is passed an error is thrown.
+        """
+        for pp in range(-10, 0):
+            pp *= 0.1
+            with self.subTest(pp=pp):
+                with self.assertRaises(RuntimeError) as error:
+                    self.request.presence_penalty = pp
+                    
+                self.assertIsInstance(error.exception, RuntimeError)
+    
+    def test_Presence_PenaltyGreaterThanMaximum(self):
+        """
+        Asserts that when a float greater than the maximum presence_penalty is passed an error is thrown.
+        """
+        for pp in range(30, 50):
+            pp *= 0.1
+            with self.subTest(pp=pp):
+                with self.assertRaises(RuntimeError) as error:
+                    self.request.presence_penalty = pp
+                    
+                self.assertIsInstance(error.exception, RuntimeError)
+    
     def test_Best_Of(self):
         """
         Asserts that when a valid integer is passed that the correct value is modified
