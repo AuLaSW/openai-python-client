@@ -40,16 +40,26 @@ class SettingsFrame(BaseFrame):
         Finally, it creates the save and exit buttons and attaches them to
         the settings frame (self).
         """
-        for key, value in self.settings, self.settings.items():
+        # key is the label, value is the value in the
+        # dictionary of settings
+        for key, value in self.settings.items():
+            # get the name of the input type
+            # str, int, float, or bool
             typeOfValue = type(value).__name__
 
+            # create the input settings frame
             inputFrame = SettingsInputFrame(
+                    # pass the curren frame
                     self,
+                    # pass the controller
                     self.controller,
+                    # pass the key/label
                     key,
+                    # pass the current value for the setting
                     value
                     )
 
+            # adjust the frame to match the input type
             match typeOfValue:
                 case "str":
                     self.strSetting(inputFrame)
@@ -60,6 +70,7 @@ class SettingsFrame(BaseFrame):
                 case _:
                     pass
             
+            # move down to the next row
             self.row += 1
 
             
