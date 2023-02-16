@@ -594,7 +594,63 @@ class TestProperties(TestCompletionRequest):
                     self.request.presence_penalty = pp
                     
                 self.assertIsInstance(error.exception, RuntimeError)
+
+    def test_Frequency_Penalty(self):
+        """
+        Asserts that when a valid input is made it changes the correct value.
+        """
+        for fp in range(-20, 21):
+            fp *= 0.1
+            with self.subTest(fp=fp):
+                self.request.frequency_penalty = fp
+                self.assertEqual(self.request.frequency_penalty, fp)
     
+    def test_Frequency_PenaltyIntegerError(self):
+        """
+        Asserts that when an integer is passed to presence_penalty an error is thrown.
+        """
+        for fp in range(-10, 10):
+            with self.subTest(fp=fp):
+                with self.assertRaises(RuntimeError) as error:
+                    self.request.frequency_penalty = fp
+                
+                self.assertIsInstance(error.exception, RuntimeError)
+    
+    def test_Frequency_PenaltyBooleanError(self):
+        """
+        Asserts that when a boolean is passed to frequency_penalty an error is thrown.
+        """
+        for fp in [True, False]:
+            with self.subTest(fp=fp):
+                with self.assertRaises(RuntimeError) as error:
+                    self.request.frequency_penalty = fp
+                
+                self.assertIsInstance(error.exception, RuntimeError)
+    
+    def test_Frequency_PenaltyLessThanMinimum(self):
+        """
+        Asserts that when an float less than or equal to zero is passed an error is thrown.
+        """
+        for fp in range(-30, -22):
+            fp *= 0.1
+            with self.subTest(fp=fp):
+                with self.assertRaises(RuntimeError) as error:
+                    self.request.frequency_penalty = fp
+                    
+                self.assertIsInstance(error.exception, RuntimeError)
+    
+    def test_Frequency_PenaltyGreaterThanMaximum(self):
+        """
+        Asserts that when a float greater than the maximum frequency_penalty is passed an error is thrown.
+        """
+        for fp in range(30, 50):
+            fp *= 0.1
+            with self.subTest(fp=fp):
+                with self.assertRaises(RuntimeError) as error:
+                    self.request.frequency_penalty = fp
+                    
+                self.assertIsInstance(error.exception, RuntimeError)
+
     def test_Best_Of(self):
         """
         Asserts that when a valid integer is passed that the correct value is modified
