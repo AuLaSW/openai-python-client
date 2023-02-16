@@ -192,12 +192,11 @@ class TestProperties(TestCompletionRequest):
         Asserts that an error is thrown when an invalid model is
         inputted into the setter.
         """
-        model = "test-model"
+        kwargs = {
+            "val": "test-model"
+        }
         
-        with self.assertRaises(RuntimeError) as error:
-            self.request.model = model
-        
-        self.assertIsInstance(error.exception, RuntimeError)
+        self.assertRaises(RuntimeError, self.request.setModel, **kwargs)
         
     def test_ModelSetterIntegerInput(self):
         """
