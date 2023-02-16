@@ -605,7 +605,7 @@ class TestProperties(TestCompletionRequest):
         for fp in range(-20, 21):
             fp *= 0.1
             with self.subTest(fp=fp):
-                self.request.frequency_penalty = fp
+                self.request.set_frequency_penalty(fp)
                 self.assertEqual(self.request.frequency_penalty, fp)
     
     def test_Frequency_PenaltyIntegerError(self):
@@ -614,10 +614,11 @@ class TestProperties(TestCompletionRequest):
         """
         for fp in range(-10, 10):
             with self.subTest(fp=fp):
-                with self.assertRaises(RuntimeError) as error:
-                    self.request.frequency_penalty = fp
-                
-                self.assertIsInstance(error.exception, RuntimeError)
+                assertionRuntimeError(
+                        self.assertRaises, 
+                        self.request.set_frequency_penalty, 
+                        fp
+                    )
     
     def test_Frequency_PenaltyBooleanError(self):
         """
@@ -625,10 +626,11 @@ class TestProperties(TestCompletionRequest):
         """
         for fp in [True, False]:
             with self.subTest(fp=fp):
-                with self.assertRaises(RuntimeError) as error:
-                    self.request.frequency_penalty = fp
-                
-                self.assertIsInstance(error.exception, RuntimeError)
+                assertionRuntimeError(
+                        self.assertRaises, 
+                        self.request.set_frequency_penalty, 
+                        fp
+                    )
     
     def test_Frequency_PenaltyLessThanMinimum(self):
         """
@@ -637,10 +639,11 @@ class TestProperties(TestCompletionRequest):
         for fp in range(-30, -22):
             fp *= 0.1
             with self.subTest(fp=fp):
-                with self.assertRaises(RuntimeError) as error:
-                    self.request.frequency_penalty = fp
-                    
-                self.assertIsInstance(error.exception, RuntimeError)
+                assertionRuntimeError(
+                        self.assertRaises, 
+                        self.request.set_frequency_penalty, 
+                        fp
+                    )
     
     def test_Frequency_PenaltyGreaterThanMaximum(self):
         """
@@ -649,10 +652,11 @@ class TestProperties(TestCompletionRequest):
         for fp in range(30, 50):
             fp *= 0.1
             with self.subTest(fp=fp):
-                with self.assertRaises(RuntimeError) as error:
-                    self.request.frequency_penalty = fp
-                    
-                self.assertIsInstance(error.exception, RuntimeError)
+                assertionRuntimeError(
+                        self.assertRaises, 
+                        self.request.set_frequency_penalty, 
+                        fp
+                    )
 
     def test_Best_Of(self):
         """
