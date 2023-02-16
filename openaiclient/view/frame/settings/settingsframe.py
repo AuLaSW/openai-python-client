@@ -154,27 +154,9 @@ class SettingsFrame(BaseFrame):
         """
         kwargs = kwargs | frame.createOutput(tkVar)
 
-        labelWidget, widget = frame.addSettingWidget(
+        frame.addSettingWidget(
             tkFunc,
             **kwargs
-        )
-
-        # generate label on the left
-        labelWidget.grid(
-            column=0,
-            row=self.row,
-            padx=5,
-            pady=10
-        )
-
-        # setup the widget that we want
-        # must pass the widget function
-        # through the function
-        widget.grid(
-            column=1,
-            row=self.row,
-            padx=10,
-            pady=10,
         )
 
     # string setting input
