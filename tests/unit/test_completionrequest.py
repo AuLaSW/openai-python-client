@@ -710,7 +710,7 @@ class TestProperties(TestCompletionRequest):
         Asserts that valid input results in correct data field change.  
         """
         user = "test-user"
-        self.request.user = user
+        self.request.set_user(user)
         
         self.assertEqual(self.request.user, user)
 
@@ -720,10 +720,11 @@ class TestProperties(TestCompletionRequest):
         """
         for user in range(-10, 10):
             with self.subTest(user=user):
-                with self.assertRaises(RuntimeError) as error:
-                    self.request.user = user
-                
-                self.assertIsInstance(error.exception, RuntimeError)
+                assertionRuntimeError(
+                        self.assertRaises, 
+                        self.request.set_user, 
+                        user
+                    )
     
     def test_UserFloatFail(self):
         """
@@ -732,10 +733,11 @@ class TestProperties(TestCompletionRequest):
         for user in range(-30, 30):
             user *= 0.1
             with self.subTest(user=user):
-                with self.assertRaises(RuntimeError) as error:
-                    self.request.user = user
-                
-                self.assertIsInstance(error.exception, RuntimeError)
+                assertionRuntimeError(
+                        self.assertRaises, 
+                        self.request.set_user, 
+                        user
+                    )
     
     def test_UserBooleanFail(self):
         """
@@ -743,10 +745,11 @@ class TestProperties(TestCompletionRequest):
         """
         for user in [True, False]:
             with self.subTest(user=user):
-                with self.assertRaises(RuntimeError) as error:
-                    self.request.user = user
-                
-                self.assertIsInstance(error.exception, RuntimeError)
+                assertionRuntimeError(
+                        self.assertRaises, 
+                        self.request.set_user, 
+                        user
+                    )
     
 
 if __name__ == "__main__":
