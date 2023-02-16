@@ -210,11 +210,7 @@ class TestProperties(TestCompletionRequest):
         """
         for model in range(-10, 10, 1):
             with self.subTest(model=model):
-                kwargs = {
-                    "val": model
-                }
-                
-                self.assertRaises(RuntimeError, self.request.set_model, **kwargs)
+                assertionRuntimeError(self.assertRaises, self.request.set_model, model)
     
     def test_Prompt(self):
         """
