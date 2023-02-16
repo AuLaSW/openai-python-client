@@ -257,7 +257,7 @@ class TestProperties(TestCompletionRequest):
             with self.subTest(model=model):
                 for max_tokens in range(1, model.max_tokens + 1, 32):
                     with self.subTest(max_tokens=max_tokens):
-                        self.request.max_tokens = max_tokens
+                        self.request.set_max_tokens(max_tokens)
                         
                         self.assertEqual(self.request.max_tokens, max_tokens)
     
@@ -268,10 +268,7 @@ class TestProperties(TestCompletionRequest):
         for max_tokens in range(1, 100):
             max_tokens = 0.5 * float(max_tokens)
             with self.subTest(max_tokens=max_tokens):
-                with self.assertRaises(RuntimeError) as error:
-                    self.request.max_tokens = max_tokens
-                
-                self.assertIsInstance(error.exception, RuntimeError)
+                assertionRuntimeError(self.assertRaises, self.request.set_max_tokens, max_tokens)
     
     def test_Max_TokensBooleanError(self):
         """
@@ -279,10 +276,7 @@ class TestProperties(TestCompletionRequest):
         """
         for max_tokens in [True, False]:
             with self.subTest(max_tokens=max_tokens):
-                with self.assertRaises(RuntimeError) as error:
-                    self.request.max_tokens = max_tokens
-                
-                self.assertIsInstance(error.exception, RuntimeError)
+                assertionRuntimeError(self.assertRaises, self.request.set_max_tokens, max_tokens)
     
     def test_Max_TokensLessThanZero(self):
         """
@@ -290,10 +284,7 @@ class TestProperties(TestCompletionRequest):
         """
         for max_tokens in range(-10, 0):
             with self.subTest(max_tokens=max_tokens):
-                with self.assertRaises(RuntimeError) as error:
-                    self.request.max_tokens = max_tokens
-                    
-                self.assertIsInstance(error.exception, RuntimeError)
+                assertionRuntimeError(self.assertRaises, self.request.set_max_tokens, max_tokens)
     
     def test_Max_TokensGreaterThanMaximum(self):
         """
@@ -301,13 +292,14 @@ class TestProperties(TestCompletionRequest):
         """
         for _, model in self.request.models.models.items():
             with self.subTest(model=model):
-                for i in range(1, 20):
-                    with self.subTest(i=i):
+                for max_tokens in range(1, 20):
+                    with self.subTest(max_tokens=max_tokens):
                         self.request.set_model(model.name)
-                        with self.assertRaises(RuntimeError) as error:
-                            self.request.max_tokens = model.max_tokens + i
-                            
-                        self.assertIsInstance(error.exception, RuntimeError)
+                        assertionRuntimeError(
+                            self.assertRaises, 
+                            self.request.set_max_tokens, 
+                            max_tokens + model.max_tokens
+                        )
     
     def test_Temperature(self):
         """
