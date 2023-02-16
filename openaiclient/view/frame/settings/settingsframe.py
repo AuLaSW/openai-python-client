@@ -128,7 +128,7 @@ class SettingsFrame(BaseFrame):
         tk.Button(
             master=self,
             label="Exit",
-            commande=self.destroy,
+            command=self.master.destroy,
         ).grid(
             column=1,
             row=self.row,
