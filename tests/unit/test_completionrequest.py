@@ -664,7 +664,7 @@ class TestProperties(TestCompletionRequest):
         """
         for best_of in range(1, 10):
             with self.subTest(best_of=best_of):
-                self.request.best_of = best_of
+                self.request.set_best_of(best_of)
                 
                 self.assertEqual(self.request.best_of, best_of)
     
@@ -675,10 +675,11 @@ class TestProperties(TestCompletionRequest):
         for best_of in range(1, 100):
             best_of = 0.5 * float(best_of)
             with self.subTest(best_of=best_of):
-                with self.assertRaises(RuntimeError) as error:
-                    self.request.best_of = best_of
-                
-                self.assertIsInstance(error.exception, RuntimeError)
+                assertionRuntimeError(
+                        self.assertRaises, 
+                        self.request.set_best_of, 
+                        best_of
+                    )
     
     def test_Best_OfBooleanError(self):
         """
@@ -686,10 +687,11 @@ class TestProperties(TestCompletionRequest):
         """
         for best_of in [True, False]:
             with self.subTest(best_of=best_of):
-                with self.assertRaises(RuntimeError) as error:
-                    self.request.best_of = best_of
-                
-                self.assertIsInstance(error.exception, RuntimeError)
+                assertionRuntimeError(
+                        self.assertRaises, 
+                        self.request.set_best_of, 
+                        best_of
+                    )
     
     def test_Best_OfLessThanZero(self):
         """
@@ -697,10 +699,11 @@ class TestProperties(TestCompletionRequest):
         """
         for best_of in range(-10, 0):
             with self.subTest(best_of=best_of):
-                with self.assertRaises(RuntimeError) as error:
-                    self.request.best_of = best_of
-                    
-                self.assertIsInstance(error.exception, RuntimeError)
+                assertionRuntimeError(
+                        self.assertRaises, 
+                        self.request.set_best_of, 
+                        best_of
+                    )
     
     def test_User(self):
         """
