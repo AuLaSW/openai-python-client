@@ -1,12 +1,15 @@
 # settingsinputframe.py
+import tkinter as tk
 from openaiclient.view.frame.baseframe import BaseFrame
 
 
 class SettingsInputFrame(BaseFrame):
-    def __init__(self, main, controller, label, default, tkVar, tkFunc, **kwargs=dict()):
-        super().__init__(self, main, controller)
+    def __init__(self, main, controller, label, default):
+        super().__init__(main, controller)
 
-        self.main = main
+        # this should be handled by master in the
+        # tk.Frame class
+        # self.main = main
         self.label = label
         self.default = default
         
@@ -25,14 +28,9 @@ class SettingsInputFrame(BaseFrame):
         labelWidget = tk.Label(
             master=self,
             text=self.label
-        ).grid(
-            column=0,
-            row=0,
-            padx=10,
-            pady=10
         )
 
-        # setup the widget that we want
+        # setup the widget that we want.
         # must pass the widget function
         # through the function and pass
         # the kwargs with at least the
@@ -58,7 +56,7 @@ class SettingsInputFrame(BaseFrame):
         output = tkVar
         output.set(self.default)
 
-        self.main.options[self.label] = output
+        self.master.outputs[self.label] = output
 
         kwargs["variable"] = output
 

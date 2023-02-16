@@ -20,8 +20,10 @@ class Response:
         return self.text
 
     def getFinishReason(self):
-        return self.finish_reason
-
+        try:
+            return self.finish_reason
+        except AttributeError:
+            raise RuntimeError
 
 if __name__ == "__main__":
     pass

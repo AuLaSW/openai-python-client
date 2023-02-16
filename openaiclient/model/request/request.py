@@ -18,8 +18,9 @@ class Request:
         self.optionalArgs = {}
 
         # set of request settings
-        self.settings = {}
+        self._settings = {}
 
+    """
     def __str__(self):
         # this produces a header for the output that contains the
         # class name (works with sublcasses, too)
@@ -41,23 +42,24 @@ class Request:
             strRequest += "    " + key + ": " + str(optionalDict[key]) + "\n"
 
         return strRequest
+    """
 
     # returns response object from request
     def getResponse(self):
-        return NotImplementedError()
+        raise NotImplementedError
 
     # returns list of all keys in the request
     def getKeys(self):
-        return self.requestDict.keys()
-
-    # returns dict of settings
-    def getSettings(self):
-        return self.settings
-
-    # gets value of var in requestDict
-    def get(self, var):
-        return self.requestDict[var]
-
-    # sets value of var in requestDict
-    def set(self, var, val):
-        self.requestDict[var] = val
+        keys = self.requestDict.keys()
+        
+        if len(keys) == 0:
+            raise RuntimeError
+        else:
+            return keys
+        
+    @property
+    def settings(self):
+        if len(self._settings) == 0:
+            raise RuntimeError("No settings to return")
+        else:
+            return self._settings

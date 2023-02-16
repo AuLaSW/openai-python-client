@@ -1,7 +1,8 @@
 # test_completionrequest.py
+import unittest
+from tests.unit.fixture import api
 from openaiclient.model.request.edit import EditRequest
 from openaiclient.model.response import Response
-import unittest
 """
 Class TestCompletionRequest:
 
@@ -9,31 +10,31 @@ Tests different units of the CompletionRequest class.
 """
 
 
-class TestEditRequest(unittest.Test):
-    def setup(self):
-        self.request = EditRequest()
+class TestEditRequest(unittest.TestCase):
+    def setUp(self):
+        self.request = EditRequest(api)
         self.REQUIRED_ARGS = 2
-    
+
     # test that the requestDict var is not empty
     # (should be setup)
     def test_RequestNotEmpty(self):
         self.assertTrue(self.request.requestDict)
-    
+
     # test that the requiredArgs var is not empty
     # (should be setup)
     def test_RequiredArgsNotEmpty(self):
         self.assertTrue(self.request.requiredArgs)
-    
+
     # test that the optionalArgs var is not empty
     # (should be setup)
     def test_OptionalArgsNotEmpty(self):
         self.assertTrue(self.request.optionalArgs)
-    
+
     # test that the settings var is not empty
     # (should be setup)
     def test_SettingsNotEmpty(self):
         self.assertTrue(self.request.settings)
-        
+
     # if the following three tests pass then
     # the optionalArgs variable is also correct.
 
@@ -49,39 +50,21 @@ class TestEditRequest(unittest.Test):
     # test that requiredArgs has the correct
     # number of elements
     def test_RequiredArgsCorrectLength(self):
-        self.assertIs(set.len(self.request.requiredArgs), self.REQUIRED_ARGS)
-    
+        self.assertIs(len(self.request.requiredArgs), self.REQUIRED_ARGS)
+
     # test that requiredArgs has the correct
     # values
     def test_RequiredArgsCorrectValue(self):
         self.assertIn("model", self.request.requiredArgs)
         self.assertIn("instruction", self.request.requiredArgs)
-        
+
     # # #
-    
+
     # tests that the correct values are in
     # the settings
     def test_SettingsCorrectValue(self):
         self.assertNotIn("instruction", self.request.settings)
         self.assertNotIn("input", self.request.settings)
-    
-    # test that the set method rejects a
-    # key that is not in the dictionary
-    # already
-    def test_SetRejectUnknownKey(self):
-        key = "testKey"
-        value = "testValue"
-        
-        kwargs = {
-            "var": key,
-            "val": value
-        }
-        
-        self.assertRaises(
-            RuntimeError, 
-            self.request.set,
-            **kwargs
-        )
 
     # test that the obect returned from getResponse() is
     # a Response object.

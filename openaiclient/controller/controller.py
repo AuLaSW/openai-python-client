@@ -1,24 +1,38 @@
+"""Controller
+
+This file should be imported as a module and contains the followings functions:
+
+    * buildRequest - builds the request from a request object
+"""
+
 from openaiclient.model.request.completion import CompletionRequest
 from openaiclient.model.request.edit import EditRequest
 from openaiclient.model.models import Models
 from openaiclient.model.response import Response
 from openaiclient.view.view import View
 
-"""
-Class Controller:
-
-This class manages the data model and the view model.
-"""
-
 
 class Controller:
+    """
+    This class manages the data model and the view model.
+
+    ...
+
+    Attributes
+    ----------
+
+
+    Methods
+    -------
+
+    """
     def __init__(self):
         # initialized variables
 
         # different models we can use
         self.models = Models()
         # the view
-        self.view = View()
+        self.view = View(self)
 
         # uninitialized variables
 
@@ -27,10 +41,11 @@ class Controller:
         # the response
         self.response = None
 
-    """Manage requests"""
-
+    # TODO: implement functions for this class.
+    """
     # creates a request
     def buildRequest(self, req):
+       Creates a request
         self.request = self.view.getRequest(req)
         self.response = self.request.getResponse()
 
@@ -55,7 +70,7 @@ class Controller:
         else:
             self.request = EditRequest()
 
-    """Request Settings Data"""
+    ""Request Settings Data""
 
     def getSettings(self, className):
         if not isinstance(self.request, className):
@@ -73,6 +88,7 @@ class Controller:
     # the completion request
     def getEditSettings(self):
         return self.getSettings(EditRequest)
+    """
 
 
 if __name__ == "__main__":

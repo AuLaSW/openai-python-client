@@ -12,67 +12,121 @@ class Models:
     def __init__(self):
         self.COMPLETION = "Completion"
         self.EDIT = "Edit"
+        
         # dictionary of models
-        self.models = {
-            self.COMPLETION: [],
-            self.EDIT: []
+        self._models = {
+            "text-davinci-003": Model(
+                name="text-davinci-003",
+                max_tokens=4_000,
+                type=self.COMPLETION
+            ),
+            "text-curie-001": Model(
+                name="text-curie-001",
+                max_tokens=2_048,
+                type=self.COMPLETION
+            ),
+            "text-babbage-001": Model(
+                name="text-babbage-001",
+                max_tokens=2_048,
+                type=self.COMPLETION
+            ),
+            "text-ada-001": Model(
+                name="text-ada-001",
+                max_tokens=2_048,
+                type=self.COMPLETION
+            ),
+            "text-davinci-edit-001": Model(
+                name="text-davinci-edit-001",
+                type=self.EDIT
+            ),
         }
-
-        # populate the model dictionary
-        self.generateModels()
 
     def __str__(self):
         strModels = "Usable Models:\n"
 
         strModels += "  " + self.COMPLETION + " Models:\n"
 
-        for key in self.models[self.COMPLETION]:
-            strModels += "    " + key + "\n"
+        for _, model in self.models.items():
+            if model.type == self.COMPLETION:
+                strModels += "    " + model.name + "\n"
 
         strModels += "  " + self.EDIT + " Models:\n"
 
-        for key in self.models[self.EDIT]:
-            strModels += "    " + key + "\n"
+        for _, model in self.models.items():
+            if model.type == self.EDIT:
+                strModels += "    " + model.name + "\n"
 
         return strModels
 
     def __contains__(self, item):
-        return item in self.models
+        return item in self._models
 
-    # returns a dictionary of usable text models
-    def generateModels(self):
-        # loop through the list of models
-        for model in openai.Model.list()["data"]:
-            # only focus on the id of the model
-            modelID = model["id"]
+    @property
+    def models(self):
+        return self._models
+        
+    @property
+    def completionModels(self):
+        modelList = []
+        for _, model in self.models.items():
+            if model.type == self.COMPLETION:
+                modelList.append(model)
+        
+        return modelList
+    
+    @property
+    def editModels(self):
+        modelList = []
+        for _, model in self.models.items():
+            if model.type == self.EDIT:
+                modelList.append(model)
+        
+        return modelList
+    
+    @property
+    def text_davinci_003(self):
+        return self.models["text-davinci-003"]
+    
+    @property
+    def text_curie_001(self):
+        return self.models["text-curie-001"]
+        
+    @property
+    def text_babbage_001(self):
+        return self.models["text-babbage-001"]
+        
+    @property
+    def text_ada_001(self):
+        return self.models["text-ada-001"]
+    
+    @property
+    def text_davinci_edit_001(self):
+        return self.models["text-davinci-edit-001"]
 
-            # is the model a text model
-            textModel = "text" in modelID
 
-            # is the model not a search or code model?
-            # I'm not sure what the : is used for in the model
-            # names, but I don't want to use those
-            codeModel = "code" in modelID
-            searchModel = "search" in modelID
-            simModel = "similarity" in modelID
-            insModel = "insert" in modelID
-            embModel = "embedding" in modelID
-            colModel = ":" in modelID
-            validModel = (not codeModel and not searchModel
-                          and not simModel and not colModel
-                          and not insModel and not embModel)
-
-            # is the model an edit model?
-            editModel = "edit" in modelID
-
-            if textModel and validModel:
-                if editModel:
-                    self.models[self.EDIT].append(modelID)
-                else:
-                    self.models[self.COMPLETION].append(modelID)
-
-    def getModels(self):
-        return self.models
+class Model:
+    def __init__(self, name, type, max_tokens=0):
+        self._name = name
+        self._type = type
+        
+        # Edit types don't have a max_tokens attribute,
+        # so set to -1 to make sure it can't be used.
+        if self._type == "Edit":
+            self._max_tokens = -1
+        else:
+            self._max_tokens = max_tokens
+    
+    @property
+    def name(self):
+        return self._name
+    
+    @property
+    def max_tokens(self):
+        return self._max_tokens
+        
+    @property
+    def type(self):
+        return self._type
 
 
 if __name__ == "__main__":

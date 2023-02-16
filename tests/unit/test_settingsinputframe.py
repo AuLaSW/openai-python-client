@@ -1,10 +1,10 @@
-from openaiclient.view.frame.settingsinputframe import SettingsInputFrame
 import unittest
+from openaiclient.view.frame.settings.settingsinputframe import SettingsInputFrame
 
 
-class TestSettingsInputFrame(unittest.Test):
+class TestSettingsInputFrame(unittest.TestCase):
     pass
-    
-    
+
+
 if __name__ == "__main__":
     unittest.mainloop()

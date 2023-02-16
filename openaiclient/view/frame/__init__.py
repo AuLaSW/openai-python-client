@@ -2,8 +2,7 @@
 
 # import all modules from package
 from . import baseframe
-from . import completionsettings
-from . import settingsframe
+from . import settings
 
 # packages to import
-__all__ = ["baseframe", "completionsettings", "settingsframe"]
+__all__ = ["baseframe", "settings"]

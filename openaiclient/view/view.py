@@ -1,16 +1,22 @@
-# view.py
+"""
+This module contains the class View, which is part of the MVC pattern for the
+openai-client application.
+
+API:
+    run():
+        Creates the window and starts the mainloop() for it.
+"""
 from openaiclient.view.window.window import Window
-
-"""
-Class View:
-
-Manages the GUI, interacts with the Controller and Model classes.
-
-This class uses tkinter to generate the GUI.
-"""
 
 
 class View:
+    """
+    Class View:
+
+    Manages the GUI, interacts with the Controller and Model classes.
+
+    This class uses tkinter to generate the GUI.
+    """
     def __init__(self, controller):
         # bind the controller to the view object
         # by passing the controller to the view,
@@ -26,6 +32,7 @@ class View:
         self.window = Window(self.controller)
 
     def run(self):
+        """Run the start window and start the mainloop."""
         self.window.completionSettingsWindow()
         self.window.window.mainloop()
 

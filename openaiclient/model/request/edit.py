@@ -1,6 +1,6 @@
+# import openai
 from openaiclient.model.request.request import Request
 from openaiclient.model.response import Response
-import openai
 
 """
 Class EditRequest
@@ -11,16 +11,19 @@ Handles sending requests to OpenAI for completion.
 
 
 class EditRequest(Request):
-    def __init__(self):
+    def __init__(self, module):
         # initialize from parent class Request
         super().__init__()
+
+        # pass API class and set it as cls
+        self.module = module
 
         # setup self.requestDict
 
         # required values
         self.requestDict = {
             "model": "text-davinci-edit-001",
-            "instruction": ""
+            "instruction": "",
             "input": "",
             "temperature": 1,
             "top_p": 1,
@@ -34,22 +37,21 @@ class EditRequest(Request):
         }
 
         # optional arguments
-        self.optionalArgs = Set(self.requestDict.keys())
+        self.optionalArgs = set(self.requestDict.keys())
         self.optionalArgs -= self.requiredArgs
 
         # arguments that are settings
-        self.settings = Set(self.requestDict.keys())
-        self.settings.remove("instruction")
-        self.settings.remove("input")
+        self._settings = set(self.requestDict.keys())
+        self._settings.remove("instruction")
+        self._settings.remove("input")
 
     def getResponse(self):
         return Response(
-                openai.Edit.create(
+                self.module.Edit.create(
                     **self.requestDict,
                 )
+            )
 
 
 if __name__ == "__main__":
-    req=EditRequest()
-
-    print(req)
+    pass
