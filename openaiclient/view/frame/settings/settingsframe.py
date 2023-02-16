@@ -139,7 +139,7 @@ class SettingsFrame(BaseFrame):
     # default setting generator. Cleans
     # up the code and makes it easier to
     # define a new setting type
-    def baseSetting(self, tkVar, tkFunc, frame, **kwargs):
+    def baseSetting(self, tkVar, tkFunc, frame, **kwargs=dict()):
         """
         The function operates as follows:
 
