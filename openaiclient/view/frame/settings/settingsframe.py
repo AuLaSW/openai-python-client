@@ -117,7 +117,7 @@ class SettingsFrame(BaseFrame):
         # button for savings settings
         tk.Button(
             master=self,
-            label="Save",
+            text="Save",
             command=self.saveSettings
         ).grid(
             column=0,
@@ -129,7 +129,7 @@ class SettingsFrame(BaseFrame):
         # button to close the window
         tk.Button(
             master=self,
-            label="Exit",
+            text="Exit",
             command=self.master.destroy,
         ).grid(
             column=1,
