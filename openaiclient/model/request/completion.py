@@ -65,11 +65,11 @@ class CompletionRequest(Request):
 
     def addToPrompt(self, newInput, newLine=False):
         if len(self.prompt) == 0:
-            self.prompt = newInput
+            self.set_prompt(newInput)
         elif newLine:
-            self.prompt += "\n" + newInput
+            self.set_prompt(self.prompt + "\n" + newInput)
         else:
-            self.prompt += " " + newInput
+            self.set_prompt(self.prompt + " " + newInput)
 
     # Properties
     
