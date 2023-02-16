@@ -139,7 +139,7 @@ class SettingsFrame(BaseFrame):
     # default setting generator. Cleans
     # up the code and makes it easier to
     # define a new setting type
-    def baseSetting(self, tkVar, tkFunc, frame, varKey, **kwargs=dict()):
+    def baseSetting(self, tkVar, tkFunc, frame, varKey, **kwargs):
         """
         The function operates as follows:
 
@@ -152,6 +152,9 @@ class SettingsFrame(BaseFrame):
         3. The widgets are then placed onto the settings frame with the grid()
            function on the current row.
         """
+        if not 'kwargs' in locals():
+            kwargs = dict()
+
         kwargs = kwargs | frame.createOutput(tkVar, varKey)
         
         # add the output variable to the outputs dictionary
