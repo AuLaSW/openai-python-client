@@ -89,8 +89,7 @@ class CompletionRequest(Request):
     def model(self):
         return self.requestDict["model"]
     
-    @model.setter
-    def model(self, val):
+    def setModel(self, val):
         if val in self.models:
             self.requestDict["model"] = val
         else:
