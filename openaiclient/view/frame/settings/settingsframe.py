@@ -202,4 +202,22 @@ class SettingsFrame(BaseFrame):
 
 
 if __name__ == "__main__":
-    pass
+    settingsWindow = tk.Tk()
+    
+    settingsFrame = SettingsFrame(
+                        main=settingsWindow,
+                        controller=None
+                    )
+    
+    settingsFrame.settings = {
+        "testKey": "testVal",
+        "testIntKey": 1,
+        "testBoolKey": True,
+        "testFloatKey": 1.0
+    }
+    
+    settingsFrame.create()
+    
+    settingsFrame.pack()
+    
+    settingsWindow.mainloop()
