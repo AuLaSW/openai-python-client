@@ -183,7 +183,7 @@ class TestProperties(TestCompletionRequest):
         value being correctly updated
         """
         model = "text-davinci-003"
-        self.request.setModel(model)
+        self.request.set_model(model)
         
         self.assertEqual(self.request.model, model)
 
@@ -196,7 +196,7 @@ class TestProperties(TestCompletionRequest):
             "val": "test-model"
         }
         
-        self.assertRaises(RuntimeError, self.request.setModel, **kwargs)
+        self.assertRaises(RuntimeError, self.request.set_model, **kwargs)
         
     def test_ModelSetterIntegerInput(self):
         """
@@ -209,7 +209,7 @@ class TestProperties(TestCompletionRequest):
                     "val": model
                 }
                 
-                self.assertRaises(RuntimeError, self.request.setModel, **kwargs)
+                self.assertRaises(RuntimeError, self.request.set_model, **kwargs)
     
     def test_Prompt(self):
         """
@@ -311,7 +311,7 @@ class TestProperties(TestCompletionRequest):
             with self.subTest(model=model):
                 for i in range(1, 20):
                     with self.subTest(i=i):
-                        self.request.setModel(model.name)
+                        self.request.set_model(model.name)
                         with self.assertRaises(RuntimeError) as error:
                             self.request.max_tokens = model.max_tokens + i
                             
