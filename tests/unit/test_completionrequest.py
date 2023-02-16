@@ -217,7 +217,7 @@ class TestProperties(TestCompletionRequest):
         the prompt is correctly changed.
         """
         prompt = "this is a test"
-        self.request.prompt = prompt
+        self.request.set_prompt(prompt)
         
         self.assertEqual(self.request.prompt, prompt)
 
@@ -228,10 +228,11 @@ class TestProperties(TestCompletionRequest):
         """
         for prompt in range(-10, 10, 1):
             with self.subTest(prompt=prompt):
-                with self.assertRaises(RuntimeError) as error:
-                    self.request.prompt = prompt
+                kwargs = {
+                    "val": prompt
+                }
                 
-                self.assertIsInstance(error.exception, RuntimeError)
+                self.assertRaises(RuntimeError, self.request.set_prompt, **kwargs)
     
     def test_PromptFloatFail(self):
         """
@@ -240,10 +241,11 @@ class TestProperties(TestCompletionRequest):
         """
         for prompt in [-1.0, -0.5, 0.0, 0.5, 1.0]:
             with self.subTest(prompt=prompt):
-                with self.assertRaises(RuntimeError) as error:
-                    self.request.prompt = prompt
+                kwargs = {
+                    "val": prompt
+                }
                 
-                self.assertIsInstance(error.exception, RuntimeError)
+                self.assertRaises(RuntimeError, self.request.set_prompt, **kwargs)
     
     def test_PromptBooleanFail(self):
         """
@@ -252,10 +254,11 @@ class TestProperties(TestCompletionRequest):
         """
         for prompt in [True, False]:
             with self.subTest(prompt=prompt):
-                with self.assertRaises(RuntimeError) as error:
-                    self.request.prompt = prompt
+                kwargs = {
+                    "val": prompt
+                }
                 
-                self.assertIsInstance(error.exception, RuntimeError)
+                self.assertRaises(RuntimeError, self.request.set_prompt, **kwargs)
     
     def test_Max_Tokens(self):
         """
