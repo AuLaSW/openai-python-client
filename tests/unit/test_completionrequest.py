@@ -368,7 +368,7 @@ class TestProperties(TestCompletionRequest):
         for top_p in range(0,10):
             top_p *= 0.1
             with self.subTest(top_p=top_p):
-                self.request.top_p = top_p
+                self.request.set_top_p(top_p)
                 self.assertEqual(self.request.top_p, top_p)
     
     def test_Top_PIntegerError(self):
@@ -377,10 +377,11 @@ class TestProperties(TestCompletionRequest):
         """
         for top_p in range(-10, 10):
             with self.subTest(top_p=top_p):
-                with self.assertRaises(RuntimeError) as error:
-                    self.request.top_p = top_p
-                
-                self.assertIsInstance(error.exception, RuntimeError)
+                assertionRuntimeError(
+                            self.assertRaises, 
+                            self.request.set_top_p, 
+                            top_p
+                        )
     
     def test_Top_PBooleanError(self):
         """
@@ -388,10 +389,11 @@ class TestProperties(TestCompletionRequest):
         """
         for top_p in [True, False]:
             with self.subTest(top_p=top_p):
-                with self.assertRaises(RuntimeError) as error:
-                    self.request.top_p = top_p
-                
-                self.assertIsInstance(error.exception, RuntimeError)
+                assertionRuntimeError(
+                            self.assertRaises, 
+                            self.request.set_top_p, 
+                            top_p
+                        )
     
     def test_Top_PLessThanZero(self):
         """
@@ -400,10 +402,11 @@ class TestProperties(TestCompletionRequest):
         for top_p in range(-10, 0):
             top_p *= 0.1
             with self.subTest(top_p=top_p):
-                with self.assertRaises(RuntimeError) as error:
-                    self.request.top_p = top_p
-                    
-                self.assertIsInstance(error.exception, RuntimeError)
+                assertionRuntimeError(
+                            self.assertRaises, 
+                            self.request.set_top_p, 
+                            top_p
+                        )
     
     def test_Top_PGreaterThanMaximum(self):
         """
@@ -412,10 +415,11 @@ class TestProperties(TestCompletionRequest):
         for top_p in range(30, 50):
             top_p *= 0.1
             with self.subTest(top_p=top_p):
-                with self.assertRaises(RuntimeError) as error:
-                    self.request.top_p = top_p
-                    
-                self.assertIsInstance(error.exception, RuntimeError)
+                assertionRuntimeError(
+                            self.assertRaises, 
+                            self.request.set_top_p, 
+                            top_p
+                        )
     
     def test_N(self):
         """
