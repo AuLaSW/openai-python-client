@@ -182,16 +182,13 @@ class CompletionRequest(Request):
     @property
     def presence_penalty(self):
         return self.requestDict["presence_penalty"]
-       
-    """
-    TODO: validate integer constraints
-    """
+
     @presence_penalty.setter
     def presence_penalty(self, val):
         if isinstance(val, float) and val >= -2.0 and val <= 2.0:
             self.requestDict["presence_penalty"] = val
         else:
-            raise RuntimeError("presence_penalty must be an float between -2.0 and 2.0.")
+            raise RuntimeError("presence_penalty must be a float between -2.0 and 2.0.")
         
     @property
     def frequency_penalty(self):
@@ -199,10 +196,10 @@ class CompletionRequest(Request):
         
     @frequency_penalty.setter
     def frequency_penalty(self, val):
-        if isinstance(val, int) and val > 0:
+        if isinstance(val, float) and val >= -2.0 and val <= 2.0:
             self.requestDict["frequency_penalty"] = val
         else:
-            raise RuntimeError("frequency_penalty must be an integer greater than 0.")
+            raise RuntimeError("frequency_penalty must be a float between -2.0 and 2.0.")
         
     @property
     def best_of(self):
