@@ -50,7 +50,7 @@ class SettingsInputFrame(BaseFrame):
     # and point kwargs and self.main.options to it
     def createOutput(self, tkVar, varKey):
         output = tkVar
-        output.set(self.default)
+        # output.set(self.default)
 
         kwargs= { varKey: output }
 
