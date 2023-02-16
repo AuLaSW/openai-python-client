@@ -213,7 +213,7 @@ class CompletionRequest(Request):
         
     @best_of.setter
     def best_of(self, val):
-        if isinstance(val, int) and val > 0:
+        if isinstance(val, int) and not isinstance(val, bool) and val > 0:
             self.requestDict["best_of"] = val
         else:
             raise RuntimeError("best_of must be an integer greater than 0.")
