@@ -183,7 +183,7 @@ class TestProperties(TestCompletionRequest):
         value being correctly updated
         """
         model = "text-davinci-003"
-        self.request.model = model
+        self.request.setModel(model)
         
         self.assertEqual(self.request.model, model)
 
