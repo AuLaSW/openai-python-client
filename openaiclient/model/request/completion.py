@@ -197,9 +197,6 @@ class CompletionRequest(Request):
     def frequency_penalty(self):
         return self.requestDict["frequency_penalty"]
         
-    """
-    TODO: validate integer constraints
-    """
     @frequency_penalty.setter
     def frequency_penalty(self, val):
         if isinstance(val, int) and val > 0:
