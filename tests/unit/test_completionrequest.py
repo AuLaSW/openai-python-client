@@ -509,7 +509,7 @@ class TestProperties(TestCompletionRequest):
         """
         for echo in [True, False]:
             with self.subTest(echo=echo):
-                self.request.echo = echo
+                self.request.set_echo(echo)
                 
                 self.assertEqual(self.request.echo, echo)
     
@@ -519,10 +519,11 @@ class TestProperties(TestCompletionRequest):
         """
         for echo in range(-10, 10):
             with self.subTest(echo=echo):
-                with self.assertRaises(RuntimeError) as error:
-                    self.request.echo = echo
-                
-                self.assertIsInstance(error.exception, RuntimeError)
+                assertionRuntimeError(
+                        self.assertRaises, 
+                        self.request.set_echo, 
+                        echo
+                    )
     
     def test_EchoFloatFail(self):
         """
@@ -531,10 +532,11 @@ class TestProperties(TestCompletionRequest):
         for echo in range(-30, 30):
             echo *= 0.1
             with self.subTest(echo=echo):
-                with self.assertRaises(RuntimeError) as error:
-                    self.request.echo = echo
-                
-                self.assertIsInstance(error.exception, RuntimeError)
+                 assertionRuntimeError(
+                        self.assertRaises, 
+                        self.request.set_echo, 
+                        echo
+                    )
     
     def test_Presence_Penalty(self):
         """
