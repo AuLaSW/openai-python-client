@@ -122,6 +122,12 @@ class TestFunctions(TestCompletionRequest):
             originalPrompt + "\n" + additionalPrompt
         )
 
+def assertionRuntimeError(test, var, val):
+    kwargs = {
+        "val": val
+    }
+    
+    test(RuntimeError, var, **kwargs)
 
 class TestSettings(TestCompletionRequest):
     def test_RequestNotEmpty(self):
@@ -192,11 +198,10 @@ class TestProperties(TestCompletionRequest):
         Asserts that an error is thrown when an invalid model is
         inputted into the setter.
         """
-        kwargs = {
-            "val": "test-model"
-        }
+        model = "test-model"
         
-        self.assertRaises(RuntimeError, self.request.set_model, **kwargs)
+        assertionRuntimeError(self.assertRaises, self.request.set_model, model)
+
         
     def test_ModelSetterIntegerInput(self):
         """
