@@ -180,6 +180,13 @@ class SettingsFrame(BaseFrame):
         Creates an integer setting input with the Entry object.
         """
         self.baseSetting(tk.IntVar, tk.Entry, frame)
+    
+    # float setting input
+    def floatSetting(self, frame):
+        """
+        Creates an integer setting input with the Entry object.
+        """
+        self.baseSetting(tk.DoubleVar, tk.Entry, frame, "textvariable")
 
     # boolean setting input
     def boolSetting(self, frame):
