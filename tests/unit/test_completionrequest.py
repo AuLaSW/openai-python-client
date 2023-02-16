@@ -427,7 +427,7 @@ class TestProperties(TestCompletionRequest):
         """
         for n in range(1, 10):
             with self.subTest(n=n):
-                self.request.n(n)
+                self.request.set_n(n)
                 
                 self.assertEqual(self.request.n, n)
     
