@@ -14,6 +14,6 @@ class CompletionSettings(SettingsFrame):
     def __init__(self, main, controller):
         super().__init__(main, controller)
 
-        self.settings = self.controller.getCompletionSettings()
+        self.settings = self.controller.response.settings
 
         self.create()
