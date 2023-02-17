@@ -162,9 +162,31 @@ class SettingsFrame(BaseFrame):
         # add the output variable to the outputs dictionary
         self.outputs[frame.label] = kwargs[varKey]
 
-        frame.addSettingWidget(
-            tkFunc,
+        labelWidget = tk.Label(
+            master=frame,
+            text=frame.label
+        ).grid(
+            column=0,
+            row=0,
+            padx=10,
+            pady=10
+        )
+
+        # setup the widget that we want.
+        # must pass the widget function
+        # through the function and pass
+        # the kwargs with at least the
+        # option tracking variable to
+        # track what the entry value
+        # is
+        widget = tkFunc(
+            master=frame,
             **kwargs
+        ).grid(
+            column=1,
+            row=0,
+            padx=10,
+            pady=10
         )
 
     # string setting input
