@@ -16,7 +16,7 @@ class CompletionRequest(Request):
         super().__init__()
 
         # set up API class
-        self.module = module
+        self._module = module
         self.models = models
 
         # setup self.requestDict
@@ -58,7 +58,7 @@ class CompletionRequest(Request):
 
     def getResponse(self):
         return Response(
-            self.module.Completion.create(
+            self._module.Completion.create(
                 **self.requestDict,
             )
         )
