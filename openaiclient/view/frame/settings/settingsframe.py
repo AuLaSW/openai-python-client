@@ -119,14 +119,14 @@ class SettingsFrame(BaseFrame):
         """saves the settings inputted in the window"""
         for key in self.settings:
             try:
+                val = self.outputs[key].get()
+                
                 if isinstance(self.settings[key], bool):
-                    self.settings[key] = bool(self.outputs[key].get())
+                    self.settings[key] = bool(val)
                 else:
-                    self.settings[key] = self.outputs[key].get()
+                    self.settings[key] = val
             except KeyError:
                 pass
-
-            print(key, ": ", self.settings[key])
 
     def exitSettings(self):
         """exits the window without savings the changes"""
