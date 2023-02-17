@@ -46,35 +46,40 @@ class SettingsFrame(BaseFrame):
             # str, int, float, or bool
             typeOfValue = type(value).__name__
 
-            # adjust the frame to match the input type
-            match typeOfValue:
-                case "str":
-                    labelWidget, widget = self.strSetting(key, value)
-                case "int":
-                    labelWidget, widget = self.intSetting(key, value)
-                case "float":
-                    labelWidget, widget = self.floatSetting(key, value)
-                case "bool":
-                    labelWidget, widget = self.boolSetting(key, value)
-                case _:
-                    pass
-            
-            labelWidget.grid(
-                column=0,
-                row=self.row,
-                padx=10,
-                pady=10
-            )
-            
-            widget.grid(
-                column=1,
-                row=self.row,
-                padx=10,
-                pady=10
-            )
-            
-            # move down to the next row
-            self.row += 1
+            try:
+                # adjust the frame to match the input type
+                match typeOfValue:
+                    case "str":
+                        labelWidget, widget = self.strSetting(key, value)
+                    case "int":
+                        labelWidget, widget = self.intSetting(key, value)
+                    case "float":
+                        labelWidget, widget = self.floatSetting(key, value)
+                    case "bool":
+                        labelWidget, widget = self.boolSetting(key, value)
+                    case _:
+                        raise RuntimeError(f"No widget of type {typeOfValue} defined.")
+                
+                labelWidget.grid(
+                    column=0,
+                    row=self.row,
+                    padx=10,
+                    pady=10
+                )
+                
+                widget.grid(
+                    column=1,
+                    row=self.row,
+                    padx=10,
+                    pady=10
+                )
+                
+                # move down to the next row
+                self.row += 1
+            except RuntimeError as error:
+                # eventually, this needs to be a logger or something similar
+                print(error)
+                continue
 
             
             # potentially better way to implement this?
@@ -219,7 +224,8 @@ if __name__ == "__main__":
         "testKey": "testVal",
         "testIntKey": 1,
         "testBoolKey": True,
-        "testFloatKey": 1.0
+        "testFloatKey": 1.0,
+        "testNotInOptions": None
     }
     
     settingsFrame.create()
