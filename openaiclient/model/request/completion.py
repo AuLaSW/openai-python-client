@@ -83,6 +83,10 @@ class CompletionRequest(Request):
     def optionalArguments(self):
         return self._optionalArgs
     
+    @property
+    def settings(self):
+        return self._settings
+    
     # request dictionary arguments
     
     @property
