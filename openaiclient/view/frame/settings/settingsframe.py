@@ -62,13 +62,13 @@ class SettingsFrame(BaseFrame):
             # adjust the frame to match the input type
             match typeOfValue:
                 case "str":
-                    self.strSetting(inputFrame)
+                    labelWidget, widget = self.strSetting(inputFrame)
                 case "int":
-                    self.intSetting(inputFrame)
+                    labelWidget, widget = self.intSetting(inputFrame)
                 case "float":
-                    self.floatSetting(inputFrame)
+                    labelWidget, widget = self.floatSetting(inputFrame)
                 case "bool":
-                    self.boolSetting(inputFrame)
+                    labelWidget, widget = self.boolSetting(inputFrame)
                 case _:
                     pass
             
@@ -187,21 +187,21 @@ class SettingsFrame(BaseFrame):
         """
         Creates a string setting input with the Entry object.
         """
-        self.baseSetting(tk.StringVar, tk.Entry, frame, "textvariable")
+        return self.baseSetting(tk.StringVar, tk.Entry, frame, "textvariable")
 
     # integer setting input
     def intSetting(self, frame):
         """
         Creates an integer setting input with the Entry object.
         """
-        self.baseSetting(tk.IntVar, tk.Entry, frame, "textvariable")
+        return self.baseSetting(tk.IntVar, tk.Entry, frame, "textvariable")
     
     # float setting input
     def floatSetting(self, frame):
         """
         Creates an integer setting input with the Entry object.
         """
-        self.baseSetting(tk.DoubleVar, tk.Entry, frame, "textvariable")
+        return self.baseSetting(tk.DoubleVar, tk.Entry, frame, "textvariable")
 
     # boolean setting input
     def boolSetting(self, frame):
@@ -213,7 +213,7 @@ class SettingsFrame(BaseFrame):
         kwargs["onvalue"] = 1
         kwargs["offvalue"] = 0
 
-        self.baseSetting(tk.IntVar, tk.Checkbutton, frame, "variable", **kwargs)
+        return self.baseSetting(tk.IntVar, tk.Checkbutton, frame, "variable", **kwargs)
 
 
 if __name__ == "__main__":
