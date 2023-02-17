@@ -44,13 +44,13 @@ class CompletionRequest(Request):
         }
 
         # required values
-        self.requiredArgs = {
+        self._requiredArgs = {
             "model",
         }
 
         # optional values
         self.optionalArgs = set(self._requestDict.keys())
-        self.optionalArgs -= self.requiredArgs
+        self.optionalArgs -= self._requiredArgs
 
         # set of setting arguments
         self._settings = set(self._requestDict.keys())
@@ -77,7 +77,7 @@ class CompletionRequest(Request):
     
     @property
     def requiredArguments(self):
-        return self.requiredArgs
+        return self._requiredArgs
     
     @property
     def optionalArguments(self):
