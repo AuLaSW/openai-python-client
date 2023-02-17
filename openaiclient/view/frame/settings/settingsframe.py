@@ -47,18 +47,9 @@ class SettingsFrame(BaseFrame):
             typeOfValue = type(value).__name__
 
             try:
-                # adjust the frame to match the input type
-                match typeOfValue:
-                    case "str":
-                        labelWidget, widget = self.strSetting(key, value)
-                    case "int":
-                        labelWidget, widget = self.intSetting(key, value)
-                    case "float":
-                        labelWidget, widget = self.floatSetting(key, value)
-                    case "bool":
-                        labelWidget, widget = self.boolSetting(key, value)
-                    case _:
-                        raise RuntimeError(f"No widget of type {typeOfValue} defined.")
+                func = self.getSettings(typeOfValue)
+                
+                labelWidget, widget = func(key, value)
                 
                 labelWidget.grid(
                     column=0,
@@ -101,6 +92,20 @@ class SettingsFrame(BaseFrame):
             """
 
         self.saveAndExitButtons()
+    
+    def getSettings(self, typeOfValue):
+        # adjust the frame to match the input type
+        match typeOfValue:
+            case "str":
+                return self.strSetting
+            case "int":
+                return self.intSetting
+            case "float":
+                return self.floatSetting
+            case "bool":
+                return self.boolSetting
+            case _:
+                raise RuntimeError(f"No widget of type {typeOfValue} defined.")
 
 
     def saveSettings(self):
