@@ -253,7 +253,7 @@ class TestProperties(TestCompletionRequest):
         """
         Asserts that when a valid integer is passed that the correct value is modified
         """
-        for model in self.request.models.completionModels:
+        for model in self.request._models.completionModels:
             with self.subTest(model=model):
                 for max_tokens in range(1, model.max_tokens + 1, 32):
                     with self.subTest(max_tokens=max_tokens):
@@ -290,7 +290,7 @@ class TestProperties(TestCompletionRequest):
         """
         Asserts that when an integer greater than the maximum number of tokens is passed an error is thrown.
         """
-        for _, model in self.request.models.models.items():
+        for _, model in self.request._models.models.items():
             with self.subTest(model=model):
                 for max_tokens in range(1, 20):
                     with self.subTest(max_tokens=max_tokens):
