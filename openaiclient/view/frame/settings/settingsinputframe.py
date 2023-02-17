@@ -44,14 +44,3 @@ class SettingsInputFrame(BaseFrame):
             padx=10,
             pady=10
         )
-
-
-    # create the output variable for the widget
-    # and point kwargs and self.main.options to it
-    def createOutput(self, tkVar, varKey):
-        output = tkVar
-        # output.set(self.default)
-
-        kwargs= { varKey: output }
-
-        return kwargs
