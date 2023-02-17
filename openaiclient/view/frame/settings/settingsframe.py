@@ -179,6 +179,8 @@ class SettingsFrame(BaseFrame):
             padx=10,
             pady=10
         )
+        
+        return labelWidget, widget
 
     # string setting input
     def strSetting(self, frame):
