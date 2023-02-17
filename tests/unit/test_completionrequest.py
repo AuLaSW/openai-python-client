@@ -146,7 +146,7 @@ class TestSettings(TestCompletionRequest):
         """
         Asserts that optionalArgs is not empty.
         """
-        self.assertTrue(self.request.optionalArgs)
+        self.assertTrue(self.request.optionalArguments)
 
     def test_SettingsNotEmpty(self):
         """
@@ -160,7 +160,7 @@ class TestSettings(TestCompletionRequest):
         """
         self.assertTrue(
             self.request.requiredArguments.isdisjoint(
-                self.request.optionalArgs
+                self.request.optionalArguments
             )
         )
 

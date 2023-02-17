@@ -49,8 +49,8 @@ class CompletionRequest(Request):
         }
 
         # optional values
-        self.optionalArgs = set(self._requestDict.keys())
-        self.optionalArgs -= self._requiredArgs
+        self._optionalArgs = set(self._requestDict.keys())
+        self._optionalArgs -= self._requiredArgs
 
         # set of setting arguments
         self._settings = set(self._requestDict.keys())
@@ -81,7 +81,7 @@ class CompletionRequest(Request):
     
     @property
     def optionalArguments(self):
-        return self.optionalArgs
+        return self._optionalArgs
     
     # request dictionary arguments
     
