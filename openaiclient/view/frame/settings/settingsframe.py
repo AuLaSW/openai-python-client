@@ -187,7 +187,7 @@ class SettingsFrame(BaseFrame):
         if not 'kwargs' in locals():
             kwargs = dict()
 
-        kwargs = kwargs | { varKey: tkVar }
+        kwargs = kwargs | { varKey: tkVar() }
         
         # add the output variable to the outputs dictionary
         self.outputs[key] = kwargs[varKey]
