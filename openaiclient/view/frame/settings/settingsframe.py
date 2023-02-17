@@ -119,7 +119,10 @@ class SettingsFrame(BaseFrame):
         """saves the settings inputted in the window"""
         for key in self.settings:
             try:
-                self.settings[key] = self.outputs[key].get()
+                if isinstance(self.settings[key], bool):
+                    self.settings[key] = bool(self.outputs[key].get())
+                else:
+                    self.settings[key] = self.outputs[key].get()
             except KeyError:
                 pass
 
