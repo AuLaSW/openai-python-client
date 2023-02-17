@@ -163,7 +163,7 @@ class SettingsFrame(BaseFrame):
         self.outputs[frame.label] = kwargs[varKey]
 
         labelWidget = tk.Label(
-            master=frame,
+            master=self,
             text=frame.label
         ).grid(
             column=0,
@@ -180,7 +180,7 @@ class SettingsFrame(BaseFrame):
         # track what the entry value
         # is
         widget = tkFunc(
-            master=frame,
+            master=self,
             **kwargs
         ).grid(
             column=1,
