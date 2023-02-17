@@ -117,6 +117,13 @@ class SettingsFrame(BaseFrame):
 
     def saveSettings(self):
         """saves the settings inputted in the window"""
+        for key in self.settings:
+            try:
+                self.settings[key] = self.outputs[key].get()
+            except KeyError:
+                pass
+
+            print(key, ": ", self.settings[key])
 
     def exitSettings(self):
         """exits the window without savings the changes"""
