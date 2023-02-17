@@ -72,15 +72,6 @@ class SettingsFrame(BaseFrame):
                 case _:
                     pass
             
-            # attach the input frame to the current
-            # settingsframe object.
-            inputFrame.grid(
-                column=0,
-                row=self.row,
-                padx=10,
-                pady=10
-            )
-            
             # move down to the next row
             self.row += 1
 
