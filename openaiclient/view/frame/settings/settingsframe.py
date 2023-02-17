@@ -47,28 +47,16 @@ class SettingsFrame(BaseFrame):
             # str, int, float, or bool
             typeOfValue = type(value).__name__
 
-            # create the input settings frame
-            inputFrame = SettingsInputFrame(
-                    # pass the curren frame
-                    self,
-                    # pass the controller
-                    self.controller,
-                    # pass the key/label
-                    key,
-                    # pass the current value for the setting
-                    value
-                    )
-
             # adjust the frame to match the input type
             match typeOfValue:
                 case "str":
-                    labelWidget, widget = self.strSetting(inputFrame)
+                    labelWidget, widget = self.strSetting(key, value)
                 case "int":
-                    labelWidget, widget = self.intSetting(inputFrame)
+                    labelWidget, widget = self.intSetting(key, value)
                 case "float":
-                    labelWidget, widget = self.floatSetting(inputFrame)
+                    labelWidget, widget = self.floatSetting(key, value)
                 case "bool":
-                    labelWidget, widget = self.boolSetting(inputFrame)
+                    labelWidget, widget = self.boolSetting(key, value)
                 case _:
                     pass
             
@@ -146,7 +134,7 @@ class SettingsFrame(BaseFrame):
     # default setting generator. Cleans
     # up the code and makes it easier to
     # define a new setting type
-    def baseSetting(self, tkVar, tkFunc, frame, varKey, **kwargs):
+    def baseSetting(self, tkVar, tkFunc, key, value, varKey, **kwargs):
         """
         The function operates as follows:
 
@@ -165,11 +153,11 @@ class SettingsFrame(BaseFrame):
         kwargs = kwargs | { varKey: tkVar }
         
         # add the output variable to the outputs dictionary
-        self.outputs[frame.label] = kwargs[varKey]
+        self.outputs[key] = kwargs[varKey]
 
         labelWidget = tk.Label(
             master=self,
-            text=frame.label
+            text=key
         )
 
         # setup the widget that we want.
@@ -187,28 +175,28 @@ class SettingsFrame(BaseFrame):
         return labelWidget, widget
 
     # string setting input
-    def strSetting(self, frame):
+    def strSetting(self, key, value):
         """
         Creates a string setting input with the Entry object.
         """
-        return self.baseSetting(tk.StringVar, tk.Entry, frame, "textvariable")
+        return self.baseSetting(tk.StringVar, tk.Entry, key, value, "textvariable")
 
     # integer setting input
-    def intSetting(self, frame):
+    def intSetting(self, key, value):
         """
         Creates an integer setting input with the Entry object.
         """
-        return self.baseSetting(tk.IntVar, tk.Entry, frame, "textvariable")
+        return self.baseSetting(tk.IntVar, tk.Entry, key, value, "textvariable")
     
     # float setting input
-    def floatSetting(self, frame):
+    def floatSetting(self, key, value):
         """
         Creates an integer setting input with the Entry object.
         """
-        return self.baseSetting(tk.DoubleVar, tk.Entry, frame, "textvariable")
+        return self.baseSetting(tk.DoubleVar, tk.Entry, key, value, "textvariable")
 
     # boolean setting input
-    def boolSetting(self, frame):
+    def boolSetting(self, key, value):
         """
         Creates a boolean setting input with on and off values as 1 and 0 and
         the input as a checkbutton.
@@ -217,7 +205,7 @@ class SettingsFrame(BaseFrame):
         kwargs["onvalue"] = 1
         kwargs["offvalue"] = 0
 
-        return self.baseSetting(tk.IntVar, tk.Checkbutton, frame, "variable", **kwargs)
+        return self.baseSetting(tk.IntVar, tk.Checkbutton, key, value, "variable", **kwargs)
 
 
 if __name__ == "__main__":
