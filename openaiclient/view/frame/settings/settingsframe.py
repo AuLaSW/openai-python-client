@@ -47,10 +47,14 @@ class SettingsFrame(BaseFrame):
             typeOfValue = type(value).__name__
 
             try:
+                # get the correct setting function
+                # based on value type
                 func = self.getSettings(typeOfValue)
                 
+                # get label and widget from function
                 labelWidget, widget = func(key, value)
                 
+                # attach label
                 labelWidget.grid(
                     column=0,
                     row=self.row,
@@ -58,6 +62,7 @@ class SettingsFrame(BaseFrame):
                     pady=10
                 )
                 
+                # attach widget
                 widget.grid(
                     column=1,
                     row=self.row,
