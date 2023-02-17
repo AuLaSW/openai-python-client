@@ -122,26 +122,39 @@ class SettingsFrame(BaseFrame):
 
     def saveAndExitButtons(self):
         """Creates the save and exit button for the frame"""
+        
+        frame = tk.Frame(self)
+        
         # button for savings settings
         tk.Button(
-            master=self,
+            master=frame,
             text="Save",
             command=self.saveSettings
         ).grid(
             column=0,
-            row=self.row,
+            row=0,
             padx=10,
-            pady=10
+            pady=10,
+            ipadx=30
         )
 
         # button to close the window
         tk.Button(
-            master=self,
+            master=frame,
             text="Exit",
             command=self.exitSettings,
         ).grid(
             column=1,
+            row=0,
+            padx=10,
+            pady=10,
+            ipadx=30
+        )
+        
+        frame.grid(
+            column=0,
             row=self.row,
+            columnspan=2,
             padx=10,
             pady=10
         )
