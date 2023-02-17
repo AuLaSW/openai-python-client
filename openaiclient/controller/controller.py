@@ -26,21 +26,41 @@ class Controller:
     -------
 
     """
-    def __init__(self):
+    def __init__(self, api):
         # initialized variables
 
         # different models we can use
-        self.models = Models()
+        self._models = Models()
         # the view
-        self.view = View(self)
+        self._view = View(self)
+        
+        self._module = api
 
         # uninitialized variables
 
         # the request we are making
-        self.request = None
+        self._request = None
         # the response
-        self.response = None
+        self._response = None
+    
+    @property
+    def models(self):
+        return self._models
+    
+    @property
+    def view(self):
+        return self._view
+    
+    @property
+    def request(self):
+        return self._request
+        
+    def completion(self):
+        self._request = CompletionRequest(self._module, self.models)
 
+    @property
+    def response(self):
+        return self._response
     # TODO: implement functions for this class.
     """
     # creates a request
