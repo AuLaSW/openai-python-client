@@ -118,6 +118,7 @@ class SettingsFrame(BaseFrame):
 
     def exitSettings(self):
         """exits the window without savings the changes"""
+        self.master.destroy()
 
     def saveAndExitButtons(self):
         """Creates the save and exit button for the frame"""
@@ -137,7 +138,7 @@ class SettingsFrame(BaseFrame):
         tk.Button(
             master=self,
             text="Exit",
-            command=self.master.destroy,
+            command=self.exitSettings,
         ).grid(
             column=1,
             row=self.row,
