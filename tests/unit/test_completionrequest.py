@@ -134,7 +134,7 @@ class TestSettings(TestCompletionRequest):
         """
         Asserts that requestDict is not empty.
         """
-        self.assertTrue(self.request.requestDict)
+        self.assertTrue(self.request._requestDict)
 
     def test_RequiredArgsNotEmpty(self):
         """
