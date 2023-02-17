@@ -140,7 +140,7 @@ class TestSettings(TestCompletionRequest):
         """
         Asserts that requiredArgs is not empty.
         """
-        self.assertTrue(self.request.requiredArgs)
+        self.assertTrue(self.request.requiredArguments)
 
     def test_OptionalArgsNotEmpty(self):
         """
@@ -159,7 +159,7 @@ class TestSettings(TestCompletionRequest):
         Asserts that requiredArgs and optionalArgs are disjoint.
         """
         self.assertTrue(
-            self.request.requiredArgs.isdisjoint(
+            self.request.requiredArguments.isdisjoint(
                 self.request.optionalArgs
             )
         )
@@ -168,13 +168,13 @@ class TestSettings(TestCompletionRequest):
         """
         Asserts that requiredArgs has the correct number of arguments.
         """
-        self.assertIs(len(self.request.requiredArgs), self.REQUIRED_ARGS)
+        self.assertIs(len(self.request.requiredArguments), self.REQUIRED_ARGS)
 
     def test_RequiredArgsCorrectValue(self):
         """
         Asserts that requiredArgs has the correct arguments.
         """
-        self.assertIn("model", self.request.requiredArgs)
+        self.assertIn("model", self.request.requiredArguments)
 
     def test_SettingsCorrectValue(self):
         """
