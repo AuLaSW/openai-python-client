@@ -72,6 +72,20 @@ class SettingsFrame(BaseFrame):
                 case _:
                     pass
             
+            labelWidget.grid(
+                column=0,
+                row=self.row,
+                padx=10,
+                pady=10
+            )
+            
+            widget.grid(
+                column=1,
+                row=self.row,
+                padx=10,
+                pady=10
+            )
+            
             # move down to the next row
             self.row += 1
 
@@ -156,11 +170,6 @@ class SettingsFrame(BaseFrame):
         labelWidget = tk.Label(
             master=self,
             text=frame.label
-        ).grid(
-            column=0,
-            row=0,
-            padx=10,
-            pady=10
         )
 
         # setup the widget that we want.
@@ -173,11 +182,6 @@ class SettingsFrame(BaseFrame):
         widget = tkFunc(
             master=self,
             **kwargs
-        ).grid(
-            column=1,
-            row=0,
-            padx=10,
-            pady=10
         )
         
         return labelWidget, widget
