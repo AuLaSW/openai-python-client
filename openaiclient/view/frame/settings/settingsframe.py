@@ -59,7 +59,8 @@ class SettingsFrame(BaseFrame):
                     column=0,
                     row=self.row,
                     padx=10,
-                    pady=10
+                    pady=10,
+                    sticky=tk.E
                 )
                 
                 # attach widget
@@ -67,7 +68,8 @@ class SettingsFrame(BaseFrame):
                     column=1,
                     row=self.row,
                     padx=10,
-                    pady=10
+                    pady=10,
+                    sticky=tk.W
                 )
                 
                 # move down to the next row
