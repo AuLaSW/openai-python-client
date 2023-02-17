@@ -17,7 +17,7 @@ class CompletionRequest(Request):
 
         # set up API class
         self._module = module
-        self.models = models
+        self._models = models
 
         # setup self.requestDict
 
@@ -90,7 +90,7 @@ class CompletionRequest(Request):
         return self.requestDict["model"]
     
     def set_model(self, val):
-        if val in self.models:
+        if val in self._models:
             self.requestDict["model"] = val
         else:
             raise RuntimeError(f"The model '{val}' is not a valid model.")
@@ -111,7 +111,7 @@ class CompletionRequest(Request):
         return self.requestDict["max_tokens"]
         
     def set_max_tokens(self, val):
-        max_tokens = self.models.models[self.model].max_tokens
+        max_tokens = self._models.models[self.model].max_tokens
         
         if isinstance(val, int) and not isinstance(val, bool) and val > 0 and val <= max_tokens:
             self.requestDict["max_tokens"] = val
