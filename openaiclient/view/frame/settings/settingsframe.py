@@ -203,6 +203,9 @@ class SettingsFrame(BaseFrame):
         # add the output variable to the outputs dictionary
         self.outputs[key] = kwargs[varKey]
 
+        # set value to default value
+        kwargs[varKey].set(self.settings[key])
+
         labelWidget = tk.Label(
             master=self,
             text=key
