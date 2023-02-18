@@ -2,6 +2,7 @@
 SettingsFrame Module
 """
 import tkinter as tk
+import tkinter.messagebox as messagebox
 from openaiclient.view.frame.baseframe import BaseFrame
 
 
@@ -129,7 +130,7 @@ class SettingsFrame(BaseFrame):
             except KeyError:
                 pass
             except tk.TclError as error:
-                print(error)
+                messagebox.showerror(f"Incorrect input in {key}", f"Key \"{key}\" " + str(error))
 
     def exitSettings(self):
         """exits the window without savings the changes"""
