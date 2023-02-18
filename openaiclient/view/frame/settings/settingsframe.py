@@ -240,7 +240,11 @@ class SettingsFrame(BaseFrame):
         Creates an integer setting input with the Entry object.
         """
         return self.baseSetting(
-            tk.IntVar, tk.Entry, key, value, "textvariable")
+            tk.IntVar,
+            tk.Entry,
+            key,
+            value,
+            "textvariable")
 
     # float setting input
     def floatSetting(self, key, value):
