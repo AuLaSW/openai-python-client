@@ -128,6 +128,8 @@ class SettingsFrame(BaseFrame):
                     self.settings[key] = val
             except KeyError:
                 pass
+            except tk.TclError as error:
+                print(error)
 
     def exitSettings(self):
         """exits the window without savings the changes"""
