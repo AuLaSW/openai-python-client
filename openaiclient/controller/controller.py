@@ -26,6 +26,7 @@ class Controller:
     -------
 
     """
+
     def __init__(self, api):
         # initialized variables
 
@@ -33,7 +34,7 @@ class Controller:
         self._models = Models()
         # the view
         self._view = View(self)
-        
+
         self._module = api
 
         # uninitialized variables
@@ -42,22 +43,22 @@ class Controller:
         self._request = None
         # the response
         self._response = None
-    
+
     @property
     def models(self):
         return self._models
-    
+
     @property
     def view(self):
         return self._view
-    
+
     @property
     def request(self):
         return self._request
-        
+
     def compReq(self):
         self._request = CompletionRequest(self._module, self.models)
-    
+
     def editReq(self):
         self._request = EditRequest(self._module, self.models)
 

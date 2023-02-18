@@ -47,10 +47,10 @@ class EditRequest(Request):
 
     def getResponse(self):
         return Response(
-                self.module.Edit.create(
-                    **self.requestDict,
-                )
+            self.module.Edit.create(
+                **self.requestDict,
             )
+        )
 
 
 if __name__ == "__main__":

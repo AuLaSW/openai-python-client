@@ -2,6 +2,7 @@
 This module replicates the Models class and contains the following:
 """
 
+
 class Models:
     def __init__(self):
         self.models = {
@@ -15,6 +16,6 @@ class Models:
                 "text-davinci-edit-001"
             ]
         }
-    
+
     def __contains__(self, item):
         return item in self.models["Completion"] + self.models["Edit"]

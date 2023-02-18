@@ -13,6 +13,7 @@ class SettingsFrame(BaseFrame):
     a user to change. Created to work with the Completion
     and Edit requests to OpenAI.
     """
+
     def __init__(self, main, controller):
         super().__init__(main, controller)
 
@@ -50,10 +51,10 @@ class SettingsFrame(BaseFrame):
                 # get the correct setting function
                 # based on value type
                 func = self.getSettings(typeOfValue)
-                
+
                 # get label and widget from function
                 labelWidget, widget = func(key, value)
-                
+
                 # attach label
                 labelWidget.grid(
                     column=0,
@@ -62,7 +63,7 @@ class SettingsFrame(BaseFrame):
                     pady=10,
                     sticky=tk.E
                 )
-                
+
                 # attach widget
                 widget.grid(
                     column=1,
@@ -71,15 +72,15 @@ class SettingsFrame(BaseFrame):
                     pady=10,
                     sticky=tk.W
                 )
-                
+
                 # move down to the next row
                 self.row += 1
             except RuntimeError as error:
-                # eventually, this needs to be a logger or something similar
+                # eventually, this needs to be a logger or something
+                # similar
                 print(error)
                 continue
 
-            
             # potentially better way to implement this?
             # Allows a class to add entries to a
             # settingsDict dictionary, with the keys being
@@ -99,7 +100,7 @@ class SettingsFrame(BaseFrame):
             """
 
         self.saveAndExitButtons()
-    
+
     def getSettings(self, typeOfValue):
         # adjust the frame to match the input type
         match typeOfValue:
@@ -112,15 +113,15 @@ class SettingsFrame(BaseFrame):
             case "bool":
                 return self.boolSetting
             case _:
-                raise RuntimeError(f"No widget of type {typeOfValue} defined.")
-
+                raise RuntimeError(
+                    f"No widget of type {typeOfValue} defined.")
 
     def saveSettings(self):
         """saves the settings inputted in the window"""
         for key in self.settings:
             try:
                 val = self.outputs[key].get()
-                
+
                 if isinstance(self.settings[key], bool):
                     self.settings[key] = bool(val)
                 else:
@@ -134,9 +135,9 @@ class SettingsFrame(BaseFrame):
 
     def saveAndExitButtons(self):
         """Creates the save and exit button for the frame"""
-        
+
         frame = tk.Frame(self)
-        
+
         # button for savings settings
         tk.Button(
             master=frame,
@@ -162,7 +163,7 @@ class SettingsFrame(BaseFrame):
             pady=10,
             ipadx=30
         )
-        
+
         frame.grid(
             column=0,
             row=self.row,
@@ -174,7 +175,14 @@ class SettingsFrame(BaseFrame):
     # default setting generator. Cleans
     # up the code and makes it easier to
     # define a new setting type
-    def baseSetting(self, tkVar, tkFunc, key, value, varKey, **kwargs):
+    def baseSetting(
+            self,
+            tkVar,
+            tkFunc,
+            key,
+            value,
+            varKey,
+            **kwargs):
         """
         The function operates as follows:
 
@@ -187,11 +195,11 @@ class SettingsFrame(BaseFrame):
         3. The widgets are then placed onto the settings frame with the grid()
            function on the current row.
         """
-        if not 'kwargs' in locals():
+        if 'kwargs' not in locals():
             kwargs = dict()
 
-        kwargs = kwargs | { varKey: tkVar() }
-        
+        kwargs = kwargs | {varKey: tkVar()}
+
         # add the output variable to the outputs dictionary
         self.outputs[key] = kwargs[varKey]
 
@@ -211,7 +219,7 @@ class SettingsFrame(BaseFrame):
             master=self,
             **kwargs
         )
-        
+
         return labelWidget, widget
 
     # string setting input
@@ -219,21 +227,32 @@ class SettingsFrame(BaseFrame):
         """
         Creates a string setting input with the Entry object.
         """
-        return self.baseSetting(tk.StringVar, tk.Entry, key, value, "textvariable")
+        return self.baseSetting(
+            tk.StringVar,
+            tk.Entry,
+            key,
+            value,
+            "textvariable")
 
     # integer setting input
     def intSetting(self, key, value):
         """
         Creates an integer setting input with the Entry object.
         """
-        return self.baseSetting(tk.IntVar, tk.Entry, key, value, "textvariable")
-    
+        return self.baseSetting(
+            tk.IntVar, tk.Entry, key, value, "textvariable")
+
     # float setting input
     def floatSetting(self, key, value):
         """
         Creates an integer setting input with the Entry object.
         """
-        return self.baseSetting(tk.DoubleVar, tk.Entry, key, value, "textvariable")
+        return self.baseSetting(
+            tk.DoubleVar,
+            tk.Entry,
+            key,
+            value,
+            "textvariable")
 
     # boolean setting input
     def boolSetting(self, key, value):
@@ -245,17 +264,23 @@ class SettingsFrame(BaseFrame):
         kwargs["onvalue"] = 1
         kwargs["offvalue"] = 0
 
-        return self.baseSetting(tk.IntVar, tk.Checkbutton, key, value, "variable", **kwargs)
+        return self.baseSetting(
+            tk.IntVar,
+            tk.Checkbutton,
+            key,
+            value,
+            "variable",
+            **kwargs)
 
 
 if __name__ == "__main__":
     settingsWindow = tk.Tk()
-    
+
     settingsFrame = SettingsFrame(
-                        main=settingsWindow,
-                        controller=None
-                    )
-    
+        main=settingsWindow,
+        controller=None
+    )
+
     settingsFrame.settings = {
         "testKey": "testVal",
         "testIntKey": 1,
@@ -263,9 +288,9 @@ if __name__ == "__main__":
         "testFloatKey": 1.0,
         "testNotInOptions": None
     }
-    
+
     settingsFrame.create()
-    
+
     settingsFrame.pack()
-    
+
     settingsWindow.mainloop()

@@ -10,7 +10,6 @@ import tkinter as tk
 from openaiclient.view.frame.settings.completionsettings import CompletionSettings
 
 
-
 class Window:
     """
     This class generates and manages the different windows the program uses.
@@ -20,10 +19,11 @@ class Window:
 
     __init__(self, controller):
         Initializes the window.
-    
+
     completionSettingsWindow(self):
         Generates a completion settings window.
     """
+
     def __init__(self, controller):
         # the main window
         self.window = tk.Tk()

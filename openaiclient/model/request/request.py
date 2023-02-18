@@ -51,12 +51,12 @@ class Request:
     # returns list of all keys in the request
     def getKeys(self):
         keys = self.requestDict.keys()
-        
+
         if len(keys) == 0:
             raise RuntimeError
         else:
             return keys
-        
+
     @property
     def settings(self):
         if len(self._settings) == 0:

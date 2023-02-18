@@ -24,12 +24,14 @@ class TestRequest(unittest.TestCase):
     def test_EmptySettingsRaiseError(self):
         with self.assertRaises(RuntimeError) as error:
             self.request.settings
-        
-        self.assertIsInstance(error.exception, RuntimeError) 
+
+        self.assertIsInstance(error.exception, RuntimeError)
 
     # test that getResponse() returns a NotImplementedError
     def test_GetResponse(self):
-        self.assertRaises(NotImplementedError, self.request.getResponse)
+        self.assertRaises(
+            NotImplementedError,
+            self.request.getResponse)
 
     # test that getKeys() called with an empty dictionary
     # will return a runtime error.

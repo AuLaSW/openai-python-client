@@ -6,6 +6,7 @@ This module replicates the OpenAI openai class and has the folowing functions:
     Edit.create()
 """
 
+
 class Completion:
     """
     This class mimics the Completion class for the OpenAI API
@@ -20,7 +21,7 @@ class Completion:
                 "text": "input text",
                 "index": 0,
                 "finish_reason": "finished"
-                }
+            }
             ],
             "model": "text-davinci-003"
         }

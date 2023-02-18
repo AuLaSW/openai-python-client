@@ -50,7 +50,7 @@ class TestCompletionRequest(unittest.TestCase):
 
     Implicit Tests:
     ---------------
-        
+
         If test_RequiredOptionalDisjoint(), test_RequiredArgsCorrectLength(),
         and test_RequiredArgsCorrectValue() all pass, then the optionalArgs
         variable would also pass the same tests. This is because the two sets
@@ -58,6 +58,7 @@ class TestCompletionRequest(unittest.TestCase):
         the correct values and is disjoint from optionalArgs, then optionalArgs
         must contain the correct values too.
     """
+
     def setUp(self):
         models = Models()
         self.request = CompletionRequest(api, models)
@@ -67,67 +68,70 @@ class TestCompletionRequest(unittest.TestCase):
 class TestFunctions(TestCompletionRequest):
     """
     This class holds the functional tests for the Completion class.
-    
+
     test_GetResponse():
         Tests that the getResponse() method returns a Response object.
-    
+
     test_AddToPrompt():
         Adds a prompt to an empty prompt and tests that the function
         completes successfully.
-    
+
     test_AddToOriginalPrompt():
         Adds a prompt to an original prompt without making a new line.
         Tests that the function completes successfully.
-    
+
     test_AddNewLineToOriginalPrompt():
         Adds a prompt to an original prompt while also generating a new
         line. Tests that the function completes successfully.
     """
+
     def test_GetResponse(self):
         """
         Asserts that the object returned by getResponse() is a Response object.
         """
         self.assertIsInstance(self.request.getResponse(), Response)
-    
+
     def test_AddToPrompt(self):
         additionalPrompt = "Add this to the prompt."
-        
+
         self.request.addToPrompt(additionalPrompt)
-        
+
         self.assertEqual(self.request.prompt, additionalPrompt)
 
     def test_AddToOriginalPrompt(self):
         originalPrompt = "This is the first prompt."
         additionalPrompt = "Add this to the prompt."
-        
+
         self.request.set_prompt(originalPrompt)
-        
+
         self.request.addToPrompt(additionalPrompt)
-        
+
         self.assertEqual(
-            self.request.prompt, 
+            self.request.prompt,
             originalPrompt + " " + additionalPrompt
         )
-    
+
     def test_AddNewLineToOriginalPrompt(self):
         originalPrompt = "This is the first prompt."
         additionalPrompt = "Add this to the prompt."
-        
+
         self.request.set_prompt(originalPrompt)
-        
+
         self.request.addToPrompt(additionalPrompt, True)
-        
+
         self.assertEqual(
-            self.request.prompt, 
+            self.request.prompt,
             originalPrompt + "\n" + additionalPrompt
         )
+
 
 def assertionRuntimeError(test, var, val):
     kwargs = {
         "val": val
     }
-    
+
     test(RuntimeError, var, **kwargs)
+
 
 class TestSettings(TestCompletionRequest):
     def test_RequestNotEmpty(self):
@@ -168,7 +172,8 @@ class TestSettings(TestCompletionRequest):
         """
         Asserts that requiredArgs has the correct number of arguments.
         """
-        self.assertIs(len(self.request.requiredArguments), self.REQUIRED_ARGS)
+        self.assertIs(len(self.request.requiredArguments),
+                      self.REQUIRED_ARGS)
 
     def test_RequiredArgsCorrectValue(self):
         """
@@ -182,6 +187,7 @@ class TestSettings(TestCompletionRequest):
         """
         self.assertNotIn("prompt", self.request.settings)
 
+
 class TestProperties(TestCompletionRequest):
     def test_ModelSetter(self):
         """
@@ -190,7 +196,7 @@ class TestProperties(TestCompletionRequest):
         """
         model = "text-davinci-003"
         self.request.set_model(model)
-        
+
         self.assertEqual(self.request.model, model)
 
     def test_ModelSetterInvalidModel(self):
@@ -199,10 +205,12 @@ class TestProperties(TestCompletionRequest):
         inputted into the setter.
         """
         model = "test-model"
-        
-        assertionRuntimeError(self.assertRaises, self.request.set_model, model)
 
-        
+        assertionRuntimeError(
+            self.assertRaises,
+            self.request.set_model,
+            model)
+
     def test_ModelSetterIntegerInput(self):
         """
         Asserts that an error is thrown when an integer is inputted
@@ -210,8 +218,9 @@ class TestProperties(TestCompletionRequest):
         """
         for model in range(-10, 10, 1):
             with self.subTest(model=model):
-                assertionRuntimeError(self.assertRaises, self.request.set_model, model)
-    
+                assertionRuntimeError(
+                    self.assertRaises, self.request.set_model, model)
+
     def test_Prompt(self):
         """
         Asserts that when a string is passed into the prompt setter,
@@ -219,7 +228,7 @@ class TestProperties(TestCompletionRequest):
         """
         prompt = "this is a test"
         self.request.set_prompt(prompt)
-        
+
         self.assertEqual(self.request.prompt, prompt)
 
     def test_PromptIntegerFail(self):
@@ -229,8 +238,9 @@ class TestProperties(TestCompletionRequest):
         """
         for prompt in range(-10, 10, 1):
             with self.subTest(prompt=prompt):
-                assertionRuntimeError(self.assertRaises, self.request.set_prompt, prompt)
-    
+                assertionRuntimeError(
+                    self.assertRaises, self.request.set_prompt, prompt)
+
     def test_PromptFloatFail(self):
         """
         Asserts that when a number is passed into the prompt, it
@@ -238,8 +248,9 @@ class TestProperties(TestCompletionRequest):
         """
         for prompt in [-1.0, -0.5, 0.0, 0.5, 1.0]:
             with self.subTest(prompt=prompt):
-                assertionRuntimeError(self.assertRaises, self.request.set_prompt, prompt)
-    
+                assertionRuntimeError(
+                    self.assertRaises, self.request.set_prompt, prompt)
+
     def test_PromptBooleanFail(self):
         """
         Asserts that when a boolean is passed into the prompt,
@@ -247,8 +258,9 @@ class TestProperties(TestCompletionRequest):
         """
         for prompt in [True, False]:
             with self.subTest(prompt=prompt):
-                assertionRuntimeError(self.assertRaises, self.request.set_prompt, prompt)
-    
+                assertionRuntimeError(
+                    self.assertRaises, self.request.set_prompt, prompt)
+
     def test_Max_Tokens(self):
         """
         Asserts that when a valid integer is passed that the correct value is modified
@@ -258,9 +270,10 @@ class TestProperties(TestCompletionRequest):
                 for max_tokens in range(1, model.max_tokens + 1, 32):
                     with self.subTest(max_tokens=max_tokens):
                         self.request.set_max_tokens(max_tokens)
-                        
-                        self.assertEqual(self.request.max_tokens, max_tokens)
-    
+
+                        self.assertEqual(
+                            self.request.max_tokens, max_tokens)
+
     def test_Max_TokensFloatError(self):
         """
         Asserts that when a float is passed to max_tokens an error is thrown.
@@ -268,24 +281,33 @@ class TestProperties(TestCompletionRequest):
         for max_tokens in range(1, 100):
             max_tokens = 0.5 * float(max_tokens)
             with self.subTest(max_tokens=max_tokens):
-                assertionRuntimeError(self.assertRaises, self.request.set_max_tokens, max_tokens)
-    
+                assertionRuntimeError(
+                    self.assertRaises,
+                    self.request.set_max_tokens,
+                    max_tokens)
+
     def test_Max_TokensBooleanError(self):
         """
         Asserts that when a boolean is passed to max_tokens an error is thrown.
         """
         for max_tokens in [True, False]:
             with self.subTest(max_tokens=max_tokens):
-                assertionRuntimeError(self.assertRaises, self.request.set_max_tokens, max_tokens)
-    
+                assertionRuntimeError(
+                    self.assertRaises,
+                    self.request.set_max_tokens,
+                    max_tokens)
+
     def test_Max_TokensLessThanZero(self):
         """
         Asserts that when an integer less than or equal to zero is passed an error is thrown.
         """
         for max_tokens in range(-10, 0):
             with self.subTest(max_tokens=max_tokens):
-                assertionRuntimeError(self.assertRaises, self.request.set_max_tokens, max_tokens)
-    
+                assertionRuntimeError(
+                    self.assertRaises,
+                    self.request.set_max_tokens,
+                    max_tokens)
+
     def test_Max_TokensGreaterThanMaximum(self):
         """
         Asserts that when an integer greater than the maximum number of tokens is passed an error is thrown.
@@ -296,11 +318,11 @@ class TestProperties(TestCompletionRequest):
                     with self.subTest(max_tokens=max_tokens):
                         self.request.set_model(model.name)
                         assertionRuntimeError(
-                            self.assertRaises, 
-                            self.request.set_max_tokens, 
+                            self.assertRaises,
+                            self.request.set_max_tokens,
                             max_tokens + model.max_tokens
                         )
-    
+
     def test_Temperature(self):
         """
         Assert that a correct input to temperature parameter will change correct data field.
@@ -309,8 +331,9 @@ class TestProperties(TestCompletionRequest):
             temperature *= 0.1
             with self.subTest(temperature=temperature):
                 self.request.set_temperature(temperature)
-                self.assertEqual(self.request.temperature, temperature)
-                
+                self.assertEqual(
+                    self.request.temperature, temperature)
+
     def test_TemperatureIntegerError(self):
         """
         Asserts that when an integer is passed to temperature an error is thrown.
@@ -318,11 +341,11 @@ class TestProperties(TestCompletionRequest):
         for temperature in range(-10, 10):
             with self.subTest(temperature=temperature):
                 assertionRuntimeError(
-                            self.assertRaises, 
-                            self.request.set_temperature, 
-                            temperature
-                        )
-    
+                    self.assertRaises,
+                    self.request.set_temperature,
+                    temperature
+                )
+
     def test_TemperatureBooleanError(self):
         """
         Asserts that when a boolean is passed to temperature an error is thrown.
@@ -330,11 +353,11 @@ class TestProperties(TestCompletionRequest):
         for temperature in [True, False]:
             with self.subTest(temperature=temperature):
                 assertionRuntimeError(
-                            self.assertRaises, 
-                            self.request.set_temperature, 
-                            temperature
-                        )
-    
+                    self.assertRaises,
+                    self.request.set_temperature,
+                    temperature
+                )
+
     def test_TemperatureLessThanZero(self):
         """
         Asserts that when an float less than or equal to zero is passed an error is thrown.
@@ -343,11 +366,11 @@ class TestProperties(TestCompletionRequest):
             temperature *= 0.1
             with self.subTest(temperature=temperature):
                 assertionRuntimeError(
-                            self.assertRaises, 
-                            self.request.set_temperature, 
-                            temperature
-                        )
-    
+                    self.assertRaises,
+                    self.request.set_temperature,
+                    temperature
+                )
+
     def test_TemperatureGreaterThanMaximum(self):
         """
         Asserts that when a float greater than the maximum temperature is passed an error is thrown.
@@ -356,21 +379,21 @@ class TestProperties(TestCompletionRequest):
             temperature *= 0.1
             with self.subTest(temperature=temperature):
                 assertionRuntimeError(
-                            self.assertRaises, 
-                            self.request.set_temperature, 
-                            temperature
-                        )
+                    self.assertRaises,
+                    self.request.set_temperature,
+                    temperature
+                )
 
     def test_Top_P(self):
         """
         Asserts that when a valid input in made it changes the correct value.
         """
-        for top_p in range(0,10):
+        for top_p in range(0, 10):
             top_p *= 0.1
             with self.subTest(top_p=top_p):
                 self.request.set_top_p(top_p)
                 self.assertEqual(self.request.top_p, top_p)
-    
+
     def test_Top_PIntegerError(self):
         """
         Asserts that when an integer is passed to top_p an error is thrown.
@@ -378,11 +401,11 @@ class TestProperties(TestCompletionRequest):
         for top_p in range(-10, 10):
             with self.subTest(top_p=top_p):
                 assertionRuntimeError(
-                            self.assertRaises, 
-                            self.request.set_top_p, 
-                            top_p
-                        )
-    
+                    self.assertRaises,
+                    self.request.set_top_p,
+                    top_p
+                )
+
     def test_Top_PBooleanError(self):
         """
         Asserts that when a boolean is passed to top_p an error is thrown.
@@ -390,11 +413,11 @@ class TestProperties(TestCompletionRequest):
         for top_p in [True, False]:
             with self.subTest(top_p=top_p):
                 assertionRuntimeError(
-                            self.assertRaises, 
-                            self.request.set_top_p, 
-                            top_p
-                        )
-    
+                    self.assertRaises,
+                    self.request.set_top_p,
+                    top_p
+                )
+
     def test_Top_PLessThanZero(self):
         """
         Asserts that when an float less than or equal to zero is passed an error is thrown.
@@ -403,11 +426,11 @@ class TestProperties(TestCompletionRequest):
             top_p *= 0.1
             with self.subTest(top_p=top_p):
                 assertionRuntimeError(
-                            self.assertRaises, 
-                            self.request.set_top_p, 
-                            top_p
-                        )
-    
+                    self.assertRaises,
+                    self.request.set_top_p,
+                    top_p
+                )
+
     def test_Top_PGreaterThanMaximum(self):
         """
         Asserts that when a float greater than the maximum top_p is passed an error is thrown.
@@ -416,11 +439,11 @@ class TestProperties(TestCompletionRequest):
             top_p *= 0.1
             with self.subTest(top_p=top_p):
                 assertionRuntimeError(
-                            self.assertRaises, 
-                            self.request.set_top_p, 
-                            top_p
-                        )
-    
+                    self.assertRaises,
+                    self.request.set_top_p,
+                    top_p
+                )
+
     def test_N(self):
         """
         Asserts that when a valid integer is passed that the correct value is modified
@@ -428,9 +451,9 @@ class TestProperties(TestCompletionRequest):
         for n in range(1, 10):
             with self.subTest(n=n):
                 self.request.set_n(n)
-                
+
                 self.assertEqual(self.request.n, n)
-    
+
     def test_NFloatError(self):
         """
         Asserts that when a float is passed to n an error is thrown.
@@ -439,11 +462,11 @@ class TestProperties(TestCompletionRequest):
             n = 0.5 * float(n)
             with self.subTest(n=n):
                 assertionRuntimeError(
-                            self.assertRaises, 
-                            self.request.set_n, 
-                            n
-                        )
-    
+                    self.assertRaises,
+                    self.request.set_n,
+                    n
+                )
+
     def test_NBooleanError(self):
         """
         Asserts that when a boolean is passed to n an error is thrown.
@@ -451,11 +474,11 @@ class TestProperties(TestCompletionRequest):
         for n in [True, False]:
             with self.subTest(n=n):
                 assertionRuntimeError(
-                            self.assertRaises, 
-                            self.request.set_n, 
-                            n
-                        )
-    
+                    self.assertRaises,
+                    self.request.set_n,
+                    n
+                )
+
     def test_NLessThanZero(self):
         """
         Asserts that when an integer less than or equal to zero is passed an error is thrown.
@@ -463,11 +486,11 @@ class TestProperties(TestCompletionRequest):
         for n in range(-10, 0):
             with self.subTest(n=n):
                 assertionRuntimeError(
-                            self.assertRaises, 
-                            self.request.set_n, 
-                            n
-                        )
-    
+                    self.assertRaises,
+                    self.request.set_n,
+                    n
+                )
+
     def test_Stream(self):
         """
         Asserts that valid input results in correct data field change.
@@ -475,9 +498,9 @@ class TestProperties(TestCompletionRequest):
         for stream in [True, False]:
             with self.subTest(stream=stream):
                 self.request.set_stream(stream)
-                
+
                 self.assertEqual(self.request.stream, stream)
-    
+
     def test_StreamIntegerFail(self):
         """
         Asserts that an integer input will fail.
@@ -485,11 +508,11 @@ class TestProperties(TestCompletionRequest):
         for stream in range(-10, 10):
             with self.subTest(stream=stream):
                 assertionRuntimeError(
-                            self.assertRaises, 
-                            self.request.set_stream, 
-                            stream
-                        )
-    
+                    self.assertRaises,
+                    self.request.set_stream,
+                    stream
+                )
+
     def test_StreamFloatFail(self):
         """
         Asserts that a float input will fail.
@@ -498,10 +521,10 @@ class TestProperties(TestCompletionRequest):
             stream *= 0.1
             with self.subTest(stream=stream):
                 assertionRuntimeError(
-                        self.assertRaises, 
-                        self.request.set_stream, 
-                        stream
-                    )
+                    self.assertRaises,
+                    self.request.set_stream,
+                    stream
+                )
 
     def test_Echo(self):
         """
@@ -510,9 +533,9 @@ class TestProperties(TestCompletionRequest):
         for echo in [True, False]:
             with self.subTest(echo=echo):
                 self.request.set_echo(echo)
-                
+
                 self.assertEqual(self.request.echo, echo)
-    
+
     def test_EchoIntegerFail(self):
         """
         Asserts that an integer input will fail.
@@ -520,11 +543,11 @@ class TestProperties(TestCompletionRequest):
         for echo in range(-10, 10):
             with self.subTest(echo=echo):
                 assertionRuntimeError(
-                        self.assertRaises, 
-                        self.request.set_echo, 
-                        echo
-                    )
-    
+                    self.assertRaises,
+                    self.request.set_echo,
+                    echo
+                )
+
     def test_EchoFloatFail(self):
         """
         Asserts that a float input will fail.
@@ -532,12 +555,12 @@ class TestProperties(TestCompletionRequest):
         for echo in range(-30, 30):
             echo *= 0.1
             with self.subTest(echo=echo):
-                 assertionRuntimeError(
-                        self.assertRaises, 
-                        self.request.set_echo, 
-                        echo
-                    )
-    
+                assertionRuntimeError(
+                    self.assertRaises,
+                    self.request.set_echo,
+                    echo
+                )
+
     def test_Presence_Penalty(self):
         """
         Asserts that when a valid input is made it changes the correct value.
@@ -547,7 +570,7 @@ class TestProperties(TestCompletionRequest):
             with self.subTest(pp=pp):
                 self.request.set_presence_penalty(pp)
                 self.assertEqual(self.request.presence_penalty, pp)
-    
+
     def test_Presence_PenaltyIntegerError(self):
         """
         Asserts that when an integer is passed to presence_penalty an error is thrown.
@@ -555,11 +578,11 @@ class TestProperties(TestCompletionRequest):
         for pp in range(-10, 10):
             with self.subTest(pp=pp):
                 assertionRuntimeError(
-                        self.assertRaises, 
-                        self.request.set_presence_penalty, 
-                        pp
-                    )
-    
+                    self.assertRaises,
+                    self.request.set_presence_penalty,
+                    pp
+                )
+
     def test_Presence_PenaltyBooleanError(self):
         """
         Asserts that when a boolean is passed to presence_penalty an error is thrown.
@@ -567,11 +590,11 @@ class TestProperties(TestCompletionRequest):
         for pp in [True, False]:
             with self.subTest(pp=pp):
                 assertionRuntimeError(
-                        self.assertRaises, 
-                        self.request.set_presence_penalty, 
-                        pp
-                    )
-    
+                    self.assertRaises,
+                    self.request.set_presence_penalty,
+                    pp
+                )
+
     def test_Presence_PenaltyLessThanMinimum(self):
         """
         Asserts that when an float less than or equal to zero is passed an error is thrown.
@@ -580,11 +603,11 @@ class TestProperties(TestCompletionRequest):
             pp *= 0.1
             with self.subTest(pp=pp):
                 assertionRuntimeError(
-                        self.assertRaises, 
-                        self.request.set_presence_penalty, 
-                        pp
-                    )
-    
+                    self.assertRaises,
+                    self.request.set_presence_penalty,
+                    pp
+                )
+
     def test_Presence_PenaltyGreaterThanMaximum(self):
         """
         Asserts that when a float greater than the maximum presence_penalty is passed an error is thrown.
@@ -593,10 +616,10 @@ class TestProperties(TestCompletionRequest):
             pp *= 0.1
             with self.subTest(pp=pp):
                 assertionRuntimeError(
-                        self.assertRaises, 
-                        self.request.set_presence_penalty, 
-                        pp
-                    )
+                    self.assertRaises,
+                    self.request.set_presence_penalty,
+                    pp
+                )
 
     def test_Frequency_Penalty(self):
         """
@@ -607,7 +630,7 @@ class TestProperties(TestCompletionRequest):
             with self.subTest(fp=fp):
                 self.request.set_frequency_penalty(fp)
                 self.assertEqual(self.request.frequency_penalty, fp)
-    
+
     def test_Frequency_PenaltyIntegerError(self):
         """
         Asserts that when an integer is passed to presence_penalty an error is thrown.
@@ -615,11 +638,11 @@ class TestProperties(TestCompletionRequest):
         for fp in range(-10, 10):
             with self.subTest(fp=fp):
                 assertionRuntimeError(
-                        self.assertRaises, 
-                        self.request.set_frequency_penalty, 
-                        fp
-                    )
-    
+                    self.assertRaises,
+                    self.request.set_frequency_penalty,
+                    fp
+                )
+
     def test_Frequency_PenaltyBooleanError(self):
         """
         Asserts that when a boolean is passed to frequency_penalty an error is thrown.
@@ -627,11 +650,11 @@ class TestProperties(TestCompletionRequest):
         for fp in [True, False]:
             with self.subTest(fp=fp):
                 assertionRuntimeError(
-                        self.assertRaises, 
-                        self.request.set_frequency_penalty, 
-                        fp
-                    )
-    
+                    self.assertRaises,
+                    self.request.set_frequency_penalty,
+                    fp
+                )
+
     def test_Frequency_PenaltyLessThanMinimum(self):
         """
         Asserts that when an float less than or equal to zero is passed an error is thrown.
@@ -640,11 +663,11 @@ class TestProperties(TestCompletionRequest):
             fp *= 0.1
             with self.subTest(fp=fp):
                 assertionRuntimeError(
-                        self.assertRaises, 
-                        self.request.set_frequency_penalty, 
-                        fp
-                    )
-    
+                    self.assertRaises,
+                    self.request.set_frequency_penalty,
+                    fp
+                )
+
     def test_Frequency_PenaltyGreaterThanMaximum(self):
         """
         Asserts that when a float greater than the maximum frequency_penalty is passed an error is thrown.
@@ -653,10 +676,10 @@ class TestProperties(TestCompletionRequest):
             fp *= 0.1
             with self.subTest(fp=fp):
                 assertionRuntimeError(
-                        self.assertRaises, 
-                        self.request.set_frequency_penalty, 
-                        fp
-                    )
+                    self.assertRaises,
+                    self.request.set_frequency_penalty,
+                    fp
+                )
 
     def test_Best_Of(self):
         """
@@ -665,9 +688,9 @@ class TestProperties(TestCompletionRequest):
         for best_of in range(1, 10):
             with self.subTest(best_of=best_of):
                 self.request.set_best_of(best_of)
-                
+
                 self.assertEqual(self.request.best_of, best_of)
-    
+
     def test_Best_OfFloatError(self):
         """
         Asserts that when a float is passed to best_of an error is thrown.
@@ -676,11 +699,11 @@ class TestProperties(TestCompletionRequest):
             best_of = 0.5 * float(best_of)
             with self.subTest(best_of=best_of):
                 assertionRuntimeError(
-                        self.assertRaises, 
-                        self.request.set_best_of, 
-                        best_of
-                    )
-    
+                    self.assertRaises,
+                    self.request.set_best_of,
+                    best_of
+                )
+
     def test_Best_OfBooleanError(self):
         """
         Asserts that when a boolean is passed to n an error is thrown.
@@ -688,11 +711,11 @@ class TestProperties(TestCompletionRequest):
         for best_of in [True, False]:
             with self.subTest(best_of=best_of):
                 assertionRuntimeError(
-                        self.assertRaises, 
-                        self.request.set_best_of, 
-                        best_of
-                    )
-    
+                    self.assertRaises,
+                    self.request.set_best_of,
+                    best_of
+                )
+
     def test_Best_OfLessThanZero(self):
         """
         Asserts that when an integer less than or equal to zero is passed an error is thrown.
@@ -700,18 +723,18 @@ class TestProperties(TestCompletionRequest):
         for best_of in range(-10, 0):
             with self.subTest(best_of=best_of):
                 assertionRuntimeError(
-                        self.assertRaises, 
-                        self.request.set_best_of, 
-                        best_of
-                    )
-    
+                    self.assertRaises,
+                    self.request.set_best_of,
+                    best_of
+                )
+
     def test_User(self):
         """
-        Asserts that valid input results in correct data field change.  
+        Asserts that valid input results in correct data field change.
         """
         user = "test-user"
         self.request.set_user(user)
-        
+
         self.assertEqual(self.request.user, user)
 
     def test_UserIntegerFail(self):
@@ -721,11 +744,11 @@ class TestProperties(TestCompletionRequest):
         for user in range(-10, 10):
             with self.subTest(user=user):
                 assertionRuntimeError(
-                        self.assertRaises, 
-                        self.request.set_user, 
-                        user
-                    )
-    
+                    self.assertRaises,
+                    self.request.set_user,
+                    user
+                )
+
     def test_UserFloatFail(self):
         """
         Asserts that a float input will fail.
@@ -734,11 +757,11 @@ class TestProperties(TestCompletionRequest):
             user *= 0.1
             with self.subTest(user=user):
                 assertionRuntimeError(
-                        self.assertRaises, 
-                        self.request.set_user, 
-                        user
-                    )
-    
+                    self.assertRaises,
+                    self.request.set_user,
+                    user
+                )
+
     def test_UserBooleanFail(self):
         """
         Asserts that when a boolean is passed to n an error is thrown.
@@ -746,11 +769,11 @@ class TestProperties(TestCompletionRequest):
         for user in [True, False]:
             with self.subTest(user=user):
                 assertionRuntimeError(
-                        self.assertRaises, 
-                        self.request.set_user, 
-                        user
-                    )
-    
+                    self.assertRaises,
+                    self.request.set_user,
+                    user
+                )
+
 
 if __name__ == "__main__":
     unittest.mainloop()

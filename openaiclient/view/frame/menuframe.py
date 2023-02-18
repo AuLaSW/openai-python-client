@@ -9,12 +9,12 @@ import tkinter as tkinter
 class MenuFrame(BaseFrame):
     def __init__(self, main, controller):
         super().__init__(main, controller)
-        
+
         self.menuLabels = dict()
         self.menuOptions = dict()
         self.column = 0
         self.row = 0
-    
+
     def create(self):
         for menu in self.menuLabels:
             self.menuOptions[menu] = tk.StringVar()
@@ -32,9 +32,9 @@ class MenuFrame(BaseFrame):
                 padx=10,
                 pady=10,
             )
-            
+
             self.column += 1
-    
+
     # attach a frame to the menu frame
     def attach(self, frame):
         # if the current menu frame is

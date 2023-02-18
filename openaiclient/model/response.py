@@ -25,5 +25,6 @@ class Response:
         except AttributeError:
             raise RuntimeError
 
+
 if __name__ == "__main__":
     pass

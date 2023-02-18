@@ -17,6 +17,7 @@ class View:
 
     This class uses tkinter to generate the GUI.
     """
+
     def __init__(self, controller):
         # bind the controller to the view object
         # by passing the controller to the view,

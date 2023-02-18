@@ -12,7 +12,7 @@ class Models:
     def __init__(self):
         self.COMPLETION = "Completion"
         self.EDIT = "Edit"
-        
+
         # dictionary of models
         self._models = {
             "text-davinci-003": Model(
@@ -64,41 +64,41 @@ class Models:
     @property
     def models(self):
         return self._models
-        
+
     @property
     def completionModels(self):
         modelList = []
         for _, model in self.models.items():
             if model.type == self.COMPLETION:
                 modelList.append(model)
-        
+
         return modelList
-    
+
     @property
     def editModels(self):
         modelList = []
         for _, model in self.models.items():
             if model.type == self.EDIT:
                 modelList.append(model)
-        
+
         return modelList
-    
+
     @property
     def text_davinci_003(self):
         return self.models["text-davinci-003"]
-    
+
     @property
     def text_curie_001(self):
         return self.models["text-curie-001"]
-        
+
     @property
     def text_babbage_001(self):
         return self.models["text-babbage-001"]
-        
+
     @property
     def text_ada_001(self):
         return self.models["text-ada-001"]
-    
+
     @property
     def text_davinci_edit_001(self):
         return self.models["text-davinci-edit-001"]
@@ -108,22 +108,22 @@ class Model:
     def __init__(self, name, type, max_tokens=0):
         self._name = name
         self._type = type
-        
+
         # Edit types don't have a max_tokens attribute,
         # so set to -1 to make sure it can't be used.
         if self._type == "Edit":
             self._max_tokens = -1
         else:
             self._max_tokens = max_tokens
-    
+
     @property
     def name(self):
         return self._name
-    
+
     @property
     def max_tokens(self):
         return self._max_tokens
-        
+
     @property
     def type(self):
         return self._type

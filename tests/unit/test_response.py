@@ -6,13 +6,19 @@ from openaiclient.model.response import Response
 class TestResponseWrapper:
     class TestResponse(unittest.TestCase):
         def test_CorrectObject(self):
-            self.assertEqual(self.response.obj, self.dictionary["object"])
+            self.assertEqual(
+                self.response.obj,
+                self.dictionary["object"])
 
         def test_CorrectText(self):
-            self.assertEqual(self.response.text, self.dictionary["choices"][0]["text"])
+            self.assertEqual(
+                self.response.text,
+                self.dictionary["choices"][0]["text"])
 
         def test_CorrectIndex(self):
-            self.assertEqual(self.response.index, self.dictionary["choices"][0]["index"])
+            self.assertEqual(
+                self.response.index,
+                self.dictionary["choices"][0]["index"])
 
         # test that getText() returns the
         # text object
@@ -39,14 +45,16 @@ class TestResponseTextCompletion(TestResponseWrapper.TestResponse):
         self.response = Response(self.dictionary)
 
     def test_CorrectModel(self):
-        self.assertEqual(self.response.model, self.dictionary["model"])
+        self.assertEqual(
+            self.response.model,
+            self.dictionary["model"])
 
     def test_CorrectFinishReason(self):
         self.assertEqual(
             self.response.finish_reason,
             self.dictionary["choices"][0]["finish_reason"]
         )
-    
+
     # test that getFinishReason() returns
     # the finish reason
     def test_GetFinishReason(self):
@@ -71,6 +79,7 @@ class TestResponseEdit(TestResponseWrapper.TestResponse):
 
     def test_GetFinishReasonException(self):
         self.assertRaises(RuntimeError, self.response.getFinishReason)
+
 
 if __name__ == "__main__":
     unittest.main()
