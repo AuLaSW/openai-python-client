@@ -20,6 +20,16 @@ class Input(BaseFrame):
             pady=10
         )
 
+        tk.Button(
+            master=self,
+            text="test"
+        ).grid(
+            column=0,
+            row=1,
+            padx=10,
+            pady=10
+        )
+
     @property
     def text(self):
         return self._textBox.get(
