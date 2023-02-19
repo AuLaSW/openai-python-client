@@ -163,8 +163,8 @@ class TestSettings(TestCompletionRequest):
         Asserts that requiredArgs and optionalArgs are disjoint.
         """
         self.assertTrue(
-            self.request.requiredArguments.isdisjoint(
-                self.request.optionalArguments
+            set(self.request.requiredArguments.keys()).isdisjoint(
+                set(self.request.optionalArguments.keys())
             )
         )
 
