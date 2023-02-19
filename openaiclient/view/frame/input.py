@@ -22,7 +22,8 @@ class Input(BaseFrame):
 
         tk.Button(
             master=self,
-            text="test"
+            text="test",
+            command=self.displayText
         ).grid(
             column=0,
             row=1,
@@ -43,6 +44,9 @@ class Input(BaseFrame):
             index=0,
             chars=val
         )
+
+    def displayText(self):
+        print(self.text)
 
 
 if __name__ == "__main__":
