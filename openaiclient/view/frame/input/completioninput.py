@@ -71,6 +71,7 @@ if __name__ == "__main__":
     from tests.unit.fixture import api
 
     window = tk.Tk()
+    window.resizable(False, False)
     controller = Controller(api)
 
     cif = CompletionInputFrame(
