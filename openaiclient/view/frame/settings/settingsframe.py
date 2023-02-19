@@ -130,7 +130,8 @@ class SettingsFrame(BaseFrame):
             except KeyError:
                 pass
             except tk.TclError as error:
-                messagebox.showerror(f"Incorrect input in {key}", f"Key \"{key}\" " + str(error))
+                messagebox.showerror(
+                    f"Incorrect input in {key}", f"Key \"{key}\" " + str(error))
 
     def exitSettings(self):
         """exits the window without savings the changes"""
