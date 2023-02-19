@@ -13,7 +13,12 @@ class Input(BaseFrame):
 
     def create(self):
         self._textBox = tk.Text(self)
-        self._textBox.pack()
+        self._textBox.grid(
+            column=0,
+            row=0,
+            padx=10,
+            pady=10
+        )
 
     @property
     def text(self):
