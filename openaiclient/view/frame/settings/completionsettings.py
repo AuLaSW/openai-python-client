@@ -15,7 +15,6 @@ class CompletionSettings(SettingsFrame):
         super().__init__(main, controller)
 
         self.settings = self.controller.request.settings
-        print(self.settings)
 
 
 if __name__ == "__main__":
