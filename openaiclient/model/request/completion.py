@@ -22,7 +22,7 @@ class CompletionRequest(Request):
         # setup self._requestDict
 
         self._requestDict = {
-            "model": "text-davinci-003",
+            "model": self._models.text_davinci_003,
             "prompt": "",
             "max_tokens": 16,
             "temperature": 0,
@@ -110,7 +110,7 @@ class CompletionRequest(Request):
 
     def set_model(self, val):
         if val in self._models:
-            self._requestDict["model"] = val
+            self._requestDict["model"] = self._models.models[val]
         else:
             raise RuntimeError(
                 f"The model '{val}' is not a valid model.")
@@ -130,7 +130,7 @@ class CompletionRequest(Request):
         return self._requestDict["max_tokens"]
 
     def set_max_tokens(self, val):
-        max_tokens = self._models.models[self.model].max_tokens
+        max_tokens = self._models.models[self.model.name].max_tokens
 
         if isinstance(
                 val,
