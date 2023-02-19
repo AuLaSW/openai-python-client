@@ -67,12 +67,12 @@ class Models:
 
     @property
     def completionModels(self):
-        modelList = []
-        for _, model in self.models.items():
+        modelDict = {}
+        for key, model in self.models.items():
             if model.type == self.COMPLETION:
-                modelList.append(model)
+                modelDict[key] = model
 
-        return modelList
+        return modelDict
 
     @property
     def editModels(self):

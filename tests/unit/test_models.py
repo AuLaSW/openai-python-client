@@ -40,7 +40,7 @@ class TestModels(unittest.TestCase):
         """
         Asserts that completionModles returns only models of type completion.
         """
-        for model in self.modelObj.completionModels:
+        for _, model in self.modelObj.completionModels.items():
             with self.subTest(model=model):
                 self.assertEqual(model.type, self.modelObj.COMPLETION)
 

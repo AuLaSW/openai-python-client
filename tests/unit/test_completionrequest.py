@@ -194,7 +194,7 @@ class TestProperties(TestCompletionRequest):
         Asserts that adding a valid model results in the model
         value being correctly updated
         """
-        model = "text-davinci-003"
+        model = self.request._models.text_davinci_003
         self.request.set_model(model)
 
         self.assertEqual(self.request.model, model)
@@ -204,12 +204,13 @@ class TestProperties(TestCompletionRequest):
         Asserts that an error is thrown when an invalid model is
         inputted into the setter.
         """
-        model = "test-model"
+        model = self.request._models.text_davinci_edit_001
 
         assertionRuntimeError(
             self.assertRaises,
             self.request.set_model,
-            model)
+            model
+            )
 
     def test_ModelSetterIntegerInput(self):
         """
@@ -219,7 +220,9 @@ class TestProperties(TestCompletionRequest):
         for model in range(-10, 10, 1):
             with self.subTest(model=model):
                 assertionRuntimeError(
-                    self.assertRaises, self.request.set_model, model)
+                    self.assertRaises,
+                    self.request.set_model,
+                    model)
 
     def test_Prompt(self):
         """
@@ -265,7 +268,7 @@ class TestProperties(TestCompletionRequest):
         """
         Asserts that when a valid integer is passed that the correct value is modified
         """
-        for model in self.request._models.completionModels:
+        for _, model in self.request._models.completionModels.items():
             with self.subTest(model=model):
                 for max_tokens in range(1, model.max_tokens + 1, 32):
                     with self.subTest(max_tokens=max_tokens):
@@ -312,11 +315,11 @@ class TestProperties(TestCompletionRequest):
         """
         Asserts that when an integer greater than the maximum number of tokens is passed an error is thrown.
         """
-        for _, model in self.request._models.models.items():
+        for _, model in self.request._models.completionModels.items():
             with self.subTest(model=model):
                 for max_tokens in range(1, 20):
                     with self.subTest(max_tokens=max_tokens):
-                        self.request.set_model(model.name)
+                        self.request.set_model(model)
                         assertionRuntimeError(
                             self.assertRaises,
                             self.request.set_max_tokens,

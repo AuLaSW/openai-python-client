@@ -109,8 +109,10 @@ class CompletionRequest(Request):
         return self._requestDict["model"]
 
     def set_model(self, val):
-        if val in self._models:
-            self._requestDict["model"] = self._models.models[val]
+        typeName = type(val).__name__
+
+        if typeName == "Model" and val.name in self._models.completionModels:
+            self._requestDict["model"] = self._models.models[val.name]
         else:
             raise RuntimeError(
                 f"The model '{val}' is not a valid model.")
