@@ -18,7 +18,7 @@ class Input(BaseFrame):
     @property
     def text(self):
         return self._textBox.get(
-            index1=0,
+            index1=1.0,
             index2=tk.END
         )
 
