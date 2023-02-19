@@ -28,7 +28,20 @@ class CompletionInputFrame(BaseFrame):
             column=0,
             row=1,
             padx=10,
-            pady=10
+            pady=10,
+            ipadx=40
+        )
+
+    def tags(self):
+        self._prompt.tag_add(
+            "testTag",
+            1.0,
+            tk.END,
+        )
+
+        self._prompt.tag_configure(
+            tagName="testTag",
+            underline=1
         )
 
     @property
@@ -50,6 +63,7 @@ class CompletionInputFrame(BaseFrame):
         self.controller.request.set_prompt(self.text)
         self.controller._response = self.controller.request.getResponse()
         self.text = self.controller._response.text
+        self.tags()
 
 
 if __name__ == "__main__":
