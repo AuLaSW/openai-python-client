@@ -40,8 +40,9 @@ class CompletionInputFrame(BaseFrame):
 
     @text.setter
     def text(self, val):
-        self._prompt.insert(
-            index=1.0,
+        self._prompt.replace(
+            index1=1.0,
+            index2=tk.END,
             chars=val
         )
 
