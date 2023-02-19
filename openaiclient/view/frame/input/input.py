@@ -5,7 +5,7 @@ import tkinter as tk
 from openaiclient.view.frame.baseframe import BaseFrame
 
 
-class Input(BaseFrame):
+class InputFrame(BaseFrame):
     def __init__(self, main, controller):
         super().__init__(main, controller)
 
@@ -52,7 +52,7 @@ class Input(BaseFrame):
 if __name__ == "__main__":
     window = tk.Tk()
 
-    inputFrame = Input(
+    inputFrame = InputFrame(
         main=window,
         controller=None
     )
