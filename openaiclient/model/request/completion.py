@@ -77,11 +77,21 @@ class CompletionRequest(Request):
 
     @property
     def requiredArguments(self):
-        return self._requiredArgs
+        temp = {}
+        for key, value in self._requestDict.items():
+            if key in self._requiredArgs:
+                temp[key] = value
+
+        return temp
 
     @property
     def optionalArguments(self):
-        return self._optionalArgs
+        temp = {}
+        for key, value in self._requestDict.items():
+            if key in self._optionalArgs:
+                temp[key] = value
+
+        return temp
 
     @property
     def settings(self):
