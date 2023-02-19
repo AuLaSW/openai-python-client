@@ -24,6 +24,11 @@ class CompletionInputFrame(BaseFrame):
             pady=10
         )
 
+        self._prompt.bind(
+            "<Any-KeyPress>",
+            self.underlineUpdate
+        )
+
         tk.Button(
             master=self,
             text="Send",
@@ -36,7 +41,22 @@ class CompletionInputFrame(BaseFrame):
             ipadx=40
         )
 
+        self.tags()
+
     def tags(self):
+        self._prompt.tag_add(
+            "testTag",
+            1.0,
+            tk.END,
+        )
+
+        self._prompt.tag_bind(
+            "testTag",
+            "<Any-KeyPress>",
+            self.underlineUpdate
+        )
+
+    def underlineUpdate(self, event):
         self._prompt.tag_add(
             "testTag",
             1.0,
@@ -47,6 +67,9 @@ class CompletionInputFrame(BaseFrame):
             tagName="testTag",
             underline=1
         )
+
+        print("test")
+
 
     @property
     def text(self):
