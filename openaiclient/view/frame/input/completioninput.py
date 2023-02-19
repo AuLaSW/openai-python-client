@@ -47,7 +47,8 @@ class CompletionInputFrame(BaseFrame):
 
     def sendInput(self):
         self.controller.request.set_prompt(self.text)
-        self.controller.request.getResponse()
+        self.controller._response = self.controller.request.getResponse()
+        self.text = self.controller._response.text
 
 
 if __name__ == "__main__":
