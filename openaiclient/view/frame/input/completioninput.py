@@ -10,7 +10,11 @@ class CompletionInputFrame(BaseFrame):
         super().__init__(main, controller)
 
         self.controller.compReq()
-        self._prompt = tk.Text(self)
+        self._prompt = tk.Text(
+            self,
+            width=50,
+            height=30
+        )
 
     def create(self):
         self._prompt.grid(
