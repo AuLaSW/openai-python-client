@@ -85,7 +85,12 @@ class CompletionRequest(Request):
 
     @property
     def settings(self):
-        return self._settings
+        temp = {}
+        for key, value in self._requestDict.items():
+            if key in self._settings:
+                temp[key] = value
+
+        return temp
 
     # request dictionary arguments
 
