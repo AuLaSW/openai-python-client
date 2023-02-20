@@ -124,8 +124,7 @@ class SettingsFrame(BaseFrame):
         for key in self.settings:                
             try:
                 val = self.outputs[key].get()
-                setter = self.setAttr(key)
-                setter(self, key, val)
+                self.setAttr(key, val)
 
             except KeyError:
                 pass
