@@ -121,7 +121,7 @@ class SettingsFrame(BaseFrame):
 
     def saveSettings(self):
         """saves the settings inputted in the window"""
-        for key in self.settings:
+        for key in self.settings:                
             try:
                 val = self.outputs[key].get()
 
@@ -134,6 +134,8 @@ class SettingsFrame(BaseFrame):
             except tk.TclError as error:
                 messagebox.showerror(
                     f"Incorrect input in {key}", f"Key \"{key}\" " + str(error))
+            except Error as err:
+                print(err)
 
     def exitSettings(self):
         """exits the window without savings the changes"""
@@ -217,8 +219,6 @@ class SettingsFrame(BaseFrame):
             text=key
         )
 
-        print(args, kwargs)
-
         # setup the widget that we want.
         # must pass the widget function
         # through the function and pass
@@ -227,9 +227,9 @@ class SettingsFrame(BaseFrame):
         # track what the entry value
         # is
         widget = tkFunc(
-            master=self,
-            **kwargs,
+            self,
             *args,
+            **kwargs
         )
 
         return labelWidget, widget
@@ -294,20 +294,44 @@ class SettingsFrame(BaseFrame):
         """
         Creates a drop-down setting with models as names
         """
-        kwargs = {"value": 1}
+        kwargs = {}
         args = set()
         for model in self.controller.models.completionModels.keys():
             args.add(model)
+        
+        tkVar = tk.StringVar
+        tkFunc = tk.OptionMenu
+        varKey = "variable"
+        
+        args = tuple(args)
 
-        return self.baseSetting(
-            tk.StringVar,
-            tk.OptionMenu,
-            key,
-            value,
-            "variable",
-            args=args,
-            kwargs=kwargs
+        kwargs = kwargs | {varKey: tkVar()}
+
+        # add the output variable to the outputs dictionary
+        self.outputs[key] = kwargs[varKey]
+
+        # set value to default value
+        kwargs[varKey].set(self.settings[key].name)
+
+        labelWidget = tk.Label(
+            master=self,
+            text=key
         )
+
+        # setup the widget that we want.
+        # must pass the widget function
+        # through the function and pass
+        # the kwargs with at least the
+        # option tracking variable to
+        # track what the entry value
+        # is
+        widget = tkFunc(
+            self,
+            kwargs[varKey],
+            *args
+        )
+        
+        return labelWidget, widget
 
 
 if __name__ == "__main__":
