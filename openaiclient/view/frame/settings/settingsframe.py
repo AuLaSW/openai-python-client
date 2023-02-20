@@ -51,63 +51,38 @@ class SettingsFrame(BaseFrame):
             try:
                 # get the correct setting function
                 # based on value type
-                func = self.getSettings(typeOfValue)
-
-                # get label and widget from function
-                labelWidget, widget = func(key, value)
-
-                # attach label
-                labelWidget.grid(
-                    column=0,
-                    row=self.row,
-                    padx=10,
-                    pady=10,
-                    sticky=tk.E
-                )
-
-                # attach widget
-                widget.grid(
-                    column=1,
-                    row=self.row,
-                    padx=10,
-                    pady=10,
-                    sticky=tk.W
-                )
-
-                # move down to the next row
-                self.row += 1
-            except RuntimeError as error:
-                # eventually, this needs to be a logger or something
-                # similar
-                print(error)
+                func = getattr(self, typeOfValue+"Setting")
+            except AttributeError:
+                # skip the current attribute.
+                # later, this will be logged into a logger
+                print(f"No widget of type {typeOfValue} defined.")
                 continue
 
-            # potentially better way to implement this?
-            # Allows a class to add entries to a
-            # settingsDict dictionary, with the keys being
-            # the name of the class and the values being
-            # the function that that setting type calls
-            # to create the correct entry.
-            #
-            # When a class inherits this class, it can
-            # add setting types to the setting dictionary
-            # making the settings generation more extensible
-            """
-            valueTypeName = type(value).__name__
-            if valueTypeName is in self.settingsDict.keys():
-                self.settingsDict[valueTypeName](key, value)
-            else:
-                return NotImplementedError()
-            """
+            # get label and widget from function
+            labelWidget, widget = func(key, value)
+
+            # attach label
+            labelWidget.grid(
+                column=0,
+                row=self.row,
+                padx=10,
+                pady=10,
+                sticky=tk.E
+            )
+
+            # attach widget
+            widget.grid(
+                column=1,
+                row=self.row,
+                padx=10,
+                pady=10,
+                sticky=tk.W
+            )
+
+            # move down to the next row
+            self.row += 1
 
         self.saveAndExitButtons()
-
-    def getSettings(self, typeOfValue):
-        try:
-            return getattr(self, typeOfValue+"Setting")
-        except Exception:
-            raise RuntimeError(
-                f"No widget of type {typeOfValue} defined.")
 
     def saveSettings(self):
         """saves the settings inputted in the window"""
