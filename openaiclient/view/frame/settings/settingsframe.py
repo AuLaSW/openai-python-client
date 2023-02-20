@@ -124,20 +124,18 @@ class SettingsFrame(BaseFrame):
         for key in self.settings:                
             try:
                 val = self.outputs[key].get()
+                setter = getattr(self.controller.request, "set_"+key)
 
-                if isinstance(self.settings[key], bool):
-                    setter = getattr(self.controller.request, "set_"+key)
-                    setter(bool(val))
+                if type(self.settings[key]).__name__ == "Model":
+                    model = getattr(self.controller.models, val.replace("-", "_"))
+                    setter(model)
                 else:
-                    setter = getattr(self.controller.request, "set_"+key)
-                    setter(val)
+                    setter(type(val)(val))
             except KeyError:
                 pass
             except tk.TclError as error:
                 messagebox.showerror(
                     f"Incorrect input in {key}", f"Key \"{key}\" " + str(error))
-            except Exception as err:
-                print(err)
 
     def exitSettings(self):
         """exits the window without savings the changes"""

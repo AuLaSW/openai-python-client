@@ -112,7 +112,7 @@ class CompletionRequest(Request):
         typeName = type(val).__name__
 
         if typeName == "Model" and val.name in self._models.completionModels:
-            self._requestDict["model"] = self._models.models[val.name]
+            self._requestDict["model"] = val
         else:
             raise RuntimeError(
                 f"The model '{val}' is not a valid model.")
@@ -171,11 +171,9 @@ class CompletionRequest(Request):
         return self._requestDict["n"]
 
     def set_n(self, val):
-        if isinstance(
-                val,
-                int) and not isinstance(
-                val,
-                bool) and val > 0:
+        if isinstance(val, int) \
+            and not isinstance(val, bool)\
+            and val > 0:
             self._requestDict["n"] = val
         else:
             raise RuntimeError("n must be an integer greater than 0.")
@@ -185,8 +183,8 @@ class CompletionRequest(Request):
         return self._requestDict["stream"]
 
     def set_stream(self, val):
-        if isinstance(val, bool):
-            self._requestDict["stream"] = val
+        if type(val) != float and val in [True, False]:
+            self._requestDict["stream"] = bool(val)
         else:
             raise RuntimeError("stream must be a boolean value.")
 
@@ -195,8 +193,8 @@ class CompletionRequest(Request):
         return self._requestDict["echo"]
 
     def set_echo(self, val):
-        if isinstance(val, bool):
-            self._requestDict["echo"] = val
+        if type(val) != float and val in [True, False]:
+            self._requestDict["echo"] = bool(val)
         else:
             raise RuntimeError("echo must be a boolean value.")
 

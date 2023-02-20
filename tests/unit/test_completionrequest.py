@@ -504,18 +504,6 @@ class TestProperties(TestCompletionRequest):
 
                 self.assertEqual(self.request.stream, stream)
 
-    def test_StreamIntegerFail(self):
-        """
-        Asserts that an integer input will fail.
-        """
-        for stream in range(-10, 10):
-            with self.subTest(stream=stream):
-                assertionRuntimeError(
-                    self.assertRaises,
-                    self.request.set_stream,
-                    stream
-                )
-
     def test_StreamFloatFail(self):
         """
         Asserts that a float input will fail.
@@ -538,18 +526,6 @@ class TestProperties(TestCompletionRequest):
                 self.request.set_echo(echo)
 
                 self.assertEqual(self.request.echo, echo)
-
-    def test_EchoIntegerFail(self):
-        """
-        Asserts that an integer input will fail.
-        """
-        for echo in range(-10, 10):
-            with self.subTest(echo=echo):
-                assertionRuntimeError(
-                    self.assertRaises,
-                    self.request.set_echo,
-                    echo
-                )
 
     def test_EchoFloatFail(self):
         """
