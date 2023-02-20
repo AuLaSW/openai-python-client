@@ -113,6 +113,8 @@ class SettingsFrame(BaseFrame):
                 return self.floatSetting
             case "bool":
                 return self.boolSetting
+            case "Model":
+                return self.modelSetting
             case _:
                 raise RuntimeError(
                     f"No widget of type {typeOfValue} defined.")
@@ -186,7 +188,8 @@ class SettingsFrame(BaseFrame):
             key,
             value,
             varKey,
-            **kwargs):
+            args=(),
+            kwargs={}):
         """
         The function operates as follows:
 
@@ -199,8 +202,7 @@ class SettingsFrame(BaseFrame):
         3. The widgets are then placed onto the settings frame with the grid()
            function on the current row.
         """
-        if 'kwargs' not in locals():
-            kwargs = dict()
+        args = tuple(args)
 
         kwargs = kwargs | {varKey: tkVar()}
 
@@ -215,6 +217,8 @@ class SettingsFrame(BaseFrame):
             text=key
         )
 
+        print(args, kwargs)
+
         # setup the widget that we want.
         # must pass the widget function
         # through the function and pass
@@ -224,7 +228,8 @@ class SettingsFrame(BaseFrame):
         # is
         widget = tkFunc(
             master=self,
-            **kwargs
+            **kwargs,
+            *args,
         )
 
         return labelWidget, widget
@@ -281,7 +286,28 @@ class SettingsFrame(BaseFrame):
             key,
             value,
             "variable",
-            **kwargs)
+            kwargs=kwargs
+        )
+
+    # float setting input
+    def modelSetting(self, key, value):
+        """
+        Creates a drop-down setting with models as names
+        """
+        kwargs = {"value": 1}
+        args = set()
+        for model in self.controller.models.completionModels.keys():
+            args.add(model)
+
+        return self.baseSetting(
+            tk.StringVar,
+            tk.OptionMenu,
+            key,
+            value,
+            "variable",
+            args=args,
+            kwargs=kwargs
+        )
 
 
 if __name__ == "__main__":
