@@ -103,21 +103,11 @@ class SettingsFrame(BaseFrame):
         self.saveAndExitButtons()
 
     def getSettings(self, typeOfValue):
-        # adjust the frame to match the input type
-        match typeOfValue:
-            case "str":
-                return self.strSetting
-            case "int":
-                return self.intSetting
-            case "float":
-                return self.floatSetting
-            case "bool":
-                return self.boolSetting
-            case "Model":
-                return self.modelSetting
-            case _:
-                raise RuntimeError(
-                    f"No widget of type {typeOfValue} defined.")
+        try:
+            return getattr(self, typeOfValue+"Setting")
+        except Exception:
+            raise RuntimeError(
+                f"No widget of type {typeOfValue} defined.")
 
     def saveSettings(self):
         """saves the settings inputted in the window"""
@@ -289,7 +279,7 @@ class SettingsFrame(BaseFrame):
         )
 
     # float setting input
-    def modelSetting(self, key, value):
+    def ModelSetting(self, key, value):
         """
         Creates a drop-down setting with models as names
         """
