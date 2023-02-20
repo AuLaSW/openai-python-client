@@ -31,8 +31,9 @@ if __name__ == "__main__":
     from openaiclient.controller.controller import Controller
     from tests.unit.fixture import api
 
-    window = tk.Tk()
     controller = Controller(api)
+    window = controller.view.window.window
+    window.resizable(False, False)
     controller.compReq()
 
     frame = CompletionSettings(
