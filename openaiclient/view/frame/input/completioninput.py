@@ -68,9 +68,6 @@ class CompletionInputFrame(BaseFrame):
             underline=1
         )
 
-        print("test")
-
-
     @property
     def text(self):
         return self._prompt.get(
