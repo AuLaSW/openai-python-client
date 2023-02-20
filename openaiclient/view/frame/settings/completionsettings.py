@@ -17,7 +17,15 @@ class CompletionSettings(SettingsFrame):
         self.settings = self.controller.request.settings
     
     def setAttr(self, key):
-        return getattr(self.controller.request, "set_"+key)
+        def func(self, key, val):
+            setter = getattr(self.controller.request, "set_"+key)
+            if type(self.settings[key]).__name__ == "Model":
+                model = getattr(self.controller.models, val.replace("-", "_"))
+                setter(model)
+            else:
+                setter(type(val)(val))
+        
+        return func
 
 
 if __name__ == "__main__":

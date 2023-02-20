@@ -125,12 +125,8 @@ class SettingsFrame(BaseFrame):
             try:
                 val = self.outputs[key].get()
                 setter = self.setAttr(key)
+                setter(self, key, val)
 
-                if type(self.settings[key]).__name__ == "Model":
-                    model = getattr(self.controller.models, val.replace("-", "_"))
-                    setter(model)
-                else:
-                    setter(type(val)(val))
             except KeyError:
                 pass
             except tk.TclError as error:
