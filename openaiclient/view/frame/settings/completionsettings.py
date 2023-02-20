@@ -15,6 +15,9 @@ class CompletionSettings(SettingsFrame):
         super().__init__(main, controller)
 
         self.settings = self.controller.request.settings
+    
+    def setAttr(self, key):
+        return getattr(self.controller.request, "set_"+key)
 
 
 if __name__ == "__main__":

@@ -124,7 +124,7 @@ class SettingsFrame(BaseFrame):
         for key in self.settings:                
             try:
                 val = self.outputs[key].get()
-                setter = getattr(self.controller.request, "set_"+key)
+                setter = self.setAttr(key)
 
                 if type(self.settings[key]).__name__ == "Model":
                     model = getattr(self.controller.models, val.replace("-", "_"))
@@ -136,6 +136,10 @@ class SettingsFrame(BaseFrame):
             except tk.TclError as error:
                 messagebox.showerror(
                     f"Incorrect input in {key}", f"Key \"{key}\" " + str(error))
+    
+    def setAttr(self, key):
+        """This should be overridden. Returns setter for saveSettings() method"""
+        raise NotImplementedError
 
     def exitSettings(self):
         """exits the window without savings the changes"""
