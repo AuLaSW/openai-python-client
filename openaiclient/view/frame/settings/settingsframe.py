@@ -145,55 +145,6 @@ class SettingsFrame(BaseFrame):
             pady=10
         )
 
-    # default setting generator. Cleans
-    # up the code and makes it easier to
-    # define a new setting type
-    def baseSetting(
-            self,
-            tkVar,
-            tkFunc,
-            key,
-            value,
-            varKey,
-            args=(),
-            kwargs={}):
-        """
-        The function operates as follows:
-
-        1. This function appends the output variable for the setting input
-           frame to the kwargs dictionary. The output variable is generated
-           by passing tkVar to frame.createOutput().
-        2. Then, the function passes tkFunc and kwargs as arguments to
-           frame.addSettingWidget(), which returns the labelWidget and the
-           widget for inputting data.
-        3. The widgets are then placed onto the settings frame with the grid()
-           function on the current row.
-        """
-        args = tuple(args)
-
-        kwargs = kwargs | {varKey: tkVar()}
-
-        # add the output variable to the outputs dictionary
-        self.outputs[key] = kwargs[varKey]
-
-        # set value to default value
-        kwargs[varKey].set(self.settings[key])
-
-        # setup the widget that we want.
-        # must pass the widget function
-        # through the function and pass
-        # the kwargs with at least the
-        # option tracking variable to
-        # track what the entry value
-        # is
-        widget = tkFunc(
-            self,
-            *args,
-            **kwargs
-        )
-
-        return widget
-
     # string setting input
     def strSetting(self, key, value):
         """
