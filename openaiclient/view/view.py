@@ -6,7 +6,7 @@ API:
     run():
         Creates the window and starts the mainloop() for it.
 """
-from openaiclient.view.window.window import Window
+from openaiclient.view.window.window import *
 
 
 class View:
@@ -23,14 +23,17 @@ class View:
         # by passing the controller to the view,
         # we can bind controller functions to view
         # functions
-        self.controller = controller
+        self._controller = controller
+
+    def settingsWindow(self):
+        newWindow = tk.Tk()
+        frame = SettingsWindow(newWindow, self._controller)
+        frame.draw()
 
 
 if __name__ == "__main__":
-    from openaiclient.controller import Controller
+    from openaiclient.controller.controller import Controller
 
-    tempController = Controller()
+    view = View(None)
 
-    view = View(tempController)
-
-    view.run()
+    view.settingsWindow()
