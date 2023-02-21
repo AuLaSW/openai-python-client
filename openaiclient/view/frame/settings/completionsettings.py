@@ -1,6 +1,6 @@
 # completionsettings.py
 from openaiclient.view.frame.settings \
-    .settingsframe import SettingsFrame, Setting
+    .settingsframe import SettingsFrame
 
 """
 Class CompletionSettings:
@@ -30,7 +30,7 @@ class CompletionSettings(SettingsFrame):
         """
         Creates a drop-down setting with models as names
         """
-        setting = Setting()
+        setting = self.Setting()
         args = set()
 
         for model in self.controller.models.completionModels.keys():

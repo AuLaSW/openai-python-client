@@ -152,7 +152,7 @@ class SettingsFrame(BaseFrame):
         """
         Creates a string setting input with the Entry object.
         """
-        setting = Setting()
+        setting = self.Setting()
         
         setting.label = tk.Label(
             master=self,
@@ -175,7 +175,7 @@ class SettingsFrame(BaseFrame):
         """
         Creates an integer setting input with the Entry object.
         """
-        setting = Setting()
+        setting = self.Setting()
         
         setting.label = tk.Label(
             master=self,
@@ -198,7 +198,7 @@ class SettingsFrame(BaseFrame):
         """
         Creates an integer setting input with the Entry object.
         """
-        setting = Setting()
+        setting = self.Setting()
 
         setting.label = tk.Label(
             master=self,
@@ -222,7 +222,7 @@ class SettingsFrame(BaseFrame):
         Creates a boolean setting input with on and off values as 1 and 0 and
         the input as a checkbutton.
         """
-        setting = Setting()
+        setting = self.Setting()
         kwargs = dict()
 
         kwargs["onvalue"] = 1
@@ -260,30 +260,30 @@ class SettingsFrame(BaseFrame):
         return kwargs
 
 
-class Setting:
-    """Holds a setting with label and widget"""
-    def __init__(self, label=None, widget=None):
-        self._label = label
-        self._widget = widget
+    class Setting:
+        """Holds a setting with label and widget"""
+        def __init__(self, label=None, widget=None):
+            self._label = label
+            self._widget = widget
 
-    @property
-    def label(self):
-        """return label widget"""
-        return self._label
-    
-    @label.setter
-    def label(self, val):
-        """set label widget"""
-        self._label = val
+        @property
+        def label(self):
+            """return label widget"""
+            return self._label
+        
+        @label.setter
+        def label(self, val):
+            """set label widget"""
+            self._label = val
 
-    @property
-    def widget(self):
-        """return input widget"""
-        return self._widget
+        @property
+        def widget(self):
+            """return input widget"""
+            return self._widget
 
-    @widget.setter
-    def widget(self, val):
-        self._widget = val
+        @widget.setter
+        def widget(self, val):
+            self._widget = val
 
 
 if __name__ == "__main__":
