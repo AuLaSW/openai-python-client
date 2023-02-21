@@ -327,6 +327,32 @@ class SettingsFrame(BaseFrame):
         return kwargs
 
 
+class Setting:
+    """Holds a setting with label and widget"""
+    def __init__(self, label=None, widget=None):
+        self._label = label
+        self._widget = widget
+
+    @property
+    def label(self):
+        """return label widget"""
+        return self._label
+    
+    @label.setter
+    def label(self, val):
+        """set label widget"""
+        self._label = val
+
+    @property
+    def widget(self):
+        """return input widget"""
+        return self._widget
+
+    @widget.setter
+    def widget(self, val):
+        self._widget = val
+
+
 if __name__ == "__main__":
     settingsWindow = tk.Tk()
 
