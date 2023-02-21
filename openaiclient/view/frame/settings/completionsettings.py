@@ -73,20 +73,9 @@ class CompletionSettings(SettingsFrame):
 if __name__ == "__main__":
     import tkinter as tk
     from openaiclient.controller.controller import Controller
+    from openaiclient.view.view import View
     from tests.unit.fixture import api
 
     controller = Controller(api)
-    window = controller.view.window.window
-    window.resizable(False, False)
     controller.compReq()
-
-    frame = CompletionSettings(
-        main=window,
-        controller=controller
-    )
-
-    frame.create()
-
-    frame.pack()
-
-    window.mainloop()
+    controller.view.completionSettingsWindow()
