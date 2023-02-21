@@ -25,18 +25,6 @@ class View:
         # functions
         self.controller = controller
 
-        # the Window class will be directly
-        # interacting with the tkinter package
-        # this will give us specific frames and
-        # windows to call and use without having
-        # to go through tkinter directly
-        self.window = Window(self.controller)
-
-    def run(self):
-        """Run the start window and start the mainloop."""
-        self.window.completionSettingsWindow()
-        self.window.window.mainloop()
-
 
 if __name__ == "__main__":
     from openaiclient.controller import Controller
