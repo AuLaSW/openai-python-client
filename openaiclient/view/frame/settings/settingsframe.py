@@ -208,7 +208,7 @@ class SettingsFrame(BaseFrame):
         
         tkFunc = tk.Entry
         
-        kwargs = self._kwargs(tkFunc, tk.StringVar, key)
+        kwargs = self._kwargs(tkFunc, tk.StringVar, "textvariable", key)
 
         setting.widget = tkFunc(
             self,
@@ -231,7 +231,7 @@ class SettingsFrame(BaseFrame):
         
         tkFunc = tk.Entry
         
-        kwargs = self._kwargs(tkFunc, tk.IntVar, key)
+        kwargs = self._kwargs(tkFunc, tk.IntVar, "textvariable", key)
 
         setting.widget = tkFunc(
             self,
@@ -254,7 +254,7 @@ class SettingsFrame(BaseFrame):
         
         tkFunc = tk.Entry
         
-        kwargs = self._kwargs(tkFunc, tk.DoubleVar, key)
+        kwargs = self._kwargs(tkFunc, tk.DoubleVar, "textvariable", key)
 
         setting.widget = tkFunc(
             self,
@@ -282,7 +282,7 @@ class SettingsFrame(BaseFrame):
         
         tkFunc = tk.Checkbutton
         
-        kwargs = self._kwargs(tkFunc, tk.IntVar, key, kwargs)
+        kwargs = self._kwargs(tkFunc, tk.IntVar, "variable", key, kwargs)
 
         setting.widget = tkFunc(
             self,
@@ -306,7 +306,7 @@ class SettingsFrame(BaseFrame):
 
         tkFunc = tk.OptionMenu
 
-        self._kwargs(tkFunc, tk.StringVar, key)
+        self._kwargs(tkFunc, tk.StringVar, "variable", key)
 
         setting.label = tk.Label(
             master=self,
@@ -321,17 +321,8 @@ class SettingsFrame(BaseFrame):
         
         return setting
 
-    def _kwargs(self, tkFunc, tkVar, key, kwargs={}):
+    def _kwargs(self, tkFunc, tkVar, varKey, key, kwargs={}):
         """Sets up the kwargs for a setting input"""
-        # get the signature of the function tkFunc
-        sig = inspect.signature(tkFunc)
-
-        # find the variable parameter in the signature
-        # and set varKey to that string
-        for param in sig.parameters.values():
-            if "variable" in param.name:
-                varKey = param.name
-
         # add varKey: tkVar() to the kwargs
         kwargs = kwargs | {varKey: tkVar()}
 
@@ -340,7 +331,7 @@ class SettingsFrame(BaseFrame):
         self.outputs[key] = kwargs[varKey]
 
         # set the value of the tkVar
-        kwargs[varKey].set(value=self.settings[key].name)
+        kwargs[varKey].set(value=self.settings[key])
 
         # return kwargs
         return kwargs
