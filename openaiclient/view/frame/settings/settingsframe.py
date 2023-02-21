@@ -3,6 +3,7 @@ SettingsFrame Module
 """
 import tkinter as tk
 import tkinter.messagebox as messagebox
+import inspect
 from openaiclient.view.frame.baseframe import BaseFrame
 
 
@@ -276,24 +277,17 @@ class SettingsFrame(BaseFrame):
         """
         Creates a drop-down setting with models as names
         """
-        kwargs = {}
         args = set()
+
         for model in self.controller.models.completionModels.keys():
             args.add(model)
         
         tkVar = tk.StringVar
         tkFunc = tk.OptionMenu
-        varKey = "variable"
         
         args = tuple(args)
 
-        kwargs = kwargs | {varKey: tkVar()}
-
-        # add the output variable to the outputs dictionary
-        self.outputs[key] = kwargs[varKey]
-
-        # set value to default value
-        kwargs[varKey].set(self.settings[key].name)
+        kwargs = self._kwargs(tkFunc, tkVar, key)
 
         labelWidget = tk.Label(
             master=self,
@@ -309,11 +303,35 @@ class SettingsFrame(BaseFrame):
         # is
         widget = tkFunc(
             self,
-            kwargs[varKey],
+            self.outputs[key],
             *args
         )
         
         return labelWidget, widget
+
+    def _kwargs(self, tkFunc, tkVar, key, kwargs={}):
+        """Sets up the kwargs for a setting input"""
+        # get the signature of the function tkFunc
+        sig = inspect.signature(tkFunc)
+
+        # find the variable parameter in the signature
+        # and set varKey to that string
+        for param in sig.parameters.values():
+            if "variable" in param.name:
+                varKey = param.name
+
+        # add varKey: tkVar() to the kwargs
+        kwargs = kwargs | {varKey: tkVar()}
+
+        # point the output dictionary value key to
+        # the tkVar() we just set up
+        self.outputs[key] = kwargs[varKey]
+
+        # set the value of the tkVar
+        kwargs[varKey].set(value=self.settings[key].name)
+
+        # return kwargs
+        return kwargs
 
 
 if __name__ == "__main__":
