@@ -100,7 +100,7 @@ class SettingsFrame(BaseFrame):
                 messagebox.showerror(
                     f"Incorrect input in {key}", f"Key {str(error)}")
     
-    def setAttr(self, key):
+    def setAttr(self, key, val):
         """This should be overridden. Returns setter for saveSettings() method"""
         raise NotImplementedError
 
