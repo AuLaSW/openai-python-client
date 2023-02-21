@@ -92,18 +92,10 @@ class CompletionInputFrame(BaseFrame):
 
 if __name__ == "__main__":
     from openaiclient.controller.controller import Controller
+    from openaiclient.view.view import View
     from tests.unit.fixture import api
 
-    window = tk.Tk()
-    window.resizable(False, False)
     controller = Controller(api)
-
-    cif = CompletionInputFrame(
-        main=window,
-        controller=controller
-    )
-
-    cif.create()
-    cif.pack()
-
-    window.mainloop()
+    controller.compReq()
+    window = tk.Tk()
+    controller.view.completionInputWindow(window)
