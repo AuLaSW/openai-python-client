@@ -307,6 +307,8 @@ class SettingsFrame(BaseFrame):
         tkFunc = tk.OptionMenu
 
         self._kwargs(tkFunc, tk.StringVar, "variable", key)
+        
+        self.outputs[key].set(self.settings[key].name)
 
         setting.label = tk.Label(
             master=self,
@@ -331,7 +333,7 @@ class SettingsFrame(BaseFrame):
         self.outputs[key] = kwargs[varKey]
 
         # set the value of the tkVar
-        kwargs[varKey].set(value=self.settings[key])
+        kwargs[varKey].set(self.settings[key])
 
         # return kwargs
         return kwargs
