@@ -33,6 +33,14 @@ class Window(ABC):
 
         self._window.mainloop()
 
+    @property
+    def window(self):
+        return self._window
+
+    @property
+    def controller(self):
+        return self._controller
+
 
 class CompletionSettingsWindow(Window):
     """
