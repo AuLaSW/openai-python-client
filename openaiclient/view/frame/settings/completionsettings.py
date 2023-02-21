@@ -1,12 +1,12 @@
 # completionsettings.py
 from __future__ import annotations
 from typing import TYPE_CHECKING
+import tkinter as tk
 from openaiclient.view.frame.settings \
     .settingsframe import SettingsFrame
 
     
 if TYPE_CHECKING:
-    import tk
     from openaiclient.controller.controller import Controller
     from openaiclient.view.frame.settings.settingsframe import SettingsFrame
 
