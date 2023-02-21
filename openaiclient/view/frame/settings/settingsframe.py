@@ -294,13 +294,6 @@ class SettingsFrame(BaseFrame):
             text=key
         )
 
-        # setup the widget that we want.
-        # must pass the widget function
-        # through the function and pass
-        # the kwargs with at least the
-        # option tracking variable to
-        # track what the entry value
-        # is
         widget = tkFunc(
             self,
             self.outputs[key],
