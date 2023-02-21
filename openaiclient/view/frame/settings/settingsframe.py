@@ -56,8 +56,13 @@ class SettingsFrame(BaseFrame):
         # dictionary of settings
         for key, value in self.settings.items():
             # get the name of the input type
-            # str, int, float, or bool
-            typeOfValue = type(value).__name__.lower()
+            # and make the first letter lowercase
+            typeOfValue = type(value).__name__
+            typeOfValue = typeOfValue.replace(
+                typeOfValue[0],
+                typeOfValue[0].lower(),
+                1
+            )
 
             try:
                 # get the correct setting function
