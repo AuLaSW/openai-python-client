@@ -34,7 +34,7 @@ class CompletionSettings(SettingsFrame):
             setter(type(self.settings[key])(val))
     
     # Model setting input
-    def ModelSetting(self, key:str, value) -> SettingsFrame.Setting:
+    def modelSetting(self, key:str, value) -> SettingsFrame.Setting:
         """
         Creates a drop-down setting with models as names
         """
