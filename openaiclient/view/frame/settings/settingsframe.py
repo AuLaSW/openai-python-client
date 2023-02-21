@@ -18,6 +18,9 @@ class SettingsFrame(BaseFrame):
 
     def __init__(self, main, controller):
         super().__init__(main, controller)
+        
+        self._PADX = 10
+        self._PADY = 5
 
         # hold the settings we will be using
         self.settings = dict()
@@ -67,7 +70,7 @@ class SettingsFrame(BaseFrame):
                 column=0,
                 row=self.row,
                 padx=10,
-                pady=10,
+                pady=5,
                 sticky=tk.E
             )
 
@@ -75,8 +78,8 @@ class SettingsFrame(BaseFrame):
             setting.widget.grid(
                 column=1,
                 row=self.row,
-                padx=10,
-                pady=10,
+                padx=self._PADX,
+                pady=self._PADY,
                 sticky=tk.W
             )
 
@@ -121,9 +124,9 @@ class SettingsFrame(BaseFrame):
         ).grid(
             column=0,
             row=0,
-            padx=10,
-            pady=10,
-            ipadx=30
+            padx=self._PADX,
+            pady=self._PADY,
+            ipadx=40
         )
 
         # button to close the window
@@ -134,17 +137,17 @@ class SettingsFrame(BaseFrame):
         ).grid(
             column=1,
             row=0,
-            padx=10,
-            pady=10,
-            ipadx=30
+            padx=self._PADX,
+            pady=self._PADY,
+            ipadx=40
         )
 
         frame.grid(
             column=0,
             row=self.row,
             columnspan=2,
-            padx=10,
-            pady=10
+            padx=self._PADX,
+            pady=self._PADY
         )
 
     # string setting input
