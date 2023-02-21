@@ -91,12 +91,14 @@ class SettingsFrame(BaseFrame):
             try:
                 val = self.outputs[key].get()
                 self.setAttr(key, val)
-
             except KeyError:
                 pass
             except tk.TclError as error:
                 messagebox.showerror(
-                    f"Incorrect input in {key}", f"Key \"{key}\" " + str(error))
+                    f"Incorrect input in {key}", f"Key \"{key}\" {str(error)}")
+            except RuntimeError as error:
+                messagebox.showerror(
+                    f"Incorrect input in {key}", f"Key {str(error)}")
     
     def setAttr(self, key):
         """This should be overridden. Returns setter for saveSettings() method"""
