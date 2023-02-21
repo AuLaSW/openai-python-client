@@ -30,7 +30,7 @@ class CompletionSettings(SettingsFrame):
             model = getattr(self.controller.models, val.replace("-", "_"))
             setter(model)
         else:
-            setter(type(val)(val))
+            setter(type(self.settings[key])(val))
     
     # Model setting input
     def ModelSetting(self, key:str, value) -> SettingsFrame.Setting:
