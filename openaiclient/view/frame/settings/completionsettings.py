@@ -1,6 +1,13 @@
 # completionsettings.py
+from __future__ import annotations
+from typing import TYPE_CHECKING
 from openaiclient.view.frame.settings \
     .settingsframe import SettingsFrame
+
+    
+if TYPE_CHECKING:
+    from openaiclient.controller.controller import Controller
+    from openaiclient.view.frame.settings.settingsframe import SettingsFrame
 
 """
 Class CompletionSettings:
@@ -11,12 +18,12 @@ with settings for an OpenAI API text-completion request.
 
 
 class CompletionSettings(SettingsFrame):
-    def __init__(self, main, controller):
+    def __init__(self, main: SettingsFrame, controller: Controller):
         super().__init__(main, controller)
 
         self.settings = self.controller.request.settings
     
-    def setAttr(self, key, val):
+    def setAttr(self, key:str, val) -> None:
         setter = getattr(self.controller.request, "set_"+key)
         
         if type(self.settings[key]).__name__ == "Model":
@@ -26,13 +33,12 @@ class CompletionSettings(SettingsFrame):
             setter(type(val)(val))
     
     # Model setting input
-    def ModelSetting(self, key, value):
+    def ModelSetting(self, key:str, value) -> SettingsFrame.Setting:
         """
         Creates a drop-down setting with models as names
         """
         setting = self.Setting()
         args = self.modelArgs()
-
         tkFunc = tk.OptionMenu
 
         self._kwargs(tkFunc, tk.StringVar, "variable", key)
