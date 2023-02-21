@@ -57,7 +57,7 @@ class SettingsFrame(BaseFrame):
         for key, value in self.settings.items():
             # get the name of the input type
             # str, int, float, or bool
-            typeOfValue = type(value).__name__
+            typeOfValue = type(value).__name__.lower()
 
             try:
                 # get the correct setting function
