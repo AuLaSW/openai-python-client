@@ -281,11 +281,11 @@ class SettingsFrame(BaseFrame):
 
         for model in self.controller.models.completionModels.keys():
             args.add(model)
+
+        args = tuple(args)
         
         tkVar = tk.StringVar
         tkFunc = tk.OptionMenu
-        
-        args = tuple(args)
 
         kwargs = self._kwargs(tkFunc, tkVar, key)
 
