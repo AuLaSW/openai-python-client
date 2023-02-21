@@ -56,10 +56,10 @@ class Controller:
     def request(self):
         return self._request
 
-    def compReq(self):
+    def compReq(self) -> None:
         self._request = CompletionRequest(self._module, self.models)
 
-    def editReq(self):
+    def editReq(self) -> None:
         self._request = EditRequest(self._module, self.models)
 
     @property
