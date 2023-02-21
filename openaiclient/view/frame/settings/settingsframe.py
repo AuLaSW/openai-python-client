@@ -60,10 +60,10 @@ class SettingsFrame(BaseFrame):
                 continue
 
             # get label and widget from function
-            labelWidget, widget = func(key, value)
+            setting = func(key, value)
 
             # attach label
-            labelWidget.grid(
+            setting.label.grid(
                 column=0,
                 row=self.row,
                 padx=10,
@@ -72,7 +72,7 @@ class SettingsFrame(BaseFrame):
             )
 
             # attach widget
-            widget.grid(
+            setting.widget.grid(
                 column=1,
                 row=self.row,
                 padx=10,
@@ -206,13 +206,16 @@ class SettingsFrame(BaseFrame):
             text=key
         )
         
-        return setting.label, self.baseSetting(
-            tk.StringVar,
-            tk.Entry,
-            key,
-            value,
-            "textvariable"
+        tkFunc = tk.Entry
+        
+        kwargs = self._kwargs(tkFunc, tk.StringVar, key)
+
+        setting.widget = tkFunc(
+            self,
+            **kwargs
         )
+        
+        return setting
 
     # integer setting input
     def intSetting(self, key, value):
@@ -226,13 +229,16 @@ class SettingsFrame(BaseFrame):
             text=key
         )
         
-        return setting.label, self.baseSetting(
-            tk.IntVar,
-            tk.Entry,
-            key,
-            value,
-            "textvariable"
+        tkFunc = tk.Entry
+        
+        kwargs = self._kwargs(tkFunc, tk.IntVar, key)
+
+        setting.widget = tkFunc(
+            self,
+            **kwargs
         )
+        
+        return setting
 
     # float setting input
     def floatSetting(self, key, value):
@@ -240,18 +246,22 @@ class SettingsFrame(BaseFrame):
         Creates an integer setting input with the Entry object.
         """
         setting = Setting()
+
         setting.label = tk.Label(
             master=self,
             text=key
         )
         
-        return setting.label, self.baseSetting(
-            tk.DoubleVar,
-            tk.Entry,
-            key,
-            value,
-            "textvariable"
+        tkFunc = tk.Entry
+        
+        kwargs = self._kwargs(tkFunc, tk.DoubleVar, key)
+
+        setting.widget = tkFunc(
+            self,
+            **kwargs
         )
+        
+        return setting
 
     # boolean setting input
     def boolSetting(self, key, value):
@@ -269,15 +279,17 @@ class SettingsFrame(BaseFrame):
             master=self,
             text=key
         )
+        
+        tkFunc = tk.Checkbutton
+        
+        kwargs = self._kwargs(tkFunc, tk.IntVar, key, kwargs)
 
-        return setting.label, self.baseSetting(
-            tk.IntVar,
-            tk.Checkbutton,
-            key,
-            value,
-            "variable",
-            kwargs=kwargs
+        setting.widget = tkFunc(
+            self,
+            **kwargs
         )
+
+        return setting
 
     # float setting input
     def ModelSetting(self, key, value):
@@ -291,11 +303,10 @@ class SettingsFrame(BaseFrame):
             args.add(model)
 
         args = tuple(args)
-        
-        tkVar = tk.StringVar
+
         tkFunc = tk.OptionMenu
 
-        self._kwargs(tkFunc, tkVar, key)
+        self._kwargs(tkFunc, tk.StringVar, key)
 
         setting.label = tk.Label(
             master=self,
@@ -308,7 +319,7 @@ class SettingsFrame(BaseFrame):
             *args
         )
         
-        return setting.label, setting.widget
+        return setting
 
     def _kwargs(self, tkFunc, tkVar, key, kwargs={}):
         """Sets up the kwargs for a setting input"""
