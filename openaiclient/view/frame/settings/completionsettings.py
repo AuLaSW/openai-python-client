@@ -31,12 +31,7 @@ class CompletionSettings(SettingsFrame):
         Creates a drop-down setting with models as names
         """
         setting = self.Setting()
-        args = set()
-
-        for model in self.controller.models.completionModels.keys():
-            args.add(model)
-
-        args = tuple(args)
+        args = self.modelArgs()
 
         tkFunc = tk.OptionMenu
 
@@ -56,6 +51,12 @@ class CompletionSettings(SettingsFrame):
         )
         
         return setting
+    
+    def modelArgs(self, args=set()):
+        for model in self.controller.models.completionModels.keys():
+            args.add(model)
+
+        return tuple(args)
 
 
 if __name__ == "__main__":
