@@ -287,7 +287,7 @@ class SettingsFrame(BaseFrame):
         tkVar = tk.StringVar
         tkFunc = tk.OptionMenu
 
-        kwargs = self._kwargs(tkFunc, tkVar, key)
+        self._kwargs(tkFunc, tkVar, key)
 
         labelWidget = tk.Label(
             master=self,
