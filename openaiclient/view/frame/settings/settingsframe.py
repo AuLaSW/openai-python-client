@@ -199,12 +199,14 @@ class SettingsFrame(BaseFrame):
         """
         Creates a string setting input with the Entry object.
         """
-        labelWidget = tk.Label(
+        setting = Setting()
+        
+        setting.label = tk.Label(
             master=self,
             text=key
         )
         
-        return labelWidget, self.baseSetting(
+        return setting.label, self.baseSetting(
             tk.StringVar,
             tk.Entry,
             key,
@@ -217,12 +219,14 @@ class SettingsFrame(BaseFrame):
         """
         Creates an integer setting input with the Entry object.
         """
-        labelWidget = tk.Label(
+        setting = Setting()
+        
+        setting.label = tk.Label(
             master=self,
             text=key
         )
         
-        return labelWidget, self.baseSetting(
+        return setting.label, self.baseSetting(
             tk.IntVar,
             tk.Entry,
             key,
@@ -235,12 +239,13 @@ class SettingsFrame(BaseFrame):
         """
         Creates an integer setting input with the Entry object.
         """
-        labelWidget = tk.Label(
+        setting = Setting()
+        setting.label = tk.Label(
             master=self,
             text=key
         )
         
-        return labelWidget, self.baseSetting(
+        return setting.label, self.baseSetting(
             tk.DoubleVar,
             tk.Entry,
             key,
@@ -254,16 +259,18 @@ class SettingsFrame(BaseFrame):
         Creates a boolean setting input with on and off values as 1 and 0 and
         the input as a checkbutton.
         """
+        setting = Setting()
         kwargs = dict()
+
         kwargs["onvalue"] = 1
         kwargs["offvalue"] = 0
         
-        labelWidget = tk.Label(
+        setting.label = tk.Label(
             master=self,
             text=key
         )
 
-        return labelWidget, self.baseSetting(
+        return setting.label, self.baseSetting(
             tk.IntVar,
             tk.Checkbutton,
             key,
@@ -277,6 +284,7 @@ class SettingsFrame(BaseFrame):
         """
         Creates a drop-down setting with models as names
         """
+        setting = Setting()
         args = set()
 
         for model in self.controller.models.completionModels.keys():
@@ -289,18 +297,18 @@ class SettingsFrame(BaseFrame):
 
         self._kwargs(tkFunc, tkVar, key)
 
-        labelWidget = tk.Label(
+        setting.label = tk.Label(
             master=self,
             text=key
         )
 
-        widget = tkFunc(
+        setting.widget = tkFunc(
             self,
             self.outputs[key],
             *args
         )
         
-        return labelWidget, widget
+        return setting.label, setting.widget
 
     def _kwargs(self, tkFunc, tkVar, key, kwargs={}):
         """Sets up the kwargs for a setting input"""
