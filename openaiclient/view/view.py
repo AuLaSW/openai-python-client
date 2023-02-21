@@ -19,13 +19,10 @@ class View:
     """
 
     def __init__(self, controller):
-        # bind the controller to the view object
-        # by passing the controller to the view,
-        # we can bind controller functions to view
-        # functions
         self._controller = controller
 
     def settingsWindow(self):
+        """Create a default settings window with default settings, for testin purposes only"""
         newWindow = tk.Tk()
         frame = SettingsWindow(newWindow, self._controller)
         frame.draw()
