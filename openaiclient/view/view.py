@@ -37,7 +37,7 @@ class View:
 
     def completionInputWindow(self, curWindow):
         """Create a completion input window for writing prompts for the OpenAI API"""
-        frame = CompletionSettingsWindow(curWindow, self._controller)
+        frame = CompletionInputWindow(curWindow, self._controller)
         frame.draw()
 
 
