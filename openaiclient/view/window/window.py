@@ -1,47 +1,70 @@
 """
 This module creates windows for the openai-client program.
-
-API:
-    completionSettingsWindow():
-        This creates the completion settings frame and attaches packs in into
-        the current window.
 """
+from __future__ import annotations
 import tkinter as tk
+from abc import ABC, abstractmethod
+from typing import TYPE_CHECKING
 from openaiclient.view.frame.settings.completionsettings import CompletionSettings
+from openaiclient.view.frame.settings.settingsframe import SettingsFrame
+from openaiclient.view.frame.input.completioninput import CompletionInputFrame
 
+if TYPE_CHECKING:
+    from openaiclient.controller.controller import Controller
 
-class Window:
+class Window(ABC):
     """
-    This class generates and manages the different windows the program uses.
-
-    Functions
-    ---------
-
-    __init__(self, controller):
-        Initializes the window.
-
-    completionSettingsWindow(self):
-        Generates a completion settings window.
+    An abstract constructor class for different windows
     """
+    def __init__(self, window: tk.Tk, controller: Controller):
+        self._window = window
+        self._controller = controller
 
-    def __init__(self, controller):
-        # the main window
-        self.window = tk.Tk()
-        # the controller managing the window
-        # and the models
-        self.controller = controller
-        # the frame that will be packed onto the
-        # window
-        self.frame = None
+    @abstractmethod
+    def windowConstructor(self):
+        """Constructs the frame product"""
+        pass
 
-    # function for drawing the window given the frame
-    # the window will hold. Allows for a window to be
-    # reset without starting a new window instance.
-    def completionSettingsWindow(self):
-        """Generates a window for the completion settings"""
-        self.frame = CompletionSettings(self.window, self.controller)
-        self.frame.pack()
+    def draw(self):
+        """Packs the product onto the window"""
+        frame = self.windowConstructor()
+        frame.create()
+        frame.pack()
+
+
+class CompletionSettingsWindow(Window):
+    """
+    A concrete factory class for the CompletionSettings window.
+    """
+    def windowConstructor(self) -> CompletionSettings:
+        """Constructs a CompletionSettings frame product"""
+        return CompletionSettings(self._window, self._controller)
+
+
+class SettingsWindow(Window):
+    """
+    A concrete factory class for the CompletionSettings window.
+    """
+    def windowConstructor(self) -> SettingsFrame:
+        """Constructs a CompletionSettings frame product"""
+        return SettingsFrame(self._window, self._controller)
+
+
+class CompletionInputWindow(Window):
+    """
+    A concrete factor class for the CompletionInput window.
+    """
+    def windowConstructor(self) -> CompletionInputFrame:
+        return CompletionInputFrame(self._window, self._controller)
 
 
 if __name__ == "__main__":
-    pass
+    from openaiclient.controller.controller import Controller
+
+    window = tk.Tk()
+
+    csw = SettingsWindow(window, None)
+    
+    csw.draw()
+
+    csw._window.mainloop()
