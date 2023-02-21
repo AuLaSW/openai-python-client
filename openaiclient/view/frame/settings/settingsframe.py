@@ -22,8 +22,15 @@ class SettingsFrame(BaseFrame):
         self._PADX = 10
         self._PADY = 5
 
-        # hold the settings we will be using
-        self.settings = dict()
+        # variable to hold the settings we will be using
+        # has a default value for testing.
+        self.settings = {
+            "testKey": "testVal",
+            "testIntKey": 1,
+            "testBoolKey": True,
+            "testFloatKey": 1.0,
+            "testNotInOptions": None
+        }
         # hold the tk variables for returning inputs from the frame
         self.outputs = dict()
 
@@ -296,14 +303,6 @@ if __name__ == "__main__":
         main=settingsWindow,
         controller=None
     )
-
-    settingsFrame.settings = {
-        "testKey": "testVal",
-        "testIntKey": 1,
-        "testBoolKey": True,
-        "testFloatKey": 1.0,
-        "testNotInOptions": None
-    }
 
     settingsFrame.create()
 
