@@ -31,7 +31,7 @@ class Window(ABC):
         frame.create()
         frame.pack()
 
-        self._window.mainloop()
+        self.window.mainloop()
 
     @property
     def window(self):
@@ -48,7 +48,7 @@ class CompletionSettingsWindow(Window):
     """
     def windowConstructor(self) -> CompletionSettings:
         """Constructs a CompletionSettings frame product"""
-        return CompletionSettings(self._window, self._controller)
+        return CompletionSettings(self.window, self.controller)
 
 
 class SettingsWindow(Window):
@@ -57,7 +57,7 @@ class SettingsWindow(Window):
     """
     def windowConstructor(self) -> SettingsFrame:
         """Constructs a CompletionSettings frame product"""
-        return SettingsFrame(self._window, self._controller)
+        return SettingsFrame(self.window, self.controller)
 
 
 class CompletionInputWindow(Window):
@@ -65,7 +65,7 @@ class CompletionInputWindow(Window):
     A concrete factor class for the CompletionInput window.
     """
     def windowConstructor(self) -> CompletionInputFrame:
-        return CompletionInputFrame(self._window, self._controller)
+        return CompletionInputFrame(self.window, self.controller)
 
 
 if __name__ == "__main__":
