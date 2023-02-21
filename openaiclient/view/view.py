@@ -27,6 +27,17 @@ class View:
         frame = SettingsWindow(newWindow, self._controller)
         frame.draw()
 
+    def completionSettingsWindow(self):
+        """Create a completion settings window with settings from the CompletionRequest class"""
+        newWindow = tk.Tk()
+        frame = CompletionSettingsWindow(newWindow, self._controller)
+        frame.draw()
+
+    def completionInputWindow(self, curWindow):
+        """Create a completion input window for writing prompts for the OpenAI API"""
+        frame = CompletionSettingsWindow(curWindow, self._controller)
+        frame.draw()
+
 
 if __name__ == "__main__":
     from openaiclient.controller.controller import Controller
