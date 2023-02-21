@@ -56,6 +56,10 @@ class CompletionSettings(SettingsFrame):
             *args
         )
         
+        setting.widget.config(
+            width=15
+        )
+        
         return setting
     
     def modelArgs(self, args=set()):
