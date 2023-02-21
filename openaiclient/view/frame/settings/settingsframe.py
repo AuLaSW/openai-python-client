@@ -178,11 +178,6 @@ class SettingsFrame(BaseFrame):
         # set value to default value
         kwargs[varKey].set(self.settings[key])
 
-        labelWidget = tk.Label(
-            master=self,
-            text=key
-        )
-
         # setup the widget that we want.
         # must pass the widget function
         # through the function and pass
@@ -196,43 +191,61 @@ class SettingsFrame(BaseFrame):
             **kwargs
         )
 
-        return labelWidget, widget
+        return widget
 
     # string setting input
     def strSetting(self, key, value):
         """
         Creates a string setting input with the Entry object.
         """
-        return self.baseSetting(
+        labelWidget = tk.Label(
+            master=self,
+            text=key
+        )
+        
+        return labelWidget, self.baseSetting(
             tk.StringVar,
             tk.Entry,
             key,
             value,
-            "textvariable")
+            "textvariable"
+        )
 
     # integer setting input
     def intSetting(self, key, value):
         """
         Creates an integer setting input with the Entry object.
         """
-        return self.baseSetting(
+        labelWidget = tk.Label(
+            master=self,
+            text=key
+        )
+        
+        return labelWidget, self.baseSetting(
             tk.IntVar,
             tk.Entry,
             key,
             value,
-            "textvariable")
+            "textvariable"
+        )
 
     # float setting input
     def floatSetting(self, key, value):
         """
         Creates an integer setting input with the Entry object.
         """
-        return self.baseSetting(
+        labelWidget = tk.Label(
+            master=self,
+            text=key
+        )
+        
+        return labelWidget, self.baseSetting(
             tk.DoubleVar,
             tk.Entry,
             key,
             value,
-            "textvariable")
+            "textvariable"
+        )
 
     # boolean setting input
     def boolSetting(self, key, value):
@@ -243,8 +256,13 @@ class SettingsFrame(BaseFrame):
         kwargs = dict()
         kwargs["onvalue"] = 1
         kwargs["offvalue"] = 0
+        
+        labelWidget = tk.Label(
+            master=self,
+            text=key
+        )
 
-        return self.baseSetting(
+        return labelWidget, self.baseSetting(
             tk.IntVar,
             tk.Checkbutton,
             key,
