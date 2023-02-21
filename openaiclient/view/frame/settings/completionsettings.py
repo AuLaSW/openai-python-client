@@ -6,6 +6,7 @@ from openaiclient.view.frame.settings \
 
     
 if TYPE_CHECKING:
+    import tk
     from openaiclient.controller.controller import Controller
     from openaiclient.view.frame.settings.settingsframe import SettingsFrame
 
@@ -18,7 +19,7 @@ with settings for an OpenAI API text-completion request.
 
 
 class CompletionSettings(SettingsFrame):
-    def __init__(self, main: SettingsFrame, controller: Controller):
+    def __init__(self, main: SettingsFrame | tk.Tk, controller: Controller):
         super().__init__(main, controller)
 
         self.settings = self.controller.request.settings
