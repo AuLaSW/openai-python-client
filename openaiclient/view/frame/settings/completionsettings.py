@@ -1,6 +1,6 @@
 # completionsettings.py
 from openaiclient.view.frame.settings \
-    .settingsframe import SettingsFrame
+    .settingsframe import SettingsFrame, Setting
 
 """
 Class CompletionSettings:
@@ -24,6 +24,38 @@ class CompletionSettings(SettingsFrame):
             setter(model)
         else:
             setter(type(val)(val))
+    
+    # Model setting input
+    def ModelSetting(self, key, value):
+        """
+        Creates a drop-down setting with models as names
+        """
+        setting = Setting()
+        args = set()
+
+        for model in self.controller.models.completionModels.keys():
+            args.add(model)
+
+        args = tuple(args)
+
+        tkFunc = tk.OptionMenu
+
+        self._kwargs(tkFunc, tk.StringVar, "variable", key)
+        
+        self.outputs[key].set(self.settings[key].name)
+
+        setting.label = tk.Label(
+            master=self,
+            text=key
+        )
+
+        setting.widget = tkFunc(
+            self,
+            self.outputs[key],
+            *args
+        )
+        
+        return setting
 
 
 if __name__ == "__main__":

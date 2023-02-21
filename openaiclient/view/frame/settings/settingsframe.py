@@ -244,38 +244,6 @@ class SettingsFrame(BaseFrame):
 
         return setting
 
-    # float setting input
-    def ModelSetting(self, key, value):
-        """
-        Creates a drop-down setting with models as names
-        """
-        setting = Setting()
-        args = set()
-
-        for model in self.controller.models.completionModels.keys():
-            args.add(model)
-
-        args = tuple(args)
-
-        tkFunc = tk.OptionMenu
-
-        self._kwargs(tkFunc, tk.StringVar, "variable", key)
-        
-        self.outputs[key].set(self.settings[key].name)
-
-        setting.label = tk.Label(
-            master=self,
-            text=key
-        )
-
-        setting.widget = tkFunc(
-            self,
-            self.outputs[key],
-            *args
-        )
-        
-        return setting
-
     def _kwargs(self, tkFunc, tkVar, varKey, key, kwargs={}):
         """Sets up the kwargs for a setting input"""
         # add varKey: tkVar() to the kwargs
