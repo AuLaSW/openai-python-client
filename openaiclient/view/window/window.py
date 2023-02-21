@@ -26,10 +26,12 @@ class Window(ABC):
         pass
 
     def draw(self):
-        """Packs the product onto the window"""
+        """Packs the product onto the window and starts the window"""
         frame = self.windowConstructor()
         frame.create()
         frame.pack()
+
+        self._window.mainloop()
 
 
 class CompletionSettingsWindow(Window):
@@ -66,5 +68,3 @@ if __name__ == "__main__":
     csw = SettingsWindow(window, None)
     
     csw.draw()
-
-    csw._window.mainloop()
