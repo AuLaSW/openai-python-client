@@ -45,6 +45,7 @@ class MainMenu(MenuFactory):
     
     def createMenu(self) -> None:
         self.addFileMenu()
+        self.addSettingMenu()
 
     def createFileMenu(self) -> tk.Menu:
         return MainFileMenu(self._menubar).menu
@@ -53,6 +54,15 @@ class MainMenu(MenuFactory):
         self._menubar.add_cascade(
             label="File",
             menu=self.createFileMenu()
+        )
+    
+    def createSettingMenu(self) -> tk.Menu:
+        return MainSettingMenu(self._menubar).menu
+    
+    def addSettingMenu(self):
+        self._menubar.add_cascade(
+            label="Settings",
+            menu=self.createSettingMenu()
         )
 
 
