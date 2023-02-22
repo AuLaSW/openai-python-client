@@ -2,9 +2,6 @@
 from openaiclient.view.frame.baseframe import BaseFrame
 import tkinter as tkinter
 
-"""
-"""
-
 
 class MenuFrame(BaseFrame):
     def __init__(self, main, controller):
@@ -15,6 +12,7 @@ class MenuFrame(BaseFrame):
         self.column = 0
         self.row = 0
 
+    """
     def create(self):
         for menu in self.menuLabels:
             self.menuOptions[menu] = tk.StringVar()
@@ -49,3 +47,4 @@ class MenuFrame(BaseFrame):
             )
         else:
             return RuntimeError()
+    """
