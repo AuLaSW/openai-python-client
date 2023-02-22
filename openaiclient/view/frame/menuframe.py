@@ -13,91 +13,71 @@ class MenuFrame(BaseFrame):
         self.row = 0
 
     def create(self):
-        mb = tk.Menubutton(
-            self,
-            text='Test Menu',
-            relief=tk.RAISED
-        )
-
-        mb.grid(
-            sticky=tk.W
-        )
-
-        mb.menu = tk.Menu(
-            mb,
-            tearoff=0
-        )
-        mb['menu'] = mb.menu
-
-
-        mb.menu.add_command(
-            label='test command',
-            command=None
-        )
-
-    """
-    def create(self):
-        for menu in self.menuLabels:
-            self.menuOptions[menu] = tk.StringVar()
-
-            tk.OptionMenu(
-                container=self,
-                variable=self.menuOptions[menu],
-                default=self.menuLabels[menu][0],
-                *self.menuLavels[menu],
-                # command=,
-                # **kwargs
-            ).grid(
-                column=self.column,
-                row=self.row,
-                padx=10,
-                pady=10,
-            )
-
-            self.column += 1
-
-    # attach a frame to the menu frame
-    def attach(self, frame):
-        # if the current menu frame is
-        # not the owner of the attached
-        # frame, then it cannot attach it.
-        if frame.master is self:
-            frame.grid(
-                column=0,
-                row=1,
-                padx=10,
-                pady=10,
-            )
-        else:
-            return RuntimeError()
-    """
 
 
 if __name__ == "__main__":
     """
     An example of how to create a menu
     """
-    window = tk.Tk()
-    mb = tk.Menubutton(
-        window,
-        text='condiments',
-    )
-    mb.grid()
+    from tkinter import *
 
-    mb.menu = tk.Menu(
-        mb,
-        tearoff=0
-    )
-    mb['menu'] = mb.menu
-    mayoVar = tk.IntVar()
-    ketchVar = tk.IntVar()
-    mb.menu.add_checkbutton(
-        label='mayo',
-        variable=mayoVar
-    )
-    mb.menu.add_command(
-        label='ketchup',
-        command=None
-    )
+    def donothing():
+        # Toplevel() is preferred over generating
+        # a new Tk() instance
+        filewin = Toplevel(root)
+        button = Button(filewin, text="Do nothing button")
+        button.pack()
 
-    window.mainloop()
+    # generate the root Tk() instance
+    root = Tk()
+    # attach a Menu to the root instance
+    # this menu will act as the menu bar that
+    # all of the other menus branch off from
+    menubar = Menu(root)
+    # create the file menu
+    filemenu = Menu(menubar, tearoff=0)
+    # add commands to the file menu
+    filemenu.add_command(label="New", command=donothing)
+    filemenu.add_command(label="Open", command=donothing)
+    filemenu.add_command(label="Save", command=donothing)
+    filemenu.add_command(label="Save as...", command=donothing)
+    filemenu.add_command(label="Close", command=donothing)
+
+    # this adds a separator between Close and '
+    # Exit buttons in the file menu
+    filemenu.add_separator()
+
+    filemenu.add_command(label="Exit", command=root.quit)
+    
+    # now, add the file menu to the menubar
+    # and add it as a cascade menu
+    menubar.add_cascade(label="File", menu=filemenu)
+    
+    # create the edit menu
+    editmenu = Menu(menubar, tearoff=0)
+    editmenu.add_command(label="Undo", command=donothing)
+
+    editmenu.add_separator()
+
+    editmenu.add_command(label="Cut", command=donothing)
+    editmenu.add_command(label="Copy", command=donothing)
+    editmenu.add_command(label="Paste", command=donothing)
+    editmenu.add_command(label="Delete", command=donothing)
+    editmenu.add_command(label="Select All", command=donothing)
+
+    # add the edit menu to the menu bar
+    menubar.add_cascade(label="Edit", menu=editmenu)
+    
+    # create the help menu
+    helpmenu = Menu(menubar, tearoff=0)
+    helpmenu.add_command(label="Help Index", command=donothing)
+    helpmenu.add_command(label="About...", command=donothing)
+    
+    # add the edit menu to the menubar
+    menubar.add_cascade(label="Help", menu=helpmenu)
+
+    # configure the root window to use
+    # the menu bar as the menu
+    root.config(menu=menubar)
+    # run the root window
+    root.mainloop()
