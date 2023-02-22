@@ -2,23 +2,9 @@
 from __future__ import annotations
 from abc import ABC, abstractmethod
 import tkinter as tk
-from openaiclient.view.frame.baseframe import BaseFrame
 
 
-class MenuFrame(BaseFrame):
-    def __init__(self, main, controller):
-        super().__init__(main, controller)
-
-        self.menuLabels = {}
-        self.menuOptions = {}
-        self.column = 0
-        self.row = 0
-
-    def create(self):
-        pass
-
-
-class MenuFactory(ABC, BaseFrame):
+class MenuFactory(ABC):
     """
     An abstract factory for generating menus
     """
