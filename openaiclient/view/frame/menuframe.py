@@ -65,6 +65,42 @@ class EditRequestMenu(MenuFactory):
     """
 
 
+class DropdownMenu(ABC):
+    """
+    Creates a dropdown menu for use inside of another menu
+    """
+    @abstractmethod
+    def create(self):
+        pass
+    
+    @property
+    @abstractmethod
+    def menu(self):
+        pass
+
+
+class EndpointDropdownMenu(DropdownMenu):
+    """
+    Creates a dropdown menu for selecting the different endpoints
+    """
+    def __init__(self, menu):
+        self._menu = tk.Menu(
+            menu,
+            tearoff=0
+        )
+        
+        self.create()
+
+    def create(self):
+        self._menu.add_command(label="Completion", command=None)
+        self._menu.add_command(label="Edit", command=None)
+        self._menu.add_command(label="Codex", command=None)
+
+    @property
+    def menu(self):
+        return self._menu
+
+
 class FileMenu(ABC):
     """
     Abstract product for file menus
@@ -95,9 +131,8 @@ class MainFileMenu(FileMenu):
         self.create()
     
     def create(self):
-        self._menu.add_command(label="New", command=None)
-        self._menu.add_command(label="Open", command=None)
-        self._menu.add_command(label="Save", command=None)
+        endpointMenu = EndpointDropdownMenu(self.menu).menu
+        self._menu.add_cascade(label="Change endpoint...", menu=endpointMenu)
 
     @property
     def menu(self):
