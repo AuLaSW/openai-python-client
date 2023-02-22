@@ -69,7 +69,7 @@ class CompletionInputWindow(Window):
     """
 
     def windowConstructor(self) -> CompletionInputFrame:
-        menu = MainMenu(self.window)
+        menu = MainMenu(self.window, self.controller)
         menu.create()
         self.window.config(menu=menu.menubar)
         return CompletionInputFrame(self.window, self.controller)

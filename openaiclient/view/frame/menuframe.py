@@ -22,8 +22,9 @@ class MainMenu(MenuFactory):
     """
     Creates a main menu
     """
-    def __init__(self, root):
+    def __init__(self, root, controller):
         self._menubar = tk.Menu(root)
+        self._controller = controller
     
     @property
     def menubar(self):
