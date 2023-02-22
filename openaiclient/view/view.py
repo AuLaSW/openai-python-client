@@ -22,28 +22,38 @@ class View:
         self._controller = controller
 
     def settingsWindow(self):
-        """Create a default settings window with default settings, for testin purposes only"""
+        """
+        Create a default settings window with default settings, for testing
+        purposes only
+        """
         newWindow = tk.Tk()
         newWindow.resizable(False, False)
         frame = SettingsWindow(newWindow, self._controller)
         frame.draw()
 
     def completionSettingsWindow(self):
-        """Create a completion settings window with settings from the CompletionRequest class"""
+        """
+        Create a completion settings window with settings from the
+        CompletionRequest class
+        """
         newWindow = tk.Tk()
         newWindow.resizable(False, False)
         frame = CompletionSettingsWindow(newWindow, self._controller)
         frame.draw()
 
-    def completionInputWindow(self, curWindow):
-        """Create a completion input window for writing prompts for the OpenAI API"""
-        frame = CompletionInputWindow(curWindow, self._controller)
+    def completionInputWindow(self):
+        """
+        Create a completion input window for writing prompts for the OpenAI API
+        """
+        newWindow = tk.Tk()
+        frame = CompletionInputWindow(newWindow, self._controller)
         frame.draw()
 
 
 if __name__ == "__main__":
     from openaiclient.controller.controller import Controller
+    from tests.unit.fixture import api
 
-    view = View(None)
-
-    view.settingsWindow()
+    controller = Controller(api)
+    controller.compReq()
+    controller.view.completionInputWindow()

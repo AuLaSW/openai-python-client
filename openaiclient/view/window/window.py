@@ -8,6 +8,7 @@ from typing import TYPE_CHECKING
 from openaiclient.view.frame.settings.completionsettings import CompletionSettings
 from openaiclient.view.frame.settings.settingsframe import SettingsFrame
 from openaiclient.view.frame.input.completioninput import CompletionInputFrame
+from openaiclient.view.frame.menuframe import MenuFrame
 
 if TYPE_CHECKING:
     from openaiclient.controller.controller import Controller
@@ -46,6 +47,7 @@ class CompletionSettingsWindow(Window):
     """
     A concrete factory class for the CompletionSettings window.
     """
+
     def windowConstructor(self) -> CompletionSettings:
         """Constructs a CompletionSettings frame product"""
         return CompletionSettings(self.window, self.controller)
@@ -55,6 +57,7 @@ class SettingsWindow(Window):
     """
     A concrete factory class for the CompletionSettings window.
     """
+
     def windowConstructor(self) -> SettingsFrame:
         """Constructs a CompletionSettings frame product"""
         return SettingsFrame(self.window, self.controller)
@@ -64,8 +67,25 @@ class CompletionInputWindow(Window):
     """
     A concrete factor class for the CompletionInput window.
     """
+
     def windowConstructor(self) -> CompletionInputFrame:
-        return CompletionInputFrame(self.window, self.controller)
+        menuFrame = MenuFrame(self.window, self.controller)
+        menuFrame.create()
+        menuFrame.grid(
+            column=0,
+            row=0
+        )
+        return CompletionInputFrame(menuFrame, self.controller)
+
+    def draw(self):
+        frame = self.windowConstructor()
+        frame.create()
+        frame.grid(
+            column=0,
+            row=1
+        )
+
+        self.window.mainloop()
 
 
 if __name__ == "__main__":
@@ -74,5 +94,5 @@ if __name__ == "__main__":
     window = tk.Tk()
 
     csw = SettingsWindow(window, None)
-    
+
     csw.draw()
