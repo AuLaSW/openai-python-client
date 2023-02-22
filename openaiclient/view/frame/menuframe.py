@@ -179,8 +179,8 @@ if __name__ == "__main__":
     An example of how to create a menu
     """
     root = tk.Tk()
-    menu = MainMenu(root)
-    menu.createMenu()
+    menu = MainMenu(root, None)
+    menu.create()
     
     root.config(menu=menu.menubar)
 
