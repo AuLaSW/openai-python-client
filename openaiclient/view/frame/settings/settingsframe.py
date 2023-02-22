@@ -99,6 +99,8 @@ class SettingsFrame(BaseFrame):
             self.row += 1
 
         self.saveAndExitButtons()
+        
+        return self
 
     def saveSettings(self):
         """saves the settings inputted in the window"""

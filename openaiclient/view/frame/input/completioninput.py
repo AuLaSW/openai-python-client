@@ -42,6 +42,8 @@ class CompletionInputFrame(BaseFrame):
         )
 
         self.tags()
+        
+        return self
 
     def tags(self):
         self._prompt.tag_add(

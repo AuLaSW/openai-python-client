@@ -30,13 +30,7 @@ class Window(ABC):
     def draw(self):
         """Packs the product onto the window and starts the window"""
         frame = self.windowConstructor()
-        frame.create()
-        frame.grid(
-            column=0,
-            row=0
-        )
-
-        self.window.mainloop()
+        return frame.create()
 
     @property
     def window(self):

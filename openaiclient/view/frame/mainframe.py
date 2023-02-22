@@ -14,8 +14,34 @@ class MainFrame(BaseFrame):
     def __init__(self, window, controller) -> None:
         super().__init__(window, controller)
     
-    def create(self) -> None:
-        self.createText()
+    def create(self) -> BaseFrame:
+        self.createText().grid(
+            column=0,
+            row=0,
+            columnspan=2
+        )
+        
+        tk.Button(
+            text="Completion Endpoint",
+            command=self.controller.view.completionInputWindow
+        ).grid(
+            column=0,
+            row=1,
+            padx=10,
+            pady=10
+        )
+        
+        tk.Button(
+            text="Edit Endpoint",
+            state=tk.DISABLED
+        ).grid(
+            column=1,
+            row=1,
+            padx=10,
+            pady=10
+        )
+        
+        return self
         
         
     def createText(self):
@@ -51,11 +77,8 @@ class MainFrame(BaseFrame):
         
         text['state'] = tk.DISABLED
         text['height'] = self.countLines(line)
-        
-        text.grid(
-            column=0,
-            row=0
-        )
+
+        return text
 
     def countLines(self, text):
         count = 0

@@ -22,6 +22,15 @@ class View:
         self._controller = controller
         self._root = tk.Tk()
         self._root.resizable(False, False)
+        self._frame = None
+    
+    @property
+    def frame(self):
+        return self._frame
+    
+    @frame.setter
+    def frame(self, frame):
+        self._frame = frame
 
     def settingsWindow(self):
         """
@@ -47,15 +56,19 @@ class View:
         """
         Create a completion input window for writing prompts for the OpenAI API
         """
-        frame = CompletionInputWindow(self._root, self._controller)
-        frame.draw()
+        window = CompletionInputWindow(self._root, self._controller)
+        self.frame = window.draw()
+        self.frame.grid()
+        self._root.mainloop()
     
     def mainWindow(self):
         """
         Create the main splash window for when the program starts
         """
-        frame = MainWindow(self._root, self._controller)
-        frame.draw()
+        window = MainWindow(self._root, self._controller)
+        self._frame = window.draw()
+        self._frame.grid()
+        self._root.mainloop()
 
 
 if __name__ == "__main__":
