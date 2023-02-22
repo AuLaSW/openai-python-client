@@ -41,17 +41,19 @@ class View:
         frame = CompletionSettingsWindow(newWindow, self._controller)
         frame.draw()
 
-    def completionInputWindow(self, curWindow):
+    def completionInputWindow(self):
         """
         Create a completion input window for writing prompts for the OpenAI API
         """
-        frame = CompletionSettingsWindow(curWindow, self._controller)
+        newWindow = tk.Tk()
+        frame = CompletionInputWindow(newWindow, self._controller)
         frame.draw()
 
 
 if __name__ == "__main__":
     from openaiclient.controller.controller import Controller
+    from tests.unit.fixture import api
 
-    view = View(None)
-
-    view.settingsWindow()
+    controller = Controller(api)
+    controller.compReq()
+    controller.view.completionInputWindow()
