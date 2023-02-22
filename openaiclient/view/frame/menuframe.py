@@ -119,6 +119,27 @@ class SettingMenu(ABC):
     """
 
 
+class MainSettingMenu(SettingMenu):
+    """
+    Creates a setting menu for the main menu.
+    """
+    def __init__(self, menubar):
+        self._menu = tk.Menu(
+            menubar,
+            tearoff=0
+        )
+        
+        self.create()
+    
+    def create(self):
+        self._menu.add_command(label="Completion Settings", command=None)
+        self._menu.add_command(label="Edit Settings", command=None)
+    
+    @property
+    def menu(self):
+        return self._menu
+
+
 class HelpMenu(ABC):
     """
     Abstract product for help menus
