@@ -72,6 +72,10 @@ class FileMenu(ABC):
     """
     Abstract product for file menus
     """
+    @abstractmethod
+    def create(self):
+        pass
+
     @property
     @abstractmethod
     def menu(self):
