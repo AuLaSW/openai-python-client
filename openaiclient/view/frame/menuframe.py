@@ -35,7 +35,7 @@ class MainMenu(MenuFactory):
         self.addSettingMenu()
 
     def createFileMenu(self) -> tk.Menu:
-        return MainFileMenu(self._menubar).menu
+        return MainFileMenu(self._menubar, self._controller).menu
     
     def addFileMenu(self):
         self._menubar.add_cascade(
@@ -89,11 +89,12 @@ class EndpointDropdownMenu(DropdownMenu):
     """
     Creates a dropdown menu for selecting the different endpoints
     """
-    def __init__(self, menu):
+    def __init__(self, menu, controller):
         self._menu = tk.Menu(
             menu,
             tearoff=0
         )
+        self._controller = controller
         
         self.create()
 
@@ -117,16 +118,18 @@ class MainFileMenu(FileMenu):
     """
     Creates a file menu for the main menu
     """
-    def __init__(self, menubar):
+    def __init__(self, menubar, controller):
         self._menu = tk.Menu(
             menubar, 
             tearoff=0
         )
         
+        self._controller = controller
+        
         self.create()
     
     def create(self):
-        endpointMenu = EndpointDropdownMenu(self.menu).menu
+        endpointMenu = EndpointDropdownMenu(self.menu, self._controller).menu
         self._menu.add_cascade(label="Change endpoint...", menu=endpointMenu)
 
     @property
