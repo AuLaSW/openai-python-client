@@ -30,7 +30,10 @@ class Window(ABC):
         """Packs the product onto the window and starts the window"""
         frame = self.windowConstructor()
         frame.create()
-        frame.pack()
+        frame.grid(
+            column=0,
+            row=0
+        )
 
         self.window.mainloop()
 
