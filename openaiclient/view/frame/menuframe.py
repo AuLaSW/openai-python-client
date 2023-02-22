@@ -28,7 +28,7 @@ class MenuFactory(ABC, BaseFrame):
         pass
 
     @abstractmethod
-    def createMenu(self):
+    def create(self):
         pass
 
 
@@ -43,7 +43,7 @@ class MainMenu(MenuFactory):
     def menubar(self):
         return self._menubar
     
-    def createMenu(self) -> None:
+    def create(self) -> None:
         self.addFileMenu()
         self.addSettingMenu()
 
