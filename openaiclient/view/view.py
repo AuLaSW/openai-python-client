@@ -20,13 +20,14 @@ class View:
 
     def __init__(self, controller):
         self._controller = controller
+        self._root = tk.Tk()
 
     def settingsWindow(self):
         """
         Create a default settings window with default settings, for testing
         purposes only
         """
-        newWindow = tk.Tk()
+        newWindow = tk.Toplevel(self._root)
         newWindow.resizable(False, False)
         frame = SettingsWindow(newWindow, self._controller)
         frame.draw()
@@ -36,7 +37,7 @@ class View:
         Create a completion settings window with settings from the
         CompletionRequest class
         """
-        newWindow = tk.Tk()
+        newWindow = tk.Toplevel(self._root)
         newWindow.resizable(False, False)
         frame = CompletionSettingsWindow(newWindow, self._controller)
         frame.draw()
@@ -45,8 +46,7 @@ class View:
         """
         Create a completion input window for writing prompts for the OpenAI API
         """
-        newWindow = tk.Tk()
-        frame = CompletionInputWindow(newWindow, self._controller)
+        frame = CompletionInputWindow(self._root, self._controller)
         frame.draw()
 
 
