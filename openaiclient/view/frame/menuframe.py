@@ -53,22 +53,16 @@ class MainMenu(MenuFactory):
         root.config(menu=self._menubar)
     
     def createMenu(self) -> None:
-        filemenu = self.createFileMenu().menu
-        """
-        editmenu = self.createEditMenu()
-        settingmenu = self.createSettingMenu()
-        helpmenu = self.createHelpMenu()
-        """
-        
-        self._menubar.add_cascade(label="File", menu=filemenu)
-        """
-        self._menubar.add_cascade(label="Edit", menu=editmenu.menu)
-        self._menubar.add_cascade(label="Settings", menu=settingmenu.menu)
-        self._menubar.add_cascade(label="Help", menu=helpmenu.menu)
-        """
-        
-    def createFileMenu(self):
-        return MainFileMenu(self._menubar)
+        self.addFileMenu()
+
+    def createFileMenu(self) -> tk.Menu:
+        return MainFileMenu(self._menubar).menu
+    
+    def addFileMenu(self):
+        self._menubar.add_cascade(
+            label="File",
+            menu=self.createFileMenu()
+        )
     
     def createEditMenu(self):
         return MainEditMenu(self._menubar)
