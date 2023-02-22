@@ -40,7 +40,7 @@ class MainMenu(MenuFactory):
     def addFileMenu(self):
         self._menubar.add_cascade(
             label="File",
-            menu=self.createFileMenu()
+            menu=self.createFileMenu(),
         )
     
     def createSettingMenu(self) -> tk.Menu:
@@ -49,7 +49,7 @@ class MainMenu(MenuFactory):
     def addSettingMenu(self):
         self._menubar.add_cascade(
             label="Settings",
-            menu=self.createSettingMenu()
+            menu=self.createSettingMenu(),
         )
 
 
@@ -99,9 +99,18 @@ class EndpointDropdownMenu(DropdownMenu):
     Creates a dropdown menu for selecting the different endpoints
     """
     def create(self):
-        self._menu.add_command(label="Completion", command=self._controller.view.completionInputWindow)
-        self._menu.add_command(label="Edit", command=None)
-        self._menu.add_command(label="Codex", command=None)
+        self._menu.add_command(
+            label="Completion", 
+            command=self._controller.view.completionInputWindow
+        )
+        self._menu.add_command(
+            label="Edit", 
+            command=None
+        )
+        self._menu.add_command(
+            label="Codex", 
+            command=None
+        )
 
     @property
     def menu(self):
