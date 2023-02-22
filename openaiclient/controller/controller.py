@@ -43,6 +43,9 @@ class Controller:
         self._request = None
         # the response
         self._response = None
+    
+    def start(self) -> None:
+        self.view.mainWindow()
 
     @property
     def models(self):
