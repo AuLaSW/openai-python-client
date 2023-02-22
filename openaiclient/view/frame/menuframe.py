@@ -15,6 +15,8 @@ class MenuFrame(BaseFrame):
         self.row = 0
 
     def create(self):
+        pass
+
 
 
 if __name__ == "__main__":
