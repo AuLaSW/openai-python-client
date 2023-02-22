@@ -63,11 +63,11 @@ class EditRequestMenu(MenuFactory):
     """
     Creates the menu when working with an edit request
     """
+    
 
-
-class DropdownMenu(ABC):
+class AbstractMenu(ABC):
     """
-    Creates a dropdown menu for use inside of another menu
+    An abstract menu class, parent to all menu product classes.
     """
     @abstractmethod
     def create(self):
@@ -77,6 +77,12 @@ class DropdownMenu(ABC):
     @abstractmethod
     def menu(self):
         pass
+
+
+class DropdownMenu(AbstractMenu):
+    """
+    Creates a dropdown menu for use inside of another menu
+    """
 
 
 class EndpointDropdownMenu(DropdownMenu):
@@ -101,21 +107,10 @@ class EndpointDropdownMenu(DropdownMenu):
         return self._menu
 
 
-class FileMenu(ABC):
+class FileMenu(AbstractMenu):
     """
     Abstract product for file menus
     """
-    @abstractmethod
-    def create(self):
-        pass
-
-    @property
-    @abstractmethod
-    def menu(self):
-        """
-        Generates the file menu
-        """
-        pass
 
 
 class MainFileMenu(FileMenu):
@@ -139,13 +134,13 @@ class MainFileMenu(FileMenu):
         return self._menu
 
 
-class EditMenu(ABC):
+class EditMenu(AbstractMenu):
     """
     Abstract product for edit menus
     """
 
 
-class SettingMenu(ABC):
+class SettingMenu(AbstractMenu):
     """
     Abstract product for setting menus
     """
@@ -172,7 +167,7 @@ class MainSettingMenu(SettingMenu):
         return self._menu
 
 
-class HelpMenu(ABC):
+class HelpMenu(AbstractMenu):
     """
     Abstract product for help menus
     """
