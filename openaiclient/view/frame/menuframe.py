@@ -56,13 +56,13 @@ class MainMenu(MenuFactory):
         )
 
 
-class CompletionMenu(MenuFactory):
+class CompletionRequestMenu(MenuFactory):
     """
     Creates the menu when working with a completion request
     """
 
 
-class EditMenu(MenuFactory):
+class EditRequestMenu(MenuFactory):
     """
     Creates the menu when working with an edit request
     """
