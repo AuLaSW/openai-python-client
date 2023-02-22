@@ -20,8 +20,9 @@ class MainFrame(BaseFrame):
             row=0,
             columnspan=2
         )
-        
+
         tk.Button(
+            self,
             text="Completion Endpoint",
             command=self.controller.view.completionInputWindow
         ).grid(
@@ -32,6 +33,7 @@ class MainFrame(BaseFrame):
         )
         
         tk.Button(
+            self,
             text="Edit Endpoint",
             state=tk.DISABLED
         ).grid(
@@ -46,6 +48,7 @@ class MainFrame(BaseFrame):
         
     def createText(self):
         text = tk.Text(
+            self,
             width=30,
             background=self.master['background'],
             padx=15,
