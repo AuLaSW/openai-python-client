@@ -21,6 +21,7 @@ class View:
     def __init__(self, controller):
         self._controller = controller
         self._root = tk.Tk()
+        self._root.resizable(False, False)
 
     def settingsWindow(self):
         """
@@ -48,6 +49,13 @@ class View:
         """
         frame = CompletionInputWindow(self._root, self._controller)
         frame.draw()
+    
+    def mainWindow(self):
+        """
+        Create the main splash window for when the program starts
+        """
+        frame = MainWindow(self._root, self._controller)
+        frame.draw()
 
 
 if __name__ == "__main__":
@@ -55,5 +63,4 @@ if __name__ == "__main__":
     from tests.unit.fixture import api
 
     controller = Controller(api)
-    controller.compReq()
-    controller.view.completionInputWindow()
+    controller.view.mainWindow()

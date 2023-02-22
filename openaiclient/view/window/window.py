@@ -9,6 +9,7 @@ from openaiclient.view.frame.settings.completionsettings import CompletionSettin
 from openaiclient.view.frame.settings.settingsframe import SettingsFrame
 from openaiclient.view.frame.input.completioninput import CompletionInputFrame
 from openaiclient.view.frame.menuframe import *
+from openaiclient.view.frame.mainframe import MainFrame
 
 if TYPE_CHECKING:
     from openaiclient.controller.controller import Controller
@@ -78,13 +79,24 @@ class CompletionInputWindow(Window):
         return CompletionInputFrame(self.window, self.controller)
 
 
+class MainWindow(Window):
+    """
+    A Concrete factory class for creating the main window on startup.
+    """
+    
+    def windowConstructor(self) -> MainFrame:
+        menu = MainMenu(self.window, self.controller)
+        menu.create()
+        self.window.config(menu=menu.menubar)
+        return MainFrame(self.window, self.controller)
+
+
 if __name__ == "__main__":
     from openaiclient.controller.controller import Controller
     from tests.unit.fixture import api
 
-    window = tk.Tk()
     controller = Controller(api)
 
-    csw = CompletionInputWindow(window, controller)
+    csw = MainWindow(controller.view._root, controller)
 
     csw.draw()
