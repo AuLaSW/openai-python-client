@@ -26,22 +26,6 @@ class MenuFactory(ABC, BaseFrame):
     def createMenu(self):
         pass
 
-    @abstractmethod
-    def createFileMenu(self):
-        pass
-
-    @abstractmethod
-    def createEditMenu(self):
-        pass
-
-    @abstractmethod
-    def createSettingMenu(self):
-        pass
-
-    @abstractmethod
-    def createHelpMenu(self):
-        pass
-
 
 class MainMenu(MenuFactory):
     """
@@ -63,15 +47,6 @@ class MainMenu(MenuFactory):
             label="File",
             menu=self.createFileMenu()
         )
-    
-    def createEditMenu(self):
-        return MainEditMenu(self._menubar)
-    
-    def createSettingMenu(self):
-        return MainSettingMenu(self._menubar)
-    
-    def createHelpMenu(self):
-        return MainHelpMenu(self._menubar)
 
 
 class CompletionMenu(MenuFactory):
