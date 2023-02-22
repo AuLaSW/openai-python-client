@@ -99,7 +99,7 @@ class EndpointDropdownMenu(DropdownMenu):
         self.create()
 
     def create(self):
-        self._menu.add_command(label="Completion", command=None)
+        self._menu.add_command(label="Completion", command=self._controller.view.completionInputWindow)
         self._menu.add_command(label="Edit", command=None)
         self._menu.add_command(label="Codex", command=None)
 
