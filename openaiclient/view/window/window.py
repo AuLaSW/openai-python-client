@@ -8,7 +8,7 @@ from typing import TYPE_CHECKING
 from openaiclient.view.frame.settings.completionsettings import CompletionSettings
 from openaiclient.view.frame.settings.settingsframe import SettingsFrame
 from openaiclient.view.frame.input.completioninput import CompletionInputFrame
-from openaiclient.view.frame.menuframe import MenuFrame
+from openaiclient.view.frame.menuframe import *
 
 if TYPE_CHECKING:
     from openaiclient.controller.controller import Controller
@@ -69,30 +69,26 @@ class CompletionInputWindow(Window):
     """
 
     def windowConstructor(self) -> CompletionInputFrame:
-        menuFrame = MenuFrame(self.window, self.controller)
-        menuFrame.create()
-        menuFrame.grid(
-            column=0,
-            row=0
-        )
-        return CompletionInputFrame(menuFrame, self.controller)
+        menu = MainMenu(self.window)
+        menu.createMenu()
+        self.window.config(menu=menu.menubar)
+        return CompletionInputFrame(self.window, self.controller)
 
     def draw(self):
         frame = self.windowConstructor()
         frame.create()
-        frame.grid(
-            column=0,
-            row=1
-        )
+        frame.pack()
 
         self.window.mainloop()
 
 
 if __name__ == "__main__":
     from openaiclient.controller.controller import Controller
+    from tests.unit.fixture import api
 
     window = tk.Tk()
+    controller = Controller(api)
 
-    csw = SettingsWindow(window, None)
+    csw = CompletionInputWindow(window, controller)
 
     csw.draw()
