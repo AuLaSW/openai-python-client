@@ -18,10 +18,134 @@ class MenuFrame(BaseFrame):
         pass
 
 
+class MenuFactory(ABC, BaseFrame):
+    """
+    An abstract factory for generating menus
+    """
+    @abstractmethod
+    def createMenu(self):
+        pass
+
+    @abstractmethod
+    def createFileMenu(self):
+        pass
+
+    @abstractmethod
+    def createEditMenu(self):
+        pass
+
+    @abstractmethod
+    def createSettingMenu(self):
+        pass
+
+    @abstractmethod
+    def createHelpMenu(self):
+        pass
+
+
+class MainMenu(MenuFactory):
+    """
+    Creates a main menu
+    """
+    def __init__(self, root):
+        self._menubar = tk.Menu(root)
+        root.config(menu=self._menubar)
+    
+    def createMenu(self) -> None:
+        filemenu = self.createFileMenu()
+        editmenu = self.createEditMenu()
+        settingmenu = self.createSettingMenu()
+        helpmenu = self.createHelpMenu()
+        
+        self._menubar.add_cascade(label="File", menu=filemenu)
+        self._menubar.add_cascade(label="Edit", menu=editmenu)
+        self._menubar.add_cascade(label="Settings", menu=settingmenu)
+        self._menubar.add_cascade(label="Help", menu=helpmenu)
+        
+    def createFileMenu(self):
+        return MainFileMenu(self._menubar)
+    
+    def createEditMenu(self):
+        return MainEditMenu(self._menubar)
+    
+    def createSettingMenu(self):
+        return MainSettingMenu(self._menubar)
+    
+    def createHelpMenu(self):
+        return MainHelpMenu(self._menubar)
+
+
+class CompletionMenu(MenuFactory):
+    """
+    Creates the menu when working with a completion request
+    """
+
+
+class EditMenu(MenuFactory):
+    """
+    Creates the menu when working with an edit request
+    """
+
+
+class FileMenu(ABC):
+    """
+    Abstract product for file menus
+    """
+    @property
+    @abstractmethod
+    def menu(self):
+        """
+        Generates the file menu
+        """
+        pass
+
+
+class MainFileMenu(FileMenu):
+    """
+    Creates a file menu for the main menu
+    """
+    def __init__(self, menubar):
+        self._menu = tk.Menu(
+            menubar, 
+            tearoff=0
+        )
+
+    @property
+    def menu(self):
+        self._menu.add_command(label="New", command=None)
+        self._menu.add_command(label="Open", command=None)
+        self._menu.add_command(label="Save", command=None)
+        return self._menu
+
+
+class EditMenu(ABC):
+    """
+    Abstract product for edit menus
+    """
+
+
+class SettingMenu(ABC):
+    """
+    Abstract product for setting menus
+    """
+
+
+class HelpMenu(ABC):
+    """
+    Abstract product for help menus
+    """
+
+
 
 if __name__ == "__main__":
     """
     An example of how to create a menu
+    """
+    root = tk.Tk()
+    menu = MainMenu(root)
+    menu._menubar.add_cascade(label="File", menu=menu.createFileMenu().menu)
+
+    root.mainloop()
     """
     from tkinter import *
 
@@ -85,3 +209,4 @@ if __name__ == "__main__":
     root.config(menu=menubar)
     # run the root window
     root.mainloop()
+    """
