@@ -49,18 +49,23 @@ class MainMenu(MenuFactory):
     """
     def __init__(self, root):
         self._menubar = tk.Menu(root)
+        self.createMenu()
         root.config(menu=self._menubar)
     
     def createMenu(self) -> None:
-        filemenu = self.createFileMenu()
+        filemenu = self.createFileMenu().menu
+        """
         editmenu = self.createEditMenu()
         settingmenu = self.createSettingMenu()
         helpmenu = self.createHelpMenu()
+        """
         
         self._menubar.add_cascade(label="File", menu=filemenu)
-        self._menubar.add_cascade(label="Edit", menu=editmenu)
-        self._menubar.add_cascade(label="Settings", menu=settingmenu)
-        self._menubar.add_cascade(label="Help", menu=helpmenu)
+        """
+        self._menubar.add_cascade(label="Edit", menu=editmenu.menu)
+        self._menubar.add_cascade(label="Settings", menu=settingmenu.menu)
+        self._menubar.add_cascade(label="Help", menu=helpmenu.menu)
+        """
         
     def createFileMenu(self):
         return MainFileMenu(self._menubar)
@@ -143,7 +148,6 @@ if __name__ == "__main__":
     """
     root = tk.Tk()
     menu = MainMenu(root)
-    menu._menubar.add_cascade(label="File", menu=menu.createFileMenu().menu)
 
     root.mainloop()
     """
