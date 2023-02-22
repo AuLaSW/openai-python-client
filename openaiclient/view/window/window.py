@@ -74,13 +74,6 @@ class CompletionInputWindow(Window):
         self.window.config(menu=menu.menubar)
         return CompletionInputFrame(self.window, self.controller)
 
-    def draw(self):
-        frame = self.windowConstructor()
-        frame.create()
-        frame.pack()
-
-        self.window.mainloop()
-
 
 if __name__ == "__main__":
     from openaiclient.controller.controller import Controller
