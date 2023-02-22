@@ -114,12 +114,16 @@ class MainFileMenu(FileMenu):
             menubar, 
             tearoff=0
         )
-
-    @property
-    def menu(self):
+        
+        self.create()
+    
+    def create(self):
         self._menu.add_command(label="New", command=None)
         self._menu.add_command(label="Open", command=None)
         self._menu.add_command(label="Save", command=None)
+
+    @property
+    def menu(self):
         return self._menu
 
 
