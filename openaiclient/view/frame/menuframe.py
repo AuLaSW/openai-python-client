@@ -22,6 +22,11 @@ class MenuFactory(ABC, BaseFrame):
     """
     An abstract factory for generating menus
     """
+    @property
+    @abstractmethod
+    def menubar(self):
+        pass
+
     @abstractmethod
     def createMenu(self):
         pass
@@ -35,6 +40,10 @@ class MainMenu(MenuFactory):
         self._menubar = tk.Menu(root)
         self.createMenu()
         root.config(menu=self._menubar)
+    
+    @property
+    def menubar(self):
+        return self._menubar
     
     def createMenu(self) -> None:
         self.addFileMenu()
