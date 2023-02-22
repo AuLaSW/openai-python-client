@@ -38,8 +38,6 @@ class MainMenu(MenuFactory):
     """
     def __init__(self, root):
         self._menubar = tk.Menu(root)
-        self.createMenu()
-        root.config(menu=self._menubar)
     
     @property
     def menubar(self):
@@ -130,6 +128,9 @@ if __name__ == "__main__":
     """
     root = tk.Tk()
     menu = MainMenu(root)
+    menu.createMenu()
+    
+    root.config(menu=menu.menubar)
 
     root.mainloop()
     """
