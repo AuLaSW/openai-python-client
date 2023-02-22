@@ -56,9 +56,10 @@ class View:
         """
         Create a completion input window for writing prompts for the OpenAI API
         """
+        self.frame.destroy()
         window = CompletionInputWindow(self._root, self._controller)
         self.frame = window.draw()
-        self.frame.grid()
+
         self._root.mainloop()
     
     def mainWindow(self):
@@ -66,8 +67,8 @@ class View:
         Create the main splash window for when the program starts
         """
         window = MainWindow(self._root, self._controller)
-        self._frame = window.draw()
-        self._frame.grid()
+        self.frame = window.draw()
+
         self._root.mainloop()
 
 
