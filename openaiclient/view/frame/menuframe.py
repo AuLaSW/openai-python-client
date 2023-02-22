@@ -44,7 +44,7 @@ class MainMenu(MenuFactory):
         )
     
     def createSettingMenu(self) -> tk.Menu:
-        return MainSettingMenu(self._menubar).menu
+        return MainSettingMenu(self._menubar, self._controller).menu
     
     def addSettingMenu(self):
         self._menubar.add_cascade(
@@ -153,16 +153,18 @@ class MainSettingMenu(SettingMenu):
     """
     Creates a setting menu for the main menu.
     """
-    def __init__(self, menubar):
+    def __init__(self, menubar, controller):
         self._menu = tk.Menu(
             menubar,
             tearoff=0
         )
         
+        self._controller = controller
+        
         self.create()
     
     def create(self):
-        self._menu.add_command(label="Completion Settings", command=None)
+        self._menu.add_command(label="Completion Settings", command=self._controller.view.completionSettingsWindow)
         self._menu.add_command(label="Edit Settings", command=None)
     
     @property
