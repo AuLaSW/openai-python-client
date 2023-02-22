@@ -1,4 +1,6 @@
 # menuframe.py
+from __future__ import annotations
+from abc import ABC, abstractmethod
 import tkinter as tk
 from openaiclient.view.frame.baseframe import BaseFrame
 
