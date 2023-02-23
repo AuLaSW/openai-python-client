@@ -23,11 +23,11 @@ class MainFrame(BaseFrame):
         
         self.addHorizSeparator(col, row)
         
-        text = self.createHeaderText(col, row)
+        text = self.addHeaderText(col, row)
         
         self.addHorizSeparator(col, row)
         
-        self.createEntryButton(
+        self.addEntryButton(
             compLine.strip(),
             "Completion Endpoint",
             self.controller.view.completionInputWindow,
@@ -35,7 +35,7 @@ class MainFrame(BaseFrame):
             row=row
         )
         
-        self.createEntryButton(
+        self.addEntryButton(
             editLine.strip(),
             "Edit Endpoint",
             None,
@@ -49,7 +49,7 @@ class MainFrame(BaseFrame):
 
         return self
 
-    def createHeaderText(self, col, row):
+    def addHeaderText(self, col, row):
         tk.Label(
             self,
             text="OpenAI Client",
@@ -78,7 +78,7 @@ class MainFrame(BaseFrame):
         
         +row
     
-    def createEntryButton(self, line, label, func, col, row):
+    def addEntryButton(self, line, label, func, col, row):
         tk.Label(
             self,
             text=line,
