@@ -110,6 +110,23 @@ class MainFrame(BaseFrame):
             pady=5
         )
         
+        ~col
+        +row
+        
+        ttk.Separator(
+            self,
+            orient="horizontal",
+        ).grid(
+            column=col,
+            row=row,
+            columnspan=2,
+            sticky=tk.W+tk.E,
+            padx=10,
+            pady=5
+        )
+        
+        +row
+        
         self.master.update()
 
         return self
