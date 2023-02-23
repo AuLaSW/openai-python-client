@@ -21,39 +21,13 @@ class MainFrame(BaseFrame):
         col = Increment()
         row = Increment()
         
-        ttk.Separator(
-            self,
-            orient="horizontal",
-        ).grid(
-            column=col,
-            row=row,
-            columnspan=2,
-            sticky=tk.W+tk.E,
-            padx=10,
-            pady=5
-        )
-        
-        +row
+        self.addHorizSeparator(col, row)
         
         text = self.createHeaderText(col, row)
         
-        +row
+        self.addHorizSeparator(col, row)
         
-        ttk.Separator(
-            self,
-            orient="horizontal",
-        ).grid(
-            column=col,
-            row=row,
-            columnspan=2,
-            sticky=tk.W+tk.E,
-            padx=10,
-            pady=5
-        )
-        
-        +row
-        
-        comp = self.createEntryButton(
+        self.createEntryButton(
             compLine.strip(),
             "Completion Endpoint",
             self.controller.view.completionInputWindow,
@@ -61,10 +35,7 @@ class MainFrame(BaseFrame):
             row=row
         )
         
-        ~col
-        +row
-        
-        edit = self.createEntryButton(
+        self.createEntryButton(
             editLine.strip(),
             "Edit Endpoint",
             None,
@@ -72,20 +43,7 @@ class MainFrame(BaseFrame):
             row=row
         )
         
-        ~col
-        +row
-        
-        ttk.Separator(
-            self,
-            orient="horizontal",
-        ).grid(
-            column=col,
-            row=row,
-            columnspan=2,
-            sticky=tk.W+tk.E,
-            padx=10,
-            pady=5
-        )
+        self.addHorizSeparator(col, row)
 
         self.master.update()
 
@@ -148,6 +106,26 @@ class MainFrame(BaseFrame):
             padx=15,
             pady=5   
         )
+        
+        ~col
+        +row
+    
+    def addHorizSeparator(self, col, row):
+        ~col
+        
+        ttk.Separator(
+            self,
+            orient="horizontal",
+        ).grid(
+            column=col,
+            row=row,
+            columnspan=2,
+            sticky=tk.W+tk.E,
+            padx=10,
+            pady=5
+        )
+        
+        +row
 
     def countLines(self, text):
         return text.count("1.0", "end", "displaylines")[0]
