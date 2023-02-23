@@ -21,11 +21,19 @@ class MainFrame(BaseFrame):
         col = Increment()
         row = Increment()
         
-        self.createText().grid(
+        text = self.createText()
+        
+        text.grid(
             column=col,
             row=row,
+            padx=10,
+            pady=10,
             columnspan=2
         )
+        
+        self.master.update()
+        
+        text['height'] = self.countLines(text)
         
         +row
         
@@ -70,7 +78,7 @@ class MainFrame(BaseFrame):
         
         self.master.update()
         
-        comp['height'] = comp.count("1.0", "end", "displaylines")[0]
+        comp['height'] = self.countLines(comp)
         
         +col
 
@@ -116,7 +124,7 @@ class MainFrame(BaseFrame):
         
         self.master.update()
         
-        edit['height'] = edit.count("1.0", "end", "displaylines")[0]
+        edit['height'] = self.countLines(edit)
         
         +col
 
@@ -140,8 +148,8 @@ class MainFrame(BaseFrame):
             self,
             width=30,
             background=self.master['background'],
-            padx=15,
-            pady=15,
+            padx=0,
+            pady=0,
             relief=tk.FLAT,
             wrap=tk.WORD,
         )
@@ -152,6 +160,8 @@ class MainFrame(BaseFrame):
             1.0,
             line,
         )
+        
+        
 
         font = ("Times New Roman", 15, "")
         text.configure(font=font)
@@ -168,14 +178,8 @@ class MainFrame(BaseFrame):
         )
 
         text['state'] = tk.DISABLED
-        text['height'] = self.countLines(line)
 
         return text
 
     def countLines(self, text):
-        count = 0
-
-        for line in text.splitlines():
-            count += 1
-
-        return count
+        return text.count("1.0", "end", "displaylines")[0]
