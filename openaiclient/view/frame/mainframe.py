@@ -35,7 +35,7 @@ class MainFrame(BaseFrame):
         
         +row
         
-        text = self.createHeaderText(row, col)
+        text = self.createHeaderText(col, row)
         
         +row
         
@@ -86,14 +86,12 @@ class MainFrame(BaseFrame):
             padx=10,
             pady=5
         )
-        
-        +row
-        
+
         self.master.update()
 
         return self
 
-    def createHeaderText(self, row, col):
+    def createHeaderText(self, col, row):
         tk.Label(
             self,
             text="OpenAI Client",
