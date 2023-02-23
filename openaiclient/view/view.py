@@ -66,6 +66,10 @@ class View:
         """
         Create the main splash window for when the program starts
         """
+        try:
+            self.frame.destroy()
+        except AttributeError:
+            pass
         window = MainWindow(self._root, self._controller)
         self.frame = window.draw()
 

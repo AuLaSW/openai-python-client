@@ -2,6 +2,7 @@
 CompletionInput class
 """
 import tkinter as tk
+from increment import Increment
 from openaiclient.view.frame.baseframe import BaseFrame
 
 
@@ -17,18 +18,24 @@ class CompletionInputFrame(BaseFrame):
         )
 
     def create(self):
+        row = Increment()
+        col = Increment()
+        
         tk.Label(
+            self,
             text="Completion Endpoint",
             font=("", 10, "")
         ).grid(
-            column=0,
-            row=1,
+            column=col,
+            row=row,
             pady=10
         )
+        
+        +row
 
         self._prompt.grid(
-            column=0,
-            row=1,
+            column=col,
+            row=row,
             padx=10,
         )
 
@@ -38,14 +45,16 @@ class CompletionInputFrame(BaseFrame):
             self.underlineUpdate
         )
         """
+        
+        +row
 
         tk.Button(
             master=self,
             text="Send",
             command=self.sendInput
         ).grid(
-            column=0,
-            row=2,
+            column=col,
+            row=row,
             padx=10,
             pady=10,
             ipadx=40
