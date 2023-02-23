@@ -172,8 +172,8 @@ class CompletionRequest(Request):
 
     def set_n(self, val):
         if isinstance(val, int) \
-            and not isinstance(val, bool)\
-            and val > 0:
+                and not isinstance(val, bool)\
+                and val > 0:
             self._requestDict["n"] = val
         else:
             raise RuntimeError("n must be an integer greater than 0.")

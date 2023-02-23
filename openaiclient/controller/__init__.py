@@ -1,7 +1,7 @@
 # controller package __init__
 
 # import all modules from package
-from . import controller
+from .controller import Controller
 
 # packages to import
-__all__ = ["controller"]
+__all__ = ["Controller"]

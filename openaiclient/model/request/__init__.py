@@ -1,9 +1,9 @@
 # request package __init__
 
 # import all modules from package
-from . import completion
-from . import edit
-from . import request
+from .completion import CompletionRequest
+from .edit import EditRequest
+from .request import Request
 
 # packages to import
-__all__ = ["completion", "edit", "request"]
+__all__ = ["CompletionRequest", "EditRequest", "Request"]

@@ -1,4 +1,3 @@
-from . import completioninput
-from . import input
+from .completioninput import CompletionInputFrame
 
-__all__ = ["completioninput", "input"]
+__all__ = ["CompletionInputFrame"]

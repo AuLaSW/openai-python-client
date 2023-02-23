@@ -5,7 +5,7 @@ import tkinter as tk
 from openaiclient.view.frame.settings \
     .settingsframe import SettingsFrame
 
-    
+
 if TYPE_CHECKING:
     from openaiclient.controller.controller import Controller
     from openaiclient.view.frame.settings.settingsframe import SettingsFrame
@@ -23,18 +23,18 @@ class CompletionSettings(SettingsFrame):
         super().__init__(main, controller)
 
         self.settings = self.controller.request.settings
-    
-    def setAttr(self, key:str, val) -> None:
+
+    def setAttr(self, key: str, val) -> None:
         setter = getattr(self.controller.request, "set_"+key)
-        
+
         if type(self.settings[key]).__name__ == "Model":
             model = getattr(self.controller.models, val.replace("-", "_"))
             setter(model)
         else:
             setter(type(self.settings[key])(val))
-    
+
     # Model setting input
-    def modelSetting(self, key:str, value) -> SettingsFrame.Setting:
+    def modelSetting(self, key: str, value) -> SettingsFrame.Setting:
         """
         Creates a drop-down setting with models as names
         """
@@ -43,7 +43,7 @@ class CompletionSettings(SettingsFrame):
         tkFunc = tk.OptionMenu
 
         self._kwargs(tkFunc, tk.StringVar, "variable", key)
-        
+
         self.outputs[key].set(self.settings[key].name)
 
         setting.label = tk.Label(
@@ -56,13 +56,13 @@ class CompletionSettings(SettingsFrame):
             self.outputs[key],
             *args
         )
-        
+
         setting.widget.config(
             width=15
         )
-        
+
         return setting
-    
+
     def modelArgs(self, args=set()):
         for model in self.controller.models.completionModels.keys():
             args.add(model)

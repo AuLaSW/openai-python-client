@@ -23,11 +23,11 @@ class View:
         self._root = tk.Tk()
         self._root.resizable(False, False)
         self._frame = None
-    
+
     @property
     def frame(self):
         return self._frame
-    
+
     @frame.setter
     def frame(self, frame):
         self._frame = frame
@@ -61,7 +61,7 @@ class View:
         self.frame = window.draw()
 
         self._root.mainloop()
-    
+
     def mainWindow(self):
         """
         Create the main splash window for when the program starts
@@ -73,7 +73,7 @@ class View:
 
 
 if __name__ == "__main__":
-    from openaiclient.controller.controller import Controller
+    from openaiclient.controller import Controller
     from tests.unit.fixture import api
 
     controller = Controller(api)

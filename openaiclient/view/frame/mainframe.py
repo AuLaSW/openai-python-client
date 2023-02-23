@@ -10,10 +10,10 @@ class MainFrame(BaseFrame):
     This class creates the frame generated when the
     application first starts.
     """
-    
+
     def __init__(self, window, controller) -> None:
         super().__init__(window, controller)
-    
+
     def create(self) -> BaseFrame:
         self.createText().grid(
             column=0,
@@ -31,7 +31,7 @@ class MainFrame(BaseFrame):
             padx=10,
             pady=10
         )
-        
+
         tk.Button(
             self,
             text="Edit Endpoint",
@@ -42,10 +42,9 @@ class MainFrame(BaseFrame):
             padx=10,
             pady=10
         )
-        
+
         return self
-        
-        
+
     def createText(self):
         text = tk.Text(
             self,
@@ -56,14 +55,14 @@ class MainFrame(BaseFrame):
             relief=tk.FLAT,
             wrap=tk.WORD,
         )
-        
+
         line = "Hello! And welcome to openaiclient!\n\nPlease select an option below:"
 
         text.insert(
             1.0,
             line,
         )
-        
+
         font = ("Times New Roman", 15, "")
         text.configure(font=font)
 
@@ -77,7 +76,7 @@ class MainFrame(BaseFrame):
             tagName="testTag",
             font="Times 15 bold",
         )
-        
+
         text['state'] = tk.DISABLED
         text['height'] = self.countLines(line)
 

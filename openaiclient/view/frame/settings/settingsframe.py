@@ -18,7 +18,7 @@ class SettingsFrame(BaseFrame):
 
     def __init__(self, main, controller):
         super().__init__(main, controller)
-        
+
         self._PADX = 10
         self._PADY = 5
 
@@ -99,12 +99,12 @@ class SettingsFrame(BaseFrame):
             self.row += 1
 
         self.saveAndExitButtons()
-        
+
         return self
 
     def saveSettings(self):
         """saves the settings inputted in the window"""
-        for key in self.settings:                
+        for key in self.settings:
             try:
                 val = self.outputs[key].get()
                 self.setAttr(key, val)
@@ -116,7 +116,7 @@ class SettingsFrame(BaseFrame):
             except RuntimeError as error:
                 messagebox.showerror(
                     f"Incorrect input in {key}", f"Key {str(error)}")
-    
+
     def setAttr(self, key, val):
         """This should be overridden. Returns setter for saveSettings() method"""
         raise NotImplementedError
@@ -170,21 +170,21 @@ class SettingsFrame(BaseFrame):
         Creates a string setting input with the Entry object.
         """
         setting = self.Setting()
-        
+
         setting.label = tk.Label(
             master=self,
             text=key
         )
-        
+
         tkFunc = tk.Entry
-        
+
         kwargs = self._kwargs(tkFunc, tk.StringVar, "textvariable", key)
 
         setting.widget = tkFunc(
             self,
             **kwargs
         )
-        
+
         return setting
 
     # integer setting input
@@ -193,21 +193,21 @@ class SettingsFrame(BaseFrame):
         Creates an integer setting input with the Entry object.
         """
         setting = self.Setting()
-        
+
         setting.label = tk.Label(
             master=self,
             text=key
         )
-        
+
         tkFunc = tk.Entry
-        
+
         kwargs = self._kwargs(tkFunc, tk.IntVar, "textvariable", key)
 
         setting.widget = tkFunc(
             self,
             **kwargs
         )
-        
+
         return setting
 
     # float setting input
@@ -221,16 +221,16 @@ class SettingsFrame(BaseFrame):
             master=self,
             text=key
         )
-        
+
         tkFunc = tk.Entry
-        
+
         kwargs = self._kwargs(tkFunc, tk.DoubleVar, "textvariable", key)
 
         setting.widget = tkFunc(
             self,
             **kwargs
         )
-        
+
         return setting
 
     # boolean setting input
@@ -244,14 +244,14 @@ class SettingsFrame(BaseFrame):
 
         kwargs["onvalue"] = 1
         kwargs["offvalue"] = 0
-        
+
         setting.label = tk.Label(
             master=self,
             text=key
         )
-        
+
         tkFunc = tk.Checkbutton
-        
+
         kwargs = self._kwargs(tkFunc, tk.IntVar, "variable", key, kwargs)
 
         setting.widget = tkFunc(
@@ -276,9 +276,9 @@ class SettingsFrame(BaseFrame):
         # return kwargs
         return kwargs
 
-
     class Setting:
         """Holds a setting with label and widget"""
+
         def __init__(self, label=None, widget=None):
             self._label = label
             self._widget = widget
@@ -287,7 +287,7 @@ class SettingsFrame(BaseFrame):
         def label(self):
             """return label widget"""
             return self._label
-        
+
         @label.setter
         def label(self, val):
             """set label widget"""

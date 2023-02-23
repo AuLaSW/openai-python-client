@@ -22,30 +22,31 @@ class MainMenu(MenuFactory):
     """
     Creates a main menu
     """
+
     def __init__(self, root, controller):
         self._menubar = tk.Menu(root)
         self._controller = controller
-    
+
     @property
     def menubar(self):
         return self._menubar
-    
+
     def create(self) -> None:
         self.addFileMenu()
         self.addSettingMenu()
 
     def createFileMenu(self) -> tk.Menu:
         return MainFileMenu(self._menubar, self._controller).menu
-    
+
     def addFileMenu(self):
         self._menubar.add_cascade(
             label="File",
             menu=self.createFileMenu(),
         )
-    
+
     def createSettingMenu(self) -> tk.Menu:
         return MainSettingMenu(self._menubar, self._controller).menu
-    
+
     def addSettingMenu(self):
         self._menubar.add_cascade(
             label="Settings",
@@ -63,25 +64,26 @@ class EditRequestMenu(MenuFactory):
     """
     Creates the menu when working with an edit request
     """
-    
+
 
 class AbstractMenu(ABC):
     """
     An abstract menu class, parent to all menu product classes.
     """
+
     def __init__(self, menu, controller):
         self._menu = tk.Menu(
             menu,
             tearoff=0
         )
         self._controller = controller
-        
+
         self.create()
 
     @abstractmethod
     def create(self):
         pass
-    
+
     @property
     @abstractmethod
     def menu(self):
@@ -98,17 +100,18 @@ class EndpointDropdownMenu(DropdownMenu):
     """
     Creates a dropdown menu for selecting the different endpoints
     """
+
     def create(self):
         self._menu.add_command(
-            label="Completion", 
+            label="Completion",
             command=self._controller.view.completionInputWindow
         )
         self._menu.add_command(
-            label="Edit", 
+            label="Edit",
             command=None
         )
         self._menu.add_command(
-            label="Codex", 
+            label="Codex",
             command=None
         )
 
@@ -127,6 +130,7 @@ class MainFileMenu(FileMenu):
     """
     Creates a file menu for the main menu
     """
+
     def create(self):
         endpointMenu = EndpointDropdownMenu(self.menu, self._controller).menu
         self._menu.add_cascade(label="Change endpoint...", menu=endpointMenu)
@@ -152,10 +156,12 @@ class MainSettingMenu(SettingMenu):
     """
     Creates a setting menu for the main menu.
     """
+
     def create(self):
-        self._menu.add_command(label="Completion Settings", command=self._controller.view.completionSettingsWindow)
+        self._menu.add_command(label="Completion Settings",
+                               command=self._controller.view.completionSettingsWindow)
         self._menu.add_command(label="Edit Settings", command=None)
-    
+
     @property
     def menu(self):
         return self._menu
@@ -167,7 +173,6 @@ class HelpMenu(AbstractMenu):
     """
 
 
-
 if __name__ == "__main__":
     """
     An example of how to create a menu
@@ -175,7 +180,7 @@ if __name__ == "__main__":
     root = tk.Tk()
     menu = MainMenu(root, None)
     menu.create()
-    
+
     root.config(menu=menu.menubar)
 
     root.mainloop()

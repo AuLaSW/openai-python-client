@@ -14,10 +14,12 @@ from openaiclient.view.frame.mainframe import MainFrame
 if TYPE_CHECKING:
     from openaiclient.controller.controller import Controller
 
+
 class Window(ABC):
     """
     An abstract constructor class for different windows
     """
+
     def __init__(self, window: tk.Tk, controller: Controller):
         self._window = window
         self._controller = controller
@@ -80,7 +82,7 @@ class MainWindow(Window):
     """
     A Concrete factory class for creating the main window on startup.
     """
-    
+
     def windowConstructor(self) -> MainFrame:
         menu = MainMenu(self.window, self.controller)
         menu.create()

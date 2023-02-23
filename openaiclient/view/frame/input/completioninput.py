@@ -42,7 +42,7 @@ class CompletionInputFrame(BaseFrame):
         )
 
         self.tags()
-        
+
         return self
 
     def tags(self):
