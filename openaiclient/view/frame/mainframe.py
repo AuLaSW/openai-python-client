@@ -52,62 +52,24 @@ class MainFrame(BaseFrame):
         )
         
         +row
-
-        #compLine = "The completion model can take text\nand generate novel outputs based\non your prompts."
         
-        comp = self.createDescriptionText(compLine.strip())
-        
-        comp.grid(
-            column=col,
-            row=row,
-            padx=15,
-            pady=5,
-            sticky=tk.W
+        comp = self.createEntryButton(
+            compLine.strip(),
+            "Completion Endpoint",
+            self.controller.view.completionInputWindow,
+            col=col,
+            row=row
         )
         
-        +col
-
-        tk.Button(
-            self,
-            text="Completion Endpoint",
-            command=self.controller.view.completionInputWindow,
-            width=20,
-            height=2
-        ).grid(
-            column=col,
-            row=row,
-            padx=15,
-            pady=5   
-        )
-
         ~col
         +row
         
-        #editLine = "The edit model takes both an\ninstruction and an input, editing\nthe input based on the instructions."
-        
-        edit = self.createDescriptionText(editLine.strip())
-        
-        edit.grid(
-            column=col,
-            row=row,
-            padx=15,
-            pady=5,
-            sticky=tk.W
-        )
-        
-        +col
-
-        tk.Button(
-            self,
-            text="Edit Endpoint",
-            state=tk.DISABLED,
-            width=20,
-            height=2
-        ).grid(
-            column=col,
-            row=row,
-            padx=15,
-            pady=5
+        edit = self.createEntryButton(
+            editLine.strip(),
+            "Edit Endpoint",
+            None,
+            col=col,
+            row=row
         )
         
         ~col
@@ -157,16 +119,37 @@ class MainFrame(BaseFrame):
             pady=0,
             columnspan=2,
         )
+        
+        +row
     
-    def createDescriptionText(self, line):
-        text = tk.Label(
+    def createEntryButton(self, line, label, func, col, row):
+        tk.Label(
             self,
             text=line,
             font=("", 10, ""),
             justify=tk.LEFT
+        ).grid(
+            column=col,
+            row=row,
+            padx=15,
+            pady=5,
+            sticky=tk.W
         )
         
-        return text
+        +col
+
+        tk.Button(
+            self,
+            text=label,
+            command=func,
+            width=20,
+            height=2
+        ).grid(
+            column=col,
+            row=row,
+            padx=15,
+            pady=5   
+        )
 
     def countLines(self, text):
         return text.count("1.0", "end", "displaylines")[0]
