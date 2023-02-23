@@ -158,8 +158,10 @@ class MainSettingMenu(SettingMenu):
     """
 
     def create(self):
-        self._menu.add_command(label="Completion Settings",
-                               command=self._controller.view.completionSettingsWindow)
+        self._menu.add_command(
+            label="Completion Settings",
+            command=self._controller.view.completionSettingsWindow
+        )
         self._menu.add_command(label="Edit Settings", command=None)
 
     @property
