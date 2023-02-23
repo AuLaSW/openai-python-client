@@ -13,6 +13,8 @@ class MenuFactory(ABC):
         self._menubar = tk.Menu(root)
         self._controller = controller
 
+        self.create()
+
     @property
     @abstractmethod
     def menubar(self):
