@@ -61,8 +61,6 @@ class View:
         window = CompletionInputWindow(self._root, self._controller)
         self.frame = window.draw()
 
-        self._root.mainloop()
-
     def mainWindow(self):
         """
         Create the main splash window for when the program starts
