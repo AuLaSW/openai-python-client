@@ -19,17 +19,30 @@ class CompletionInputFrame(BaseFrame):
 
     def create(self):
         row = Increment()
-        col = Increment()
+        col = Increment(1)
         
         tk.Label(
             self,
             text="Completion Endpoint",
-            font=("", 10, "")
+            font=("", 14, "")
         ).grid(
             column=col,
             row=row,
             pady=10
         )
+        
+        """
+        tk.Button(
+            self,
+            text="test"
+        ).grid(
+            column=col,
+            row=row,
+            pady=10,
+            padx=10,
+            sticky=tk.W
+        )
+        """
         
         +row
 
