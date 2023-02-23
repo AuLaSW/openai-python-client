@@ -23,6 +23,7 @@ class View:
         self._controller = controller
         self._root = tk.Tk()
         self._root.resizable(False, False)
+        self._root.title("openai-client")
         self._frame = None
 
     @property
