@@ -40,7 +40,8 @@ class MainFrame(BaseFrame):
             "Edit Endpoint",
             None,
             col=col,
-            row=row
+            row=row,
+            state=tk.DISABLED
         )
         
         self.addHorizSeparator(col, row)
@@ -78,7 +79,7 @@ class MainFrame(BaseFrame):
         
         +row
     
-    def addEntryButton(self, line, label, func, col, row):
+    def addEntryButton(self, line, label, func, col, row, state=None):
         tk.Label(
             self,
             text=line,
@@ -99,7 +100,8 @@ class MainFrame(BaseFrame):
             text=label,
             command=func,
             width=20,
-            height=2
+            height=2,
+            state=state
         ).grid(
             column=col,
             row=row,
