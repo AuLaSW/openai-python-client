@@ -17,17 +17,27 @@ class CompletionInputFrame(BaseFrame):
         )
 
     def create(self):
-        self._prompt.grid(
+        tk.Label(
+            text="Completion Endpoint",
+            font=("", 10, "")
+        ).grid(
             column=0,
-            row=0,
-            padx=10,
+            row=1,
             pady=10
         )
 
+        self._prompt.grid(
+            column=0,
+            row=1,
+            padx=10,
+        )
+
+        """
         self._prompt.bind(
             "<Any-KeyPress>",
             self.underlineUpdate
         )
+        """
 
         tk.Button(
             master=self,
@@ -35,7 +45,7 @@ class CompletionInputFrame(BaseFrame):
             command=self.sendInput
         ).grid(
             column=0,
-            row=1,
+            row=2,
             padx=10,
             pady=10,
             ipadx=40
@@ -46,6 +56,8 @@ class CompletionInputFrame(BaseFrame):
         return self
 
     def tags(self):
+        pass
+    """
         self._prompt.tag_add(
             "testTag",
             1.0,
@@ -69,6 +81,7 @@ class CompletionInputFrame(BaseFrame):
             tagName="testTag",
             underline=1
         )
+    """
 
     @property
     def text(self):
