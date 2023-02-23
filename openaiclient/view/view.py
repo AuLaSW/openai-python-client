@@ -6,6 +6,7 @@ API:
     run():
         Creates the window and starts the mainloop() for it.
 """
+import tkinter as tk
 from openaiclient.view.window.window import *
 
 
