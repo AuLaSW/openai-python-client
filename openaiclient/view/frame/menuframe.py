@@ -34,7 +34,6 @@ class MainMenu(MenuFactory):
 
     def create(self) -> None:
         self.addFileMenu()
-        self.addSettingMenu()
 
     def createFileMenu(self) -> tk.Menu:
         return MainFileMenu(self._menubar, self._controller).menu
@@ -45,20 +44,30 @@ class MainMenu(MenuFactory):
             menu=self.createFileMenu(),
         )
 
+
+class CompletionRequestMenu(MenuFactory):
+    """
+    Creates the menu when working with a completion request
+    """
+
+    @property
+    def menubar(self):
+        return self._menubar
+
+    def create(self) -> None:
+        self.addSettingMenu()
+
     def createSettingMenu(self) -> tk.Menu:
-        return MainSettingMenu(self._menubar, self._controller).menu
+        return CompletionRequestSettingMenu(
+            self._menubar,
+            self._controller
+        ).menu
 
     def addSettingMenu(self):
         self._menubar.add_cascade(
             label="Settings",
             menu=self.createSettingMenu(),
         )
-
-
-class CompletionRequestMenu(MenuFactory):
-    """
-    Creates the menu when working with a completion request
-    """
 
 
 class EditRequestMenu(MenuFactory):
@@ -153,7 +162,7 @@ class SettingMenu(AbstractMenu):
     """
 
 
-class MainSettingMenu(SettingMenu):
+class CompletionRequestSettingMenu(SettingMenu):
     """
     Creates a setting menu for the main menu.
     """
@@ -163,7 +172,22 @@ class MainSettingMenu(SettingMenu):
             label="Completion Settings",
             command=self._controller.view.completionSettingsWindow
         )
-        self._menu.add_command(label="Edit Settings", command=None)
+
+    @property
+    def menu(self):
+        return self._menu
+
+
+class EditRequestSettingMenu(SettingMenu):
+    """
+    Creates a setting menu for the main menu.
+    """
+
+    def create(self):
+        self._menu.add_command(
+            label="Edit Settings",
+            command=self._controller.view.editSettingsWindow
+        )
 
     @property
     def menu(self):
