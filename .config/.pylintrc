@@ -11,6 +11,19 @@ ignore=
 # number of processors to use
 jobs=1
 
+[MESSAGE CONTROL]
+
+# Disable the specific messages
+disable=
+    # redefine outer name
+    W0621,
+    # wildcard import
+    W0401,
+    # pointless string statement, used for commenting so no throw error
+    W0105,
+    # missing function doc string, I'll add them stop complaining
+    C0116
+
 [REPORTS]
 
 # the output format for the reports.
