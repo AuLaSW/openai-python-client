@@ -10,6 +10,7 @@ from openaiclient.view.frame.settings.settingsframe import SettingsFrame
 from openaiclient.view.frame.input.completioninput import CompletionInputFrame
 from openaiclient.view.frame.menuframe import *
 from openaiclient.view.frame.mainframe import MainFrame
+from openaiclient.view.frame.apiframe import APIFrame
 
 if TYPE_CHECKING:
     from openaiclient.controller.controller import Controller
@@ -86,6 +87,15 @@ class MainWindow(Window):
         menu = MainMenu(self.window, self.controller)
         self.window.config(menu=menu.menubar)
         return MainFrame(self.window, self.controller)
+
+
+class APIWindow(Window):
+    """
+    A concrete facotry class for creating the API window when no API key is detected
+    """
+
+    def windowConstructor(self) -> APIFrame:
+        return APIFrame(self.window, self.controller)
 
 
 if __name__ == "__main__":

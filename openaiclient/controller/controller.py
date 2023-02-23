@@ -4,7 +4,7 @@ This file should be imported as a module and contains the followings functions:
 
     * buildRequest - builds the request from a request object
 """
-
+from enum import Enum
 from openaiclient.model.request.completion import CompletionRequest
 from openaiclient.model.request.edit import EditRequest
 from openaiclient.model.models import Models
@@ -44,8 +44,12 @@ class Controller:
         # the response
         self._response = None
 
-    def start(self) -> None:
-        self.view.mainWindow()
+    def start(self, startVal) -> None:
+        match startVal:
+            case StartKey.GOOD_START:
+                self.view.mainWindow()
+            case StartKey.NO_API_KEY:
+                self.view.apiWindow()
 
     @property
     def models(self):
@@ -117,6 +121,10 @@ class Controller:
     def getEditSettings(self):
         return self.getSettings(EditRequest)
     """
+
+class StartKey(Enum):
+    GOOD_START = 0
+    NO_API_KEY = 1
 
 
 if __name__ == "__main__":

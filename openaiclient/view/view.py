@@ -74,6 +74,18 @@ class View:
         self.frame = window.draw()
 
         self._root.mainloop()
+    
+    def apiWindow(self):
+        """
+        Create a pop-up window to get API key when no API key is detected
+        """
+        self.frame = MainWindow(self._root, self._controller).draw()
+        newWindow = tk.Toplevel(self._root)
+        newWindow.resizable(False, False)
+        frame = APIWindow(newWindow, self._controller)
+        frame.draw()
+        
+        self._root.mainloop()
 
 
 if __name__ == "__main__":
