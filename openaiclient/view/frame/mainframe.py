@@ -23,7 +23,7 @@ class MainFrame(BaseFrame):
         
         self.addHorizSeparator(col, row)
         
-        text = self.addHeaderText(col, row)
+        self.addHeaderText(col, row)
         
         self.addHorizSeparator(col, row)
         
