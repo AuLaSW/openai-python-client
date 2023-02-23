@@ -43,7 +43,16 @@ class MainFrame(BaseFrame):
             row=row,
             state=tk.DISABLED
         )
-        
+
+        self.addEntryButton(
+            codexLine.strip(),
+            "Codex Endpoint",
+            None,
+            col=col,
+            row=row,
+            state=tk.DISABLED
+        )
+
         self.addHorizSeparator(col, row)
 
         self.master.update()
