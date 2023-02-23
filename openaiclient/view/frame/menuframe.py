@@ -8,6 +8,11 @@ class MenuFactory(ABC):
     """
     An abstract factory for generating menus
     """
+
+    def __init__(self, root, controller):
+        self._menubar = tk.Menu(root)
+        self._controller = controller
+
     @property
     @abstractmethod
     def menubar(self):
@@ -22,10 +27,6 @@ class MainMenu(MenuFactory):
     """
     Creates a main menu
     """
-
-    def __init__(self, root, controller):
-        self._menubar = tk.Menu(root)
-        self._controller = controller
 
     @property
     def menubar(self):
