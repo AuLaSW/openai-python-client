@@ -115,14 +115,21 @@ class EndpointDropdownMenu(DropdownMenu):
     """
 
     def create(self):
+        pass
+
+    def addCompletion(self):
         self._menu.add_command(
             label="Completion",
             command=self._controller.view.completionInputWindow
         )
+
+    def addEdit(self):
         self._menu.add_command(
             label="Edit",
             command=None
         )
+
+    def addCodex(self):
         self._menu.add_command(
             label="Codex",
             command=None
@@ -145,7 +152,11 @@ class MainFileMenu(FileMenu):
     """
 
     def create(self):
-        endpointMenu = EndpointDropdownMenu(self.menu, self._controller).menu
+        endpointMenu = EndpointDropdownMenu(self.menu, self._controller)
+        endpointMenu.addCompletion()
+        endpointMenu.addEdit()
+        endpointMenu.addCodex()
+        endpointMenu = endpointMenu.menu
         self._menu.add_cascade(label="Change endpoint...", menu=endpointMenu)
 
     @property
@@ -159,7 +170,10 @@ class CompletionRequestFileMenu(FileMenu):
     """
 
     def create(self):
-        endpointMenu = EndpointDropdownMenu(self.menu, self._controller).menu
+        endpointMenu = EndpointDropdownMenu(self.menu, self._controller)
+        endpointMenu.addEdit()
+        endpointMenu.addCodex()
+        endpointMenu = endpointMenu.menu
         self._menu.add_cascade(label="Change endpoint...", menu=endpointMenu)
 
     @property
