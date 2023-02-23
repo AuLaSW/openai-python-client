@@ -60,6 +60,18 @@ class CompletionRequestMenu(MenuFactory):
         self.addFileMenu()
         self.addSettingMenu()
 
+    def createFileMenu(self) -> tk.Menu:
+        return CompletionRequestFileMenu(
+            self._menubar,
+            self._controller
+        ).menu
+
+    def addFileMenu(self):
+        self._menubar.add_cascade(
+            label="File",
+            menu=self.createFileMenu(),
+        )
+
     def createSettingMenu(self) -> tk.Menu:
         return CompletionRequestSettingMenu(
             self._menubar,
