@@ -79,7 +79,7 @@ class EditRequestMenu(MenuFactory):
     """
 
 
-class AbstractMenu(ABC):
+class AbstractMenuProduct(ABC):
     """
     An abstract menu class, parent to all menu product classes.
     """
@@ -103,7 +103,7 @@ class AbstractMenu(ABC):
         pass
 
 
-class DropdownMenu(AbstractMenu):
+class DropdownMenu(AbstractMenuProduct):
     """
     Creates a dropdown menu for use inside of another menu
     """
@@ -133,7 +133,7 @@ class EndpointDropdownMenu(DropdownMenu):
         return self._menu
 
 
-class FileMenu(AbstractMenu):
+class FileMenu(AbstractMenuProduct):
     """
     Abstract product for file menus
     """
@@ -167,13 +167,13 @@ class CompletionRequestFileMenu(FileMenu):
         return self._menu
 
 
-class EditMenu(AbstractMenu):
+class EditMenu(AbstractMenuProduct):
     """
     Abstract product for edit menus
     """
 
 
-class SettingMenu(AbstractMenu):
+class SettingMenu(AbstractMenuProduct):
     """
     Abstract product for setting menus
     """
@@ -211,7 +211,7 @@ class EditRequestSettingMenu(SettingMenu):
         return self._menu
 
 
-class HelpMenu(AbstractMenu):
+class HelpMenu(AbstractMenuProduct):
     """
     Abstract product for help menus
     """
