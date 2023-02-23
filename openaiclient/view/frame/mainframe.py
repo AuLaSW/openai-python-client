@@ -21,19 +21,21 @@ class MainFrame(BaseFrame):
         col = Increment()
         row = Increment()
         
-        text = self.createText()
-        
-        text.grid(
+        ttk.Separator(
+            self,
+            orient="horizontal",
+        ).grid(
             column=col,
             row=row,
+            columnspan=2,
+            sticky=tk.W+tk.E,
             padx=10,
-            pady=10,
-            columnspan=2
+            pady=5
         )
         
-        self.master.update()
+        +row
         
-        text['height'] = self.countLines(text)
+        text = self.createHeaderText(row, col)
         
         +row
         
@@ -50,16 +52,10 @@ class MainFrame(BaseFrame):
         )
         
         +row
+
+        #compLine = "The completion model can take text\nand generate novel outputs based\non your prompts."
         
-        comp = tk.Text(
-            self,
-            width=30,
-            background=self.master['background'],
-            padx=0,
-            pady=0,
-            relief=tk.FLAT,
-            wrap=tk.WORD,
-        )
+        comp = self.createDescriptionText(compLine.strip())
         
         comp.grid(
             column=col,
@@ -68,17 +64,6 @@ class MainFrame(BaseFrame):
             pady=5,
             sticky=tk.W
         )
-        
-        compLine = "This gives you access to the completion endpoint"
-        
-        comp.insert(
-            1.0,
-            compLine,
-        )
-        
-        self.master.update()
-        
-        comp['height'] = self.countLines(comp)
         
         +col
 
@@ -98,33 +83,17 @@ class MainFrame(BaseFrame):
         ~col
         +row
         
-        edit = tk.Text(
-            self,
-            width=30,
-            background=self.master['background'],
-            padx=0,
-            pady=0,
-            relief=tk.FLAT,
-            wrap=tk.WORD,
-        )
+        #editLine = "The edit model takes both an\ninstruction and an input, editing\nthe input based on the instructions."
+        
+        edit = self.createDescriptionText(editLine.strip())
         
         edit.grid(
             column=col,
             row=row,
             padx=15,
             pady=5,
+            sticky=tk.W
         )
-        
-        editLine = "This gives you access to the edit endpoint"
-        
-        edit.insert(
-            1.0,
-            editLine,
-        )
-        
-        self.master.update()
-        
-        edit['height'] = self.countLines(edit)
         
         +col
 
@@ -140,46 +109,69 @@ class MainFrame(BaseFrame):
             padx=15,
             pady=5
         )
+        
+        self.master.update()
 
         return self
 
-    def createText(self):
-        text = tk.Text(
+    def createHeaderText(self, row, col):
+        tk.Label(
             self,
-            width=30,
-            background=self.master['background'],
+            text="OpenAI Client",
+            font=("", 16, "bold italic")
+        ).grid(
+            column=col,
+            row=row,
             padx=0,
             pady=0,
-            relief=tk.FLAT,
-            wrap=tk.WORD,
-        )
-
-        line = "Hello! And welcome to openaiclient!"
-
-        text.insert(
-            1.0,
-            line,
+            columnspan=2,
         )
         
+        +row
         
-
-        font = ("Times New Roman", 15, "")
-        text.configure(font=font)
-
-        text.tag_add(
-            "testTag",
-            1.0,
-            "1.6",
+        tk.Label(
+            self,
+            text="An open-source client for accessing the OpenAI API",
+            font=("", 12, "italic")
+        ).grid(
+            column=col,
+            row=row,
+            padx=0,
+            pady=0,
+            columnspan=2,
         )
-
-        text.tag_configure(
-            tagName="testTag",
-            font="Times 15 bold",
+    
+    def createDescriptionText(self, line):
+        text = tk.Label(
+            self,
+            text=line,
+            font=("", 10, ""),
+            justify=tk.LEFT
         )
-
-        text['state'] = tk.DISABLED
-
+        
         return text
 
     def countLines(self, text):
         return text.count("1.0", "end", "displaylines")[0]
+
+"""
+Maximum length of labels:
++++++++++1+++++++++2+++++++++3++++5~~
+"""
+
+compLine = """
+The completion models can take text
+and generate novel outputs based on
+your prompts.
+"""
+
+editLine = """
+The edit model takes both an
+instruction and an input, editing
+the input based on the instructions.
+"""
+
+codexLine = """
+The codex model generates code
+based on a given input.
+"""
