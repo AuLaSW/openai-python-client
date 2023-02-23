@@ -55,6 +55,7 @@ class CompletionRequestMenu(MenuFactory):
         return self._menubar
 
     def create(self) -> None:
+        self.addFileMenu()
         self.addSettingMenu()
 
     def createSettingMenu(self) -> tk.Menu:
@@ -139,6 +140,20 @@ class FileMenu(AbstractMenu):
 class MainFileMenu(FileMenu):
     """
     Creates a file menu for the main menu
+    """
+
+    def create(self):
+        endpointMenu = EndpointDropdownMenu(self.menu, self._controller).menu
+        self._menu.add_cascade(label="Change endpoint...", menu=endpointMenu)
+
+    @property
+    def menu(self):
+        return self._menu
+
+
+class CompletionRequestFileMenu(FileMenu):
+    """
+    Creates a file menu for the completion request view
     """
 
     def create(self):
