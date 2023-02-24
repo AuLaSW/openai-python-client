@@ -4,6 +4,7 @@ APIFrame class
 from increment import Increment
 import tkinter as tk
 from tkinter import ttk
+import webbrowser
 from openaiclient.view.frame import BaseFrame
 from tests.unit.fixture import api
 
@@ -64,7 +65,7 @@ class APIFrame(BaseFrame):
         
         tk.Button(
             tempFrame2,
-            text="Generate API Key",
+            text="Get API Key",
             font=("", 10, ""),
             command=self.setAPI
         ).grid(
@@ -118,7 +119,7 @@ class APIFrame(BaseFrame):
         ).grid(
             column=col,
             row=row,
-            pady=10,
+            pady=5,
             padx=(5,10),
         )
         
@@ -128,12 +129,14 @@ class APIFrame(BaseFrame):
         tk.Button(
             self,
             text="Save API Key",
+            font=("", 10, ""),
             width=30
         ).grid(
             column=col,
             row=row,
-            pady=10,
+            pady=(5,10),
             padx=10,
+            columnspan=2
         )
     
     def addHorizSeparator(self, col, row, frame):
@@ -154,7 +157,8 @@ class APIFrame(BaseFrame):
         +row
     
     def setAPI(self):
-        pass
+        api_url = "https://platform.openai.com/account/api-keys"
+        webbrowser.open(api_url)
 
     def setTestAPI(self):
         self.controller._api = api
