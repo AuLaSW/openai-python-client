@@ -58,7 +58,7 @@ class CompletionRequest(Request):
 
     def getResponse(self):
     
-        request = self._requestDict
+        request = dict(self._requestDict)
         request['model'] = request['model'].name
 
         return Response(
