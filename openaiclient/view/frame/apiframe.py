@@ -5,6 +5,8 @@ from increment import Increment
 import tkinter as tk
 from tkinter import ttk
 import webbrowser
+import os
+import openai
 from openaiclient.view.frame import BaseFrame
 from tests.unit.fixture import api
 
@@ -17,6 +19,8 @@ class APIFrame(BaseFrame):
     
     def __init__(self, main, controller):
         super().__init__(main, controller)
+        
+        self._api_key = tk.StringVar()
 
     def create(self):
         col = Increment()
@@ -67,7 +71,7 @@ class APIFrame(BaseFrame):
             tempFrame2,
             text="Get API Key",
             font=("", 10, ""),
-            command=self.setAPI
+            command=self.getAPI
         ).grid(
             column=tempCol,
             row=tempRow,
@@ -115,7 +119,8 @@ class APIFrame(BaseFrame):
         
         tk.Entry(
             self,
-            width=30
+            width=30,
+            textvariable=self._api_key
         ).grid(
             column=col,
             row=row,
@@ -130,7 +135,8 @@ class APIFrame(BaseFrame):
             self,
             text="Save API Key",
             font=("", 10, ""),
-            width=30
+            width=30,
+            command=self.setAPIKey
         ).grid(
             column=col,
             row=row,
@@ -156,12 +162,19 @@ class APIFrame(BaseFrame):
         
         +row
     
-    def setAPI(self):
+    def getAPI(self):
         api_url = "https://platform.openai.com/account/api-keys"
         webbrowser.open(api_url)
 
     def setTestAPI(self):
         self.controller._api = api
+        self.master.destroy()
+        
+    def setAPIKey(self):
+        self.controller._module = openai
+        self.controller._module.api_key = \
+        os.environ['OPENAI_API_KEY'] = self._api_key.get()
+
         self.master.destroy()
 
 
