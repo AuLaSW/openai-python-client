@@ -57,13 +57,9 @@ class CompletionRequest(Request):
         self._settings.remove("prompt")
 
     def getResponse(self):
-
-        request = self.request
-        request['model'] = request['model'].name
-
         return Response(
             self._module.Completion.create(
-                **request,
+                **self.request,
             )
         )
 
@@ -108,7 +104,9 @@ class CompletionRequest(Request):
 
     @property
     def request(self):
-        return dict(self._requestDict)
+        request = dict(self._requestDict)
+        request['model'] = request['model'].name
+        return request
 
     # request dictionary arguments
 
