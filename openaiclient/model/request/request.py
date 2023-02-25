@@ -4,9 +4,10 @@ Class Request:
 An abstract class used to model different request types to the
 OpenAI API.
 """
+from abc import ABC, abstractmethod
 
 
-class Request:
+class Request(ABC):
     def __init__(self):
         # dictionary of request arguments
         self.requestDict = dict()
@@ -45,17 +46,9 @@ class Request:
     """
 
     # returns response object from request
+    @abstractmethod
     def getResponse(self):
         raise NotImplementedError
-
-    # returns list of all keys in the request
-    def getKeys(self):
-        keys = self.requestDict.keys()
-
-        if len(keys) == 0:
-            raise RuntimeError
-        else:
-            return keys
 
     @property
     def settings(self):

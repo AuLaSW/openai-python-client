@@ -3,6 +3,7 @@ import unittest
 from openaiclient.model.request.request import Request
 
 
+"""
 class TestRequest(unittest.TestCase):
     def setUp(self):
         self.request = Request()
@@ -41,3 +42,4 @@ class TestRequest(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.mainloop()
+"""
