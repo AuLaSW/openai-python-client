@@ -58,7 +58,7 @@ class CompletionRequest(Request):
 
     def getResponse(self):
 
-        request = dict(self._requestDict)
+        request = self.request
         request['model'] = request['model'].name
 
         return Response(
@@ -106,6 +106,10 @@ class CompletionRequest(Request):
 
         return temp
 
+    @property
+    def request(self):
+        return dict(self._requestDict)
+
     # request dictionary arguments
 
     @property
@@ -146,7 +150,9 @@ class CompletionRequest(Request):
             self._requestDict["max_tokens"] = val
         else:
             raise RuntimeError(
-                f"max_tokens must be an integer greater than 0 and less than {max_tokens}")
+                f"max_tokens must be an integer greater than 0 and " +
+                f"less than {max_tokens}"
+            )
 
     @property
     def temperature(self):
