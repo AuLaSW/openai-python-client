@@ -67,7 +67,7 @@ class SettingsFrame(BaseFrame):
             try:
                 # get the correct setting function
                 # based on value type
-                func = getattr(self, typeOfValue+"Setting")
+                func = getattr(self, typeOfValue + "Setting")
             except AttributeError:
                 # skip the current attribute.
                 # later, this will be logged into a logger
@@ -116,7 +116,7 @@ class SettingsFrame(BaseFrame):
             except RuntimeError as error:
                 messagebox.showerror(
                     f"Incorrect input in {key}", f"Key {str(error)}")
-        
+
         self.exitSettings()
 
     def setAttr(self, key, val):

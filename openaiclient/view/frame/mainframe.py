@@ -20,13 +20,13 @@ class MainFrame(BaseFrame):
     def create(self) -> BaseFrame:
         col = Increment()
         row = Increment()
-        
+
         self.addHorizSeparator(col, row)
-        
+
         self.addHeaderText(col, row)
-        
+
         self.addHorizSeparator(col, row)
-        
+
         self.addEntryButton(
             compLine.strip(),
             "Completion Endpoint",
@@ -34,7 +34,7 @@ class MainFrame(BaseFrame):
             col=col,
             row=row
         )
-        
+
         self.addEntryButton(
             editLine.strip(),
             "Edit Endpoint",
@@ -71,9 +71,9 @@ class MainFrame(BaseFrame):
             pady=0,
             columnspan=2,
         )
-        
+
         +row
-        
+
         tk.Label(
             self,
             text="An open-source client for accessing the OpenAI API",
@@ -85,9 +85,9 @@ class MainFrame(BaseFrame):
             pady=0,
             columnspan=2,
         )
-        
+
         +row
-    
+
     def addEntryButton(self, line, label, func, col, row, state=None):
         tk.Label(
             self,
@@ -101,7 +101,7 @@ class MainFrame(BaseFrame):
             pady=5,
             sticky=tk.W
         )
-        
+
         +col
 
         tk.Button(
@@ -115,15 +115,15 @@ class MainFrame(BaseFrame):
             column=col,
             row=row,
             padx=15,
-            pady=5   
+            pady=5
         )
-        
+
         ~col
         +row
-    
+
     def addHorizSeparator(self, col, row):
         ~col
-        
+
         ttk.Separator(
             self,
             orient="horizontal",
@@ -131,15 +131,16 @@ class MainFrame(BaseFrame):
             column=col,
             row=row,
             columnspan=2,
-            sticky=tk.W+tk.E,
+            sticky=tk.W + tk.E,
             padx=10,
             pady=5
         )
-        
+
         +row
 
     def countLines(self, text):
         return text.count("1.0", "end", "displaylines")[0]
+
 
 """
 Maximum length of labels:

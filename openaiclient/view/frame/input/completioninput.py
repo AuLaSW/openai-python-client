@@ -21,9 +21,9 @@ class CompletionInputFrame(BaseFrame):
     def create(self):
         row = Increment()
         col = Increment()
-        
+
         self.addHorizSeparator(col, row)
-        
+
         tk.Label(
             self,
             text="Completion Endpoint",
@@ -33,11 +33,11 @@ class CompletionInputFrame(BaseFrame):
             row=row,
             pady=0
         )
-        
+
         +row
-        
+
         self.addHorizSeparator(col, row)
-        
+
         """
         tk.Button(
             self,
@@ -50,7 +50,7 @@ class CompletionInputFrame(BaseFrame):
             sticky=tk.W
         )
         """
-        
+
         +row
 
         self._prompt.grid(
@@ -66,7 +66,7 @@ class CompletionInputFrame(BaseFrame):
             self.underlineUpdate
         )
         """
-        
+
         +row
 
         tk.Button(
@@ -84,10 +84,10 @@ class CompletionInputFrame(BaseFrame):
         self.tags()
 
         return self
-    
+
     def addHorizSeparator(self, col, row):
         ~col
-        
+
         ttk.Separator(
             self,
             orient="horizontal",
@@ -95,11 +95,11 @@ class CompletionInputFrame(BaseFrame):
             column=col,
             row=row,
             columnspan=2,
-            sticky=tk.W+tk.E,
+            sticky=tk.W + tk.E,
             padx=10,
             pady=5
         )
-        
+
         +row
 
     def tags(self):

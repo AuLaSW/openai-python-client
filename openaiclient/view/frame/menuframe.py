@@ -182,7 +182,8 @@ class CompletionRequestFileMenu(FileMenu):
     """
 
     def create(self):
-        self._menu.add_command(label="Home", command=self._controller.view.mainWindow)
+        self._menu.add_command(label="Home",
+                               command=self._controller.view.mainWindow)
         endpointMenu = EndpointDropdownMenu(self.menu, self._controller)
         endpointMenu.addEdit()
         endpointMenu.addCodex()

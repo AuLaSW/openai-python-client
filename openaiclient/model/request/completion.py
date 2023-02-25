@@ -57,7 +57,7 @@ class CompletionRequest(Request):
         self._settings.remove("prompt")
 
     def getResponse(self):
-    
+
         request = dict(self._requestDict)
         request['model'] = request['model'].name
 
@@ -187,7 +187,7 @@ class CompletionRequest(Request):
         return self._requestDict["stream"]
 
     def set_stream(self, val):
-        if type(val) != float and val in [True, False]:
+        if not isinstance(val, float) and val in [True, False]:
             self._requestDict["stream"] = bool(val)
         else:
             raise RuntimeError("stream must be a boolean value.")
@@ -197,7 +197,7 @@ class CompletionRequest(Request):
         return self._requestDict["echo"]
 
     def set_echo(self, val):
-        if type(val) != float and val in [True, False]:
+        if not isinstance(val, float) and val in [True, False]:
             self._requestDict["echo"] = bool(val)
         else:
             raise RuntimeError("echo must be a boolean value.")

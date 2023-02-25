@@ -25,7 +25,7 @@ class CompletionSettings(SettingsFrame):
         self.settings = self.controller.request.settings
 
     def setAttr(self, key: str, val) -> None:
-        setter = getattr(self.controller.request, "set_"+key)
+        setter = getattr(self.controller.request, "set_" + key)
 
         if type(self.settings[key]).__name__ == "Model":
             model = getattr(self.controller.models, val.replace("-", "_"))

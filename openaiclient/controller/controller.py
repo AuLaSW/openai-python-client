@@ -122,6 +122,7 @@ class Controller:
         return self.getSettings(EditRequest)
     """
 
+
 class StartKey(Enum):
     GOOD_START = 0
     NO_API_KEY = 1
