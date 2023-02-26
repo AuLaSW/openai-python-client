@@ -2,6 +2,8 @@
 Holds the request product classes
 """
 from abc import ABC, abstractmethod
+import pickle
+from pathlib import Path
 
 
 class RequestProduct(ABC):
@@ -12,6 +14,10 @@ class RequestProduct(ABC):
     def __getattr__(self, name):
         if '_requestDict' in self.__dict__:
             return self.__dict__['_requestDict'][name]
+
+    def _pickle_dump(self):
+        with open(CompletionRequest.PICKLE_PATH, "wb") as pickleFile:
+            pickle.dump(self._requestDict, pickleFile)
 
     @property
     @abstractmethod
@@ -39,79 +45,84 @@ class CompletionRequest(RequestProduct):
     A Completion Request object
     """
 
+    PICKLE_PATH = Path("./defaults/model/request/completionrequest.pickle")
+
     def __init__(self, model=None) -> None:
-        # I'm wondering if this should just be read from a database of
-        # default values for differnt types of requests? Would be easier
-        # than trying to type it all out programatically.
-        self._requestDict = {
-            "model": RequestSetting(
-                value=model,
-                setting=True,
-                optional=False,
-                ),
-            "prompt": RequestSetting(
-                value="",
-                setting=False,
-                optional=True,
-                ),
-            "max_tokens": RequestSetting(
-                value=16,
-                setting=True,
-                optional=True,
-                ),
-            "temperature": RequestSetting(
-                value=0.0,
-                setting=True,
-                optional=True,
-                ),
-            "top_p": RequestSetting(
-                value=0.0,
-                setting=True,
-                optional=True,
-                ),
-            "n": RequestSetting(
-                value=1,
-                setting=True,
-                optional=True,
-                ),
-            "stream": RequestSetting(
-                value=False,
-                setting=True,
-                optional=True,
-                ),
-            "echo": RequestSetting(
-                value=False,
-                setting=True,
-                optional=True,
-                ),
-            "presence_penalty": RequestSetting(
-                value=0.0,
-                setting=True,
-                optional=True,
-                ),
-            "frequency_penalty": RequestSetting(
-                value=0.0,
-                setting=True,
-                optional=True,
-                ),
-            "best_of": RequestSetting(
-                value=1,
-                setting=True,
-                optional=True,
-                ),
-            "user": RequestSetting(
-                value="",
-                setting=True,
-                optional=True,
-                ),
-            # these keys I cannot get to work and are optional,
-            # so they are commented out until they work
-            #
-            # "suffix": NULL,
-            # "logprobs": 0,
-            # "stop": "",
-            # "logit_bias": {},
-        }
+        self._requestDict = {}
+
+        try:
+            with open(CompletionRequest.PICKLE_PATH, "rb") as file:
+                self._requestDict = pickle.load(file)
+        except Exception as err:
+            self._requestDict = {
+                "model": RequestSetting(
+                    value=model,
+                    setting=True,
+                    optional=False,
+                    ),
+                "prompt": RequestSetting(
+                    value="",
+                    setting=False,
+                    optional=True,
+                    ),
+                "max_tokens": RequestSetting(
+                    value=16,
+                    setting=True,
+                    optional=True,
+                    ),
+                "temperature": RequestSetting(
+                    value=0.0,
+                    setting=True,
+                    optional=True,
+                    ),
+                "top_p": RequestSetting(
+                    value=0.0,
+                    setting=True,
+                    optional=True,
+                    ),
+                "n": RequestSetting(
+                    value=1,
+                    setting=True,
+                    optional=True,
+                    ),
+                "stream": RequestSetting(
+                    value=False,
+                    setting=True,
+                    optional=True,
+                    ),
+                "echo": RequestSetting(
+                    value=False,
+                    setting=True,
+                    optional=True,
+                    ),
+                "presence_penalty": RequestSetting(
+                    value=0.0,
+                    setting=True,
+                    optional=True,
+                    ),
+                "frequency_penalty": RequestSetting(
+                    value=0.0,
+                    setting=True,
+                    optional=True,
+                    ),
+                "best_of": RequestSetting(
+                    value=1,
+                    setting=True,
+                    optional=True,
+                    ),
+                "user": RequestSetting(
+                    value="",
+                    setting=True,
+                    optional=True,
+                    ),
+                # these keys I cannot get to work and are optional,
+                # so they are commented out until they work
+                #
+                # "suffix": NULL,
+                # "logprobs": 0,
+                # "stop": "",
+                # "logit_bias": {},
+            }
 
     def set_model(self, val):
         """
@@ -286,12 +297,5 @@ class RequestSetting:
 
 
 if __name__ == "__main__":
-    setting = RequestSetting(1, True, True)
-
-    print(setting.value)
-
     req = CompletionRequest()
-
-    print(req.optionalArguments)
-    print(req.requiredArguments)
-    print(req.settings)
+    req._pickle_dump()
