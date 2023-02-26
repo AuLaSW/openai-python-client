@@ -22,7 +22,9 @@ disable=
     # pointless string statement, used for commenting so no throw error
     W0105,
     # missing function doc string, I'll add them stop complaining
-    C0116
+    C0116,
+    # too few public methods
+    R0903
 
 [REPORTS]
 
