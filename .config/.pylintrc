@@ -23,6 +23,8 @@ disable=
     W0105,
     # missing function doc string, I'll add them stop complaining
     C0116,
+    # using private members
+    W0212,
     # too few public methods
     R0903
 
