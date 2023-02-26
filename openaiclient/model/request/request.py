@@ -286,11 +286,7 @@ class RequestSetting:
 
 
 if __name__ == "__main__":
-    setting = RequestSetting(1)
-
-    setting.setting = True
-
-    setting.optional = True
+    setting = RequestSetting(1, True, True)
 
     print(setting.value)
 
