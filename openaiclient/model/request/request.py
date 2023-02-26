@@ -12,10 +12,12 @@ class RequestProduct(ABC):
     def __getattr__(self, name):
         if '_requestDict' in self.__dict__:
             return self.__dict__['_requestDict'][name]
-        else:
-            pass
 
-    """
+    @property
+    @abstractmethod
+    def request(self):
+        pass
+
     @property
     @abstractmethod
     def requiredArguments(self):
@@ -30,12 +32,6 @@ class RequestProduct(ABC):
     @abstractmethod
     def settings(self):
         pass
-
-    @property
-    @abstractmethod
-    def request(self):
-        pass
-    """
 
 
 class CompletionRequest(RequestProduct):
@@ -117,6 +113,95 @@ class CompletionRequest(RequestProduct):
             # "logit_bias": {},
         }
 
+    def set_model(self, val):
+        """
+        Check that the input is the correct type and set the value
+        """
+        typeName = type(val).__name__
+
+        if typeName == "Model" and val.name in self._models.completionModels:
+            self.model._value = val
+        else:
+            raise RuntimeError(
+                f"The model '{val}' is not a valid model.")
+
+    def set_prompt(self, val):
+        if isinstance(val, str):
+            self.prompt._value = val
+        else:
+            raise RuntimeError("The prompt must be a string.")
+
+    def set_max_tokens(self, val):
+        max_tokens = self._models.models[self.model.name].max_tokens
+
+        if isinstance(val, int) and 0 < val <= max_tokens:
+            self.max_tokens._value = val
+        else:
+            raise RuntimeError(
+                "max_tokens must be an integer greater than 0 and " +
+                f"less than {max_tokens}"
+            )
+
+    def set_temperature(self, val):
+        if isinstance(val, float) and 0 <= val <= 2:
+            self.temperature._value = val
+        else:
+            raise RuntimeError("temperature must be number between 0 and 2.")
+
+    def set_top_p(self, val):
+        if isinstance(val, float) and 0 <= val <= 1:
+            self.top_p._value = val
+        else:
+            raise RuntimeError(
+                "top_p must be an integer greater than 0.")
+
+    def set_n(self, val):
+        if isinstance(val, int)\
+                and not isinstance(val, bool)\
+                and 0 < val:
+            self.n._value = val
+        else:
+            raise RuntimeError("n must be an integer greater than 0.")
+
+    def set_stream(self, val):
+        if val in [True, False]:
+            self.stream._value = bool(val)
+        else:
+            raise RuntimeError("stream must be a boolean value.")
+
+    def set_echo(self, val):
+        if val in [True, False]:
+            self.echo._value = bool(val)
+        else:
+            raise RuntimeError("echo must be a boolean value.")
+
+    def set_presence_penalty(self, val):
+        if isinstance(val, float) and -2.0 <= val <= 2.0:
+            self.presence_penalty._value = val
+        else:
+            raise RuntimeError(
+                "presence_penalty must be a float between -2.0 and 2.0.")
+
+    def set_frequency_penalty(self, val):
+        if isinstance(val, float) and -2.0 <= val <= 2.0:
+            self.frequency_penalty._value = val
+        else:
+            raise RuntimeError(
+                "frequency_penalty must be a float between -2.0 and 2.0.")
+
+    def set_best_of(self, val):
+        if isinstance(val, int) and not isinstance(val, bool) and 0 < val:
+            self.best_of._value = val
+        else:
+            raise RuntimeError(
+                "best_of must be an integer greater than 0.")
+
+    def set_user(self, val):
+        if isinstance(val, str):
+            self.user._value = val
+        else:
+            raise RuntimeError("The user must be a string.")
+
     @property
     def request(self):
         """
@@ -157,6 +242,20 @@ class CompletionRequest(RequestProduct):
 
         return temp
 
+    @property
+    def settings(self):
+        """
+        Returns a dictionary of the settings in the request
+        """
+
+        temp = {}
+
+        for key, item in self._requestDict.items():
+            if item.setting:
+                temp[key] = item.value
+
+        return temp
+
 
 class RequestSetting:
     """
@@ -168,34 +267,22 @@ class RequestSetting:
         self._setting = setting
         self._optional = optional
 
-    def set(self, name, val) -> None:
-        datafield = getattr(self, name, None)
-        if type(val) == type(datafield):
-            setattr(self, name, val)
+    """
+    Remove the public setter methods; just call the private variables.
+    These should not be changed outside of these classes.
+    """
 
     @property
     def value(self):
         return self._value
 
-    @value.setter
-    def value(self, val):
-        self.set('_value', val)
-
     @property
     def setting(self):
         return self._setting
 
-    @setting.setter
-    def setting(self, val):
-        self.set('_setting', val)
-
     @property
     def optional(self):
         return self._optional
-
-    @optional.setter
-    def optional(self, val):
-        self.set('_optional', val)
 
 
 if __name__ == "__main__":
@@ -210,3 +297,5 @@ if __name__ == "__main__":
     req = CompletionRequest()
 
     print(req.optionalArguments)
+    print(req.requiredArguments)
+    print(req.settings)
