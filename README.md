@@ -35,7 +35,7 @@ Currently there is no binary build and the project runs in a venv. Currently the
 
 ## Current Work
 
-Currently, the project is moving the model package over to a set of abstract factories working together to build the requests and responses.
+Currently, the project is moving the model package over to a set of abstract factories working together to build the requests and responses. This will allow for easier extension to accomodate different endpoints.
 
 ## Contributing
 
