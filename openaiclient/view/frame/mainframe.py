@@ -2,6 +2,9 @@
 mainframe module
 """
 import tkinter as tk
+from tkinter import ttk
+import math
+from increment import Increment
 from openaiclient.view.frame.baseframe import BaseFrame
 
 
@@ -15,77 +18,147 @@ class MainFrame(BaseFrame):
         super().__init__(window, controller)
 
     def create(self) -> BaseFrame:
-        self.createText().grid(
-            column=0,
-            row=0,
-            columnspan=2
+        col = Increment()
+        row = Increment()
+        
+        self.addHorizSeparator(col, row)
+        
+        self.addHeaderText(col, row)
+        
+        self.addHorizSeparator(col, row)
+        
+        self.addEntryButton(
+            compLine.strip(),
+            "Completion Endpoint",
+            self.controller.view.completionInputWindow,
+            col=col,
+            row=row
         )
-
-        tk.Button(
-            self,
-            text="Completion Endpoint",
-            command=self.controller.view.completionInputWindow
-        ).grid(
-            column=0,
-            row=1,
-            padx=10,
-            pady=10
-        )
-
-        tk.Button(
-            self,
-            text="Edit Endpoint",
+        
+        self.addEntryButton(
+            editLine.strip(),
+            "Edit Endpoint",
+            None,
+            col=col,
+            row=row,
             state=tk.DISABLED
-        ).grid(
-            column=1,
-            row=1,
-            padx=10,
-            pady=10
         )
+
+        self.addEntryButton(
+            codexLine.strip(),
+            "Codex Endpoint",
+            None,
+            col=col,
+            row=row,
+            state=tk.DISABLED
+        )
+
+        self.addHorizSeparator(col, row)
+
+        self.master.update()
 
         return self
 
-    def createText(self):
-        text = tk.Text(
+    def addHeaderText(self, col, row):
+        tk.Label(
             self,
-            width=30,
-            background=self.master['background'],
+            text="OpenAI Client",
+            font=("", 16, "bold italic")
+        ).grid(
+            column=col,
+            row=row,
+            padx=0,
+            pady=0,
+            columnspan=2,
+        )
+        
+        +row
+        
+        tk.Label(
+            self,
+            text="An open-source client for accessing the OpenAI API",
+            font=("", 12, "italic")
+        ).grid(
+            column=col,
+            row=row,
+            padx=0,
+            pady=0,
+            columnspan=2,
+        )
+        
+        +row
+    
+    def addEntryButton(self, line, label, func, col, row, state=None):
+        tk.Label(
+            self,
+            text=line,
+            font=("", 10, ""),
+            justify=tk.LEFT
+        ).grid(
+            column=col,
+            row=row,
             padx=15,
-            pady=15,
-            relief=tk.FLAT,
-            wrap=tk.WORD,
+            pady=5,
+            sticky=tk.W
         )
+        
+        +col
 
-        line = "Hello! And welcome to openaiclient!\n\nPlease select an option below:"
-
-        text.insert(
-            1.0,
-            line,
+        tk.Button(
+            self,
+            text=label,
+            command=func,
+            width=20,
+            height=2,
+            state=state
+        ).grid(
+            column=col,
+            row=row,
+            padx=15,
+            pady=5   
         )
-
-        font = ("Times New Roman", 15, "")
-        text.configure(font=font)
-
-        text.tag_add(
-            "testTag",
-            1.0,
-            "1.6",
+        
+        ~col
+        +row
+    
+    def addHorizSeparator(self, col, row):
+        ~col
+        
+        ttk.Separator(
+            self,
+            orient="horizontal",
+        ).grid(
+            column=col,
+            row=row,
+            columnspan=2,
+            sticky=tk.W+tk.E,
+            padx=10,
+            pady=5
         )
-
-        text.tag_configure(
-            tagName="testTag",
-            font="Times 15 bold",
-        )
-
-        text['state'] = tk.DISABLED
-        text['height'] = self.countLines(line)
-
-        return text
+        
+        +row
 
     def countLines(self, text):
-        count = 0
+        return text.count("1.0", "end", "displaylines")[0]
 
-        for line in text.splitlines():
-            count += 1
+"""
+Maximum length of labels:
++++++++++1+++++++++2+++++++++3++++5~~
+"""
 
-        return count
+compLine = """
+The completion models can take text
+and generate novel outputs based on
+your prompts.
+"""
+
+editLine = """
+The edit model takes both an
+instruction and an input, editing
+the input based on the instructions.
+"""
+
+codexLine = """
+The codex model generates code
+based on a given input.
+"""

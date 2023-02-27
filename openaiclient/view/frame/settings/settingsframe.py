@@ -116,6 +116,8 @@ class SettingsFrame(BaseFrame):
             except RuntimeError as error:
                 messagebox.showerror(
                     f"Incorrect input in {key}", f"Key {str(error)}")
+        
+        self.exitSettings()
 
     def setAttr(self, key, val):
         """This should be overridden. Returns setter for saveSettings() method"""

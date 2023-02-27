@@ -23,6 +23,7 @@ class View:
         self._controller = controller
         self._root = tk.Tk()
         self._root.resizable(False, False)
+        self._root.title("openai-client")
         self._frame = None
 
     @property
@@ -61,15 +62,29 @@ class View:
         window = CompletionInputWindow(self._root, self._controller)
         self.frame = window.draw()
 
-        self._root.mainloop()
-
     def mainWindow(self):
         """
         Create the main splash window for when the program starts
         """
+        try:
+            self.frame.destroy()
+        except AttributeError:
+            pass
         window = MainWindow(self._root, self._controller)
         self.frame = window.draw()
 
+        self._root.mainloop()
+    
+    def apiWindow(self):
+        """
+        Create a pop-up window to get API key when no API key is detected
+        """
+        self.frame = MainWindow(self._root, self._controller).draw()
+        newWindow = tk.Toplevel(self._root)
+        newWindow.resizable(False, False)
+        frame = APIWindow(newWindow, self._controller)
+        frame.draw()
+        
         self._root.mainloop()
 
 

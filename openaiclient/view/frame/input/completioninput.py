@@ -2,6 +2,8 @@
 CompletionInput class
 """
 import tkinter as tk
+from tkinter import ttk
+from increment import Increment
 from openaiclient.view.frame.baseframe import BaseFrame
 
 
@@ -17,19 +19,45 @@ class CompletionInputFrame(BaseFrame):
         )
 
     def create(self):
+        row = Increment()
+        col = Increment()
+        
+        self.addHorizSeparator(col, row)
+        
         tk.Label(
+            self,
             text="Completion Endpoint",
-            font=("", 10, "")
+            font=("", 14, "")
         ).grid(
-            column=0,
-            row=1,
-            pady=10
+            column=col,
+            row=row,
+            pady=0
         )
+        
+        +row
+        
+        self.addHorizSeparator(col, row)
+        
+        """
+        tk.Button(
+            self,
+            text="test"
+        ).grid(
+            column=col,
+            row=row,
+            pady=10,
+            padx=10,
+            sticky=tk.W
+        )
+        """
+        
+        +row
 
         self._prompt.grid(
-            column=0,
-            row=1,
+            column=col,
+            row=row,
             padx=10,
+            pady=5
         )
 
         """
@@ -38,14 +66,16 @@ class CompletionInputFrame(BaseFrame):
             self.underlineUpdate
         )
         """
+        
+        +row
 
         tk.Button(
             master=self,
             text="Send",
             command=self.sendInput
         ).grid(
-            column=0,
-            row=2,
+            column=col,
+            row=row,
             padx=10,
             pady=10,
             ipadx=40
@@ -54,6 +84,23 @@ class CompletionInputFrame(BaseFrame):
         self.tags()
 
         return self
+    
+    def addHorizSeparator(self, col, row):
+        ~col
+        
+        ttk.Separator(
+            self,
+            orient="horizontal",
+        ).grid(
+            column=col,
+            row=row,
+            columnspan=2,
+            sticky=tk.W+tk.E,
+            padx=10,
+            pady=5
+        )
+        
+        +row
 
     def tags(self):
         pass
