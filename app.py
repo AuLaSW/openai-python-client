@@ -8,6 +8,8 @@ controller = Controller(api)
 
 # get API key from environment
 try:
+    configFile = config()
+    
     openai.api_key = environ["OPENAI_API_KEY"]
     controller.start()
 except Exception as err:
