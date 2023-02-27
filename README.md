@@ -1,6 +1,6 @@
 # openai-python-client
 
-A python GUI application that communicates with OpenAI through their openai-python API. Works with OpenAI Text Completion and Text Edit models.
+A python GUI application that communicates with OpenAI through their openai-python API. Works with OpenAI Text Completion endpoint.
 
 ## Purpose
 
@@ -14,45 +14,28 @@ This project is still a work in progress, though I am working on it frequently r
 
 ## Installing
 
-To install, 
+To install, head over to the [releases](https://github.com/AuLaSW/openai-python-client/releases) tab to find the latest release and install from there, either that or clone this repository into a folder. You'll need to set up the correct paths to be able to run the application.
+
+Currently there is no binary build and the project runs in a venv. Currently the application runs through `app.py`, though that will be updated to a better file name soon. When the application runs, it will ask you to either input your API key or use the test API. This has to be done at each instantiation until the code is fixed.
 
 ### Requirements
 
 [Requirements for running the application can be found here.](requirements.txt)
 
-## Basic Setup
+## TODO
 
-## Roadmap
+- [ ] Create documentation for the code.
+- [ ] Extend to more endpoints.
+  - [ ] Edit endpoint.
+  - [ ] Codex endpoint.
+  - [ ] Embedding endpoint.
+- [ ] API key retrieval and saving.
+- [ ] Better interaction UI for the models.
+- [ ] Help center for how to best work with the models.
 
-Features to be implemented in this project include but are not limited to:
+## Current Work
 
-### Documentation
-
-- [ ] Complete README
-	- [ ] Complete Installation information
-	- [ ] Complete Setup information
-	- [ ] Contribution
-		- [ ] How to best contribute to the project
-		- [ ] Resources for discussion
-		- [ ] Links to dependencies
-- [ ] Code documentation
-	- [ ] Determine method of Documentation
-	- [ ] Document modules
-		- [ ] app.py
-		- [ ] model package
-			- [ ] request package
-				- [ ] completion.py
-				- [ ] edit.py
-				- [ ] request.py
-			- [ ] models.py
-			- [ ] response.py
-		- [ ] view package
-		- [ ] controller package
-			- [ ] controller.py
-
-### Project
-
-
+Currently, the project is moving the model package over to a set of abstract factories working together to build the requests and responses.
 
 ## Contributing
 
@@ -62,5 +45,5 @@ If you would like to contribute, please fork the repository and make a [pull req
 
 AuLaSW
 
-## Licsence
+## License
 
