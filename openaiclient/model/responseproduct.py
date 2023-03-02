@@ -34,9 +34,9 @@ class CompletionResponse(ResponseProduct):
 
         self._api = api
 
-        self.getResponse(request)
+        self._getResponse(request)
 
-    def getResponse(self, request):
+    def _getResponse(self, request):
         response = self._api.Completion.create(
             **request.request
         )

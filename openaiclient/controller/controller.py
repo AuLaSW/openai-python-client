@@ -31,18 +31,14 @@ class Controller:
         # the view
         self._view = View(self)
 
-        self._module = api
+        self._api = api
 
         # uninitialized variables
 
-        # different models we can use
-        self._models = None
         # the request we are making
-        self._request = None
+        self._handler = None
         # the response
         self._response = None
-        # request handler
-        self._requestHandler = None
 
     def start(self, startVal) -> None:
         match startVal:
@@ -53,83 +49,30 @@ class Controller:
 
     @property
     def models(self):
-        return self._models
+        return self._handler._models
 
     @property
     def view(self):
         return self._view
 
     @property
-    def request(self):
-        return self._request
+    def handler(self):
+        return self._handler
 
     def completionRequest(self) -> None:
-        request = CompletionRequestFactory()
-        self._models = request.createModels()
-        self._request = request.createRequest(self._models.text_davinci_003)
-        self._requestHandler = request.createRequestHandler(
-            self._request,
-            self._module
-        )
+        self._handler = CompletionRequestFactory(self._api)
 
-    def sendRequest(self) -> None:
-        self._response = self._requestHandler.createResponse()
+    def getResponse(self) -> None:
+        self._response = self._handler.getResposne()
 
+"""
     def editReq(self) -> None:
-        self._request = EditRequest(self._module, self.models)
+        self._handler = EditRequest(self._module, self.models)
+"""
 
     @property
     def response(self):
         return self._response
-
-    # TODO: implement functions for this class.
-    """
-    # creates a request
-    def buildRequest(self, req):
-       Creates a request
-        self.request = self.view.getRequest(req)
-        self.response = self.request.getResponse()
-
-        self.view.updateResponse(self.response)
-
-    # build an edit request
-    def buildEditRequest(self):
-        if not isinstance(self.request, EditRequest):
-            self.request = EditRequest()
-        self.buildRequest(self.request)
-
-    # build a completion request
-    def buildCompletionRequest(self):
-        if not isinstance(self.request, CompletionRequest):
-            self.request = CompletionRequest()
-        self.buildRequest(self.request)
-
-    # reset the current request
-    def resetRequest(self):
-        if isinstance(self.request, CompletionRequest):
-            self.request = CompletionRequest()
-        else:
-            self.request = EditRequest()
-
-    ""Request Settings Data""
-
-    def getSettings(self, className):
-        if not isinstance(self.request, className):
-            # return an error
-            pass
-
-        return self.request.getSettings()
-
-    # returns the keys that are settings for
-    # the completion request
-    def getCompletionSettings(self):
-        return self.getSettings(CompletionRequest)
-
-    # returns the keys that are settings for
-    # the completion request
-    def getEditSettings(self):
-        return self.getSettings(EditRequest)
-    """
 
 
 class StartKey(Enum):
