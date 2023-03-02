@@ -22,10 +22,10 @@ class CompletionSettings(SettingsFrame):
     def __init__(self, main: SettingsFrame | tk.Tk, controller: Controller):
         super().__init__(main, controller)
 
-        self.settings = self.controller.request.settings
+        self.settings = self.controller.handler.settings
 
     def setAttr(self, key: str, val) -> None:
-        setter = getattr(self.controller.request, "set_" + key)
+        setter = getattr(self.controller.handler, "set_" + key)
 
         if type(self.settings[key]).__name__ == "Model":
             model = getattr(self.controller.models, val.replace("-", "_"))
@@ -64,7 +64,7 @@ class CompletionSettings(SettingsFrame):
         return setting
 
     def modelArgs(self, args=set()):
-        for model in self.controller.models.completionModels.keys():
+        for model in self.controller.models:
             args.add(model)
 
         return tuple(args)
