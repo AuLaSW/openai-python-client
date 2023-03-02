@@ -16,6 +16,11 @@ class ModelProduct(ABC):
         with open(self.PICKLE_PATH, "wb") as file:
             pickle.dump(self._models, file)
     
+    def _setPicklePath(self):
+        return Path(
+            f"./defaults/model/request/{self.__class__.__name__}.pickle"
+        )
+    
     @property
     def models(self):
         return self._models
@@ -27,9 +32,8 @@ class CompletionModels(ModelProduct):
     """
 
     def __init__(self):
-        self.PICKLE_PATH = Path(
-            f"./defaults/model/request/{self.__class__.__name__}.pickle"
-        )
+        self.PICKLE_PATH = self._setPicklePath()
+        
         print(self.PICKLE_PATH)
 
         self._models = {}

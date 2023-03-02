@@ -19,6 +19,11 @@ class RequestProduct(ABC):
         with open(self.PICKLE_PATH, "wb") as file:
             pickle.dump(self._requestDict, file)
 
+    def _setPicklePath(self):
+        return Path(
+            f"./defaults/model/request/{self.__class__.__name__}.pickle"
+        )
+
     @property
     @abstractmethod
     def request(self):
@@ -46,9 +51,7 @@ class CompletionRequest(RequestProduct):
     """
 
     def __init__(self, model=None) -> None:
-        self.PICKLE_PATH = Path(
-            f"./defaults/model/request/{self.__class__.__name__}.pickle"
-        )
+        self.PICKLE_PATH = self._setPicklePath()
 
         self._requestDict = {}
 
