@@ -7,7 +7,7 @@ This file should be imported as a module and contains the followings functions:
 from enum import Enum
 # from openaiclient.model.request.edit import EditRequest
 from openaiclient.view.view import View
-from openaiclient.model.request.requestfactory import *
+from openaiclient.model.request.requesthandler import *
 
 
 class Controller:
@@ -60,15 +60,15 @@ class Controller:
         return self._handler
 
     def completionRequest(self) -> None:
-        self._handler = CompletionRequestFactory(self._api)
+        self._handler = CompletionRequestHandler(api=self._api)
 
     def getResponse(self) -> None:
-        self._response = self._handler.getResposne()
+        self._response = self._handler.getResponse()
 
-"""
+    """
     def editReq(self) -> None:
         self._handler = EditRequest(self._module, self.models)
-"""
+    """
 
     @property
     def response(self):

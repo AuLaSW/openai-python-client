@@ -20,13 +20,13 @@ class RequestHandlerFactory(ABC):
     def __init__(self, api):
         self._models = self.createModels()
         self._request = self.createRequest()
-        self._handler = self.createRequestHandler(
+        self._handler = self.createResponseHandler(
             self._request,
             api
         )
     
     def __getattr__(self, name):
-        if hasattr(self._reqeust, name):
+        if hasattr(self._request, name):
             return getattr(self._request, name)
         elif hasattr(self._models, name):
             return getattr(self._models, name)
@@ -47,6 +47,9 @@ class RequestHandlerFactory(ABC):
             # get the function and pass value to it
             getattr(self._request, "set_"+key)(value)
     
+    def setPrompt(self, prompt):
+        self._request.set_prompt(prompt)
+    
     def getResponse(self):
         """
         Returns a response object.
@@ -62,7 +65,7 @@ class RequestHandlerFactory(ABC):
         pass
 
     @abstractmethod
-    def createRequestHandler(self, request, api):
+    def createResponseHandler(self, request, api):
         pass
 
 
@@ -84,7 +87,7 @@ class CompletionRequestHandler(RequestHandlerFactory):
         """
         return CompletionRequest(self._models.text_davinci_003)
 
-    def createRequestHandler(self, request, api):
+    def createResponseHandler(self, request, api):
         return CompletionResponseHandler(request, api)
 
 

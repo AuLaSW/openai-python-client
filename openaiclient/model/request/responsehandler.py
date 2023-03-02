@@ -17,7 +17,7 @@ class ResponseHandlerFactory(ABC):
     """
 
     @abstractmethod
-    def createResponse(self):
+    def getResponse(self):
         pass
 
 
