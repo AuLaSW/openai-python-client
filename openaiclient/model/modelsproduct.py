@@ -11,6 +11,12 @@ class ModelProduct(ABC):
     def __getattr__(self, name):
         if '_models' in self.__dict__:
             return self.__dict__['_models'][name]
+    
+    def __contains__(self, val):
+        return val in self._models.keys()
+    
+    def __iter__(self):
+        return self._models.__iter__()
 
     def _pickle_dump(self):
         with open(self.PICKLE_PATH, "wb") as file:
