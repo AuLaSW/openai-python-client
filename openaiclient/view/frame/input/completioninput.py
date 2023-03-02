@@ -11,7 +11,7 @@ class CompletionInputFrame(BaseFrame):
     def __init__(self, main, controller):
         super().__init__(main, controller)
 
-        self.controller.compReq()
+        self.controller.completionRequest()
         self._prompt = tk.Text(
             self,
             width=50,
