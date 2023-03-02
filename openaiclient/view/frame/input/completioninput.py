@@ -148,7 +148,7 @@ class CompletionInputFrame(BaseFrame):
     def sendInput(self):
         self.controller.handler.setPrompt(self.text)
         self.controller.getResponse()
-        self.text = self.controller.response.text
+        self.text = self.controller.response.text.strip()
         self.tags()
 
 
