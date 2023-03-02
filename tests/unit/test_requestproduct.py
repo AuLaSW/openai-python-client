@@ -6,6 +6,7 @@ from tests.unit.fixture import api
 from openaiclient.model.modelsproduct import *
 from openaiclient.model.requestproduct import *
 
+
 class TestCompletionRequest(unittest.TestCase):
     """
     This class tests the CompletionRequest class.
@@ -225,6 +226,57 @@ class TestCompletionRequest(unittest.TestCase):
                 self.assertRaises(
                     AttributeError,
                     self.request.set_top_p, 
+                    val
+                )
+    
+    def test_N(self):
+        """
+        Asserts that when a valid integer is passed that the correct value is modified
+        """
+        model = self.request.model.value
+        
+        vals = range(1, 10)
+        
+        for val in vals:
+            with self.subTest(val=val):
+                self.request.set_n(val)
+
+                self.assertEqual(
+                    self.request.n.value, 
+                    val
+                )
+    
+    def test_NBoundsError(self):
+        """
+        Asserts that an AttributeError is raised when an input outside the bounds is used.
+        """
+        model = self.request.model.value
+        
+        vals = range(-10, 0)
+        
+        for val in vals:
+            val = {"val": val}
+            with self.subTest(val=val):
+                self.assertRaises(
+                    AttributeError,
+                    self.request.set_n, 
+                    val
+                )
+    
+    def test_NTypeError(self):
+        """
+        Asserts than an AttributeError is raised when an invalid type is inputted.
+        """
+        model = self.request.model.value
+        
+        vals = [1.0, "test", True, None]
+        
+        for val in vals:
+            val = {"val": val}
+            with self.subTest(val=val):
+                self.assertRaises(
+                    AttributeError,
+                    self.request.set_n, 
                     val
                 )
     
@@ -475,5 +527,216 @@ class TestCompletionRequest(unittest.TestCase):
                 self.assertRaises(
                     AttributeError, 
                     self.request.set_user, 
+                    val
+                )
+
+
+class TestEditRequest(unittest.TestCase):
+    """
+    This class tests the EditRequest class
+    """
+
+    def setUp(self):
+        model = EditModels().text_davinci_edit_001
+        self.request = EditRequest(model)
+
+    def test_Input(self):
+        """
+        Test that when an input is entered, the request input correctly changes.
+        """
+        val = "this is a test"
+        self.request.set_input(val)
+        
+        self.assertEqual(self.request.input.value, val)
+    
+    def test_InputTypeError(self):
+        """
+        Test that when a non-string is entered into the input, it throws an AttributeError.
+        """
+        vals = [1, 1.0, None, True]
+        
+        for val in vals:
+            val = {"val": val}
+            with self.subTest(val=val):
+                self.assertRaises(
+                    AttributeError, 
+                    self.request.set_input, 
+                    val
+                )
+
+    def test_Instruction(self):
+        """
+        Test that when an instruction is entered, the request instruction correctly changes.
+        """
+        val = "this is a test"
+        self.request.set_instruction(val)
+        
+        self.assertEqual(self.request.instruction.value, val)
+    
+    def test_InstructionTypeError(self):
+        """
+        Test that when a non-string is entered into the instruction, it throws an AttributeError.
+        """
+        vals = [1, 1.0, None, True]
+        
+        for val in vals:
+            val = {"val": val}
+            with self.subTest(val=val):
+                self.assertRaises(
+                    AttributeError, 
+                    self.request.set_instruction, 
+                    val
+                )
+    
+    def test_Temperature(self):
+        """
+        Asserts that when a valid integer is passed that the correct value is modified
+        """
+        model = self.request.model.value
+        
+        temps = [number*0.01 for number in range(0, 201, 5)]
+        
+        for temp in temps:
+            with self.subTest(temp=temp):
+                self.request.set_temperature(temp)
+
+                self.assertEqual(
+                    self.request.temperature.value, 
+                    temp
+                )
+    
+    def test_TemperatureBoundsError(self):
+        """
+        Asserts that an AttributeError is raised when an input outside the bounds is used.
+        """
+        model = self.request.model.value
+        
+        temps = [number*0.01 for number in range(-200, 1, 5)]
+        
+        for temp in temps:
+            val = {"val": temp}
+            with self.subTest(val=val):
+                self.assertRaises(
+                    AttributeError,
+                    self.request.set_temperature, 
+                    val
+                )
+    
+    def test_TemperatureTypeError(self):
+        """
+        Asserts than an AttributeError is raised when an invalid type is inputted.
+        """
+        model = self.request.model.value
+        
+        temps = [1, "test", True, None]
+        
+        for temp in temps:
+            val = {"val": temp}
+            with self.subTest(val=val):
+                self.assertRaises(
+                    AttributeError,
+                    self.request.set_temperature, 
+                    val
+                )
+    
+    def test_Top_P(self):
+        """
+        Asserts that when a valid integer is passed that the correct value is modified
+        """
+        model = self.request.model.value
+        
+        vals = [number*0.01 for number in range(0, 101, 5)]
+        
+        for val in vals:
+            with self.subTest(val=val):
+                self.request.set_top_p(val)
+
+                self.assertEqual(
+                    self.request.top_p.value, 
+                    val
+                )
+    
+    def test_Top_PBoundsError(self):
+        """
+        Asserts that an AttributeError is raised when an input outside the bounds is used.
+        """
+        model = self.request.model.value
+        
+        vals = [number*0.01 for number in range(-100, 1, 5)]
+        
+        for val in vals:
+            val = {"val": val}
+            with self.subTest(val=val):
+                self.assertRaises(
+                    AttributeError,
+                    self.request.set_top_p, 
+                    val
+                )
+    
+    def test_Top_PTypeError(self):
+        """
+        Asserts than an AttributeError is raised when an invalid type is inputted.
+        """
+        model = self.request.model.value
+        
+        vals = [1, "test", True, None]
+        
+        for val in vals:
+            val = {"val": val}
+            with self.subTest(val=val):
+                self.assertRaises(
+                    AttributeError,
+                    self.request.set_top_p, 
+                    val
+                )
+    
+    def test_N(self):
+        """
+        Asserts that when a valid integer is passed that the correct value is modified
+        """
+        model = self.request.model.value
+        
+        vals = range(1, 10)
+        
+        for val in vals:
+            with self.subTest(val=val):
+                self.request.set_n(val)
+
+                self.assertEqual(
+                    self.request.n.value, 
+                    val
+                )
+    
+    def test_NBoundsError(self):
+        """
+        Asserts that an AttributeError is raised when an input outside the bounds is used.
+        """
+        model = self.request.model.value
+        
+        vals = range(-10, 0)
+        
+        for val in vals:
+            val = {"val": val}
+            with self.subTest(val=val):
+                self.assertRaises(
+                    AttributeError,
+                    self.request.set_n, 
+                    val
+                )
+    
+    def test_NTypeError(self):
+        """
+        Asserts than an AttributeError is raised when an invalid type is inputted.
+        """
+        model = self.request.model.value
+        
+        vals = [1.0, "test", True, None]
+        
+        for val in vals:
+            val = {"val": val}
+            with self.subTest(val=val):
+                self.assertRaises(
+                    AttributeError,
+                    self.request.set_n, 
                     val
                 )
