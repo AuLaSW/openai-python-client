@@ -46,6 +46,10 @@ class CompletionResponse(ResponseProduct):
         self.index = response["choices"][0]["index"]
         self.model = response["model"]
         self.finish_reason = response["choices"][0]["finish_reason"]
+        
+    @property
+    def response(self):
+        return self._response
 
 
 if __name__ == "__main__":

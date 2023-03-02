@@ -30,5 +30,5 @@ class CompletionRequestHandler(RequestHandlerFactory):
         self._request = request
         self._api = api
 
-    def createResponse(self):
-        return CompletionResponse(self._request, self._api)
+    def getResponse(self):
+        return CompletionResponse(self._request, self._api).response
