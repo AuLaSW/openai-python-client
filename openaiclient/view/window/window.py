@@ -57,16 +57,6 @@ class CompletionSettingsWindow(Window):
         return CompletionSettings(self.window, self.controller)
 
 
-class SettingsWindow(Window):
-    """
-    A concrete factory class for the CompletionSettings window.
-    """
-
-    def windowConstructor(self) -> SettingsFrame:
-        """Constructs a CompletionSettings frame product"""
-        return SettingsFrame(self.window, self.controller)
-
-
 class CompletionInputWindow(Window):
     """
     A concrete factor class for the CompletionInput window.
@@ -76,6 +66,17 @@ class CompletionInputWindow(Window):
         menu = CompletionRequestMenu(self.window, self.controller)
         self.window.config(menu=menu.menubar)
         return CompletionInputFrame(self.window, self.controller)
+
+
+class EditInputWindow(Window):
+    """
+    A concrete factor class for the CompletionInput window.
+    """
+
+    def windowConstructor(self) -> CompletionInputFrame:
+        menu = EditRequestMenu(self.window, self.controller)
+        self.window.config(menu=menu.menubar)
+        return EditInputFrame(self.window, self.controller)
 
 
 class MainWindow(Window):
