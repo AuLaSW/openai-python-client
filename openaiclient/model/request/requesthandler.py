@@ -2,6 +2,7 @@
 Factory for generating request handlers
 """
 from abc import ABC, abstractmethod
+from openaiclient.model.response import *
 
 
 class RequestHandlerFactory(ABC):
@@ -9,9 +10,11 @@ class RequestHandlerFactory(ABC):
     An abstract factory for creating request handlers
     """
 
+    """
     @abstractmethod
     def setRequest(self, request):
-
+        pass
+    """
 
 
 class CompletionRequestHandler(RequestHandlerFactory):
@@ -19,11 +22,12 @@ class CompletionRequestHandler(RequestHandlerFactory):
     Creates a completion response object
     """
 
-    def __init__(self, request):
+    def __init__(self, request, api):
         self._request = request
+        self._api = api
 
     def createCompletionResponse(self):
-        return CompletionResponse(self._request)
+        return CompletionResponse(self._request, self._api)
 
     @property
     def request(self):

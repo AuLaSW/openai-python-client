@@ -7,23 +7,24 @@ OpenAI API.
 from abc import ABC, abstractmethod
 from openaiclient.model.models import *
 from openaiclient.model.request.request import *
-from openaiclient.model.request.requesthandler import *
+from openaiclient.model.request.requesthandler import CompletionRequestHandler
 
 
 class RequestFactory(ABC):
     """
     An abstract factory for implementing request factories
     """
-    @abstractmethod
-    def createRequest(self):
-        pass
 
     @abstractmethod
     def createModels(self):
         pass
 
     @abstractmethod
-    def createRequestHandler(self):
+    def createRequest(self, model):
+        pass
+
+    @abstractmethod
+    def createRequestHandler(self, request):
         pass
 
 
@@ -32,14 +33,14 @@ class CompletionRequestFactory(RequestFactory):
     Creates Completion Request Objects
     """
 
-    def createRequest(self):
-        return CompletionRequest()
-
     def createModels(self):
         return CompletionModels()
 
-    def createRequestHandler(self):
-        return CompletionRequestHandler()
+    def createRequest(self, model):
+        return CompletionRequest(model)
+
+    def createRequestHandler(self, request, api):
+        return CompletionRequestHandler(request, api)
 
 
 class EditRequestFactory(RequestFactory):
