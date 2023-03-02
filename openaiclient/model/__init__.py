@@ -2,8 +2,8 @@
 
 # import all modules from package
 from . import request
-from .models import Models
-from .response import Response
+from .modelsproduct import CompletionModels
+from .responseproduct import CompletionResponse
 
 # packages to import
-__all__ = ["Models", "request", "Response"]
+__all__ = ["Request", "CompletionResponse", "CompletionModels"]
