@@ -122,7 +122,7 @@ class ModelProduct(ABC):
             pickle.dump(self._models, file)
 
 
-class CompletionModel(ModelProduct):
+class CompletionModels(ModelProduct):
     """
     A completion model object
     """
@@ -182,7 +182,7 @@ class Model:
 
 
 if __name__ == "__main__":
-    model = CompletionModel()
+    model = CompletionModels()
     model._pickle_dump()
 
     print(model)

@@ -5,6 +5,9 @@ An abstract class used to model different request types to the
 OpenAI API.
 """
 from abc import ABC, abstractmethod
+from openaiclient.model.models import *
+from openaiclient.model.request.request import *
+from openaiclient.model.request.requesthandler import *
 
 
 class RequestFactory(ABC):
@@ -67,3 +70,4 @@ class CodexRequestFactory(RequestFactory):
 
     def createRequestHandler(self):
         return CodexRequestHandler()
+

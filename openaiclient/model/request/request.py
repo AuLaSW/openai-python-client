@@ -132,7 +132,7 @@ class CompletionRequest(RequestProduct):
         """
         typeName = type(val).__name__
 
-        if typeName == "Model" and val.name in self._models.completionModels:
+        if typeName == "Model":
             self.model._value = val
         else:
             raise RuntimeError(
