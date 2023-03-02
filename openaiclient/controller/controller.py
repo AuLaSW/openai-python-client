@@ -7,7 +7,7 @@ This file should be imported as a module and contains the followings functions:
 from enum import Enum
 # from openaiclient.model.request.edit import EditRequest
 from openaiclient.view.view import View
-from openaiclient.model.request.requesthandler import *
+from openaiclient.model.requesthandler import *
 
 
 class Controller:

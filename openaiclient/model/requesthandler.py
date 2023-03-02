@@ -6,8 +6,8 @@ OpenAI API.
 """
 from abc import ABC, abstractmethod
 from openaiclient.model.modelsproduct import *
-from openaiclient.model.request.requestproduct import *
-from openaiclient.model.request.responsehandler import CompletionResponseHandler
+from openaiclient.model.requestproduct import *
+from openaiclient.model.responsehandler import CompletionResponseHandler
 
 
 class RequestHandlerFactory(ABC):
