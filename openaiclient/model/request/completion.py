@@ -148,7 +148,7 @@ class CompletionRequest(Request):
             self._requestDict["max_tokens"] = val
         else:
             raise RuntimeError(
-                f"max_tokens must be an integer greater than 0 and " +
+                "max_tokens must be an integer greater than 0 and " +
                 f"less than {max_tokens}"
             )
 
@@ -252,6 +252,15 @@ class CompletionRequest(Request):
             self._requestDict["user"] = val
         else:
             raise RuntimeError("The user must be a string.")
+
+
+class RequestDictionary:
+    """
+    A class to hold the request dictionary and work with it
+    """
+
+    def __init__(self):
+        pass
 
 
 if __name__ == "__main__":

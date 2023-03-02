@@ -10,6 +10,7 @@ from openaiclient.model.request.edit import EditRequest
 from openaiclient.model.models import Models
 from openaiclient.model.response import Response
 from openaiclient.view.view import View
+from openaiclient.model.request.requestfactory import *
 
 
 class Controller:
@@ -43,6 +44,8 @@ class Controller:
         self._request = None
         # the response
         self._response = None
+        # request handler
+        self._requestHandler = None
 
     def start(self, startVal) -> None:
         match startVal:
@@ -63,8 +66,14 @@ class Controller:
     def request(self):
         return self._request
 
-    def compReq(self) -> None:
-        self._request = CompletionRequest(self._module, self.models)
+    def completionRequest(self) -> None:
+        request = CompletionRequestFactory()
+        self._models = request.createModels()
+        self._request = request.createRequest(self._models.text_davinci_003)
+        self._requestHandler = request.createRequestHandler(
+            self._request,
+            self._module
+        )
 
     def editReq(self) -> None:
         self._request = EditRequest(self._module, self.models)

@@ -77,5 +77,5 @@ if __name__ == "__main__":
     from tests.unit.fixture import api
 
     controller = Controller(api)
-    controller.compReq()
+    controller.completionRequest()
     controller.view.completionSettingsWindow()
