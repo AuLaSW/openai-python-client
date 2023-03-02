@@ -6,8 +6,54 @@ from tests.unit.fixture import api
 from openaiclient.model.modelsproduct import *
 from openaiclient.model.requestproduct import *
 
+class TestRequestWrapper:
+    class TestRequest(unittest.TestCase):
+        """
+        This class holds tests that test common attributes amongst the classes.
+        """
+        
+        def test_Request(self):
+            """
+            Test that the object returned is a copy of the request values
+            """
+            # they are pointing to different objects in memory, 
+            # so the addresses should not be the same.
+            self.assertNotEqual(self.request, self.request.request)
+        
+        def test_RequestValues(self):
+            """
+            Test that the values for the request object are not RequestSettings objects
+            """
+            for value in self.request.request.values():
+                with self.subTest(value=value):
+                    self.assertIsNot(value, RequestSetting)
+        
+        def test_Settings(self):
+            """
+            Test that the settings for the request object are not RequestSetting objects
+            """
+            for value in self.request.settings.values():
+                with self.subTest(value=value):
+                    self.assertIsNot(value, RequestSetting)
+        
+        def test_OptionalArguments(self):
+            """
+            Test that the optional arguments for the request object are not RequestSetting objects
+            """
+            for value in self.request.optionalArguments.values():
+                with self.subTest(value=value):
+                    self.assertIsNot(value, RequestSetting)
+        
+        def test_RequiredArguments(self):
+            """
+            Test that the required arguments for the request object are not RequestSetting objects
+            """
+            for value in self.request.requiredArguments.values():
+                with self.subTest(value=value):
+                    self.assertIsNot(value, RequestSetting)
 
-class TestCompletionRequest(unittest.TestCase):
+
+class TestCompletionRequest(TestRequestWrapper.TestRequest):
     """
     This class tests the CompletionRequest class.
     """
@@ -15,46 +61,6 @@ class TestCompletionRequest(unittest.TestCase):
     def setUp(self):
         model = CompletionModels().text_davinci_003
         self.request = CompletionRequest(model)
-    
-    def test_Request(self):
-        """
-        Test that the object returned is a copy of the request values
-        """
-        # they are pointing to different objects in memory, 
-        # so the addresses should not be the same.
-        self.assertNotEqual(self.request, self.request.request)
-    
-    def test_RequestValues(self):
-        """
-        Test that the values for the request object are not RequestSettings objects
-        """
-        for value in self.request.request.values():
-            with self.subTest(value=value):
-                self.assertIsNot(value, RequestSetting)
-    
-    def test_Settings(self):
-        """
-        Test that the settings for the request object are not RequestSetting objects
-        """
-        for value in self.request.settings.values():
-            with self.subTest(value=value):
-                self.assertIsNot(value, RequestSetting)
-    
-    def test_OptionalArguments(self):
-        """
-        Test that the optional arguments for the request object are not RequestSetting objects
-        """
-        for value in self.request.optionalArguments.values():
-            with self.subTest(value=value):
-                self.assertIsNot(value, RequestSetting)
-    
-    def test_RequiredArguments(self):
-        """
-        Test that the required arguments for the request object are not RequestSetting objects
-        """
-        for value in self.request.requiredArguments.values():
-            with self.subTest(value=value):
-                self.assertIsNot(value, RequestSetting)
     
     def test_Prompt(self):
         """
@@ -531,7 +537,7 @@ class TestCompletionRequest(unittest.TestCase):
                 )
 
 
-class TestEditRequest(unittest.TestCase):
+class TestEditRequest(TestRequestWrapper.TestRequest):
     """
     This class tests the EditRequest class
     """
