@@ -32,3 +32,15 @@ class CompletionResponseHandler(ResponseHandlerFactory):
 
     def getResponse(self):
         return CompletionResponse(self._request, self._api)
+
+class EditResponseHandler(ResponseHandlerFactory):
+    """
+    Creates a edit response object
+    """
+
+    def __init__(self, request, api):
+        self._request = request
+        self._api = api
+
+    def getResponse(self):
+        return EditResponse(self._request, self._api)

@@ -70,6 +70,27 @@ class CompletionModels(ModelProduct):
             }
 
 
+class EditModels(ModelProduct):
+    """
+    An edit model object
+    """
+
+    def __init__(self):
+        self.PICKLE_PATH = self._setPicklePath()
+
+        self._models = {}
+
+        try:
+            with open(self.PICKLE_PATH, "rb") as file:
+                self._models = pickle.load(file)
+        except Exception:
+            self._models = {
+                "text_davinci_edit_001": Model(
+                   name="text-davinci-edit-001",
+                ),
+            }
+
+
 class Model:
     def __init__(self, name, max_tokens=-1):
         self._name = name

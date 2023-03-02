@@ -47,9 +47,6 @@ class RequestHandlerFactory(ABC):
             # get the function and pass value to it
             getattr(self._request, "set_"+key)(value)
     
-    def setPrompt(self, prompt):
-        self._request.set_prompt(prompt)
-    
     def getResponse(self):
         """
         Returns a response object.
@@ -89,6 +86,9 @@ class CompletionRequestHandler(RequestHandlerFactory):
 
     def createResponseHandler(self, request, api):
         return CompletionResponseHandler(request, api)
+    
+    def setPrompt(self, prompt):
+        self._request.set_prompt(prompt)
 
 
 class EditRequestHandler(RequestHandlerFactory):
@@ -96,11 +96,11 @@ class EditRequestHandler(RequestHandlerFactory):
     Creates Edit Request Objects
     """
 
-    def createRequest(self):
-        return EditRequest()
-
     def createModels(self):
         return EditModels()
+
+    def createRequest(self):
+        return EditRequest()
 
     def createRequestHandler(self):
         return EditResponseHandler()

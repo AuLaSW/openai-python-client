@@ -16,6 +16,10 @@ class ResponseProduct(ABC):
     def __getattr__(self, name):
         if '_response' in self.__dict__:
             return self.__dict__['_response'][name]
+    
+    @property
+    def response(self):
+        return self._response
 
 
 class CompletionResponse(ResponseProduct):
@@ -25,11 +29,11 @@ class CompletionResponse(ResponseProduct):
 
     def __init__(self, request, api):
         self._response = {
-                "obj": None,
-                "text": None,
-                "index": None,
-                "model": None,
-                "finish_reason": None,
+            "obj": None,
+            "text": None,
+            "index": None,
+            "model": None,
+            "finish_reason": None,
         }
 
         self._api = api
@@ -46,10 +50,32 @@ class CompletionResponse(ResponseProduct):
         self.index = response["choices"][0]["index"]
         self.model = response["model"]
         self.finish_reason = response["choices"][0]["finish_reason"]
-        
-    @property
-    def response(self):
-        return self._response
+
+
+class EditResponse(ResponseProduct):
+    """
+    An edit response object
+    """
+
+    def __init__(self, request, api):
+        self._response = {
+            "obj": None,
+            "text": None,
+            "index": None,
+        }
+
+        self._api = api
+
+        self._getResponse(request)
+
+    def _getResponse(self, request):
+        response = self._api.Completion.create(
+            **request.request
+        )
+
+        self.obj = response["object"]
+        self.text = response["choices"][0]["text"]
+        self.index = response["choices"][0]["index"]
 
 
 if __name__ == "__main__":

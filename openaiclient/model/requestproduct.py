@@ -23,26 +23,53 @@ class RequestProduct(ABC):
         return Path(
             f"./defaults/model/request/{self.__class__.__name__}.pickle"
         )
-
+    
     @property
     @abstractmethod
     def request(self):
         pass
 
     @property
-    @abstractmethod
-    def requiredArguments(self):
-        pass
-
-    @property
-    @abstractmethod
     def optionalArguments(self):
-        pass
+        """
+        Returns a dictionary of optional arguments for the request
+        """
+
+        temp = {}
+
+        for key, item in self._requestDict.items():
+            if item.optional:
+                temp[key] = item.value
+
+        return temp
 
     @property
-    @abstractmethod
+    def requiredArguments(self):
+        """
+        Returns a dictionary of optional arguments for the request
+        """
+
+        temp = {}
+
+        for key, item in self._requestDict.items():
+            if not item.optional:
+                temp[key] = item.value
+
+        return temp
+
+    @property
     def settings(self):
-        pass
+        """
+        Returns a dictionary of the settings in the request
+        """
+
+        temp = {}
+
+        for key, item in self._requestDict.items():
+            if item.setting:
+                temp[key] = item.value
+
+        return temp
 
 
 class CompletionRequest(RequestProduct):
@@ -232,53 +259,113 @@ class CompletionRequest(RequestProduct):
 
         return temp
 
-    @property
-    def optionalArguments(self):
-        """
-        Returns a dictionary of optional arguments for the request
-        """
-
-        temp = {}
-
-        for key, item in self._requestDict.items():
-            if item.optional:
-                temp[key] = item.value
-
-        return temp
-
-    @property
-    def requiredArguments(self):
-        """
-        Returns a dictionary of optional arguments for the request
-        """
-
-        temp = {}
-
-        for key, item in self._requestDict.items():
-            if not item.optional:
-                temp[key] = item.value
-
-        return temp
-
-    @property
-    def settings(self):
-        """
-        Returns a dictionary of the settings in the request
-        """
-
-        temp = {}
-
-        for key, item in self._requestDict.items():
-            if item.setting:
-                temp[key] = item.value
-
-        return temp
-
 
 class EditRequest(RequestProduct):
     """
     A Edit Request object
     """
+    def __init__(self, model=None) -> None:
+        self.PICKLE_PATH = self._setPicklePath()
+
+        self._requestDict = {}
+
+        try:
+            with open(self.PICKLE_PATH, "rb") as file:
+                self._requestDict = pickle.load(file)
+        except Exception as err:
+            self._requestDict = {
+                "model": RequestSetting(
+                    value=model,
+                    setting=True,
+                    optional=False,
+                    ),
+                "instruction": RequestSetting(
+                    value="",
+                    setting=False,
+                    optional=False,
+                    ),
+                "input": RequestSetting(
+                    value="",
+                    setting=False,
+                    optional=True,
+                ),
+                "temperature": RequestSetting(
+                    value=0.0,
+                    setting=True,
+                    optional=True,
+                    ),
+                "top_p": RequestSetting(
+                    value=0.0,
+                    setting=True,
+                    optional=True,
+                    ),
+                "n": RequestSetting(
+                    value=1,
+                    setting=True,
+                    optional=True,
+                    )
+            }
+
+    def set_model(self, val):
+        """
+        Check that the input is the correct type and set the value
+        """
+        typeName = type(val).__name__
+
+        if typeName == "Model":
+            self.model._value = val
+        else:
+            raise AttributeError(
+                f"The model '{val}' is not a valid model.")
+
+    def set_instruction(self, val):
+        if isinstance(val, str):
+            self.instruction._value = val
+        else:
+            raise AttributeError("The instruction must be a string.")
+    
+    def set_input(self, val):
+        if isinstance(val, str):
+            self.input._value = val
+        else:
+            raise AttributeError("The input must be a string.")
+
+    def set_temperature(self, val):
+        if isinstance(val, float) and 0 <= val <= 2:
+            self.temperature._value = val
+        else:
+            raise AttributeError("temperature must be number between 0 and 2.")
+
+    def set_top_p(self, val):
+        if isinstance(val, float) and 0 <= val <= 1:
+            self.top_p._value = val
+        else:
+            raise AttributeError(
+                "top_p must be an integer greater than 0.")
+
+    def set_n(self, val):
+        if isinstance(val, int)\
+                and not isinstance(val, bool)\
+                and 0 < val:
+            self.n._value = val
+        else:
+            raise AttributeError("n must be an integer greater than 0.")
+
+    @property
+    def request(self):
+        """
+        Returns a cleaned dictionary of the request dictionary
+        """
+        temp = {}
+
+        for key, item in self._requestDict.items():
+            temp[key] = item.value
+        
+        temp['model'] = temp['model'].name
+
+        return temp
+
+
 
 
 class CodexRequest(RequestProduct):

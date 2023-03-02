@@ -64,7 +64,12 @@ class Controller:
         return self._response
 
     def completionRequest(self) -> None:
-        self._handler = CompletionRequestHandler(api=self._api)
+        self._response = None
+        self._handler = CompletionRequestHandler(self._api)
+    
+    def editRequest(self) -> None:
+        self._response = None
+        self._handler = EditRequestHandler(self._api)
 
     def getResponse(self) -> None:
         self._response = self._handler.getResponse()
