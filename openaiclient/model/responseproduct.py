@@ -12,6 +12,10 @@ class ResponseProduct(ABC):
     """
     An interface for working with response products
     """
+    
+    def __getattr__(self, name):
+        if '_response' in self.__dict__:
+            return self.__dict__['_response'][name]
 
 
 class CompletionResponse(ResponseProduct):
@@ -34,14 +38,14 @@ class CompletionResponse(ResponseProduct):
 
     def getResponse(self, request):
         response = self._api.Completion.create(
-            **request
+            **request.request
         )
 
-        self._response.obj = response["object"]
-        self._response.text = response["choices"][0]["text"]
-        self._response.index = response["choices"][0]["index"]
-        self._response.model = response["model"]
-        self._response.finish_reason = response["choices"][0]["finish_reason"]
+        self.obj = response["object"]
+        self.text = response["choices"][0]["text"]
+        self.index = response["choices"][0]["index"]
+        self.model = response["model"]
+        self.finish_reason = response["choices"][0]["finish_reason"]
 
 
 if __name__ == "__main__":
