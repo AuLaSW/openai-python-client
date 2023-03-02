@@ -746,3 +746,6 @@ class TestEditRequest(TestRequestWrapper.TestRequest):
                     self.request.set_n, 
                     val
                 )
+
+if __name__ == "__main__":
+    unittest.mainloop()

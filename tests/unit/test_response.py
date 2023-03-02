@@ -1,6 +1,6 @@
 # test_response.py
 import unittest
-from openaiclient.model.response import Response
+from openaiclient.model.responseproduct import *
 
 
 class TestResponseWrapper:
