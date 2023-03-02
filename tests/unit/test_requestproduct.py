@@ -55,7 +55,7 @@ class TestCompletionRequest(unittest.TestCase):
             with self.subTest(value=value):
                 self.assertIsNot(value, RequestSetting)
     
-    def test_PromptEquality(self):
+    def test_Prompt(self):
         """
         Test that when a prompt is entered, the request prompt correctly changes.
         """
@@ -225,5 +225,255 @@ class TestCompletionRequest(unittest.TestCase):
                 self.assertRaises(
                     AttributeError,
                     self.request.set_top_p, 
+                    val
+                )
+    
+    def test_Stream(self):
+        """
+        Asserts that when a valid integer is passed that the correct value is modified
+        """
+        model = self.request.model.value
+        
+        vals = [True, False]
+        
+        for val in vals:
+            with self.subTest(val=val):
+                self.request.set_stream(val)
+
+                self.assertEqual(
+                    self.request.stream.value, 
+                    val
+                )
+    
+    def test_StreamTypeError(self):
+        """
+        Asserts than an AttributeError is raised when an invalid type is inputted.
+        """
+        model = self.request.model.value
+        
+        vals = [1, -1.0, "test", None]
+        
+        for val in vals:
+            val = {"val": val}
+            with self.subTest(val=val):
+                self.assertRaises(
+                    AttributeError,
+                    self.request.set_stream, 
+                    val
+                )
+    
+    def test_Echo(self):
+        """
+        Asserts that when a valid integer is passed that the correct value is modified
+        """
+        model = self.request.model.value
+        
+        vals = [True, False]
+        
+        for val in vals:
+            with self.subTest(val=val):
+                self.request.set_echo(val)
+
+                self.assertEqual(
+                    self.request.echo.value, 
+                    val
+                )
+    
+    def test_EchoTypeError(self):
+        """
+        Asserts than an AttributeError is raised when an invalid type is inputted.
+        """
+        model = self.request.model.value
+        
+        vals = [1, -1.0, "test", None]
+        
+        for val in vals:
+            val = {"val": val}
+            with self.subTest(val=val):
+                self.assertRaises(
+                    AttributeError,
+                    self.request.set_echo, 
+                    val
+                )
+    
+    def test_Presence_Penalty(self):
+        """
+        Asserts that when a valid integer is passed that the correct value is modified
+        """
+        model = self.request.model.value
+        
+        vals = [number*0.01 for number in range(-200, 201, 5)]
+        
+        for val in vals:
+            with self.subTest(val=val):
+                self.request.set_presence_penalty(val)
+
+                self.assertEqual(
+                    self.request.presence_penalty.value, 
+                    val
+                )
+    
+    def test_Presence_PenaltyBoundsError(self):
+        """
+        Asserts that an AttributeError is raised when an input outside the bounds is used.
+        """
+        model = self.request.model.value
+        
+        vals = [number*0.01 for number in range(-300, -200, 5)]
+        vals = [*vals, *(number*0.01 for number in range(201, 301, 5))]
+        
+        for val in vals:
+            val = {"val": val}
+            with self.subTest(val=val):
+                self.assertRaises(
+                    AttributeError,
+                    self.request.set_presence_penalty, 
+                    val
+                )
+    
+    def test_Presence_PenaltyTypeError(self):
+        """
+        Asserts than an AttributeError is raised when an invalid type is inputted.
+        """
+        model = self.request.model.value
+        
+        vals = [1, "test", True, None]
+        
+        for val in vals:
+            val = {"val": val}
+            with self.subTest(val=val):
+                self.assertRaises(
+                    AttributeError,
+                    self.request.set_presence_penalty, 
+                    val
+                )
+    
+    def test_Frequency_Penalty(self):
+        """
+        Asserts that when a valid integer is passed that the correct value is modified
+        """
+        model = self.request.model.value
+        
+        vals = [number*0.01 for number in range(-200, 201, 5)]
+        
+        for val in vals:
+            with self.subTest(val=val):
+                self.request.set_frequency_penalty(val)
+
+                self.assertEqual(
+                    self.request.frequency_penalty.value, 
+                    val
+                )
+    
+    def test_Frequency_PenaltyBoundsError(self):
+        """
+        Asserts that an AttributeError is raised when an input outside the bounds is used.
+        """
+        model = self.request.model.value
+        
+        vals = [number*0.01 for number in range(-300, -200, 5)]
+        vals = [*vals, *(number*0.01 for number in range(201, 301, 5))]
+        
+        for val in vals:
+            val = {"val": val}
+            with self.subTest(val=val):
+                self.assertRaises(
+                    AttributeError,
+                    self.request.set_frequency_penalty, 
+                    val
+                )
+    
+    def test_Frequency_PenaltyTypeError(self):
+        """
+        Asserts than an AttributeError is raised when an invalid type is inputted.
+        """
+        model = self.request.model.value
+        
+        vals = [1, "test", True, None]
+        
+        for val in vals:
+            val = {"val": val}
+            with self.subTest(val=val):
+                self.assertRaises(
+                    AttributeError,
+                    self.request.set_frequency_penalty, 
+                    val
+                )
+                
+    def test_Best_Of(self):
+        """
+        Asserts that when a valid integer is passed that the correct value is modified
+        """
+        model = self.request.model.value
+        
+        vals = range(1, 10)
+        
+        for val in vals:
+            with self.subTest(val=val):
+                self.request.set_best_of(val)
+
+                self.assertEqual(
+                    self.request.best_of.value, 
+                    val
+                )
+    
+    def test_Best_OfBoundsError(self):
+        """
+        Asserts that an AttributeError is raised when an input outside the bounds is used.
+        """
+        model = self.request.model.value
+        
+        vals = range(-10, 0)
+        
+        for val in vals:
+            val = {"val": val}
+            with self.subTest(val=val):
+                self.assertRaises(
+                    AttributeError,
+                    self.request.set_best_of, 
+                    val
+                )
+    
+    def test_Best_OfTypeError(self):
+        """
+        Asserts than an AttributeError is raised when an invalid type is inputted.
+        """
+        model = self.request.model.value
+        
+        vals = [1.0, "test", True, None]
+        
+        for val in vals:
+            val = {"val": val}
+            with self.subTest(val=val):
+                self.assertRaises(
+                    AttributeError,
+                    self.request.set_best_of, 
+                    val
+                )
+    
+    def test_User(self):
+        """
+        Test that when a user is entered, the request user correctly changes.
+        """
+        val = "this is a test"
+        self.request.set_user(val)
+        
+        self.assertEqual(
+            self.request.user.value, 
+            val
+        )
+    
+    def test_UserTypeError(self):
+        """
+        Test that when a non-string is entered into the user, it throws an AttributeError.
+        """
+        vals = [1, 1.0, None, True]
+        
+        for val in vals:
+            val = {"val": val}
+            with self.subTest(val=val):
+                self.assertRaises(
+                    AttributeError, 
+                    self.request.set_user, 
                     val
                 )
