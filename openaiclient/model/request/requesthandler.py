@@ -2,7 +2,7 @@
 Factory for generating request handlers
 """
 from abc import ABC, abstractmethod
-from openaiclient.model.response import *
+from openaiclient.model.responseproduct import *
 
 
 class RequestHandlerFactory(ABC):

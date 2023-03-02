@@ -5,10 +5,7 @@ This file should be imported as a module and contains the followings functions:
     * buildRequest - builds the request from a request object
 """
 from enum import Enum
-from openaiclient.model.request.completion import CompletionRequest
-from openaiclient.model.request.edit import EditRequest
-from openaiclient.model.models import Models
-from openaiclient.model.response import Response
+# from openaiclient.model.request.edit import EditRequest
 from openaiclient.view.view import View
 from openaiclient.model.request.requestfactory import *
 

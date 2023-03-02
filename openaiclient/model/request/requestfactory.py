@@ -5,8 +5,8 @@ An abstract class used to model different request types to the
 OpenAI API.
 """
 from abc import ABC, abstractmethod
-from openaiclient.model.models import *
-from openaiclient.model.request.request import *
+from openaiclient.model.modelsproduct import *
+from openaiclient.model.request.requestproduct import *
 from openaiclient.model.request.requesthandler import CompletionRequestHandler
 
 
@@ -24,7 +24,7 @@ class RequestFactory(ABC):
         pass
 
     @abstractmethod
-    def createRequestHandler(self, request):
+    def createRequestHandler(self, request, api):
         pass
 
 
