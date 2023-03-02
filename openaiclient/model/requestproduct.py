@@ -147,13 +147,6 @@ class CompletionRequest(RequestProduct):
                     setting=True,
                     optional=True,
                     ),
-                # these keys I cannot get to work and are optional,
-                # so they are commented out until they work
-                #
-                # "suffix": NULL,
-                # "logprobs": 0,
-                # "stop": "",
-                # "logit_bias": {},
             }
 
     def set_model(self, val):
@@ -163,7 +156,7 @@ class CompletionRequest(RequestProduct):
         typeName = type(val).__name__
 
         if typeName == "Model":
-            self.model._value = val
+            self.model.value = val
         else:
             raise AttributeError(
                 f"The model '{val}' is not a valid model.")

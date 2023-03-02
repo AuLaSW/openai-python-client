@@ -26,6 +26,9 @@ class EditSettings(SettingsFrame):
 
     def setAttr(self, key: str, val) -> None:
         setter = getattr(self.controller.handler, "set_" + key)
+        
+        if key == "model":
+            val = getattr(self.controller.handler, val.replace("-", "_"))
 
         setter(val)
 
