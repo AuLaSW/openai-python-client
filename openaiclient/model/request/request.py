@@ -16,8 +16,8 @@ class RequestProduct(ABC):
             return self.__dict__['_requestDict'][name]
 
     def _pickle_dump(self):
-        with open(CompletionRequest.PICKLE_PATH, "wb") as pickleFile:
-            pickle.dump(self._requestDict, pickleFile)
+        with open(self.PICKLE_PATH, "wb") as file:
+            pickle.dump(self._requestDict, file)
 
     @property
     @abstractmethod
@@ -45,13 +45,15 @@ class CompletionRequest(RequestProduct):
     A Completion Request object
     """
 
-    PICKLE_PATH = Path("./defaults/model/request/completionrequest.pickle")
-
     def __init__(self, model=None) -> None:
+        self.PICKLE_PATH = Path(
+            f"./defaults/model/request/{self.__class__.__name__}.pickle"
+        )
+
         self._requestDict = {}
 
         try:
-            with open(CompletionRequest.PICKLE_PATH, "rb") as file:
+            with open(self.PICKLE_PATH, "rb") as file:
                 self._requestDict = pickle.load(file)
         except Exception as err:
             self._requestDict = {
@@ -268,6 +270,18 @@ class CompletionRequest(RequestProduct):
         return temp
 
 
+class EditRequest(RequestProduct):
+    """
+    A Edit Request object
+    """
+
+
+class CodexRequest(RequestProduct):
+    """
+    A Codex Request object
+    """
+
+
 class RequestSetting:
     """
     Holds setting objects for request objecs
@@ -277,11 +291,6 @@ class RequestSetting:
         self._value = value
         self._setting = setting
         self._optional = optional
-
-    """
-    Remove the public setter methods; just call the private variables.
-    These should not be changed outside of these classes.
-    """
 
     @property
     def value(self):
