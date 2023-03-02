@@ -39,8 +39,6 @@ class CompletionModels(ModelProduct):
 
     def __init__(self):
         self.PICKLE_PATH = self._setPicklePath()
-        
-        print(self.PICKLE_PATH)
 
         self._models = {}
 
