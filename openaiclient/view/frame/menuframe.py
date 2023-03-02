@@ -170,7 +170,7 @@ class EndpointDropdownMenu(DropdownMenu):
     def addEdit(self):
         self._menu.add_command(
             label="Edit",
-            command=None
+            command=self._controller.view.editInputWindow
         )
 
     def addCodex(self):

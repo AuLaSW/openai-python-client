@@ -4,11 +4,13 @@ from typing import TYPE_CHECKING
 import tkinter as tk
 from openaiclient.view.frame.settings \
     .settingsframe import SettingsFrame
+from openaiclient.view.frame.settings.requestsettings import RequestSettings
 
 
 if TYPE_CHECKING:
     from openaiclient.controller.controller import Controller
     from openaiclient.view.frame.settings.settingsframe import SettingsFrame
+    
 
 """
 Class CompletionSettings:
@@ -18,55 +20,8 @@ with settings for an OpenAI API text-completion request.
 """
 
 
-class CompletionSettings(SettingsFrame):
-    def __init__(self, main: SettingsFrame | tk.Tk, controller: Controller):
-        super().__init__(main, controller)
-
-        self.settings = self.controller.handler.settings
-
-    def setAttr(self, key: str, val) -> None:
-        setter = getattr(self.controller.handler, "set_" + key)
-        
-        if key == "model":
-            val = getattr(self.controller.handler, val.replace("-", "_"))
-
-        setter(val)
-
-    # Model setting input
-    def modelSetting(self, key: str, value) -> SettingsFrame.Setting:
-        """
-        Creates a drop-down setting with models as names
-        """
-        setting = self.Setting()
-        args = self.modelArgs()
-        tkFunc = tk.OptionMenu
-
-        self._kwargs(tkFunc, tk.StringVar, "variable", key)
-
-        self.outputs[key].set(self.settings[key].name)
-
-        setting.label = tk.Label(
-            master=self,
-            text=key
-        )
-
-        setting.widget = tkFunc(
-            self,
-            self.outputs[key],
-            *args
-        )
-
-        setting.widget.config(
-            width=15
-        )
-
-        return setting
-
-    def modelArgs(self, args=set()):
-        for model in self.controller.models:
-            args.add(model)
-
-        return tuple(args)
+class CompletionSettings(RequestSettings):
+    pass
 
 
 if __name__ == "__main__":
