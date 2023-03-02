@@ -11,7 +11,7 @@ class EditInputFrame(BaseFrame):
     def __init__(self, main, controller):
         super().__init__(main, controller)
 
-        self.controller.completionRequest()
+        self.controller.editRequest()
         self._prompt = tk.Text(
             self,
             width=50,
@@ -26,7 +26,7 @@ class EditInputFrame(BaseFrame):
 
         tk.Label(
             self,
-            text="Completion Endpoint",
+            text="Edit Endpoint",
             font=("", 14, "")
         ).grid(
             column=col,

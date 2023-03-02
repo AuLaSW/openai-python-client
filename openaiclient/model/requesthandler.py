@@ -7,7 +7,7 @@ OpenAI API.
 from abc import ABC, abstractmethod
 from openaiclient.model.modelsproduct import *
 from openaiclient.model.requestproduct import *
-from openaiclient.model.responsehandler import CompletionResponseHandler
+from openaiclient.model.responsehandler import *
 
 
 class RequestHandlerFactory(ABC):
@@ -100,10 +100,10 @@ class EditRequestHandler(RequestHandlerFactory):
         return EditModels()
 
     def createRequest(self):
-        return EditRequest()
+        return EditRequest(self._models.text_davinci_edit_001)
 
-    def createRequestHandler(self):
-        return EditResponseHandler()
+    def createResponseHandler(self, request, api):
+        return EditResponseHandler(request, api)
 
 
 class CodexRequestHandler(RequestHandlerFactory):

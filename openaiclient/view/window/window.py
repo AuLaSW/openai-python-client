@@ -6,6 +6,7 @@ import tkinter as tk
 from abc import ABC, abstractmethod
 from typing import TYPE_CHECKING
 from openaiclient.view.frame.settings.completionsettings import CompletionSettings
+from openaiclient.view.frame.settings.editsettings import EditSettings
 from openaiclient.view.frame.settings.settingsframe import SettingsFrame
 from openaiclient.view.frame.input.completioninput import CompletionInputFrame
 from openaiclient.view.frame.input.editinput import EditInputFrame
@@ -57,6 +58,15 @@ class CompletionSettingsWindow(Window):
         """Constructs a CompletionSettings frame product"""
         return CompletionSettings(self.window, self.controller)
 
+
+class EditSettingsWindow(Window):
+    """
+    A concrete factory class for the CompletionSettings window.
+    """
+
+    def windowConstructor(self) -> CompletionSettings:
+        """Constructs a CompletionSettings frame product"""
+        return EditSettings(self.window, self.controller)
 
 class CompletionInputWindow(Window):
     """
