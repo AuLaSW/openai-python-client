@@ -32,11 +32,3 @@ class CompletionRequestHandler(RequestHandlerFactory):
 
     def createResponse(self):
         return CompletionResponse(self._request, self._api)
-
-    @property
-    def request(self):
-        return self._request
-
-    @request.setter
-    def request(self, val):
-        self._request = val

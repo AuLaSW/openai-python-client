@@ -224,6 +224,8 @@ class CompletionRequest(RequestProduct):
 
         for key, item in self._requestDict.items():
             temp[key] = item.value
+        
+        temp['model'] = temp['model'].name
 
         return temp
 

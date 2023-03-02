@@ -15,6 +15,10 @@ class ModelProduct(ABC):
     def _pickle_dump(self):
         with open(self.PICKLE_PATH, "wb") as file:
             pickle.dump(self._models, file)
+    
+    @property
+    def models(self):
+        return self._models
 
 
 class CompletionModels(ModelProduct):
@@ -56,10 +60,6 @@ class CompletionModels(ModelProduct):
                 #    endpoint=self.EDIT
                 # ),
             }
-
-    @property
-    def models(self):
-        return self._models
 
 
 class Model:
