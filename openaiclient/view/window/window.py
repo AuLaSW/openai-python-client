@@ -8,6 +8,7 @@ from typing import TYPE_CHECKING
 from openaiclient.view.frame.settings.completionsettings import CompletionSettings
 from openaiclient.view.frame.settings.settingsframe import SettingsFrame
 from openaiclient.view.frame.input.completioninput import CompletionInputFrame
+from openaiclient.view.frame.input.editinput import EditInputFrame
 from openaiclient.view.frame.menuframe import *
 from openaiclient.view.frame.mainframe import MainFrame
 from openaiclient.view.frame.apiframe import APIFrame

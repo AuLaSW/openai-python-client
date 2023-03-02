@@ -38,10 +38,10 @@ class MainFrame(BaseFrame):
         self.addEntryButton(
             editLine.strip(),
             "Edit Endpoint",
-            None,
+            self.controller.view.editInputWindow,
             col=col,
             row=row,
-            state=tk.DISABLED
+            #state=tk.DISABLED
         )
 
         self.addEntryButton(

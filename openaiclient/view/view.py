@@ -61,6 +61,24 @@ class View:
         self.frame.destroy()
         window = CompletionInputWindow(self._root, self._controller)
         self.frame = window.draw()
+    
+    def editSettingsWindow(self):
+        """
+        Create a completion settings window with settings from the
+        CompletionRequest class
+        """
+        newWindow = tk.Toplevel(self._root)
+        newWindow.resizable(False, False)
+        frame = EditSettingsWindow(newWindow, self._controller)
+        frame.draw()
+
+    def editInputWindow(self):
+        """
+        Create a completion input window for writing prompts for the OpenAI API
+        """
+        self.frame.destroy()
+        window = EditInputWindow(self._root, self._controller)
+        self.frame = window.draw()
 
     def mainWindow(self):
         """
