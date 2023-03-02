@@ -148,7 +148,7 @@ class CompletionRequest(RequestProduct):
             raise RuntimeError("The prompt must be a string.")
 
     def set_max_tokens(self, val):
-        max_tokens = self._models.models[self.model.name].max_tokens
+        max_tokens = self.model._value.max_tokens
 
         if isinstance(val, int) and 0 < val <= max_tokens:
             self.max_tokens._value = val
