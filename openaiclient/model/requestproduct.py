@@ -138,14 +138,14 @@ class CompletionRequest(RequestProduct):
         if typeName == "Model":
             self.model._value = val
         else:
-            raise RuntimeError(
+            raise AttributeError(
                 f"The model '{val}' is not a valid model.")
 
     def set_prompt(self, val):
         if isinstance(val, str):
             self.prompt._value = val
         else:
-            raise RuntimeError("The prompt must be a string.")
+            raise AttributeError("The prompt must be a string.")
 
     def set_max_tokens(self, val):
         max_tokens = self.model._value.max_tokens
@@ -153,7 +153,7 @@ class CompletionRequest(RequestProduct):
         if isinstance(val, int) and 0 < val <= max_tokens:
             self.max_tokens._value = val
         else:
-            raise RuntimeError(
+            raise AttributeError(
                 "max_tokens must be an integer greater than 0 and " +
                 f"less than {max_tokens}"
             )
@@ -162,13 +162,13 @@ class CompletionRequest(RequestProduct):
         if isinstance(val, float) and 0 <= val <= 2:
             self.temperature._value = val
         else:
-            raise RuntimeError("temperature must be number between 0 and 2.")
+            raise AttributeError("temperature must be number between 0 and 2.")
 
     def set_top_p(self, val):
         if isinstance(val, float) and 0 <= val <= 1:
             self.top_p._value = val
         else:
-            raise RuntimeError(
+            raise AttributeError(
                 "top_p must be an integer greater than 0.")
 
     def set_n(self, val):
@@ -177,46 +177,46 @@ class CompletionRequest(RequestProduct):
                 and 0 < val:
             self.n._value = val
         else:
-            raise RuntimeError("n must be an integer greater than 0.")
+            raise AttributeError("n must be an integer greater than 0.")
 
     def set_stream(self, val):
         if val in [True, False]:
             self.stream._value = bool(val)
         else:
-            raise RuntimeError("stream must be a boolean value.")
+            raise AttributeError("stream must be a boolean value.")
 
     def set_echo(self, val):
         if val in [True, False]:
             self.echo._value = bool(val)
         else:
-            raise RuntimeError("echo must be a boolean value.")
+            raise AttributeError("echo must be a boolean value.")
 
     def set_presence_penalty(self, val):
         if isinstance(val, float) and -2.0 <= val <= 2.0:
             self.presence_penalty._value = val
         else:
-            raise RuntimeError(
+            raise AttributeError(
                 "presence_penalty must be a float between -2.0 and 2.0.")
 
     def set_frequency_penalty(self, val):
         if isinstance(val, float) and -2.0 <= val <= 2.0:
             self.frequency_penalty._value = val
         else:
-            raise RuntimeError(
+            raise AttributeError(
                 "frequency_penalty must be a float between -2.0 and 2.0.")
 
     def set_best_of(self, val):
         if isinstance(val, int) and not isinstance(val, bool) and 0 < val:
             self.best_of._value = val
         else:
-            raise RuntimeError(
+            raise AttributeError(
                 "best_of must be an integer greater than 0.")
 
     def set_user(self, val):
         if isinstance(val, str):
             self.user._value = val
         else:
-            raise RuntimeError("The user must be a string.")
+            raise AttributeError("The user must be a string.")
 
     @property
     def request(self):
