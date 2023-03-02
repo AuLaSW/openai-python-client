@@ -27,11 +27,7 @@ class CompletionSettings(SettingsFrame):
     def setAttr(self, key: str, val) -> None:
         setter = getattr(self.controller.handler, "set_" + key)
 
-        if type(self.settings[key]).__name__ == "Model":
-            model = getattr(self.controller.models, val.replace("-", "_"))
-            setter(model)
-        else:
-            setter(type(self.settings[key])(val))
+        setter(val)
 
     # Model setting input
     def modelSetting(self, key: str, value) -> SettingsFrame.Setting:
