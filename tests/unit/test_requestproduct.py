@@ -64,7 +64,7 @@ class TestCompletionRequest(unittest.TestCase):
         
         self.assertEqual(self.request.prompt.value, prompt)
     
-    def test_PromptError(self):
+    def test_PromptTypeError(self):
         """
         Test that when a non-string is entered into the prompt, it throws an AttributeError.
         """
@@ -74,3 +74,54 @@ class TestCompletionRequest(unittest.TestCase):
             val = {"val": prompt}
             with self.subTest(val=val):
                 self.assertRaises(AttributeError, self.request.set_prompt, val)
+    
+    def test_Max_Tokens(self):
+        """
+        Asserts that when a valid integer is passed that the correct value is modified
+        """
+        model = self.request.model.value
+        
+        tokens = [*range(1, model.max_tokens, 50), model.max_tokens]
+        
+        for max_tokens in tokens:
+            with self.subTest(max_tokens=max_tokens):
+                self.request.set_max_tokens(max_tokens)
+
+                self.assertEqual(
+                    self.request.max_tokens.value, 
+                    max_tokens
+                )
+    
+    def test_Max_TokensBoundsError(self):
+        """
+        Asserts that an AttributeError is raised when an input outside the bounds is used.
+        """
+        model = self.request.model.value
+        
+        tokens = [*range(-10, 1), *range(model.max_tokens + 1, model.max_tokens + 10)]
+        
+        for max_tokens in tokens:
+            val = {"val": max_tokens}
+            with self.subTest(val=val):
+                self.assertRaises(
+                    AttributeError,
+                    self.request.set_max_tokens, 
+                    val
+                )
+    
+    def test_Max_TokensTypeError(self):
+        """
+        Asserts than an AttributeError is raised when an invalid type is inputted.
+        """
+        model = self.request.model.value
+        
+        tokens = ["test", True, None]
+        
+        for max_tokens in tokens:
+            val = {"val": max_tokens}
+            with self.subTest(val=val):
+                self.assertRaises(
+                    AttributeError,
+                    self.request.set_max_tokens, 
+                    val
+                )
