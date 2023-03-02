@@ -171,8 +171,8 @@ class APIFrame(BaseFrame):
         self.master.destroy()
 
     def setAPIKey(self):
-        self.controller._module = openai
-        self.controller._module.api_key = \
+        self.controller._api = openai
+        self.controller._api.api_key = \
             os.environ['OPENAI_API_KEY'] = self._api_key.get()
 
         self.master.destroy()
