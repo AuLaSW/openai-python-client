@@ -176,3 +176,54 @@ class TestCompletionRequest(unittest.TestCase):
                     self.request.set_temperature, 
                     val
                 )
+    
+    def test_Top_P(self):
+        """
+        Asserts that when a valid integer is passed that the correct value is modified
+        """
+        model = self.request.model.value
+        
+        vals = [number*0.01 for number in range(0, 101, 5)]
+        
+        for val in vals:
+            with self.subTest(val=val):
+                self.request.set_top_p(val)
+
+                self.assertEqual(
+                    self.request.top_p.value, 
+                    val
+                )
+    
+    def test_Top_PBoundsError(self):
+        """
+        Asserts that an AttributeError is raised when an input outside the bounds is used.
+        """
+        model = self.request.model.value
+        
+        vals = [number*0.01 for number in range(-100, 1, 5)]
+        
+        for val in vals:
+            val = {"val": val}
+            with self.subTest(val=val):
+                self.assertRaises(
+                    AttributeError,
+                    self.request.set_top_p, 
+                    val
+                )
+    
+    def test_Top_PTypeError(self):
+        """
+        Asserts than an AttributeError is raised when an invalid type is inputted.
+        """
+        model = self.request.model.value
+        
+        vals = [1, "test", True, None]
+        
+        for val in vals:
+            val = {"val": val}
+            with self.subTest(val=val):
+                self.assertRaises(
+                    AttributeError,
+                    self.request.set_top_p, 
+                    val
+                )
