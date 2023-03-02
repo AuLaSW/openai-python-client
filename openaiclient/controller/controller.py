@@ -31,8 +31,6 @@ class Controller:
     def __init__(self, api):
         # initialized variables
 
-        # different models we can use
-        self._models = Models()
         # the view
         self._view = View(self)
 
@@ -40,6 +38,8 @@ class Controller:
 
         # uninitialized variables
 
+        # different models we can use
+        self._models = None
         # the request we are making
         self._request = None
         # the response
@@ -74,6 +74,9 @@ class Controller:
             self._request,
             self._module
         )
+
+    def sendRequest(self) -> None:
+        self._response = self._requestHandler.createResponse()
 
     def editReq(self) -> None:
         self._request = EditRequest(self._module, self.models)

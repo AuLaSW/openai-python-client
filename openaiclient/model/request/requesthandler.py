@@ -16,6 +16,10 @@ class RequestHandlerFactory(ABC):
         pass
     """
 
+    @abstractmethod
+    def createResponse(self):
+        pass
+
 
 class CompletionRequestHandler(RequestHandlerFactory):
     """
@@ -26,7 +30,7 @@ class CompletionRequestHandler(RequestHandlerFactory):
         self._request = request
         self._api = api
 
-    def createCompletionResponse(self):
+    def createResponse(self):
         return CompletionResponse(self._request, self._api)
 
     @property
