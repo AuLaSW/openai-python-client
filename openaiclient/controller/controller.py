@@ -59,6 +59,10 @@ class Controller:
     def handler(self):
         return self._handler
 
+    @property
+    def response(self):
+        return self._response
+
     def completionRequest(self) -> None:
         self._handler = CompletionRequestHandler(api=self._api)
 
@@ -70,9 +74,6 @@ class Controller:
         self._handler = EditRequest(self._module, self.models)
     """
 
-    @property
-    def response(self):
-        return self._response
 
 
 class StartKey(Enum):
