@@ -125,3 +125,54 @@ class TestCompletionRequest(unittest.TestCase):
                     self.request.set_max_tokens, 
                     val
                 )
+    
+    def test_Temperature(self):
+        """
+        Asserts that when a valid integer is passed that the correct value is modified
+        """
+        model = self.request.model.value
+        
+        temps = [number*0.01 for number in range(0, 201, 5)]
+        
+        for temp in temps:
+            with self.subTest(temp=temp):
+                self.request.set_temperature(temp)
+
+                self.assertEqual(
+                    self.request.temperature.value, 
+                    temp
+                )
+    
+    def test_TemperatureBoundsError(self):
+        """
+        Asserts that an AttributeError is raised when an input outside the bounds is used.
+        """
+        model = self.request.model.value
+        
+        temps = [number*0.01 for number in range(-200, 1, 5)]
+        
+        for temp in temps:
+            val = {"val": temp}
+            with self.subTest(val=val):
+                self.assertRaises(
+                    AttributeError,
+                    self.request.set_temperature, 
+                    val
+                )
+    
+    def test_TemperatureTypeError(self):
+        """
+        Asserts than an AttributeError is raised when an invalid type is inputted.
+        """
+        model = self.request.model.value
+        
+        temps = [1, "test", True, None]
+        
+        for temp in temps:
+            val = {"val": temp}
+            with self.subTest(val=val):
+                self.assertRaises(
+                    AttributeError,
+                    self.request.set_temperature, 
+                    val
+                )
