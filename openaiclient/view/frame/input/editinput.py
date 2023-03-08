@@ -12,10 +12,16 @@ class EditInputFrame(BaseFrame):
         super().__init__(main, controller)
 
         self.controller.editRequest()
-        self._prompt = tk.Text(
+        self._input = tk.Text(
             self,
             width=50,
             height=30
+        )
+
+        self._instruction = tk.Text(
+            self,
+            width=50,
+            height=3
         )
 
     def create(self):
@@ -53,7 +59,28 @@ class EditInputFrame(BaseFrame):
 
         +row
 
-        self._prompt.grid(
+        tk.Label(
+            master=self,
+            text="This is a label"
+        ).grid(
+            column=col,
+            row=row,
+            padx=10,
+            sticky=tk.W+tk.S
+        )
+
+        +row
+
+        self._instruction.grid(
+            column=col,
+            row=row,
+            padx=10,
+            pady=5
+        )
+
+        +row
+
+        self._input.grid(
             column=col,
             row=row,
             padx=10,
