@@ -61,7 +61,7 @@ class EditInputFrame(BaseFrame):
 
         tk.Label(
             master=self,
-            text="This is a label"
+            text="Enter Instructions:"
         ).grid(
             column=col,
             row=row,
@@ -76,6 +76,18 @@ class EditInputFrame(BaseFrame):
             row=row,
             padx=10,
             pady=5
+        )
+
+        +row
+
+        tk.Label(
+            master=self,
+            text="Enter Input:"
+        ).grid(
+            column=col,
+            row=row,
+            padx=10,
+            sticky=tk.W+tk.S
         )
 
         +row
