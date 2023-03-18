@@ -26,12 +26,13 @@ class RequestHandlerFactory(ABC):
         )
     
     def __getattr__(self, name):
-        if hasattr(self._request, name):
+        try:
             return getattr(self._request, name)
-        elif hasattr(self._models, name):
-            return getattr(self._models, name)
-        else:
-            raise AttributeError
+        except KeyError:
+            try:
+                return getattr(self._models, name)
+            except KeyError as error:
+                raise KeyError from error
         
     def updateRequest(self, **kwargs):
         """

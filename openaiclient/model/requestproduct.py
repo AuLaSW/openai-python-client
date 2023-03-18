@@ -156,7 +156,7 @@ class CompletionRequest(RequestProduct):
         typeName = type(val).__name__
 
         if typeName == "Model":
-            self.model.value = val
+            self.model._value = val
         else:
             raise AttributeError(
                 f"The model '{val}' is not a valid model.")
