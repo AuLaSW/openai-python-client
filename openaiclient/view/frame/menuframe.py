@@ -240,6 +240,10 @@ class MainFileMenu(FileMenu):
         endpointMenu.addCodex()
         endpointMenu = endpointMenu.menu
         self._menu.add_cascade(label="Change endpoint...", menu=endpointMenu)
+        self._menu.add_command(
+            label="API Key",
+            command=self._controller.view.apiWindow,
+        )
 
     @property
     def menu(self):
