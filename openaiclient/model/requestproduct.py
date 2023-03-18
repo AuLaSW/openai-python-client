@@ -363,6 +363,88 @@ class CodexRequest(CompletionRequest):
     """
     A Codex Request object
     """
+    def __init__(self, model=None) -> None:
+        self.PICKLE_PATH = self._setPicklePath()
+
+        self._requestDict = {}
+
+        try:
+            with open(self.PICKLE_PATH, "rb") as file:
+                self._requestDict = pickle.load(file)
+        except Exception as err:
+            self._requestDict = {
+                "model": RequestSetting(
+                    value=model,
+                    setting=True,
+                    optional=False,
+                    ),
+                "prompt": RequestSetting(
+                    value="",
+                    setting=False,
+                    optional=True,
+                    ),
+                "max_tokens": RequestSetting(
+                    value=16,
+                    setting=True,
+                    optional=True,
+                    ),
+                "temperature": RequestSetting(
+                    value=0.0,
+                    setting=True,
+                    optional=True,
+                    ),
+                "top_p": RequestSetting(
+                    value=0.0,
+                    setting=True,
+                    optional=True,
+                    ),
+                "n": RequestSetting(
+                    value=1,
+                    setting=True,
+                    optional=True,
+                    ),
+                "stream": RequestSetting(
+                    value=False,
+                    setting=True,
+                    optional=True,
+                    ),
+                "echo": RequestSetting(
+                    value=False,
+                    setting=True,
+                    optional=True,
+                    ),
+                "presence_penalty": RequestSetting(
+                    value=0.0,
+                    setting=True,
+                    optional=True,
+                    ),
+                "frequency_penalty": RequestSetting(
+                    value=0.0,
+                    setting=True,
+                    optional=True,
+                    ),
+                "best_of": RequestSetting(
+                    value=1,
+                    setting=True,
+                    optional=True,
+                    ),
+                "user": RequestSetting(
+                    value="",
+                    setting=True,
+                    optional=True,
+                    ),
+                "stop": RequestSetting(
+                    value="",
+                    setting=True,
+                    optional=True
+                    ),
+            }
+
+    def set_stop(self, val):
+        if isinstance(val, str):
+            self.stop._value = val
+        else:
+            raise AttributeError("The stop must be a string.")
 
 
 class RequestSetting:
