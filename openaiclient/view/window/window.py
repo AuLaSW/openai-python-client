@@ -9,6 +9,7 @@ from openaiclient.view.frame.settings.completionsettings import CompletionSettin
 from openaiclient.view.frame.settings.editsettings import EditSettings
 from openaiclient.view.frame.settings.settingsframe import SettingsFrame
 from openaiclient.view.frame.input.completioninput import CompletionInputFrame
+from openaiclient.view.frame.input.codexinput import CodexInputFrame
 from openaiclient.view.frame.input.editinput import EditInputFrame
 from openaiclient.view.frame.menuframe import *
 from openaiclient.view.frame.mainframe import MainFrame
@@ -68,6 +69,7 @@ class EditSettingsWindow(Window):
         """Constructs a CompletionSettings frame product"""
         return EditSettings(self.window, self.controller)
 
+
 class CompletionInputWindow(Window):
     """
     A concrete factor class for the CompletionInput window.
@@ -77,6 +79,17 @@ class CompletionInputWindow(Window):
         menu = CompletionRequestMenu(self.window, self.controller)
         self.window.config(menu=menu.menubar)
         return CompletionInputFrame(self.window, self.controller)
+
+
+class CodexInputWindow(Window):
+    """
+    A concrete factor class for the CodexInput window.
+    """
+
+    def windowConstructor(self) -> CodexInputFrame:
+        menu = CompletionRequestMenu(self.window, self.controller)
+        self.window.config(menu=menu.menubar)
+        return CodexInputFrame(self.window, self.controller)
 
 
 class EditInputWindow(Window):

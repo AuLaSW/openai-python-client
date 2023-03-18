@@ -62,6 +62,14 @@ class View:
         window = CompletionInputWindow(self._root, self._controller)
         self.frame = window.draw()
     
+    def codexInputWindow(self):
+        """
+        Create a codex input window for writing prompts for the OpenAI API
+        """
+        self.frame.destroy()
+        window = CodexInputWindow(self._root, self._controller)
+        self.frame = window.draw()
+
     def editSettingsWindow(self):
         """
         Create a completion settings window with settings from the

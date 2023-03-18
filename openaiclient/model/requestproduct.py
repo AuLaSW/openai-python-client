@@ -359,7 +359,7 @@ class EditRequest(RequestProduct):
         return temp
 
 
-class CodexRequest(RequestProduct):
+class CodexRequest(CompletionRequest):
     """
     A Codex Request object
     """

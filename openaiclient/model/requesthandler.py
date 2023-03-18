@@ -78,7 +78,7 @@ class CompletionRequestHandler(RequestHandlerFactory):
         """
         Create a completion request with the default
         model text-davinci-003.
-        
+
         This requires self._models to be created before
         self._request.
         """
@@ -86,7 +86,7 @@ class CompletionRequestHandler(RequestHandlerFactory):
 
     def createResponseHandler(self, request, api):
         return CompletionResponseHandler(request, api)
-    
+
     def setPrompt(self, prompt):
         self._request.set_prompt(prompt)
 
@@ -112,17 +112,16 @@ class EditRequestHandler(RequestHandlerFactory):
         self._request.set_input(prompt)
 
 
-class CodexRequestHandler(RequestHandlerFactory):
+class CodexRequestHandler(CompletionRequestHandler):
     """
     Creates Codex Request Objects
     """
 
-    def createRequest(self):
-        return CodexRequest()
-
     def createModels(self):
         return CodexModels()
 
-    def createRequestHandler(self):
-        return CodexResponseHandler()
+    def createRequest(self):
+        return CodexRequest(self._models.code_davinci_002)
 
+    def createRequestHandler(self, request, api):
+        return CodexResponseHandler(request, api)

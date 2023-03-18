@@ -66,10 +66,14 @@ class Controller:
     def completionRequest(self) -> None:
         self._response = None
         self._handler = CompletionRequestHandler(self._api)
-    
+
     def editRequest(self) -> None:
         self._response = None
         self._handler = EditRequestHandler(self._api)
+
+    def codexRequest(self) -> None:
+        self._response = None
+        self._handler = CodexRequestHandler(self._api)
 
     def getResponse(self) -> None:
         self._response = self._handler.getResponse()

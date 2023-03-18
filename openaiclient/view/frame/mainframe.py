@@ -47,10 +47,10 @@ class MainFrame(BaseFrame):
         self.addEntryButton(
             codexLine.strip(),
             "Codex Endpoint",
-            None,
+            self.controller.view.codexInputWindow,
             col=col,
             row=row,
-            state=tk.DISABLED
+            #state=tk.DISABLED
         )
 
         self.addHorizSeparator(col, row)

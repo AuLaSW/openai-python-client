@@ -91,6 +91,32 @@ class EditModels(ModelProduct):
             }
 
 
+class CodexModels(ModelProduct):
+    """
+    An codex model object
+    """
+
+    def __init__(self):
+        self.PICKLE_PATH = self._setPicklePath()
+
+        self._models = {}
+
+        try:
+            with open(self.PICKLE_PATH, "rb") as file:
+                self._models = pickle.load(file)
+        except Exception:
+            self._models = {
+                "code_davinci_002": Model(
+                   name="code-davinci-002",
+                   max_tokens=8_001,
+                ),
+                "code_cushman_001": Model(
+                   name="code-cushman-001",
+                   max_tokens=2_048,
+                ),
+            }
+
+
 class Model:
     def __init__(self, name, max_tokens=-1):
         self._name = name
