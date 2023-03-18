@@ -115,7 +115,8 @@ class View:
         """
         Create a pop-up window to get API key when no API key is detected
         """
-        self.frame = MainWindow(self._root, self._controller).draw()
+        if self.frame is None:
+            self.frame = MainWindow(self._root, self._controller).draw()
         newWindow = tk.Toplevel(self._root)
         newWindow.resizable(False, False)
         frame = APIWindow(newWindow, self._controller)
