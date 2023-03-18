@@ -170,24 +170,40 @@ class EditInputFrame(BaseFrame):
     """
 
     @property
-    def text(self):
-        return self._prompt.get(
+    def instructions(self):
+        return self._instruction.get(
             index1=1.0,
             index2=tk.END
         )
 
-    @text.setter
-    def text(self, val):
-        self._prompt.replace(
+    @instructions.setter
+    def instructions(self, val):
+        self._instruction.replace(
+            index1=1.0,
+            index2=tk.END,
+            chars=val
+        )
+
+    @property
+    def input(self):
+        return self._input.get(
+            index1=1.0,
+            index2=tk.END
+        )
+
+    @input.setter
+    def input(self, val):
+        self._input.replace(
             index1=1.0,
             index2=tk.END,
             chars=val
         )
 
     def sendInput(self):
-        self.controller.handler.setPrompt(self.text)
+        self.controller.handler.setInstructions(self.instructions)
+        self.controller.handler.setInput(self.input)
         self.controller.getResponse()
-        self.text = self.controller.response.text.strip()
+        self.input = self.controller.response.text.strip()
         self.tags()
 
 

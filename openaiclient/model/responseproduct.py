@@ -69,7 +69,7 @@ class EditResponse(ResponseProduct):
         self._getResponse(request)
 
     def _getResponse(self, request):
-        response = self._api.Completion.create(
+        response = self._api.Edit.create(
             **request.request
         )
 

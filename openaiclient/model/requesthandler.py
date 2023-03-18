@@ -58,7 +58,7 @@ class RequestHandlerFactory(ABC):
         pass
 
     @abstractmethod
-    def createRequest(self, model):
+    def createRequest(self):
         pass
 
     @abstractmethod
@@ -104,6 +104,12 @@ class EditRequestHandler(RequestHandlerFactory):
 
     def createResponseHandler(self, request, api):
         return EditResponseHandler(request, api)
+
+    def setInstructions(self, prompt):
+        self._request.set_instruction(prompt)
+
+    def setInput(self, prompt):
+        self._request.set_input(prompt)
 
 
 class CodexRequestHandler(RequestHandlerFactory):

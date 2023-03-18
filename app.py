@@ -7,8 +7,11 @@ from openaiclient.controller.controller import StartKey as sk
 controller = Controller(api)
 
 # get API key from environment
+"""
 try:
     openai.api_key = environ["OPENAI_API_KEY"]
-    controller.start()
+    controller.start(sk.GOOD_START)
 except Exception as err:
     controller.start(sk.NO_API_KEY)
+"""
+controller.start(sk.NO_API_KEY)

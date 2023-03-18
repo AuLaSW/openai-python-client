@@ -40,7 +40,7 @@ class Controller:
         # the response
         self._response = None
 
-    def start(self, startVal) -> None:
+    def start(self, startVal=0) -> None:
         match startVal:
             case StartKey.GOOD_START:
                 self.view.mainWindow()

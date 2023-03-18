@@ -43,7 +43,7 @@ class Edit:
         response = {
             "object": "edit",
             "choices": [{
-                "text": "input text",
+                "text": "edited text",
                 "index": 0,
             }
             ],
