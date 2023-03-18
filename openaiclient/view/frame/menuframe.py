@@ -123,6 +123,44 @@ class EditRequestMenu(MenuFactory):
         )
 
 
+class CodexRequestMenu(MenuFactory):
+    """
+    Creates the menu when working with a completion request
+    """
+
+    @property
+    def menubar(self):
+        return self._menubar
+
+    def create(self) -> None:
+        self.addFileMenu()
+        self.addSettingMenu()
+
+    def createFileMenu(self) -> tk.Menu:
+        return CodexRequestFileMenu(
+            self._menubar,
+            self._controller
+        ).menu
+
+    def addFileMenu(self):
+        self._menubar.add_cascade(
+            label="File",
+            menu=self.createFileMenu(),
+        )
+
+    def createSettingMenu(self) -> tk.Menu:
+        return CodexRequestSettingMenu(
+            self._menubar,
+            self._controller
+        ).menu
+
+    def addSettingMenu(self):
+        self._menubar.add_cascade(
+            label="Settings",
+            menu=self.createSettingMenu(),
+        )
+
+
 class AbstractMenuProduct(ABC):
     """
     An abstract menu class, parent to all menu product classes.
@@ -176,7 +214,7 @@ class EndpointDropdownMenu(DropdownMenu):
     def addCodex(self):
         self._menu.add_command(
             label="Codex",
-            command=None
+            command=self._controller.view.codexInputWindow
         )
 
     @property
@@ -246,6 +284,25 @@ class EditRequestFileMenu(FileMenu):
         return self._menu
 
 
+class CodexRequestFileMenu(FileMenu):
+    """
+    Creates a file menu for the completion request view
+    """
+
+    def create(self):
+        self._menu.add_command(label="Home",
+                               command=self._controller.view.mainWindow)
+        endpointMenu = EndpointDropdownMenu(self.menu, self._controller)
+        endpointMenu.addCompletion()
+        endpointMenu.addEdit()
+        endpointMenu = endpointMenu.menu
+        self._menu.add_cascade(label="Change endpoint...", menu=endpointMenu)
+
+    @property
+    def menu(self):
+        return self._menu
+
+
 class EditMenu(AbstractMenuProduct):
     """
     Abstract product for edit menus
@@ -283,6 +340,22 @@ class EditRequestSettingMenu(SettingMenu):
         self._menu.add_command(
             label="Edit Settings",
             command=self._controller.view.editSettingsWindow
+        )
+
+    @property
+    def menu(self):
+        return self._menu
+
+
+class CodexRequestSettingMenu(SettingMenu):
+    """
+    Creates a setting menu for the main menu.
+    """
+
+    def create(self):
+        self._menu.add_command(
+            label="Codex Settings",
+            command=self._controller.view.codexSettingsWindow
         )
 
     @property

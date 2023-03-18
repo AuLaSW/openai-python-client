@@ -7,7 +7,7 @@ from abc import ABC, abstractmethod
 from typing import TYPE_CHECKING
 from openaiclient.view.frame.settings.completionsettings import CompletionSettings
 from openaiclient.view.frame.settings.editsettings import EditSettings
-from openaiclient.view.frame.settings.settingsframe import SettingsFrame
+from openaiclient.view.frame.settings.requestsettings import RequestSettings
 from openaiclient.view.frame.input.completioninput import CompletionInputFrame
 from openaiclient.view.frame.input.codexinput import CodexInputFrame
 from openaiclient.view.frame.input.editinput import EditInputFrame
@@ -70,6 +70,16 @@ class EditSettingsWindow(Window):
         return EditSettings(self.window, self.controller)
 
 
+class CodexSettingsWindow(Window):
+    """
+    A concrete factory class for the CodexSettings window.
+    """
+
+    def windowConstructor(self) -> CompletionSettings:
+        """Constructs a CompletionSettings frame product"""
+        return RequestSettings(self.window, self.controller)
+
+
 class CompletionInputWindow(Window):
     """
     A concrete factor class for the CompletionInput window.
@@ -87,7 +97,7 @@ class CodexInputWindow(Window):
     """
 
     def windowConstructor(self) -> CodexInputFrame:
-        menu = CompletionRequestMenu(self.window, self.controller)
+        menu = CodexRequestMenu(self.window, self.controller)
         self.window.config(menu=menu.menubar)
         return CodexInputFrame(self.window, self.controller)
 

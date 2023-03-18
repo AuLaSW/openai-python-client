@@ -62,6 +62,16 @@ class View:
         window = CompletionInputWindow(self._root, self._controller)
         self.frame = window.draw()
     
+    def codexSettingsWindow(self):
+        """
+        Create a completion settings window with settings from the
+        CompletionRequest class
+        """
+        newWindow = tk.Toplevel(self._root)
+        newWindow.resizable(False, False)
+        frame = CodexSettingsWindow(newWindow, self._controller)
+        frame.draw()
+
     def codexInputWindow(self):
         """
         Create a codex input window for writing prompts for the OpenAI API
